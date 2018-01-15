@@ -1,7 +1,5 @@
-#
-Hosting static sites on S3
+# Hosting static sites on S3
 
-###
 Turns out this was pretty straightforward. The steps are basically:
 
     * decide on a dns name for your static page
