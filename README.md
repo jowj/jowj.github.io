@@ -1,2 +1,1 @@
-# jowj.github.io
-Public Blog
+# me.jowj.net
