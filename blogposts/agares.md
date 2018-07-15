@@ -44,7 +44,7 @@ Once that's downloaded you still have to flash your ergodox. do yourself a favor
 Some guides say you only need to flash one side of the keyboard as long as they are plugged into each other. That has never worked for me and I *must* flash both sides or the keymap will be incorrect.
 
 ### flashing the keyboard on windows
-i absolutely can not get this to work unless i'm running a linux guest in virtualbox. instead, I flash from a mac or other *nix computer because its just hilariously easy and I don't have to fuck with loading a new driver first. sorry for this terrible answer, but for the infinity ergodox this is literally the easiest way. if anyone knows one for the love of god please [email me](me@jowj.net).
+i absolutely can not get this to work unless i'm running a linux guest in virtualbox. instead, I flash from a mac or other *nix computer because its just hilariously easy and I don't have to fuck with loading a new driver first. sorry for this terrible answer, but for the infinity ergodox this is literally the easiest way. if anyone knows one for the love of god please [email me](mailto:me@jowj.net).
 
 ### flashing the keyboard on *nix
 [read this here poast](https://www.reddit.com/r/MechanicalKeyboards/comments/5bjtt8/guide_infinity_ergodox_linux_guide_modifying/)
