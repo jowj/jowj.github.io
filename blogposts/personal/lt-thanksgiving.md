@@ -3,7 +3,7 @@ we flew in to seattle from austin at 845 am. don’t take that flight it was fuc
 
 ##  sheri’s house
 we drove around a bunch, but we started the night at sheri’s. we saw new (baby!) cats and ate good food and had our photo taken by a family friend. 
-![sheri’s house](/photos/lt-thanksgiving/sheri’s-house.jpeg)
+![sheri’s house](/photos/lt-thanksgiving/sheris-house.jpeg)
 
 ## jill’s house
 i forgot to take pictures this trip so here’s some from last year: 
