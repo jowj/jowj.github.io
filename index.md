@@ -8,3 +8,4 @@ you can read some of the bullshit i'm working on:
 i am also experimenting with posting terrible pictures here. you can view them:
 * [friendsgiving](/blogposts/personal/friendsgiving.md)
 * [thanksgiving in seattle](/blogposts/personal/lt-thanksgiving.md)
+* [rad boys only](/blogposts/personal/rad-boys-only.md)
