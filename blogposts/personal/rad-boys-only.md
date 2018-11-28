@@ -25,4 +25,4 @@ and made ceviche and watched tv
 
 ![kitchen1](/photos/rad-boys-only/kitchen1.JPG)
 ![kitchen2](/photos/rad-boys-only/kitchen2.JPG)
-![salt salt salt](/photos/rad-boys-only/salt.KPG)
+![salt salt salt](/photos/rad-boys-only/salt.JPG)
