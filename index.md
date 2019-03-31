@@ -1,11 +1,5 @@
-you can read some of the bullshit i'm working on:
+hi you have reached the landingpage of me, the person whose name is above this text. please click a link below if you are curious about me:
 
-* [hosting static sites on s3](/blogposts/hostingStaticSitesOnS3.md)
-* [building a slack bot](/blogposts/mojojojo-bot.md)
-* [agares, the multi-armed demon](/blogposts/agares.md)
-* [using git on iPhone](/blogposts/workingcopy.md)
-
-i am also experimenting with posting terrible pictures here. you can view them:
-* [friendsgiving](/blogposts/personal/friendsgiving.md)
-* [thanksgiving in seattle](/blogposts/personal/lt-thanksgiving.md)
-* [rad boys only](/blogposts/personal/rad-boys-only.md)
+* [projects](/projects.md)
+* [personal](/personal.md)
+* [resume](/josiah-resume.pdf)

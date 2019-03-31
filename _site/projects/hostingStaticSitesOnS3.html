@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/assets/css/style.css?v=8e34e282acb2cd964124eb60125f1bf9c948c591">
+    <link rel="stylesheet" type="text/css" href="/assets/css/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Hosting static sites on S3 | josiah ledbetter</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="Hosting static sites on S3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Public Blog" />
+<meta property="og:description" content="Public Blog" />
+<meta property="og:site_name" content="josiah ledbetter" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Hosting static sites on S3","url":"/projects/hostingStaticSitesOnS3.html","description":"Public Blog","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Hosting static sites on S3</h1>
+        </header>
+        <section id="downloads" class="clearfix">
+          
+	
+        </section>
+        <hr>
+        <section id="main_content">
+          <h1 id="hosting-static-sites-on-s3">Hosting static sites on S3</h1>
+
+<p>Turns out this was pretty straightforward. The steps are basically:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* decide on a dns name for your static page
+* create an S3 bucket using that name (bullshit.jowj.net) 
+* upload at least one file to your bucket
+* change bucket to enable hosting static pages (ensure you set the file you uploaded to be your index)
+* copy fully qied aws name of endpoint and point cname (bullshit) to that endpoint
+* boom done. 
+</code></pre></div></div>
+
+<p>I’d had this as a “thing to do” for forever, but I guess I thought it’d be more involved. this was just really straight forward.</p>
+
+
+        </section>
+
+        <footer>
+        
+        </footer>
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

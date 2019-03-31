@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/assets/css/style.css?v=8e34e282acb2cd964124eb60125f1bf9c948c591">
+    <link rel="stylesheet" type="text/css" href="/assets/css/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>mojojojo-bot | josiah ledbetter</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="mojojojo-bot" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Public Blog" />
+<meta property="og:description" content="Public Blog" />
+<meta property="og:site_name" content="josiah ledbetter" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"mojojojo-bot","url":"/projects/mojojojo-bot.html","description":"Public Blog","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>mojojojo-bot</h1>
+        </header>
+        <section id="downloads" class="clearfix">
+          
+	
+        </section>
+        <hr>
+        <section id="main_content">
+          <h1 id="mojojojo-bot">mojojojo-bot</h1>
+<p>this was relatively easy to build initially (straight from a template), but building any functionality that I wanted into was, as expected, hard. because i am garbage at python.</p>
+
+<h2 id="learnings">learnings</h2>
+
+<h3 id="1-import-pdb-python-debugger">1. import pdb (python debugger)</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pdb.set_trace
+SETS A BREAK POINT IN CODE AND I CAN WRITE CODE THERE AND INTERACT WITH IT HOOOO MY GOD
+</code></pre></div></div>
+
+<p>this is probably the biggest thing i learned; para exemplar say you have a bit of code that defines a variable eq to individual objects you iterate through one at a time:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>events = slack_client.rtm_read()
+for event in events:
+    thing = event.property
+    thing2 = event.otherproperty
+    do stuff with thing / thing2
+</code></pre></div></div>
+<p>sometimes (all the time) you run into problems where maybe one of the variables you defined doesn’t have the data you expect. so in order to troubleshoot you open you repl and try and do some adhoc definitions of variables and tokens so you can see what the deal is. as you might expect, that’s bad and doesn’t work very well. but with pdb.set_trace you can define a break point in your code that will give you a prompt, and then you can type “interact” into the prompt and it will let you type python into a repl provided with the state inherent in that point in your code! how fucking cool is that??</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pdb
+events = slack_client.rtm_read()
+for event in events:
+    thing = event.property
+    thing2 = event.otherproperty
+    pdb.set_trace
+    do stuff with thing / thing2
+</code></pre></div></div>
+<p>now the code looks like this and you can just call dir(events) and view its properties!!</p>
+
+<h3 id="2-accessing-data-in-dict-of-dicts">2. accessing data in dict of dicts</h3>
+<p>python is not powershell python is not powershell python is not powershell python is no</p>
+
+<p>so in powershell if you’re given a dict you can access its indexes using dot params. like</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS /&gt; $dict = @{}                                                                                                                                                                                                                                                             
+PS /&gt; $dict.Add('firstname','jowj')                                                                                                                                                                                                                                           
+PS /&gt; $dict.Add('pet','metroid')                                                                                                                                                                                                                                              
+PS /&gt; $dict                                                                                                                                                                                                                                                                   
+
+Name                           Value                                                                                                                                                                                                                                         
+----                           -----                                                                                                                                                                                                                                         
+pet                            metroid                                                                                                                                                                                                                                       
+firstname                      jowj                                                                                                                                                                                                                                          
+
+
+PS /&gt; $dict.pet                                                                                                                                                                                                                                                               
+metroid
+PS /&gt; 
+</code></pre></div></div>
+
+<p>in python you cannot do this. in python, in order to pull data for a particular key/value pair, you must index using they key value.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; dict = {}
+&gt;&gt;&gt; dict
+{}
+&gt;&gt;&gt; dict = {"firstname" : "jowj", "pet" : "metroid"}
+&gt;&gt;&gt; dict
+{'firstname': 'jowj', 'pet': 'metroid'}
+&gt;&gt;&gt; dict.firstname
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AttributeError: 'dict' object has no attribute 'firstname'
+&gt;&gt;&gt; dict[0]
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+KeyError: 0
+&gt;&gt;&gt; dict["firstname"]
+'jowj'
+&gt;&gt;&gt; 
+</code></pre></div></div>
+
+<p>it took me. so. so. so. long.</p>
+
+<h2 id="whats-next">what’s next:</h2>
+<p>i gotta finish fixing this bot to get everything i want into 1 file (right now i have some of the functionality i want in two different scripts). then maybe add some extra functionality like:</p>
+<ul>
+  <li>commanding to my twitter bot</li>
+  <li>…other stuff.</li>
+</ul>
+
+<h2 id="resources">resources:</h2>
+<ul>
+  <li>basic tutorial / code i stole - https://www.fullstackpython.com/blog/build-first-slack-bot-python.html</li>
+  <li>to set an environment variable in powershell in userscope, you gotta go out to .net - [Environment]::SetEnvironmentVariable(“SLACK_BOT_TOKEN”, “Test value.”, “User”)</li>
+  <li>responding to messages with specific text - http://pfertyk.me/2016/11/automatically-respond-to-slack-messages-containing-specific-text/</li>
+  <li>api docs - https://github.com/slackapi/python-slackclient</li>
+</ul>
+
+        </section>
+
+        <footer>
+        
+        </footer>
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
