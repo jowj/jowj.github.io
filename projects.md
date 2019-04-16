@@ -1,4 +1,13 @@
-* [hosting static sites on s3](/projects/hostingStaticSitesOnS3.md)
-* [building a slack bot](/projects/mojojojo-bot.md)
-* [agares, the multi-armed demon](/projects/agares.md)
-* [using git on iPhone](/projects/workingcopy.md)
+---
+permalink: /projects/
+title: Projects
+---
+<p>Posts in category "projects" are:</p>
+
+<ul>
+  {% for post in site.categories.projects %}
+    {% if post.url %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
