@@ -2,4 +2,5 @@ hi you have reached the landing page of me, the person whose name is above this 
 
 🤖 [projects](/projects/)  
 🧟 [personal](/personal/)  
+💩 [security thots](/security/)  
 ‍🧙 [resume](/josiah-resume.pdf)  
