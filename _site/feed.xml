@@ -1,4 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-20T19:36:16-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">y don’t u blog about it</title><subtitle></subtitle><author><name>jowj</name></author><entry><title type="html">mojo v2</title><link href="http://localhost:4000/projects/2019/11/13/mojov2.html" rel="alternate" type="text/html" title="mojo v2" /><published>2019-11-13T00:00:00-06:00</published><updated>2019-11-13T00:00:00-06:00</updated><id>http://localhost:4000/projects/2019/11/13/mojov2</id><content type="html" xml:base="http://localhost:4000/projects/2019/11/13/mojov2.html">&lt;h1 id=&quot;mojobot-v2&quot;&gt;Mojobot v2&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-22T16:44:02-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">y don’t u blog about it</title><subtitle></subtitle><author><name>jowj</name></author><entry><title type="html">rest api prototyping</title><link href="http://localhost:4000/projects/2019/11/22/cylance_api_prototyping.html" rel="alternate" type="text/html" title="rest api prototyping" /><published>2019-11-22T00:00:00-06:00</published><updated>2019-11-22T00:00:00-06:00</updated><id>http://localhost:4000/projects/2019/11/22/cylance_api_prototyping</id><content type="html" xml:base="http://localhost:4000/projects/2019/11/22/cylance_api_prototyping.html">&lt;p&gt;&lt;a id=&quot;org055b087&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;the-problem&quot;&gt;the problem&lt;/h1&gt;
+
+&lt;p&gt;lately i’ve been working on a lot of web API glue projects. these are usually simple things like “service1 needs to send messages to service2 in a particular format, with a particular set of priviledges.” Sometimes its more complicated, but that’s usually what it breaks down to.&lt;/p&gt;
+
+&lt;p&gt;at first I was writing python code the whole time, exploring the API through python (ugh) and kept getting frustrated; it felt like I wasn’t able to go as fast as I would like, I kept making silly mistakes that I wouldn’t catch until much later, etc. To fix this, i’ve moved to prototyping in &lt;a href=&quot;https://github.com/pashky/restclient.el&quot;&gt;restclient.el&lt;/a&gt; - this is a featureful rest client that you interact with through plain text (i.e., you can version control it!) within emacs.&lt;/p&gt;
+
+&lt;p&gt;this has worked great for a lot of things, but falls short when you have to generate an auth token programmatically (instead of using a static key) for each request. this problem is solvable using: a different kind of glue lol. i use python to create the auth token, org-babel to register the result and then pass it to &lt;code class=&quot;highlighter-rouge&quot;&gt;restclient&lt;/code&gt; which will continue to be my prototyping tool of choice. this write up will go over how i stitch each part together; i’ll use Cylance as an example service for api requests.&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;org4a1c34b&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;authentication-and-authorization-in-cylance&quot;&gt;Authentication and Authorization in Cylance&lt;/h1&gt;
+
+&lt;p&gt;Cylance relies on something called JWT (JSON Web Token). There’s an RFC for this here: &lt;a href=&quot;https://tools.ietf.org/html/rfc7519&quot;&gt;https://tools.ietf.org/html/rfc7519&lt;/a&gt;. This is not possible to generate within &lt;code class=&quot;highlighter-rouge&quot;&gt;restclient&lt;/code&gt;, so we do it in python.&lt;/p&gt;
+
+&lt;p&gt;To generate the JWT, in Cylance’s case, we care about:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;TID_VAL&lt;/code&gt;, which is the tenant ID. You can find this by logging into the console &amp;gt; settings &amp;gt; integrations.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;APP_ID&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;APP_SECRET&lt;/code&gt;, which is under the same place, but you’ll have to expand the custom application.&lt;/p&gt;
+
+&lt;p&gt;We’ll add a &lt;code class=&quot;highlighter-rouge&quot;&gt;#+name:&lt;/code&gt; argument to the top of the &lt;code class=&quot;highlighter-rouge&quot;&gt;org-mode&lt;/code&gt; src block so that the output from the block can be registered for later use.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;uuid&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;jwt&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pdb&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;datetime&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timedelta&lt;/span&gt;
+    
+    &lt;span class=&quot;c&quot;&gt;# initial auth test setup&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;JTI_VAL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uuid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uuid4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;TID_VAL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# The tenant's unique identifier.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;APP_ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;      &lt;span class=&quot;c&quot;&gt;# The application's unique identifier.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;APP_SECRET&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# application's secret to sign the auth token with.&lt;/span&gt;
+    
+    &lt;span class=&quot;c&quot;&gt;# 30 minutes from now&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;TIMEOUT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1800&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;NOW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utcnow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;TIMEOUT_DATETIME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NOW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timedelta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TIMEOUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;EPOCH_TIME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NOW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1970&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;total_seconds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;EPOCH_TIMEOUT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TIMEOUT_DATETIME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1970&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;total_seconds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;AUTH_URL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://protectapi.cylance.com/auth/v2/token&quot;&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;CLAIMS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;exp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EPOCH_TIMEOUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;iat&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EPOCH_TIME&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;iss&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://cylance.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;sub&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;APP_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;tid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TID_VAL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;jti&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JTI_VAL&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;ENCODED&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CLAIMS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;APP_SECRET&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;algorithm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'HS256'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# lol you have to decode from a bytes object to a string because&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# bytes aren't fucking json serializable&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# you never seem to need to re-encode them? python is so fucking weird.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ENCODED&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ENCODED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;PAYLOAD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;auth_token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ENCODED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;HEADERS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-Type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;application/json; charset=utf-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;RESP&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AUTH_URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HEADERS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dumps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PAYLOAD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RESP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'access_token'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;this will generate a token and attach it to the name space &lt;code class=&quot;highlighter-rouge&quot;&gt;jwt_token&lt;/code&gt; as defined previously.&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;orge661742&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;restclient-example&quot;&gt;restclient example&lt;/h2&gt;
+
+&lt;p&gt;once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance’s API through &lt;code class=&quot;highlighter-rouge&quot;&gt;restclient.el&lt;/code&gt; going forward! in order to pass the output from the registered name we used before, &lt;code class=&quot;highlighter-rouge&quot;&gt;jwt_token&lt;/code&gt;, we add an argument to the &lt;code class=&quot;highlighter-rouge&quot;&gt;BEGIN_SRC&lt;/code&gt; header, like &lt;code class=&quot;highlighter-rouge&quot;&gt;:var x=jwt_token&lt;/code&gt;. Then, we can set a &lt;code class=&quot;highlighter-rouge&quot;&gt;restclient&lt;/code&gt; local variable equal to the &lt;code class=&quot;highlighter-rouge&quot;&gt;org-babel&lt;/code&gt; super-variable and use it within the rest of the src block, as seen below:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# auth.test
+:cylance_jwt_token = :x
+GET https://protectapi.cylance.com/users/v2?page=1&amp;amp;page_size=1
+Authorization: Bearer :cylance_jwt_token
+Content-Type: application/json
+User-Agent: Emacs Restclient
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;this will return my user (again, i’ve disturbed the output but it is roughly what’s returned):&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;page_number&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;page_size&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;total_pages&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;total_number_of_items&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;page_items&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;tenant_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;first_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;last_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;me@thiscompanyyo.isit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;has_logged_in&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;role_type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;role_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;i am the boss&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;default_zone_role_type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;default_zone_role_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;zones&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;date_last_login&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2019-11-22T14:52:13&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;date_email_confirmed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;date_created&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2019-05-17T17:16:52&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;date_modified&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2019-05-17T17:16:52&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//protectapi.cylance.com/users/v&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;?page=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;amp;page_size=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;HTTP/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;OK&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Content-Encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;gzip&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Content-Type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;application/json;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;charset=utf&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;-8&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Fri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Nov&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2019&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;GMT&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;openresty&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Content-Length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;339&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;keep-alive&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.305690&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a id=&quot;orgce4eb0b&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;troubleshooting-python-and-org-babel&quot;&gt;Troubleshooting python and org-babel&lt;/h1&gt;
+
+&lt;p&gt;I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn’t find my python binary on macOS. to fix this i manually set it in my &lt;code class=&quot;highlighter-rouge&quot;&gt;init.el&lt;/code&gt; file, which worked for a long time.&lt;/p&gt;
+
+&lt;p&gt;however, if you start using venvs &lt;em&gt;within emacs&lt;/em&gt;, tools like &lt;code class=&quot;highlighter-rouge&quot;&gt;pvenv&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;venv&lt;/code&gt; &lt;em&gt;will not overwrite the global variable set with the new venv specific python binaries&lt;/em&gt; if you’ve globally set the py binary location. This killed me. below are some blocks i used to troubleshoot what was going on.&lt;/p&gt;
+
+&lt;p&gt;This one is pretty straight forward: do i have a virtual env active, and where is the python binary as seen by the shell:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$VIRTUAL_ENV&lt;/span&gt;
+    which python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Same deal, only “where is the python binary as seen in the python session”. in my case, this was showing me the system python binary even when the &lt;em&gt;shell&lt;/em&gt; was showing me the venv binary.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;this block just proved that i could in fact import the right modules that were only in the venv.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;jwt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>jowj</name></author><summary type="html"></summary></entry><entry><title type="html">mojo v2</title><link href="http://localhost:4000/projects/2019/11/13/mojov2.html" rel="alternate" type="text/html" title="mojo v2" /><published>2019-11-13T00:00:00-06:00</published><updated>2019-11-13T00:00:00-06:00</updated><id>http://localhost:4000/projects/2019/11/13/mojov2</id><content type="html" xml:base="http://localhost:4000/projects/2019/11/13/mojov2.html">&lt;h1 id=&quot;mojobot-v2&quot;&gt;Mojobot v2&lt;/h1&gt;
 &lt;p&gt;so, i had to rewrite &lt;code class=&quot;highlighter-rouge&quot;&gt;mojo&lt;/code&gt;. there’s a couple reasons here, the big ones are:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;slack came out with a new api a bit before i finished writing v1. they wanted to eventually deprecate v1, though that seems to be a bit of a pipe dream!&lt;/li&gt;
@@ -226,65 +363,14 @@ sed -e 's/TEL;/TEL;TYPE=/g' -e 's/VERSION:2.1/VERSION:3.0/g' ../new-contacts/all
   &lt;li&gt;don’t close people’s accounts right away; make sure everything is prepared before accounts are closed.&lt;/li&gt;
   &lt;li&gt;by the time i die i should establish a fucking runbook to go over the necessary steps for people who aren’t technically inclined&lt;/li&gt;
   &lt;li&gt;open formats are great&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jowj</name></author><summary type="html">this past week my dad and I helped my grandmother with a few Computer Things. my grandfather died at the end of last year and the process of getting “Computer Things” to a usable state for my grandmother was pretty rough.</summary></entry><entry><title type="html">agares</title><link href="http://localhost:4000/projects/2019/04/15/agares.html" rel="alternate" type="text/html" title="agares" /><published>2019-04-15T00:00:00-05:00</published><updated>2019-04-15T00:00:00-05:00</updated><id>http://localhost:4000/projects/2019/04/15/agares</id><content type="html" xml:base="http://localhost:4000/projects/2019/04/15/agares.html">&lt;h1 id=&quot;agares-a-multi-armed-demon&quot;&gt;agares, a multi armed demon&lt;/h1&gt;
-&lt;p&gt;well, originally i don’t think the multi armed part was mentioned in the “list of demons” i found on the internet. now, though, agares is absolutely multi armed because I keep adding so much bullshit to this project.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>jowj</name></author><summary type="html">this past week my dad and I helped my grandmother with a few Computer Things. my grandfather died at the end of last year and the process of getting “Computer Things” to a usable state for my grandmother was pretty rough.</summary></entry><entry><title type="html">editing files tracked in gif while on your phone</title><link href="http://localhost:4000/projects/2019/04/15/workingcopy.html" rel="alternate" type="text/html" title="editing files tracked in gif while on your phone" /><published>2019-04-15T00:00:00-05:00</published><updated>2019-04-15T00:00:00-05:00</updated><id>http://localhost:4000/projects/2019/04/15/workingcopy</id><content type="html" xml:base="http://localhost:4000/projects/2019/04/15/workingcopy.html">&lt;h1 id=&quot;editing-files-tracked-in-gif-while-on-your-phone&quot;&gt;editing files tracked in gif while on your phone&lt;/h1&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;sync my dot files. .emacs, bash, powershell, etc.&lt;/li&gt;
-  &lt;li&gt;configure windows devices. install software, some minor software configuration, remove windows bullshit.&lt;/li&gt;
-  &lt;li&gt;sync my keyboard config; this involves updating a .png as well as a folder of .json an .kll files to apply firmware to ergodox.&lt;/li&gt;
-  &lt;li&gt;house deployments for home projects&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;i open it in “working copy” and then send it to your markdown editor. then you sent it back to working copy.&lt;/p&gt;
 
-&lt;p&gt;Up next is configuring an Mac device, and then whatever else I get to throw at it.&lt;/p&gt;
+&lt;h2 id=&quot;so-writing-this-is-not-bad&quot;&gt;so writing this is not bad&lt;/h2&gt;
+&lt;p&gt;really, it’s a lot better than i expected it to be. i’m writing this on my phone for christ sake, but it’s still really straight forward to add a list, insert images, whatever&lt;/p&gt;
 
-&lt;h2 id=&quot;dot-file-sync&quot;&gt;dot file sync&lt;/h2&gt;
-&lt;p&gt;I think I’m doing this poorly. So far all i’m really doing is configuring all devices &lt;em&gt;actual&lt;/em&gt; dot files to load these &lt;code class=&quot;highlighter-rouge&quot;&gt;agares/&lt;/code&gt; dotfiles.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;powershell: make sure you don’t have powershell, vscode /ise, and pwsh.exe all looking for the same profile. you’ll hate yourself. split them up.&lt;/li&gt;
-  &lt;li&gt;.emacs: this is pretty straightforward unless you use more emacs features than me (easy to do). I leave in just a single .emacs file.&lt;/li&gt;
-  &lt;li&gt;.bashrc: there’s a complicated set of rules that determines, at least on mac, when different .bash* files get loaded. be careful that yours only loads when you want it&lt;/li&gt;
-  &lt;li&gt;.tmux: straight forward.&lt;/li&gt;
-  &lt;li&gt;conemu: i don’t have an elegant solve for this. I just import this file whenever I set up a new machine. there is likely a better way.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;further-bashrc-info&quot;&gt;further .bashrc info&lt;/h3&gt;
-&lt;p&gt;I found &lt;a href=&quot;http://hayne.net/MacDev/Notes/unixFAQ.html#shellStartup&quot;&gt;this&lt;/a&gt; link very useful, quoted below:&lt;br /&gt;
-When a “login shell” starts up, it reads the file “/etc/profile” and then “~/.bash_profile” or “~/.bash_login” or “~/.profile” (whichever one exists - it only reads one of these, checking for them in the order mentioned).&lt;/p&gt;
-
-&lt;p&gt;When a “non-login shell” starts up, it reads the file “/etc/bashrc” and then the file “~/.bashrc”.&lt;/p&gt;
-
-&lt;p&gt;Note that when bash is invoked with the name “sh”, it tries to mimic the startup sequence of the Bourne shell (“sh”). In particular, a non-login shell invoked as “sh” does not read any dot files by default. See the bash man page for details.&lt;/p&gt;
-
-&lt;p&gt;What this means is that you don’t want to link or load the agares .bashrc file from .bashrc &lt;em&gt;necessarily&lt;/em&gt;. It depends on your usage. you’ll likely wanna call it from .bash_profile instead, if you’re on a mac.&lt;/p&gt;
-
-&lt;h2 id=&quot;configure-windows-devices&quot;&gt;configure windows devices&lt;/h2&gt;
-&lt;p&gt;3rd party app install is all handled through chocolatey. this is a great / terrible tool for this. great because it actually exists (wonderful!). Terrible because of certain usability problems. some packages install very weirdly through. emacs, for instance; do you want emacs? or emacs64? Those are not just optimized for different cpus, but are actually different versions of emacs (24 vs 25) that have different features shipped natively.&lt;/p&gt;
-
-&lt;h3 id=&quot;removing-windows-kruft&quot;&gt;removing windows kruft&lt;/h3&gt;
-&lt;p&gt;windows, particularly windows10, now ships with a bunch of bullshit that no sane person wants on their fucking computer. fucking 3rd party games are my favorite. thanks msft, get the fuck out. I stole a bunch of functions from &lt;a href=&quot;https://gist.github.com/alirobe/7f3b34ad89a159e6daa1&quot;&gt;this&lt;/a&gt; gist (which stole them from another). I definitely recommend perusing powershell module file i made before running the functions therein. Some are easy wins, or simple “get started” features, like removing a game or unpinning stuff from the start menu. Some are more hit or miss, like disabling the windows store; great 90% of the time IME, but if you didn’t have WSL you &lt;em&gt;must&lt;/em&gt; have the windows store or you can’t install it.&lt;/p&gt;
-
-&lt;h3 id=&quot;a-note-on-hypervisors&quot;&gt;a note on hypervisors&lt;/h3&gt;
-&lt;p&gt;i do a lot of work on hyper-v, especially recently, because there’s a great suite of automation tools that work natively on that platform. hyperv is a fine tool for many things, particularly home labbing, but far less useful as a “need to run second OS without dual boot” utility. If you need that you’ll likely need something like vmware workstation or virtualbox. the bad news is &lt;em&gt;you cannot have hyperv and another hypervisor active on the same machine at the same time&lt;/em&gt;. hyperv blocks other hypervisors from working because its petty and rude (something about the way it operates does this. for more information on this check out &lt;a href=&quot;https://superuser.com/questions/1208850/why-vitualbox-or-vmware-can-not-run-with-hyper-v-enabled-windows-10&quot;&gt;this superuser answer&lt;/a&gt;).&lt;/p&gt;
-
-&lt;h2 id=&quot;keyboard-firmware-sync&quot;&gt;keyboard firmware sync&lt;/h2&gt;
-&lt;p&gt;i use an &lt;a href=&quot;https://www.massdrop.com/buy/infinity-ergodox&quot;&gt;infinity ergodox&lt;/a&gt; at home. this is a fun entry level diy project that taught me to solder (badly) and introduced me to QMK and TMK. I avoid having to dive very deep into those and instead use input.club’s online &lt;a href=&quot;https://input.club/configurator-ergodox/&quot;&gt;configurator tool&lt;/a&gt;. i download the output and put them into the keyboard dir of &lt;code class=&quot;highlighter-rouge&quot;&gt;agares&lt;/code&gt;, along with a screenshot of the configurator tool, so that I know how everything is &lt;em&gt;currently&lt;/em&gt; configured. this helps especially early on when you’re tweaking the keymap every few days trying to remember “where the fuck did i put the _ sign??”.&lt;/p&gt;
-
-&lt;p&gt;Once that’s downloaded you still have to flash your ergodox. do yourself a favor and keep a “flash” keybinding easily accessible on both sides of your keyboard or you will hate yourself.&lt;/p&gt;
-
-&lt;p&gt;Some guides say you only need to flash one side of the keyboard as long as they are plugged into each other. That has never worked for me and I &lt;em&gt;must&lt;/em&gt; flash both sides or the keymap will be incorrect.&lt;/p&gt;
-
-&lt;h3 id=&quot;flashing-the-keyboard-on-windows&quot;&gt;flashing the keyboard on windows&lt;/h3&gt;
-&lt;p&gt;i absolutely can not get this to work unless i’m running a linux guest in virtualbox. instead, I flash from a mac or other *nix computer because its just hilariously easy and I don’t have to fuck with loading a new driver first. sorry for this terrible answer, but for the infinity ergodox this is literally the easiest way. if anyone knows one for the love of god please &lt;a href=&quot;mailto:me@jowj.net&quot;&gt;email me&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;flashing-the-keyboard-on-nix&quot;&gt;flashing the keyboard on *nix&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.reddit.com/r/MechanicalKeyboards/comments/5bjtt8/guide_infinity_ergodox_linux_guide_modifying/&quot;&gt;read this here poast&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;deployments-for-home-projects&quot;&gt;deployments for home projects&lt;/h2&gt;
-&lt;p&gt;right now this is really just a spot for my deployment of &lt;code class=&quot;highlighter-rouge&quot;&gt;mojojojo-bot&lt;/code&gt;, my slackbot. you can read more about it (in an out of date blog post) &lt;a href=&quot;/blogposts/mojojojo-bot.md&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I deploy it using ansible targeting one of my few docker hosts. right now those are all local. eventually, i hope to build out a spot, or a deployment mechanism, for pushing it to Azure or AWS. I call &lt;code class=&quot;highlighter-rouge&quot;&gt;mojo.yml&lt;/code&gt; with ansible-playbook, referencing a custom inventory file of &lt;code class=&quot;highlighter-rouge&quot;&gt;hosts.yml&lt;/code&gt;, with &lt;code class=&quot;highlighter-rouge&quot;&gt;--ask-vault-pass&lt;/code&gt; to prompt for password to decrypt &lt;code class=&quot;highlighter-rouge&quot;&gt;mojo-vault-vars.yml&lt;/code&gt;, containing the slack-bot API token. this allows me to sync the actual API token via github, encrypted, without worrying about everyone and their dog fucking with my slack server.&lt;/p&gt;</content><author><name>jowj</name></author><summary type="html">agares, a multi armed demon well, originally i don’t think the multi armed part was mentioned in the “list of demons” i found on the internet. now, though, agares is absolutely multi armed because I keep adding so much bullshit to this project.</summary></entry><entry><title type="html">friendsgiving</title><link href="http://localhost:4000/personal/2019/04/15/friendsgiving.html" rel="alternate" type="text/html" title="friendsgiving" /><published>2019-04-15T00:00:00-05:00</published><updated>2019-04-15T00:00:00-05:00</updated><id>http://localhost:4000/personal/2019/04/15/friendsgiving</id><content type="html" xml:base="http://localhost:4000/personal/2019/04/15/friendsgiving.html">&lt;p&gt;&lt;img src=&quot;/photos/friendsgiving/friendsgiving-header.jpeg&quot; alt=&quot;the best table &quot; /&gt;&lt;/p&gt;
+&lt;p&gt;that is so fucking great tbh&lt;/p&gt;</content><author><name>jowj</name></author><summary type="html">editing files tracked in gif while on your phone</summary></entry><entry><title type="html">friendsgiving</title><link href="http://localhost:4000/personal/2019/04/15/friendsgiving.html" rel="alternate" type="text/html" title="friendsgiving" /><published>2019-04-15T00:00:00-05:00</published><updated>2019-04-15T00:00:00-05:00</updated><id>http://localhost:4000/personal/2019/04/15/friendsgiving</id><content type="html" xml:base="http://localhost:4000/personal/2019/04/15/friendsgiving.html">&lt;p&gt;&lt;img src=&quot;/photos/friendsgiving/friendsgiving-header.jpeg&quot; alt=&quot;the best table &quot; /&gt;&lt;/p&gt;
 &lt;h1 id=&quot;look-at-how-pretty-this-fucking-table-is&quot;&gt;look at how pretty this fucking table is&lt;/h1&gt;
 &lt;p&gt;my sister made a bunch of that stuff there; the candles were all melted on to the wood and the gourds that they were resting on; the wreathes of Whatever Plant were picked from her garden; even the table it all sat on was made by my sister and her family&lt;/p&gt;
 
@@ -408,31 +494,4 @@ KeyError: 0
   &lt;li&gt;to set an environment variable in powershell in userscope, you gotta go out to .net - [Environment]::SetEnvironmentVariable(“SLACK_BOT_TOKEN”, “Test value.”, “User”)&lt;/li&gt;
   &lt;li&gt;responding to messages with specific text - http://pfertyk.me/2016/11/automatically-respond-to-slack-messages-containing-specific-text/&lt;/li&gt;
   &lt;li&gt;api docs - https://github.com/slackapi/python-slackclient&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jowj</name></author><summary type="html">mojojojo-bot this was relatively easy to build initially (straight from a template), but building any functionality that I wanted into was, as expected, hard. because i am garbage at python.</summary></entry><entry><title type="html">rad boys only</title><link href="http://localhost:4000/personal/2019/04/15/rad_boys_only.html" rel="alternate" type="text/html" title="rad boys only" /><published>2019-04-15T00:00:00-05:00</published><updated>2019-04-15T00:00:00-05:00</updated><id>http://localhost:4000/personal/2019/04/15/rad_boys_only</id><content type="html" xml:base="http://localhost:4000/personal/2019/04/15/rad_boys_only.html">&lt;h1 id=&quot;rad-boys-only&quot;&gt;rad boys only&lt;/h1&gt;
-&lt;p&gt;we are boys and we are rad
-sometimes our cooking makes us sad&lt;/p&gt;
-
-&lt;p&gt;but not this time, this time we made ceviche and it was fucking bomb&lt;/p&gt;
-
-&lt;h2 id=&quot;we-were-gonna-play-games-first-tho&quot;&gt;we were gonna play games first tho&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/photos/rad-boys-only/noah-desk.JPG&quot; alt=&quot;noahs monstrous desk&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;noah’s desk, was so large
-it was, like, the size of a barge&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/photos/rad-boys-only/micah-desk.JPG&quot; alt=&quot;micah’s smol desk&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;micah’s desk was very sad
-it was so small
-and so lonely&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/photos/rad-boys-only/josiah-desk.JPG&quot; alt=&quot;my desk&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;my desk is the perfect size and my laptop is totally a normal weight why do you ask&lt;/p&gt;
-
-&lt;h2 id=&quot;we-forgot-to-play-games&quot;&gt;we forgot to play games&lt;/h2&gt;
-&lt;p&gt;and made ceviche and watched tv&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/photos/rad-boys-only/kitchen1.JPG&quot; alt=&quot;kitchen1&quot; /&gt;
-&lt;img src=&quot;/photos/rad-boys-only/kitchen2.JPG&quot; alt=&quot;kitchen2&quot; /&gt;
-&lt;img src=&quot;/photos/rad-boys-only/salt.JPG&quot; alt=&quot;salt salt salt&quot; /&gt;&lt;/p&gt;</content><author><name>jowj</name></author><summary type="html">rad boys only we are boys and we are rad sometimes our cooking makes us sad</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>jowj</name></author><summary type="html">mojojojo-bot this was relatively easy to build initially (straight from a template), but building any functionality that I wanted into was, as expected, hard. because i am garbage at python.</summary></entry></feed>
