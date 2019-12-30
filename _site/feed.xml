@@ -1,4 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-20T19:36:16-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">y don’t u blog about it</title><subtitle></subtitle><author><name>jowj</name></author><entry><title type="html">mojo v2</title><link href="http://localhost:4000/projects/2019/11/13/mojov2.html" rel="alternate" type="text/html" title="mojo v2" /><published>2019-11-13T00:00:00-06:00</published><updated>2019-11-13T00:00:00-06:00</updated><id>http://localhost:4000/projects/2019/11/13/mojov2</id><content type="html" xml:base="http://localhost:4000/projects/2019/11/13/mojov2.html">&lt;h1 id=&quot;mojobot-v2&quot;&gt;Mojobot v2&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-29T18:40:04-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">y don’t u blog about it</title><subtitle></subtitle><author><name>jowj</name></author><entry><title type="html">emacs on catalina</title><link href="http://localhost:4000/projects/2019/12/29/emacs_on_catalina.html" rel="alternate" type="text/html" title="emacs on catalina" /><published>2019-12-29T00:00:00-06:00</published><updated>2019-12-29T00:00:00-06:00</updated><id>http://localhost:4000/projects/2019/12/29/emacs_on_catalina</id><content type="html" xml:base="http://localhost:4000/projects/2019/12/29/emacs_on_catalina.html">&lt;h1 id=&quot;emacs-on-catalina&quot;&gt;emacs on catalina&lt;/h1&gt;
+
+&lt;h2 id=&quot;early-days&quot;&gt;early days&lt;/h2&gt;
+&lt;p&gt;i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.&lt;/p&gt;
+
+&lt;p&gt;at first there was only a single reddit post detailing what emacs users might need to know about. it linked to &lt;a href=&quot;https://gist.github.com/dive/f64c645a9086afce8e5dd2590071dbf9&quot;&gt;this gist&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;this basically says to run this lisp to add your proper emacs path to the proper exclusions and then you won’t have any problems. Ok great! but that didn’t work. I could now /launch/ emacs from Spotlight and navigate around my Docs/Downloads/whatever, but i was totally unable to /swap/ to emacs from Spotlight. this also impacted using hammerspoon as a launcher, i’m guessing because the primative behind both mechanisms is the same.&lt;/p&gt;
+
+&lt;h2 id=&quot;partial-fix&quot;&gt;partial fix&lt;/h2&gt;
+&lt;p&gt;later that week, a few other people said you needed to whitelist &lt;em&gt;ruby’s&lt;/em&gt; executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn’t work either (though they were actually correct that ruby was involved).&lt;/p&gt;
+
+&lt;p&gt;since I could at least launch and navigate around with my then-current janky set up i stopped spending Paid Time on it and moved on. i ran the the rest of the catalina beta out and then reported back on my experience with our security tools, whatever. a few weeks ago i finally got mad enough at the situation to spend some more time looking at this and found the answer really soon! apparently a bunch of people had similar problems to me and so there are several blogs about the problem now! the one I found most helpful was &lt;a href=&quot;https://spin.atomicobject.com/2019/12/12/fixing-emacs-macos-catalina/&quot;&gt;this guy&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;jankiest-fix&quot;&gt;jankiest fix&lt;/h2&gt;
+&lt;p&gt;he gives a good breakdown as to why this is needed &lt;em&gt;instead of&lt;/em&gt; the ruby application whitelisting. here’s the quick fix:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      %  &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt;  /Applications /Emacs.app /Contents /MacOS
+      %  mv Emacs Emacs-launcher
+      %  mv Emacs-x86_64- 10_14 Emacs
+      %  &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt;  /Applications /Emacs.app /Contents /
+      %  rm  &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; _CodeSignature
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;this is not like, super great. its makes your configuration brittle and it will break when you update emacs! version 27 is looming i hear. but at least i can fucking swap to emacs again.&lt;/p&gt;</content><author><name>jowj</name></author><summary type="html">emacs on catalina</summary></entry><entry><title type="html">Org_babel_restclient</title><link href="http://localhost:4000/2019/11/21/org_babel_restclient.html" rel="alternate" type="text/html" title="Org_babel_restclient" /><published>2019-11-21T00:00:00-06:00</published><updated>2019-11-21T00:00:00-06:00</updated><id>http://localhost:4000/2019/11/21/org_babel_restclient</id><content type="html" xml:base="http://localhost:4000/2019/11/21/org_babel_restclient.html"></content><author><name>jowj</name></author><summary type="html"></summary></entry><entry><title type="html">mojo v2</title><link href="http://localhost:4000/projects/2019/11/13/mojov2.html" rel="alternate" type="text/html" title="mojo v2" /><published>2019-11-13T00:00:00-06:00</published><updated>2019-11-13T00:00:00-06:00</updated><id>http://localhost:4000/projects/2019/11/13/mojov2</id><content type="html" xml:base="http://localhost:4000/projects/2019/11/13/mojov2.html">&lt;h1 id=&quot;mojobot-v2&quot;&gt;Mojobot v2&lt;/h1&gt;
 &lt;p&gt;so, i had to rewrite &lt;code class=&quot;highlighter-rouge&quot;&gt;mojo&lt;/code&gt;. there’s a couple reasons here, the big ones are:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;slack came out with a new api a bit before i finished writing v1. they wanted to eventually deprecate v1, though that seems to be a bit of a pipe dream!&lt;/li&gt;
@@ -324,115 +347,4 @@ we played a lot of mule, an old atari 800 game. it’s a lot of fun; laura hates
 
 &lt;h2 id=&quot;food-at-marthas&quot;&gt;food at martha’s&lt;/h2&gt;
 &lt;p&gt;i forgot to take pictures of food. and also forgot to take a lot of other pictures. i did get a funny picture of laura’s family though, it was great:
-&lt;img src=&quot;/photos/lt-thanksgiving/family-sit-time.jpeg&quot; alt=&quot;family sit time&quot; /&gt;&lt;/p&gt;</content><author><name>jowj</name></author><summary type="html">seattle we flew in to seattle from austin at 845 am. don’t take that flight it was fucking horrible but it did give us a full day there despite flying for 4 hours.</summary></entry><entry><title type="html">mojojojo-bot</title><link href="http://localhost:4000/projects/2019/04/15/mojojojo_bot.html" rel="alternate" type="text/html" title="mojojojo-bot" /><published>2019-04-15T00:00:00-05:00</published><updated>2019-04-15T00:00:00-05:00</updated><id>http://localhost:4000/projects/2019/04/15/mojojojo_bot</id><content type="html" xml:base="http://localhost:4000/projects/2019/04/15/mojojojo_bot.html">&lt;h1 id=&quot;mojojojo-bot&quot;&gt;mojojojo-bot&lt;/h1&gt;
-&lt;p&gt;this was relatively easy to build initially (straight from a template), but building any functionality that I wanted into was, as expected, hard. because i am garbage at python.&lt;/p&gt;
-
-&lt;h2 id=&quot;learnings&quot;&gt;learnings&lt;/h2&gt;
-
-&lt;h3 id=&quot;1-import-pdb-python-debugger&quot;&gt;1. import pdb (python debugger)&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pdb.set_trace
-SETS A BREAK POINT IN CODE AND I CAN WRITE CODE THERE AND INTERACT WITH IT HOOOO MY GOD
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;this is probably the biggest thing i learned; para exemplar say you have a bit of code that defines a variable eq to individual objects you iterate through one at a time:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;events = slack_client.rtm_read()
-for event in events:
-    thing = event.property
-    thing2 = event.otherproperty
-    do stuff with thing / thing2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;sometimes (all the time) you run into problems where maybe one of the variables you defined doesn’t have the data you expect. so in order to troubleshoot you open you repl and try and do some adhoc definitions of variables and tokens so you can see what the deal is. as you might expect, that’s bad and doesn’t work very well. but with pdb.set_trace you can define a break point in your code that will give you a prompt, and then you can type “interact” into the prompt and it will let you type python into a repl provided with the state inherent in that point in your code! how fucking cool is that??&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import pdb
-events = slack_client.rtm_read()
-for event in events:
-    thing = event.property
-    thing2 = event.otherproperty
-    pdb.set_trace
-    do stuff with thing / thing2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;now the code looks like this and you can just call dir(events) and view its properties!!&lt;/p&gt;
-
-&lt;h3 id=&quot;2-accessing-data-in-dict-of-dicts&quot;&gt;2. accessing data in dict of dicts&lt;/h3&gt;
-&lt;p&gt;python is not powershell python is not powershell python is not powershell python is no&lt;/p&gt;
-
-&lt;p&gt;so in powershell if you’re given a dict you can access its indexes using dot params. like&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PS /&amp;gt; $dict = @{}                                                                                                                                                                                                                                                             
-PS /&amp;gt; $dict.Add('firstname','jowj')                                                                                                                                                                                                                                           
-PS /&amp;gt; $dict.Add('pet','metroid')                                                                                                                                                                                                                                              
-PS /&amp;gt; $dict                                                                                                                                                                                                                                                                   
-
-Name                           Value                                                                                                                                                                                                                                         
-----                           -----                                                                                                                                                                                                                                         
-pet                            metroid                                                                                                                                                                                                                                       
-firstname                      jowj                                                                                                                                                                                                                                          
-
-
-PS /&amp;gt; $dict.pet                                                                                                                                                                                                                                                               
-metroid
-PS /&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;in python you cannot do this. in python, in order to pull data for a particular key/value pair, you must index using they key value.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; dict = {}
-&amp;gt;&amp;gt;&amp;gt; dict
-{}
-&amp;gt;&amp;gt;&amp;gt; dict = {&quot;firstname&quot; : &quot;jowj&quot;, &quot;pet&quot; : &quot;metroid&quot;}
-&amp;gt;&amp;gt;&amp;gt; dict
-{'firstname': 'jowj', 'pet': 'metroid'}
-&amp;gt;&amp;gt;&amp;gt; dict.firstname
-Traceback (most recent call last):
-  File &quot;&amp;lt;stdin&amp;gt;&quot;, line 1, in &amp;lt;module&amp;gt;
-AttributeError: 'dict' object has no attribute 'firstname'
-&amp;gt;&amp;gt;&amp;gt; dict[0]
-Traceback (most recent call last):
-  File &quot;&amp;lt;stdin&amp;gt;&quot;, line 1, in &amp;lt;module&amp;gt;
-KeyError: 0
-&amp;gt;&amp;gt;&amp;gt; dict[&quot;firstname&quot;]
-'jowj'
-&amp;gt;&amp;gt;&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;it took me. so. so. so. long.&lt;/p&gt;
-
-&lt;h2 id=&quot;whats-next&quot;&gt;what’s next:&lt;/h2&gt;
-&lt;p&gt;i gotta finish fixing this bot to get everything i want into 1 file (right now i have some of the functionality i want in two different scripts). then maybe add some extra functionality like:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;commanding to my twitter bot&lt;/li&gt;
-  &lt;li&gt;…other stuff.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;resources&quot;&gt;resources:&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;basic tutorial / code i stole - https://www.fullstackpython.com/blog/build-first-slack-bot-python.html&lt;/li&gt;
-  &lt;li&gt;to set an environment variable in powershell in userscope, you gotta go out to .net - [Environment]::SetEnvironmentVariable(“SLACK_BOT_TOKEN”, “Test value.”, “User”)&lt;/li&gt;
-  &lt;li&gt;responding to messages with specific text - http://pfertyk.me/2016/11/automatically-respond-to-slack-messages-containing-specific-text/&lt;/li&gt;
-  &lt;li&gt;api docs - https://github.com/slackapi/python-slackclient&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jowj</name></author><summary type="html">mojojojo-bot this was relatively easy to build initially (straight from a template), but building any functionality that I wanted into was, as expected, hard. because i am garbage at python.</summary></entry><entry><title type="html">rad boys only</title><link href="http://localhost:4000/personal/2019/04/15/rad_boys_only.html" rel="alternate" type="text/html" title="rad boys only" /><published>2019-04-15T00:00:00-05:00</published><updated>2019-04-15T00:00:00-05:00</updated><id>http://localhost:4000/personal/2019/04/15/rad_boys_only</id><content type="html" xml:base="http://localhost:4000/personal/2019/04/15/rad_boys_only.html">&lt;h1 id=&quot;rad-boys-only&quot;&gt;rad boys only&lt;/h1&gt;
-&lt;p&gt;we are boys and we are rad
-sometimes our cooking makes us sad&lt;/p&gt;
-
-&lt;p&gt;but not this time, this time we made ceviche and it was fucking bomb&lt;/p&gt;
-
-&lt;h2 id=&quot;we-were-gonna-play-games-first-tho&quot;&gt;we were gonna play games first tho&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/photos/rad-boys-only/noah-desk.JPG&quot; alt=&quot;noahs monstrous desk&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;noah’s desk, was so large
-it was, like, the size of a barge&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/photos/rad-boys-only/micah-desk.JPG&quot; alt=&quot;micah’s smol desk&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;micah’s desk was very sad
-it was so small
-and so lonely&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/photos/rad-boys-only/josiah-desk.JPG&quot; alt=&quot;my desk&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;my desk is the perfect size and my laptop is totally a normal weight why do you ask&lt;/p&gt;
-
-&lt;h2 id=&quot;we-forgot-to-play-games&quot;&gt;we forgot to play games&lt;/h2&gt;
-&lt;p&gt;and made ceviche and watched tv&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/photos/rad-boys-only/kitchen1.JPG&quot; alt=&quot;kitchen1&quot; /&gt;
-&lt;img src=&quot;/photos/rad-boys-only/kitchen2.JPG&quot; alt=&quot;kitchen2&quot; /&gt;
-&lt;img src=&quot;/photos/rad-boys-only/salt.JPG&quot; alt=&quot;salt salt salt&quot; /&gt;&lt;/p&gt;</content><author><name>jowj</name></author><summary type="html">rad boys only we are boys and we are rad sometimes our cooking makes us sad</summary></entry></feed>
+&lt;img src=&quot;/photos/lt-thanksgiving/family-sit-time.jpeg&quot; alt=&quot;family sit time&quot; /&gt;&lt;/p&gt;</content><author><name>jowj</name></author><summary type="html">seattle we flew in to seattle from austin at 845 am. don’t take that flight it was fucking horrible but it did give us a full day there despite flying for 4 hours.</summary></entry></feed>
