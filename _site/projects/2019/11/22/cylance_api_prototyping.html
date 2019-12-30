@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/assets/css/style.css?v=6a6bb086d0984085a8904dcdbb3be7d216431bb4">
+    <link rel="stylesheet" type="text/css" href="/assets/css/print.css" media="print">
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>rest api prototyping | y don’t u blog about it</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="rest api prototyping" />
+<meta name="author" content="jowj" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/projects/2019/11/22/cylance_api_prototyping.html" />
+<meta property="og:url" content="http://localhost:4000/projects/2019/11/22/cylance_api_prototyping.html" />
+<meta property="og:site_name" content="y don’t u blog about it" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-22T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/projects/2019/11/22/cylance_api_prototyping.html","author":{"@type":"Person","name":"jowj"},"headline":"rest api prototyping","dateModified":"2019-11-22T00:00:00-06:00","datePublished":"2019-11-22T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/projects/2019/11/22/cylance_api_prototyping.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>josiah ledbetter</h1>
+        </header>
+        <section id="downloads" class="clearfix">
+          
+	
+        </section>
+        <hr>
+        <section id="main_content">
+          <p><a id="org055b087"></a></p>
+
+<h1 id="the-problem">the problem</h1>
+
+<p>lately i’ve been working on a lot of web API glue projects. these are usually simple things like “service1 needs to send messages to service2 in a particular format, with a particular set of priviledges.” Sometimes its more complicated, but that’s usually what it breaks down to.</p>
+
+<p>at first I was writing python code the whole time, exploring the API through python (ugh) and kept getting frustrated; it felt like I wasn’t able to go as fast as I would like, I kept making silly mistakes that I wouldn’t catch until much later, etc. To fix this, i’ve moved to prototyping in <a href="https://github.com/pashky/restclient.el">restclient.el</a> - this is a featureful rest client that you interact with through plain text (i.e., you can version control it!) within emacs.</p>
+
+<p>this has worked great for a lot of things, but falls short when you have to generate an auth token programmatically (instead of using a static key) for each request. this problem is solvable using: a different kind of glue lol. i use python to create the auth token, org-babel to register the result and then pass it to <code class="highlighter-rouge">restclient</code> which will continue to be my prototyping tool of choice. this write up will go over how i stitch each part together; i’ll use Cylance as an example service for api requests.</p>
+
+<p><a id="org4a1c34b"></a></p>
+
+<h1 id="authentication-and-authorization-in-cylance">Authentication and Authorization in Cylance</h1>
+
+<p>Cylance relies on something called JWT (JSON Web Token). There’s an RFC for this here: <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>. This is not possible to generate within <code class="highlighter-rouge">restclient</code>, so we do it in python.</p>
+
+<p>To generate the JWT, in Cylance’s case, we care about:</p>
+
+<p><code class="highlighter-rouge">TID_VAL</code>, which is the tenant ID. You can find this by logging into the console &gt; settings &gt; integrations.
+<code class="highlighter-rouge">APP_ID</code> and <code class="highlighter-rouge">APP_SECRET</code>, which is under the same place, but you’ll have to expand the custom application.</p>
+
+<p>We’ll add a <code class="highlighter-rouge">#+name:</code> argument to the top of the <code class="highlighter-rouge">org-mode</code> src block so that the output from the block can be registered for later use.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">import</span> <span class="nn">uuid</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+    <span class="kn">import</span> <span class="nn">requests</span>
+    <span class="kn">import</span> <span class="nn">jwt</span>
+    <span class="kn">import</span> <span class="nn">pdb</span>
+    <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+    
+    <span class="c"># initial auth test setup</span>
+    <span class="n">JTI_VAL</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+    <span class="n">TID_VAL</span> <span class="o">=</span> <span class="s">""</span>     <span class="c"># The tenant's unique identifier.</span>
+    <span class="n">APP_ID</span> <span class="o">=</span> <span class="s">""</span>      <span class="c"># The application's unique identifier.</span>
+    <span class="n">APP_SECRET</span> <span class="o">=</span> <span class="s">""</span>  <span class="c"># application's secret to sign the auth token with.</span>
+    
+    <span class="c"># 30 minutes from now</span>
+    <span class="n">TIMEOUT</span> <span class="o">=</span> <span class="mi">1800</span>
+    <span class="n">NOW</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+    <span class="n">TIMEOUT_DATETIME</span> <span class="o">=</span> <span class="n">NOW</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">TIMEOUT</span><span class="p">)</span>
+    <span class="n">EPOCH_TIME</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">NOW</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">())</span>
+    <span class="n">EPOCH_TIMEOUT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">TIMEOUT_DATETIME</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">())</span>
+    
+    <span class="n">AUTH_URL</span> <span class="o">=</span> <span class="s">"https://protectapi.cylance.com/auth/v2/token"</span>
+    
+    <span class="n">CLAIMS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">"exp"</span><span class="p">:</span> <span class="n">EPOCH_TIMEOUT</span><span class="p">,</span>
+        <span class="s">"iat"</span><span class="p">:</span> <span class="n">EPOCH_TIME</span><span class="p">,</span>
+        <span class="s">"iss"</span><span class="p">:</span> <span class="s">"http://cylance.com"</span><span class="p">,</span>
+        <span class="s">"sub"</span><span class="p">:</span> <span class="n">APP_ID</span><span class="p">,</span>
+        <span class="s">"tid"</span><span class="p">:</span> <span class="n">TID_VAL</span><span class="p">,</span>
+        <span class="s">"jti"</span><span class="p">:</span> <span class="n">JTI_VAL</span>
+    <span class="p">}</span>
+    
+    <span class="n">ENCODED</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">CLAIMS</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">'HS256'</span><span class="p">)</span>
+    <span class="c"># lol you have to decode from a bytes object to a string because</span>
+    <span class="c"># bytes aren't fucking json serializable</span>
+    <span class="c"># you never seem to need to re-encode them? python is so fucking weird.</span>
+    <span class="n">ENCODED</span> <span class="o">=</span> <span class="n">ENCODED</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    
+    <span class="n">PAYLOAD</span> <span class="o">=</span> <span class="p">{</span><span class="s">"auth_token"</span><span class="p">:</span> <span class="n">ENCODED</span><span class="p">}</span>
+    <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">}</span>
+    <span class="n">RESP</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">AUTH_URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">PAYLOAD</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">RESP</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s">'access_token'</span><span class="p">])</span>
+</code></pre></div></div>
+<p>this will generate a token and attach it to the name space <code class="highlighter-rouge">jwt_token</code> as defined previously.</p>
+
+<p><a id="orge661742"></a></p>
+
+<h2 id="restclient-example">restclient example</h2>
+
+<p>once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance’s API through <code class="highlighter-rouge">restclient.el</code> going forward! in order to pass the output from the registered name we used before, <code class="highlighter-rouge">jwt_token</code>, we add an argument to the <code class="highlighter-rouge">BEGIN_SRC</code> header, like <code class="highlighter-rouge">:var x=jwt_token</code>. Then, we can set a <code class="highlighter-rouge">restclient</code> local variable equal to the <code class="highlighter-rouge">org-babel</code> super-variable and use it within the rest of the src block, as seen below:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># auth.test
+:cylance_jwt_token = :x
+GET https://protectapi.cylance.com/users/v2?page=1&amp;page_size=1
+Authorization: Bearer :cylance_jwt_token
+Content-Type: application/json
+User-Agent: Emacs Restclient
+</code></pre></div></div>
+
+<p>this will return my user (again, i’ve disturbed the output but it is roughly what’s returned):</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"page_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"page_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"total_number_of_items"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"page_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tenant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"me@thiscompanyyo.isit"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"has_logged_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"role_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"role_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"i am the boss"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"default_zone_role_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"default_zone_role_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"zones"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="s2">"date_last_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-22T14:52:13"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"date_email_confirmed"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-17T17:16:52"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"date_modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-17T17:16:52"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">GET</span><span class="w"> </span><span class="err">https</span><span class="p">:</span><span class="err">//protectapi.cylance.com/users/v</span><span class="mi">2</span><span class="err">?page=</span><span class="mi">1</span><span class="err">&amp;page_size=</span><span class="mi">1</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">Content-Encoding</span><span class="p">:</span><span class="w"> </span><span class="err">gzip</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">Content-Type</span><span class="p">:</span><span class="w"> </span><span class="err">application/json;</span><span class="w"> </span><span class="err">charset=utf</span><span class="mi">-8</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">Date</span><span class="p">:</span><span class="w"> </span><span class="err">Fri</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="err">Nov</span><span class="w"> </span><span class="mi">2019</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">13</span><span class="w"> </span><span class="err">GMT</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">Server</span><span class="p">:</span><span class="w"> </span><span class="err">openresty</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">Content-Length</span><span class="p">:</span><span class="w"> </span><span class="mi">339</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">Connection</span><span class="p">:</span><span class="w"> </span><span class="err">keep-alive</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">Request</span><span class="w"> </span><span class="err">duration</span><span class="p">:</span><span class="w"> </span><span class="mf">0.305690</span><span class="err">s</span><span class="w">
+</span></code></pre></div></div>
+
+<p><a id="orgce4eb0b"></a></p>
+
+<h1 id="troubleshooting-python-and-org-babel">Troubleshooting python and org-babel</h1>
+
+<p>I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn’t find my python binary on macOS. to fix this i manually set it in my <code class="highlighter-rouge">init.el</code> file, which worked for a long time.</p>
+
+<p>however, if you start using venvs <em>within emacs</em>, tools like <code class="highlighter-rouge">pvenv</code> and <code class="highlighter-rouge">venv</code> <em>will not overwrite the global variable set with the new venv specific python binaries</em> if you’ve globally set the py binary location. This killed me. below are some blocks i used to troubleshoot what was going on.</p>
+
+<p>This one is pretty straight forward: do i have a virtual env active, and where is the python binary as seen by the shell:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">echo</span> <span class="nv">$VIRTUAL_ENV</span>
+    which python
+</code></pre></div></div>
+<p>Same deal, only “where is the python binary as seen in the python session”. in my case, this was showing me the system python binary even when the <em>shell</em> was showing me the venv binary.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+</code></pre></div></div>
+<p>this block just proved that i could in fact import the right modules that were only in the venv.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">import</span> <span class="nn">jwt</span>
+</code></pre></div></div>
+
+        </section>
+
+        <footer>
+        
+        </footer>
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>
