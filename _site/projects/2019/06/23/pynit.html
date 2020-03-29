@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/assets/css/style.css?v=9cf74c26e8c8b2060ce53e855783a85c377be660">
+    <link rel="stylesheet" type="text/css" href="/assets/css/print.css" media="print">
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>pynit | y don’t u blog about it</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="pynit" />
+<meta name="author" content="jowj" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="pynit is a personal archival script that relies on pinboard.in. it pulls in posts through the reddit api (by way of praw) and adds them to the linked pinboard account. you can get it here" />
+<meta property="og:description" content="pynit is a personal archival script that relies on pinboard.in. it pulls in posts through the reddit api (by way of praw) and adds them to the linked pinboard account. you can get it here" />
+<link rel="canonical" href="http://localhost:4000/projects/2019/06/23/pynit.html" />
+<meta property="og:url" content="http://localhost:4000/projects/2019/06/23/pynit.html" />
+<meta property="og:site_name" content="y don’t u blog about it" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-23T00:00:00-05:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/projects/2019/06/23/pynit.html"},"author":{"@type":"Person","name":"jowj"},"headline":"pynit","dateModified":"2019-06-23T00:00:00-05:00","datePublished":"2019-06-23T00:00:00-05:00","description":"pynit is a personal archival script that relies on pinboard.in. it pulls in posts through the reddit api (by way of praw) and adds them to the linked pinboard account. you can get it here","url":"http://localhost:4000/projects/2019/06/23/pynit.html","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>josiah ledbetter</h1>
+        </header>
+        <section id="downloads" class="clearfix">
+          
+	
+        </section>
+        <hr>
+        <section id="main_content">
+          <p>pynit is a personal archival script that relies on <code class="highlighter-rouge">pinboard.in</code>. it pulls in posts through the reddit api (by way of <code class="highlighter-rouge">praw</code>) and adds them to the linked <code class="highlighter-rouge">pinboard</code> account. you can get it <a href="https://github.com/jowj/pynit" title="pynit">here</a></p>
+
+<p>i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:</p>
+
+<ul>
+  <li>fashion</li>
+  <li>emacs / org-mode</li>
+  <li>powershell</li>
+  <li>homelabs</li>
+  <li>secops</li>
+</ul>
+
+<p>my typical workflow for seeing a piece of content that was useful looked something like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>view content
+peruse comments (usually, the most useful part of the reddit entry)
+find something that i want to revist
+save it for later inside of reddit
+forget about it forever, maybe revisit it within 3 months if i'm very bored
+in the interim, many of the comments are deleted, links don't work, parent URL points to a dead webserver
+</code></pre></div></div>
+
+<p>this is obviously not ideal. pynit helps me with about half of those problems. specifically, because i pay for <code class="highlighter-rouge">pinboard</code>’s archiving service, i can preserve the context in the comment section of the reddit entry. links may still be broken, but i’m perfectly fine with using archive.org for viewing the links later if i need to. as i mentioned, comments end up being the most useful thing to me most of the time.</p>
+
+<p>it should be noted that <code class="highlighter-rouge">pinboard</code> can be used to archive the parent URL context as well, but i opted not to do that in order to preserve some semblance of readability in my <code class="highlighter-rouge">pinboard</code> feed.</p>
+
+<p>comments are also possible to be preserved through things resavr, ceddit, removeddit, etc. these type of sites go down regularly and are not very reliable in my experience (although resavr looks promising, if limited. it only archives comments that are deleted that are &gt; 1000 characters).</p>
+
+<p>now whenever i want to revisit a particular item i have all the comments preserved via pinboard, and URLs can be usable (most of the time) through archive.org.</p>
+
+<p>i learned a few things that i want to write up here, all related to python or working with rest apis:</p>
+
+<h2 id="python">python</h2>
+
+<p>i learned about <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through <a href="https://github.com/mrled/">@mrled</a> and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pysnooper
+
+@pysnooper.snoop()
+def my_function():
+    var1 = 'thing1'
+    var2 = 'thing2'
+
+    return(var1 + var2)
+
+print(my_function())
+
+</code></pre></div></div>
+
+<p>this would return:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>19:54:53.048881 call         4 def my_function():
+19:54:53.049021 line         5     var1 = 'thing1'
+New var:....... var1 = 'thing1'
+19:54:53.049094 line         6     var2 = 'thing2'
+New var:....... var2 = 'thing2'
+19:54:53.049155 line         8     return(var1 + var2)
+19:54:53.049197 return       8     return(var1 + var2)
+Return value:.. 'thing1thing2'
+thing1thing2
+
+</code></pre></div></div>
+
+<p>this allowed me to simple add a single line to an exist function /without modifying the function itself at all/ and make sure I was actually doing what I thought I was doing. this was huge for letting me sanity check my work.</p>
+
+<h2 id="rest-apis">rest apis</h2>
+<p>a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you’re posting stuff. i am not a Web Man, so i don’t understand the why, but if all you’ve ever done is /read/ about working with rest apis then the real world may be confusing when you try and post something that requires a get request. <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the <code class="highlighter-rouge">delicious</code> api.</p>
+
+        </section>
+
+        <footer>
+        
+        </footer>
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

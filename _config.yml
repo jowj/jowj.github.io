@@ -1,0 +1,7 @@
+theme: jekyll-theme-tactile
+title: y don't u blog about it
+url: me.jowj.net
+author: jowj
+description: ""
+plugins:
+  - jekyll-feed
