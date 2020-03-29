@@ -1,0 +1,72 @@
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../org/src/alt-dark.css" />
+#+AUTHOR: jowj
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+LATEX_CLASS: article
+#+LaTeX_HEADER: \usepackage[T1]{fontenc}
+#+LaTeX_HEADER: \usepackage[scaled]{beraserif}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \singlespacing
+#+LATEX_HEADER: \usepackage{enumitem}
+#+BEGIN_CENTER
+*Josiah Ledbetter*
+
+6602 Willamette Dr, Austin, TX, 78723
+
+(512) 554-8976; me@jowj.net
+#+END_CENTER
+* Skills
+** Sysops
+#+ATTR_LATEX: :options [noitemsep]
+- Extensive knowledge of Windows Server 2003-2012R2 and IIS 6-8.5.
+- Intermediate knowledge of AD and Group Policy.
+- Intermediate knowledge of nix OSes.
+
+** Programming & automation
+#+ATTR_LATEX: :options [noitemsep]
+- Python API libraries & command line tools.
+- Config management through Ansible.
+- Deployment automation through Docker, Powershell, and Python.
+** Security tools
+#+ATTR_LATEX: :options [noitemsep]
+- Extensive knowledge of Rapid7 Nexpose Vulnerability Scanner.
+- Intermediate knowledge of Splunk.
+- Intermediate knowledge of Rapid7 IDR.
+- Intermediate knowledge of CylancePROTECT.
+* Technical Experience
+
+** Information Security Engineer at Planview, May 2019 - Current
+#+ATTR_LATEX: :options [noitemsep]
+- Built out library for talking with Rapid7 Investigations in IDR.
+- Automated pulling alerts from IDR and posting non-sensitive information to slack for broader team use during incident response.
+  - This was later used as a system of record for SOCII compliance.
+- Created a scanning and remediation process for all products under the Planview umbrella.
+- Rolled out Powershell, Macroscript whitelist initiative to all employees through Cylance.
+
+** Information Security Engineer at Volusion, April 2017 - May 2019
+#+ATTR_LATEX: :options [noitemsep]
+- Reimplemented the scanning and remediation program.
+- Deployed Splunk from scratch for use as a SEIM.
+- Built out Rapid7 Nexpose infra to decrease scan times from > 24 hours to < 8.
+- Spearheaded compliance efforts with PCI and internal security policy.
+- Created automation tooling through Powershell, Python, and Ansible.
+
+** Systems Engineer at Volusion, December 2015 - April 2017
+#+ATTR_LATEX: :options [noitemsep]
+- Planned and executed upgrades to out of support applications.
+- Created SQL cluster build automation in Powershell to decrease department turn-around time during cluster builds.
+- Planned and executed large scale AV upgrades in corporate, production, and payments environments. 
+
+* Open source projects & self hosting
+#+ATTR_LATEX: :options [noitemsep]
+- [[https://git.awful.club/projects/pynit][pynit]]: an automatable way to sync reddit saved-posts to [[https://pinboard.in][pinboard]].
+- [[https://git.awful.club/hosted][hosted]]: list of projects i'm self hosting and actively using, including:
+  - nextcloud
+  - gitea
+  - znc
+* Other
+#+ATTR_LATEX: :options [noitemsep]
+- Experience with PCI, SOCII compliance frameworks
+- Intermediate trapeze skills
+- CompTIA Sec+
+

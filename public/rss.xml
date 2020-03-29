@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>josiah's shitty blog</title>
+<description>(Abstract Abstract)</description>
+<generator>Emacs webfeeder.el</generator>
+<link>https://me.jowj.net/</link>
+<atom:link href="https://me.jowj.net/rss.xml" rel="self" type="application/rss+xml"/>
+<lastBuildDate>Fri, 27 Mar 2020 16:14:47 -0500</lastBuildDate>
+</channel>
+</rss>

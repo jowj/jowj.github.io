@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-03-27 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>emacs on catalina</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="[[https://me.jowj.net][josiah]]josiah">
+<link rel="stylesheet" type="text/css" href="css/my-dark.css" />---
+</head>
+<body>
+<div id="preamble" class="status">
+<a href="./index.html">About</a>
+<a href="./articles.html">Articles</a>
+<a href="./projects/index.html">Projects</a>
+<a href="./atom.xml">Feed</a>
+</div>
+<div id="content">
+<header>
+<h1 class="title">emacs on catalina</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6362166">early days</a></li>
+<li><a href="#org6cee7ae">partial fix</a></li>
+<li><a href="#org88123a6">jankiest fix</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org6362166" class="outline-2">
+<h2 id="org6362166">early days</h2>
+<div class="outline-text-2" id="text-org6362166">
+<p>
+i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
+</p>
+
+<p>
+at first there was only a single reddit post detailing what emacs users might need to know about. it linked to <a href="https://gist.github.com/dive/f64c645a9086afce8e5dd2590071dbf9">this gist</a>.
+</p>
+
+<p>
+this basically says to run this lisp to add your proper emacs path to the proper exclusions and then you won't have any problems. Ok great! but that didn't work. I could now <i>launch</i> emacs from Spotlight and navigate around my Docs/Downloads/whatever, but i was totally unable to <i>swap</i> to emacs from Spotlight. this also impacted using hammerspoon as a launcher, i'm guessing because the primative behind both mechanisms is the same.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6cee7ae" class="outline-2">
+<h2 id="org6cee7ae">partial fix</h2>
+<div class="outline-text-2" id="text-org6cee7ae">
+<p>
+later that week, a few other people said you needed to whitelist <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
+</p>
+
+<p>
+since I could at least launch and navigate around with my then-current janky set up i stopped spending Paid Time on it and moved on. i ran the the rest of the catalina beta out and then reported back on my experience with our security tools, whatever. a few weeks ago i finally got mad enough at the situation to spend some more time looking at this and found the answer really soon! apparently a bunch of people had similar problems to me and so there are several blogs about the problem now! the one I found most helpful was <a href="https://spin.atomicobject.com/2019/12/12/fixing-emacs-macos-catalina/">this guy</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org88123a6" class="outline-2">
+<h2 id="org88123a6">jankiest fix</h2>
+<div class="outline-text-2" id="text-org88123a6">
+<p>
+he gives a good breakdown as to why this is needed <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">% cd  /Applications /Emacs.app /Contents /MacOS
+% mv Emacs Emacs-launcher
+% mv Emacs-x86_64- 10_14 Emacs
+% cd  /Applications /Emacs.app /Contents /
+% rm  -rf _CodeSignature
+</pre>
+</div>
+
+
+<p>
+this is not like, super great. its makes your configuration brittle and it will break when you update emacs! version 27 is looming i hear. but at least i can fucking swap to emacs again.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: </p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)</p>
+</div>
+</body>
+</html>
