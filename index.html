@@ -1,60 +1,327 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset='utf-8'>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="/assets/css/style.css?v=9cf74c26e8c8b2060ce53e855783a85c377be660">
-    <link rel="stylesheet" type="text/css" href="/assets/css/print.css" media="print">
-    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-04-09 Thu 15:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>index</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="josiah" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
-<!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>y don’t u blog about it</title>
-<meta name="generator" content="Jekyll v3.7.4" />
-<meta property="og:title" content="y don’t u blog about it" />
-<meta name="author" content="jowj" />
-<meta property="og:locale" content="en_US" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
-<meta property="og:site_name" content="y don’t u blog about it" />
-<script type="application/ld+json">
-{"@type":"WebSite","author":{"@type":"Person","name":"jowj"},"headline":"y don’t u blog about it","url":"http://localhost:4000/","name":"y don’t u blog about it","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="posts/css/my-dark.css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
 
-  </head>
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
 
-  <body>
-    <div id="container">
-      <div class="inner">
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
 
-        <header>
-          <h1>josiah ledbetter</h1>
-        </header>
-        <section id="downloads" class="clearfix">
-          
-	
-        </section>
-        <hr>
-        <section id="main_content">
-          <p>hi you have reached the landing page of me, the person whose name is above this text. please click a link below if you are curious about me:</p>
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
 
-<p>🤖 <a href="/projects/">projects</a><br />
-🧟 <a href="/personal/">personal</a><br />
-💩 <a href="/security/">security thots</a><br />
-‍🧙 <a href="/josiah-resume.pdf">resume</a></p>
 
-        </section>
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a href="./index.html">home</a>
+<a href="./posts/articles.html">essays</a>
+<a href="./personal/articles.html">diary</a>
+<a href="https://git.awful.club/projects">projects</a>
+<a href="./resume.pdf">resume</a>
+</div>
+<div id="content">
+<h1 class="title">index</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orga6d5afd">josiah ledbetter</a>
+<ul>
+<li><a href="#org5cb7141">talk to me</a></li>
+<li><a href="#org0b66b00">c͝o̾nͭs͔uͫm̖é</a>
+<ul>
+<li><a href="#orga5f7599">stuff i've written</a></li>
+<li><a href="#org9a061bd">stuff i've made</a></li>
+<li><a href="#orgc21e322">stuff thats personal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga6d5afd" class="outline-2">
+<h2 id="orga6d5afd"><a id="ID-9d8b0a05-5454-4b4a-b746-d9f55b511dbb"></a>josiah ledbetter</h2>
+<div class="outline-text-2" id="text-orga6d5afd">
+<p>
+hi you've reached the landing page of me, the person whose name is above this text! how exciting.
+</p>
 
-        <footer>
-        
-        </footer>
+<p>
+i mostly use this to make people look at my <a href="./resume.pdf">resume</a>.
+</p>
+</div>
 
-      </div>
-    </div>
+<div id="outline-container-org5cb7141" class="outline-3">
+<h3 id="org5cb7141"><a id="ID-c61d46e9-4626-499b-8e72-cc8e44d308bc"></a>talk to me</h3>
+<div class="outline-text-3" id="text-org5cb7141">
+<p>
+🔮 send me an <a href="mailto:me@jowj.net">email</a>
+</p>
 
-    
-  </body>
+<p>
+🗑 message me on <a href="https://twitter.com/Jowjoso">twitter</a>
+</p>
+
+<p>
+i am interested in emacs, python, security, and making stuff in general.
+</p>
+</div>
+</div>
+<div id="outline-container-org0b66b00" class="outline-3">
+<h3 id="org0b66b00"><a id="ID-bfaaf606-afa7-4daa-98ae-fa944200e3a8"></a>c͝o̾nͭs͔uͫm̖é</h3>
+<div class="outline-text-3" id="text-org0b66b00">
+</div>
+<div id="outline-container-orga5f7599" class="outline-4">
+<h4 id="orga5f7599"><a id="ID-7eb028e9-ca53-4674-b9c4-0098295beab2"></a>stuff i've written</h4>
+<div class="outline-text-4" id="text-orga5f7599">
+<ul class="org-ul">
+<li>i'm particularly into my post on <a href="./posts/api-prototyping.html">prototyping rest apis with org-mode</a></li>
+<li>if you just wanna view what i've written about, view the list <a href="./posts/articles.html">here</a></li>
+<li>you can subscribe to just my technical writing using <a href="./posts/rss.xml">rss</a>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9a061bd" class="outline-4">
+<h4 id="org9a061bd"><a id="ID-8f41ebdd-e6c7-4dd1-816f-dada50841fc8"></a>stuff i've made</h4>
+<div class="outline-text-4" id="text-org9a061bd">
+<p>
+📌 <a href="https://git.awful.club/projects/pynit">pynit</a> is an integration between reddit saved posts and pinboard.in
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc21e322" class="outline-4">
+<h4 id="orgc21e322"><a id="ID-3843ae67-de10-47ed-91e8-83a437f3d355"></a>stuff thats personal</h4>
+<div class="outline-text-4" id="text-orgc21e322">
+<ul class="org-ul">
+<li>if you're really interested in the boring aspects of my life you might wanna read my diary <a href="./personal/articles.html">here</a>. its where i put all the stuff no one gives a shit about!</li>
+<li>you can subscribe to just my personal writing using <a href="./personal/rss.xml">rss</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)</p></p>
+</div>
+</body>
 </html>

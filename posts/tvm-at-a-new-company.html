@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-04-09 Thu 15:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tvm at a new company</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="josiah">
+<link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<a href="../index.html">home</a>
+<a href="../posts/articles.html">essays</a>
+<a href="../personal/articles.html">diary</a>
+<a href="https://git.awful.club/projects">projects</a>
+<a href="../resume.pdf">resume</a>
+</div>
+<div id="content">
+<header>
+<h1 class="title">tvm at a new company</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge417d84">no new problems</a>
+<ul>
+<li><a href="#org2926099">using an existing scanning install or starting over</a></li>
+<li><a href="#orgf06842c">are naming schemes important enough to spend time on</a></li>
+<li><a href="#orgc34ac8d">a note on scan schedules</a></li>
+<li><a href="#orgd8cc93c">what other things should I check on</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orge417d84" class="outline-2">
+<h2 id="orge417d84">no new problems</h2>
+<div class="outline-text-2" id="text-orge417d84">
+<p>
+i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.
+</p>
+</div>
+
+<div id="outline-container-org2926099" class="outline-3">
+<h3 id="org2926099">using an existing scanning install or starting over</h3>
+<div class="outline-text-3" id="text-org2926099">
+<p>
+it may be reasonable to nuke an install if:
+</p>
+
+<ul class="org-ul">
+<li>data existing in the install is massively out of date / bad / for some reason is fucked up data</li>
+<li>data existing in the install doesn't tell you anything useful; 'these ips are alive' isn't useful.</li>
+</ul>
+
+<p>
+times when you definitely should not nuke an install:
+</p>
+<ul class="org-ul">
+<li>if the install is tied to existing agents; losing those agent connections would be a mistake</li>
+</ul>
+
+<p>
+those are really the only hard constraints i can think of. everything else seems pretty grey
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf06842c" class="outline-3">
+<h3 id="orgf06842c">are naming schemes important enough to spend time on</h3>
+<div class="outline-text-3" id="text-orgf06842c">
+<p>
+hard yes. some of the names in use at my new place are frankly <i>hilarious</i>. and bad. "aaah, a scan template called 'corp users', what do you suppo - oh, its for scanning production? of course."
+</p>
+
+<p>
+i picked a rough naming scheme template for all objects, and then tweaked it on a per-object-type basis, i.e.:
+</p>
+
+<p>
+ProductName - Environment - Geolocation - Data
+</p>
+
+<p>
+"search - prod - aus" is pretty straight forward, and then the 'data' field can be where you really express differences between the object classes. if it ends up looking a bit different between object classes, that's ok. the most important thing for naming schemes is consistency to the rules you set. everything else, while still important, is secondary.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc34ac8d" class="outline-3">
+<h3 id="orgc34ac8d">a note on scan schedules</h3>
+<div class="outline-text-3" id="text-orgc34ac8d">
+<p>
+think about what a particular scan is trying to accomplish. if the goal of a scan is to get data from <i>corporate servers</i> then a typical overnight maintenance window makes sense. 
+</p>
+
+<p>
+if the goal is to get data from <i>the entire corporate netblock</i> then scanning over night is probably really stupid, unless the entire company works during that time. after all, most companies are deploying large laptop fleets that all get taken home at the end of the day! instead, you can tackle this by doing one of these:
+</p>
+
+<ul class="org-ul">
+<li>scan midday, during the work hours, at several different times to catch differently shifted people</li>
+<li>install agents on all laptop / movable devices</li>
+</ul>
+
+<p>
+ok, apparently the title should be "two notes on scans". if your goal is to scan sensitive production servers make sure you reach out to the ops team that manages those servers. they should know, you should have a paper trail proving you at least made best efforts to communicate, etc.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgd8cc93c" class="outline-3">
+<h3 id="orgd8cc93c">what other things should I check on</h3>
+<div class="outline-text-3" id="text-orgd8cc93c">
+<ul class="org-ul">
+<li>is the OS backing the scanning app still getting updates? a lot of people fire and forget scan setups so make sure you're not running shit off some idiots ubuntu 12 install.</li>
+<li>how much of the infrastructure are we actually scanning? do have blind spots?
+<ul class="org-ul">
+<li>if there isn't an ipam then this will be reaaaaal hard to figure out, but its very important.</li>
+</ul></li>
+<li>is your license sufficient or will you have to get more approved before you can actually achieve good coverage?</li>
+<li>are there any non-expiring exceptions?
+<ul class="org-ul">
+<li>if so, i recommend nuking them and rebuilding them with at the most a 1 year expiration date; force the company to re-eval once a year if they really want these risks.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)</p></p>
+</div>
+</body>
+</html>
