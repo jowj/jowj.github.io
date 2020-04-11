@@ -6,283 +6,14 @@
 <generator>Emacs webfeeder.el</generator>
 <link>https://me.jowj.net/posts/</link>
 <atom:link href="https://me.jowj.net/posts/rss.xml" rel="self" type="application/rss+xml"/>
-<lastBuildDate>Thu, 09 Apr 2020 15:34:44 -0500</lastBuildDate>
-<item>
-  <title>a list of stuff i wrote</title>
-  <description><![CDATA[<div id="content">
- <ul class="org-ul"> <li> <a href="moving-from-1pass-to-bitwarden.html">Moving from 1pass to bitwarden</a></li>
- <li> <a href="pynit.html">pynit</a></li>
- <li> <a href="vcards.html">vcards</a></li>
- <li> <a href="tvm-at-a-new-company.html">tvm at a new company</a></li>
- <li> <a href="emacs-on-catalina.html">emacs on catalina</a></li>
- <li> <a href="css.html">css test</a></li>
- <li> <a href="api-prototyping.html">rest api prototyping</a></li>
-</ul></div>]]></description>
-  <link>https://me.jowj.net/posts/articles.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/articles.html</guid>
-  <pubDate>Thu, 09 Apr 2020 15:34:00 -0500</pubDate>
-</item>
-<item>
-  <author>josiah</author>
-  <title>Moving from 1pass to bitwarden</title>
-  <description><![CDATA[<div id="content">
- <div id="outline-container-org3a8ddb0" class="outline-2">
- <h2 id="org3a8ddb0">background</h2>
- <div class="outline-text-2" id="text-org3a8ddb0">
- <p>
-I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
-</p>
-
- <p>
-Since early 2019 i've been running linux at home for everything and that has finally made 1password too painful such that i'm moving off of it. 1pass is a great app and has fantastic compatability for most people but it sucks horribly on linux; until now i've been using 1passX with a 1password.com account. This is the  <i>only</i> way to use 1password on a linux os. 1pass4 ran fine under wine, 1pass6 i think could work for some people (but i never got it to).
-</p>
-
- <p>
-1passX is a browser extension. This means there's a few things that make me uncomfortable or that downright don't match with my work flow:
-</p>
-
- <ol class="org-ol"> <li>having to open a browser on first boot to get access to passwords suck if you also have your browser bring back sessions on launch. everything takes forever to load and you're probably just looking for an entry real quick anyway.</li>
- <li>doing anything cryptographically sensitive in a browser extension is a little shady. I trust 1password enough to handle this, but this won't be true of everyone. info:
- <ul class="org-ul"> <li>here's a famous NCC write up about it:  <a href="https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful/">https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful/</a></li>
- <li>browser extensions that run on every page can be risky enough already; if that browser extension could be tricked to pass instructions to your local vault when it shouldn't (say, send an 'autofill' query over to your vault for 'google.com' when you're actually on 'g00gle.com' or whatever) then a browser bug could lead to your entire vault being exfilled.</li>
-</ul></li>
- <li>swapping quickly between anything i'm working on and my vault sucked because you had to pull up your browser and then move to the vault tab and then login. boo.</li>
-</ol> <p>
-because of these issues i started looking for alternatives
-</p>
-</div>
-</div>
- <div id="outline-container-org3204734" class="outline-2">
- <h2 id="org3204734">bitwarden</h2>
- <div class="outline-text-2" id="text-org3204734">
- <p>
-since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
-</p>
-
- <ul class="org-ul"> <li>open source</li>
- <li>self hosted (as an option)</li>
- <li>ability to share passwords between accounts</li>
- <li>good to great mobile experience on iOS  <span class="underline">and</span> Android</li>
- <li>totp support</li>
-</ul> <p>
-i've been living on bitwarden for ~1 week at this point and haven't felt any real urge to go back to 1Password. I started with their hosted service so that I didn't have to go through a ton of self hosting work to figure out if I hated it or not. Now that I know that I like it, I can slowly start automating deploys and maintenance tasks and mirror data from their hosted service to my own instance as quickly or slowly as I please.
-</p>
-</div>
-</div>
-
- <div id="outline-container-orgd33ed02" class="outline-2">
- <h2 id="orgd33ed02">the bad</h2>
- <div class="outline-text-2" id="text-orgd33ed02">
- <p>
-bad news first. 
-</p>
- <ol class="org-ol"> <li>bitwarden's desktop clients are all electron. I expect there to be vulns discovered here eventually that impact these clients. This is still better than the shared sandbox that is my browser IMO, but that's not an experts opinion, that's just mine.</li>
- <li>migrating over from 1pass was both great and more confusing than it needed to be.
- <ul class="org-ul"> <li>TOTP migration from 1pass is REALLY confusing, depending on what kind of bw account you have. I'll talk about it more specifically further down.</li>
- <li>You cannot export from 1password.com accounts through 1passX. You  <i>must</i> export from a 1pass7 install on a mac or windows machine. REALLY frustrating!</li>
- <li>You cannot export Document objects  <i>at all</i>. You have to manually download them one at a time! Talk about letting your programming abstraction rule the user interface. an obvious mistake on 1pass's part, i hope they fix that eventually.</li>
-</ul></li>
- <li>bitwarden's UI is just not as polished as 1passwords. 1password is so good at that shit.</li>
-</ol></div>
-</div>
-
- <div id="outline-container-orga4e6497" class="outline-2">
- <h2 id="orga4e6497">totp issue specifics</h2>
- <div class="outline-text-2" id="text-orga4e6497">
- <p>
-bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
-</p>
-
- <p>
-I created a free bitwarden account on bitwarden.com, exported one of my vaults, imported it into my new bw account, and then started poking around. Pretty much everything came over right away, but I noticed that the TOTP fields were hidden. "Makes sense", I thought, they said that they didn't offer that feature until you pay.
-</p>
-
- <p>
-So I fuck around and do some more testing and poking and decide to spend the $10 to get premium bw. When i do that, the TOTP codes on all 2FA entries magically appear! So all that data succesfully gets exported > imported and saved, its just not visible to you. Kind of confusing UX tbqh, but ok makes sense.
-</p>
-
- <p>
-The desktop apps, being electron, got cached without showing the TOTP codes; super confusing again, and frustrating. if you need to clear the cache of an electron app you can follow this stack overflow post:
-  <a href="https://stackoverflow.com/questions/31446782/how-to-clear-the-cache-data-in-electronatom-shell">https://stackoverflow.com/questions/31446782/how-to-clear-the-cache-data-in-electronatom-shell</a>
-</p>
-</div>
-</div>
-
- <div id="outline-container-org03c885d" class="outline-2">
- <h2 id="org03c885d">the cool</h2>
- <div class="outline-text-2" id="text-org03c885d">
- <p>
-On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
-</p>
-
- <p>
-bw also handles documents in a sane format; rather than creating 'objects' as a seperate entry type in the vault it has them as attachments to any other kind of entry. DUH. I don't want just a signature pdf in my vault, either divorced from context or linked but still polluting my results. Stupid. bw reverts to older 1pass behavior with documents, letting me attach them anywhere and keep notes about the specific document. rad.
-</p>
-
- <p>
-bw is open source! totally! the clients, the servers, the mobile apps, its rad! a fair critique of bw as a self hosted project is that the servers are  <i>beefy</i> fucks. That's true.  since its open source some weirdo has built a rust implementation that is API compatible with all clients. I think this is rad as hell (though i'm not about to trust all my vault secrets to Some Dude's implementation).
-</p>
-
- <p>
-A counter argument to my worry about the server is that bw encrypts everything before sending to the server per 3. here:
- <a href="https://help.bitwarden.com/article/why-should-i-trust-bitwarden/">https://help.bitwarden.com/article/why-should-i-trust-bitwarden/</a>
-</p>
-
- <p>
-I still am not gonna run bitwarden <sub>rs</sub> though.
-</p>
-
- <p>
-read about the bitwarden <sub>rs</sub> project here:
- <a href="https://github.com/dani-garcia/bitwarden_rs">https://github.com/dani-garcia/bitwarden_rs</a>
-</p>
-</div>
-</div>
-
- <div id="outline-container-org801cab9" class="outline-2">
- <h2 id="org801cab9">next steps</h2>
- <div class="outline-text-2" id="text-org801cab9">
- <p>
-i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
-</p>
-
- <p>
-i haven't figured out how i could do that, but it seems like it should be pretty feasible. the fact that i could even do that is pretty fuckin' cool, tbqh.
-</p>
-</div>
-</div>
-</div>]]></description>
-  <link>https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</guid>
-  <pubDate>Thu, 09 Apr 2020 15:34:00 -0500</pubDate>
-</item>
-<item>
-  <author>josiah</author>
-  <title>pynit</title>
-  <description><![CDATA[<div id="content">
- <div id="outline-container-org12bdf4b" class="outline-2">
- <h2 id="org12bdf4b">what is this</h2>
- <div class="outline-text-2" id="text-org12bdf4b">
- <p>
-pynit is a personal archival script that relies on  <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it  <a href="https://github.com/jowj/pynit">here</a>.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org5c1dbc3" class="outline-2">
- <h2 id="org5c1dbc3">why i made it</h2>
- <div class="outline-text-2" id="text-org5c1dbc3">
- <p>
-i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
-</p>
-
- <ul class="org-ul"> <li>fashion</li>
- <li>emacs / org-mode</li>
- <li>powershell</li>
- <li>homelabs</li>
- <li>secops</li>
-</ul> <p>
-my typical workflow for seeing a piece of content that was useful looked something like:
-</p>
-
- <ul class="org-ul"> <li>view content</li>
- <li>peruse comments (usually, the most useful part of the reddit entry)</li>
- <li>find something that i want to revist</li>
- <li>save it for later inside of reddit</li>
- <li>forget about it forever, maybe revisit it within 3 months if i'm very bored</li>
- <li>in the interim, many of the comments are deleted, links don't work, parent URL points to a dead webserver</li>
-</ul> <p>
-this is obviously not ideal. pynit helps me with about half of those problems. specifically, because i pay for `pinboard`'s archiving service, i can preserve the context in the comment section of the reddit entry. links may still be broken, but i'm perfectly fine with using archive.org for viewing the links later if i need to. as i mentioned, comments end up being the most useful thing to me most of the time.
-</p>
-
- <p>
-it should be noted that `pinboard` can be used to archive the parent URL context as well, but i opted not to do that in order to preserve some semblance of readability in my `pinboard` feed.
-</p>
-
- <p>
-comments are also possible to be preserved through things resavr, ceddit, removeddit, etc. these type of sites go down regularly and are not very reliable in my experience (although resavr looks promising, if limited. it only archives comments that are deleted that are > 1000 characters). 
-</p>
-
- <p>
-now whenever i want to revisit a particular item i have all the comments preserved via pinboard, and URLs can be usable (most of the time) through archive.org.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org1c386b0" class="outline-2">
- <h2 id="org1c386b0">what I learned while i made this</h2>
- <div class="outline-text-2" id="text-org1c386b0">
- <p>
-i learned a few things that i want to write up here, all related to python or working with rest apis:
-</p>
-</div>
-
- <div id="outline-container-orgf59a6af" class="outline-3">
- <h3 id="orgf59a6af">python</h3>
- <div class="outline-text-3" id="text-orgf59a6af">
- <p>
-i learned about  <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through  <a href="https://twitter.com/mrled">@mrled</a> and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
-</p>
-
- <div class="org-src-container">
- <pre class="src src-python"> <span style="color: #598249;">import</span> pysnooper
-
- <span style="color: #598249;">@pysnooper.snoop</span>()
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
-     <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-     <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
-
-     <span style="color: #598249;">return</span>(var1 + var2)
-
- <span style="color: #598249;">print</span>(my_function())
-
-</pre>
-</div>
-
- <p>
-this would return:
-</p>
-
- <div class="org-src-container">
- <pre class="src src-python">19:54:53.048881 call         4  <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
-19:54:53.049021 line         5      <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-New var:.......  <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-19:54:53.049094 line         6      <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
-New var:.......  <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
-19:54:53.049155 line         8      <span style="color: #598249;">return</span>(var1 + var2)
-19:54:53.049197  <span style="color: #598249;">return</span>       8      <span style="color: #598249;">return</span>(var1 + var2)
-Return value:..  <span style="color: #15968D;">'thing1thing2'</span>
-thing1thing2
-</pre>
-</div>
-
- <p>
-this allowed me to simple add a single line to an exist function  <i>without modifying the function itself at all</i> and make sure I was actually doing what I thought I was doing. this was huge for letting me sanity check my work.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org7d42076" class="outline-3">
- <h3 id="org7d42076">rest apis</h3>
- <div class="outline-text-3" id="text-org7d42076">
- <p>
-a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is  <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the  <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
-</p>
-</div>
-</div>
-</div>
-</div>]]></description>
-  <link>https://me.jowj.net/posts/pynit.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/pynit.html</guid>
-  <pubDate>Thu, 09 Apr 2020 15:34:00 -0500</pubDate>
-</item>
+<lastBuildDate>Sat, 11 Apr 2020 18:30:56 -0500</lastBuildDate>
 <item>
   <author>josiah</author>
   <title>rest api prototyping</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org0254b37" class="outline-2">
- <h2 id="org0254b37">the problem</h2>
- <div class="outline-text-2" id="text-org0254b37">
+ <div id="outline-container-orgeb05e08" class="outline-2">
+ <h2 id="orgeb05e08">the problem</h2>
+ <div class="outline-text-2" id="text-orgeb05e08">
  <p>
 lately i've been working on a lot of web API glue projects. these are usually simple things like "service1 needs to send messages to service2 in a particular format, with a particular set of priviledges." Sometimes its more complicated, but that's usually what it breaks down to.
 </p>
@@ -298,9 +29,9 @@ this has worked great for a lot of things, but falls short when you have to gene
 </div>
 </div>
 
- <div id="outline-container-orgc002475" class="outline-2">
- <h2 id="orgc002475">Authentication and Authorization in Cylance</h2>
- <div class="outline-text-2" id="text-orgc002475">
+ <div id="outline-container-org01988d6" class="outline-2">
+ <h2 id="org01988d6">Authentication and Authorization in Cylance</h2>
+ <div class="outline-text-2" id="text-org01988d6">
  <p>
 Cylance relies on something called JWT (JSON Web Token). There's an RFC for this here:  <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>. This is not possible to generate within `restclient`, so we do it in python.
 </p>
@@ -319,9 +50,9 @@ We'll add a  <code>#+name:</code> argument to the top of the  <code>org-mode</co
 </p>
 </div>
 
- <div id="outline-container-org0378312" class="outline-3">
- <h3 id="org0378312">python code</h3>
- <div class="outline-text-3" id="text-org0378312">
+ <div id="outline-container-org8a3d8fb" class="outline-3">
+ <h3 id="org8a3d8fb">python code</h3>
+ <div class="outline-text-3" id="text-org8a3d8fb">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> uuid
  <span style="color: #598249;">import</span> json
@@ -374,9 +105,9 @@ this will generate a token and attach it to the name space  <code>jwt_token</cod
 </div>
 
 
- <div id="outline-container-org5676fee" class="outline-3">
- <h3 id="org5676fee">restclient example</h3>
- <div class="outline-text-3" id="text-org5676fee">
+ <div id="outline-container-org55e6df5" class="outline-3">
+ <h3 id="org55e6df5">restclient example</h3>
+ <div class="outline-text-3" id="text-org55e6df5">
  <p>
 once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance's API through  <code>restclient.el</code> going forward! in order to pass the output from the registered name we used before,  <code>jwt_token</code>, we add an argument to the  <code>BEGIN_SRC</code> header, like  <code>:var x=jwt_token</code>. Then, we can set a  <code>restclient</code> local variable equal to the  <code>org-babel</code> super-variable and use it within the rest of the src block, as seen below:
 </p>
@@ -437,9 +168,9 @@ this will return my user (again, i've disturbed the output but it is roughly wha
 </div>
 </div>
 
- <div id="outline-container-org0d48d7d" class="outline-2">
- <h2 id="org0d48d7d">Troubleshooting python and org-babel</h2>
- <div class="outline-text-2" id="text-org0d48d7d">
+ <div id="outline-container-orgbfb8915" class="outline-2">
+ <h2 id="orgbfb8915">Troubleshooting python and org-babel</h2>
+ <div class="outline-text-2" id="text-orgbfb8915">
  <p>
 I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn't find my python binary on macOS. to fix this i manually set it in my  <code>init.el</code> file, which worked for a long time.
 </p>
@@ -479,15 +210,31 @@ this block just proved that i could in fact import the right modules that were o
 </div>]]></description>
   <link>https://me.jowj.net/posts/api-prototyping.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/api-prototyping.html</guid>
-  <pubDate>Thu, 09 Apr 2020 15:19:00 -0500</pubDate>
+  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+</item>
+<item>
+  <title>a list of stuff i wrote</title>
+  <description><![CDATA[<div id="content">
+ <ul class="org-ul"> <li> <a href="blogging-on-ghpages-with-orgmode.html">blogging on github:pages with orgmode</a></li>
+ <li> <a href="moving-from-1pass-to-bitwarden.html">Moving from 1pass to bitwarden</a></li>
+ <li> <a href="api-prototyping.html">rest api prototyping</a></li>
+ <li> <a href="tvm-at-a-new-company.html">tvm at a new company</a></li>
+ <li> <a href="emacs-on-catalina.html">emacs on catalina</a></li>
+ <li> <a href="vcards.html">vcards</a></li>
+ <li> <a href="css.html">css test</a></li>
+ <li> <a href="pynit.html">pynit</a></li>
+</ul></div>]]></description>
+  <link>https://me.jowj.net/posts/articles.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/articles.html</guid>
+  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>css test</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org8ec5832" class="outline-2">
- <h2 id="org8ec5832">this is the first header</h2>
- <div class="outline-text-2" id="text-org8ec5832">
+ <div id="outline-container-org2291693" class="outline-2">
+ <h2 id="org2291693">this is the first header</h2>
+ <div class="outline-text-2" id="text-org2291693">
  <p>
 this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
 </p>
@@ -501,16 +248,16 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </ol></div>
 </div>
 
- <div id="outline-container-orgb5b9d8e" class="outline-2">
- <h2 id="orgb5b9d8e">below is a picture embed with caption</h2>
- <div class="outline-text-2" id="text-orgb5b9d8e">
+ <div id="outline-container-org2262d70" class="outline-2">
+ <h2 id="org2262d70">below is a picture embed with caption</h2>
+ <div class="outline-text-2" id="text-org2262d70">
 
- <figure id="org412c3c3"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
+ <figure id="org31458cd"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
 </div>
 
- <div id="outline-container-orge1b098d" class="outline-2">
- <h2 id="orge1b098d">here is a python embd</h2>
- <div class="outline-text-2" id="text-orge1b098d">
+ <div id="outline-container-orgcd19afd" class="outline-2">
+ <h2 id="orgcd19afd">here is a python embd</h2>
+ <div class="outline-text-2" id="text-orgcd19afd">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> slack
 
@@ -558,9 +305,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>
 </div>
 
- <div id="outline-container-org3a0bb51" class="outline-2">
- <h2 id="org3a0bb51">here is a listp embed</h2>
- <div class="outline-text-2" id="text-org3a0bb51">
+ <div id="outline-container-org99b7308" class="outline-2">
+ <h2 id="org99b7308">here is a listp embed</h2>
+ <div class="outline-text-2" id="text-org99b7308">
  <div class="org-src-container">
  <pre class="src src-elisp">( <span style="color: #598249;">let</span> ((proj-base (file-name-directory load-file-name)))
   ( <span style="color: #598249;">setq</span> org-publish-project-alist
@@ -573,9 +320,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>
 </div>
 </div>
- <div id="outline-container-orgcb5368f" class="outline-2">
- <h2 id="orgcb5368f">see links styling</h2>
- <div class="outline-text-2" id="text-orgcb5368f">
+ <div id="outline-container-org00c6abf" class="outline-2">
+ <h2 id="org00c6abf">see links styling</h2>
+ <div class="outline-text-2" id="text-org00c6abf">
  <p>
  <a href="https://me.jowj.net">https://me.jowj.net</a> looks like this
 </p>
@@ -584,15 +331,15 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>]]></description>
   <link>https://me.jowj.net/posts/css.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
-  <pubDate>Thu, 09 Apr 2020 15:19:00 -0500</pubDate>
+  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>emacs on catalina</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org2ef0078" class="outline-2">
- <h2 id="org2ef0078">early days</h2>
- <div class="outline-text-2" id="text-org2ef0078">
+ <div id="outline-container-orgdf487a2" class="outline-2">
+ <h2 id="orgdf487a2">early days</h2>
+ <div class="outline-text-2" id="text-orgdf487a2">
  <p>
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
 </p>
@@ -607,9 +354,9 @@ this basically says to run this lisp to add your proper emacs path to the proper
 </div>
 </div>
 
- <div id="outline-container-org91a88bf" class="outline-2">
- <h2 id="org91a88bf">partial fix</h2>
- <div class="outline-text-2" id="text-org91a88bf">
+ <div id="outline-container-org2b64508" class="outline-2">
+ <h2 id="org2b64508">partial fix</h2>
+ <div class="outline-text-2" id="text-org2b64508">
  <p>
 later that week, a few other people said you needed to whitelist  <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
 </p>
@@ -620,9 +367,9 @@ since I could at least launch and navigate around with my then-current janky set
 </div>
 </div>
 
- <div id="outline-container-org08b2512" class="outline-2">
- <h2 id="org08b2512">jankiest fix</h2>
- <div class="outline-text-2" id="text-org08b2512">
+ <div id="outline-container-orgd3d4da5" class="outline-2">
+ <h2 id="orgd3d4da5">jankiest fix</h2>
+ <div class="outline-text-2" id="text-orgd3d4da5">
  <p>
 he gives a good breakdown as to why this is needed  <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
 </p>
@@ -645,23 +392,277 @@ this is not like, super great. its makes your configuration brittle and it will 
 </div>]]></description>
   <link>https://me.jowj.net/posts/emacs-on-catalina.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/emacs-on-catalina.html</guid>
-  <pubDate>Thu, 09 Apr 2020 15:19:00 -0500</pubDate>
+  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+</item>
+<item>
+  <author>josiah</author>
+  <title>Moving from 1pass to bitwarden</title>
+  <description><![CDATA[<div id="content">
+ <div id="outline-container-orge814bb8" class="outline-2">
+ <h2 id="orge814bb8">background</h2>
+ <div class="outline-text-2" id="text-orge814bb8">
+ <p>
+I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
+</p>
+
+ <p>
+Since early 2019 i've been running linux at home for everything and that has finally made 1password too painful such that i'm moving off of it. 1pass is a great app and has fantastic compatability for most people but it sucks horribly on linux; until now i've been using 1passX with a 1password.com account. This is the  <i>only</i> way to use 1password on a linux os. 1pass4 ran fine under wine, 1pass6 i think could work for some people (but i never got it to).
+</p>
+
+ <p>
+1passX is a browser extension. This means there's a few things that make me uncomfortable or that downright don't match with my work flow:
+</p>
+
+ <ol class="org-ol"> <li>having to open a browser on first boot to get access to passwords suck if you also have your browser bring back sessions on launch. everything takes forever to load and you're probably just looking for an entry real quick anyway.</li>
+ <li>doing anything cryptographically sensitive in a browser extension is a little shady. I trust 1password enough to handle this, but this won't be true of everyone. info:
+ <ul class="org-ul"> <li>here's a famous NCC write up about it:  <a href="https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful/">https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful/</a></li>
+ <li>browser extensions that run on every page can be risky enough already; if that browser extension could be tricked to pass instructions to your local vault when it shouldn't (say, send an 'autofill' query over to your vault for 'google.com' when you're actually on 'g00gle.com' or whatever) then a browser bug could lead to your entire vault being exfilled.</li>
+</ul></li>
+ <li>swapping quickly between anything i'm working on and my vault sucked because you had to pull up your browser and then move to the vault tab and then login. boo.</li>
+</ol> <p>
+because of these issues i started looking for alternatives
+</p>
+</div>
+</div>
+ <div id="outline-container-org580e22a" class="outline-2">
+ <h2 id="org580e22a">bitwarden</h2>
+ <div class="outline-text-2" id="text-org580e22a">
+ <p>
+since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
+</p>
+
+ <ul class="org-ul"> <li>open source</li>
+ <li>self hosted (as an option)</li>
+ <li>ability to share passwords between accounts</li>
+ <li>good to great mobile experience on iOS  <span class="underline">and</span> Android</li>
+ <li>totp support</li>
+</ul> <p>
+i've been living on bitwarden for ~1 week at this point and haven't felt any real urge to go back to 1Password. I started with their hosted service so that I didn't have to go through a ton of self hosting work to figure out if I hated it or not. Now that I know that I like it, I can slowly start automating deploys and maintenance tasks and mirror data from their hosted service to my own instance as quickly or slowly as I please.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgec495ee" class="outline-2">
+ <h2 id="orgec495ee">the bad</h2>
+ <div class="outline-text-2" id="text-orgec495ee">
+ <p>
+bad news first. 
+</p>
+ <ol class="org-ol"> <li>bitwarden's desktop clients are all electron. I expect there to be vulns discovered here eventually that impact these clients. This is still better than the shared sandbox that is my browser IMO, but that's not an experts opinion, that's just mine.</li>
+ <li>migrating over from 1pass was both great and more confusing than it needed to be.
+ <ul class="org-ul"> <li>TOTP migration from 1pass is REALLY confusing, depending on what kind of bw account you have. I'll talk about it more specifically further down.</li>
+ <li>You cannot export from 1password.com accounts through 1passX. You  <i>must</i> export from a 1pass7 install on a mac or windows machine. REALLY frustrating!</li>
+ <li>You cannot export Document objects  <i>at all</i>. You have to manually download them one at a time! Talk about letting your programming abstraction rule the user interface. an obvious mistake on 1pass's part, i hope they fix that eventually.</li>
+</ul></li>
+ <li>bitwarden's UI is just not as polished as 1passwords. 1password is so good at that shit.</li>
+</ol></div>
+</div>
+
+ <div id="outline-container-orgdc8bd9b" class="outline-2">
+ <h2 id="orgdc8bd9b">totp issue specifics</h2>
+ <div class="outline-text-2" id="text-orgdc8bd9b">
+ <p>
+bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
+</p>
+
+ <p>
+I created a free bitwarden account on bitwarden.com, exported one of my vaults, imported it into my new bw account, and then started poking around. Pretty much everything came over right away, but I noticed that the TOTP fields were hidden. "Makes sense", I thought, they said that they didn't offer that feature until you pay.
+</p>
+
+ <p>
+So I fuck around and do some more testing and poking and decide to spend the $10 to get premium bw. When i do that, the TOTP codes on all 2FA entries magically appear! So all that data succesfully gets exported > imported and saved, its just not visible to you. Kind of confusing UX tbqh, but ok makes sense.
+</p>
+
+ <p>
+The desktop apps, being electron, got cached without showing the TOTP codes; super confusing again, and frustrating. if you need to clear the cache of an electron app you can follow this stack overflow post:
+  <a href="https://stackoverflow.com/questions/31446782/how-to-clear-the-cache-data-in-electronatom-shell">https://stackoverflow.com/questions/31446782/how-to-clear-the-cache-data-in-electronatom-shell</a>
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org648201e" class="outline-2">
+ <h2 id="org648201e">the cool</h2>
+ <div class="outline-text-2" id="text-org648201e">
+ <p>
+On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
+</p>
+
+ <p>
+bw also handles documents in a sane format; rather than creating 'objects' as a seperate entry type in the vault it has them as attachments to any other kind of entry. DUH. I don't want just a signature pdf in my vault, either divorced from context or linked but still polluting my results. Stupid. bw reverts to older 1pass behavior with documents, letting me attach them anywhere and keep notes about the specific document. rad.
+</p>
+
+ <p>
+bw is open source! totally! the clients, the servers, the mobile apps, its rad! a fair critique of bw as a self hosted project is that the servers are  <i>beefy</i> fucks. That's true.  since its open source some weirdo has built a rust implementation that is API compatible with all clients. I think this is rad as hell (though i'm not about to trust all my vault secrets to Some Dude's implementation).
+</p>
+
+ <p>
+A counter argument to my worry about the server is that bw encrypts everything before sending to the server per 3. here:
+ <a href="https://help.bitwarden.com/article/why-should-i-trust-bitwarden/">https://help.bitwarden.com/article/why-should-i-trust-bitwarden/</a>
+</p>
+
+ <p>
+I still am not gonna run bitwarden <sub>rs</sub> though.
+</p>
+
+ <p>
+read about the bitwarden <sub>rs</sub> project here:
+ <a href="https://github.com/dani-garcia/bitwarden_rs">https://github.com/dani-garcia/bitwarden_rs</a>
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgdb3eb9d" class="outline-2">
+ <h2 id="orgdb3eb9d">next steps</h2>
+ <div class="outline-text-2" id="text-orgdb3eb9d">
+ <p>
+i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
+</p>
+
+ <p>
+i haven't figured out how i could do that, but it seems like it should be pretty feasible. the fact that i could even do that is pretty fuckin' cool, tbqh.
+</p>
+</div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</guid>
+  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+</item>
+<item>
+  <author>josiah</author>
+  <title>pynit</title>
+  <description><![CDATA[<div id="content">
+ <div id="outline-container-org4506de9" class="outline-2">
+ <h2 id="org4506de9">what is this</h2>
+ <div class="outline-text-2" id="text-org4506de9">
+ <p>
+pynit is a personal archival script that relies on  <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it  <a href="https://github.com/jowj/pynit">here</a>.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orga72e625" class="outline-2">
+ <h2 id="orga72e625">why i made it</h2>
+ <div class="outline-text-2" id="text-orga72e625">
+ <p>
+i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
+</p>
+
+ <ul class="org-ul"> <li>fashion</li>
+ <li>emacs / org-mode</li>
+ <li>powershell</li>
+ <li>homelabs</li>
+ <li>secops</li>
+</ul> <p>
+my typical workflow for seeing a piece of content that was useful looked something like:
+</p>
+
+ <ul class="org-ul"> <li>view content</li>
+ <li>peruse comments (usually, the most useful part of the reddit entry)</li>
+ <li>find something that i want to revist</li>
+ <li>save it for later inside of reddit</li>
+ <li>forget about it forever, maybe revisit it within 3 months if i'm very bored</li>
+ <li>in the interim, many of the comments are deleted, links don't work, parent URL points to a dead webserver</li>
+</ul> <p>
+this is obviously not ideal. pynit helps me with about half of those problems. specifically, because i pay for `pinboard`'s archiving service, i can preserve the context in the comment section of the reddit entry. links may still be broken, but i'm perfectly fine with using archive.org for viewing the links later if i need to. as i mentioned, comments end up being the most useful thing to me most of the time.
+</p>
+
+ <p>
+it should be noted that `pinboard` can be used to archive the parent URL context as well, but i opted not to do that in order to preserve some semblance of readability in my `pinboard` feed.
+</p>
+
+ <p>
+comments are also possible to be preserved through things resavr, ceddit, removeddit, etc. these type of sites go down regularly and are not very reliable in my experience (although resavr looks promising, if limited. it only archives comments that are deleted that are > 1000 characters). 
+</p>
+
+ <p>
+now whenever i want to revisit a particular item i have all the comments preserved via pinboard, and URLs can be usable (most of the time) through archive.org.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org20351bf" class="outline-2">
+ <h2 id="org20351bf">what I learned while i made this</h2>
+ <div class="outline-text-2" id="text-org20351bf">
+ <p>
+i learned a few things that i want to write up here, all related to python or working with rest apis:
+</p>
+</div>
+
+ <div id="outline-container-orgef46d9d" class="outline-3">
+ <h3 id="orgef46d9d">python</h3>
+ <div class="outline-text-3" id="text-orgef46d9d">
+ <p>
+i learned about  <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through  <a href="https://twitter.com/mrled">@mrled</a> and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-python"> <span style="color: #598249;">import</span> pysnooper
+
+ <span style="color: #598249;">@pysnooper.snoop</span>()
+ <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
+     <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
+     <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
+
+     <span style="color: #598249;">return</span>(var1 + var2)
+
+ <span style="color: #598249;">print</span>(my_function())
+
+</pre>
+</div>
+
+ <p>
+this would return:
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-python">19:54:53.048881 call         4  <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
+19:54:53.049021 line         5      <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
+New var:.......  <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
+19:54:53.049094 line         6      <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
+New var:.......  <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
+19:54:53.049155 line         8      <span style="color: #598249;">return</span>(var1 + var2)
+19:54:53.049197  <span style="color: #598249;">return</span>       8      <span style="color: #598249;">return</span>(var1 + var2)
+Return value:..  <span style="color: #15968D;">'thing1thing2'</span>
+thing1thing2
+</pre>
+</div>
+
+ <p>
+this allowed me to simple add a single line to an exist function  <i>without modifying the function itself at all</i> and make sure I was actually doing what I thought I was doing. this was huge for letting me sanity check my work.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orga3523cc" class="outline-3">
+ <h3 id="orga3523cc">rest apis</h3>
+ <div class="outline-text-3" id="text-orga3523cc">
+ <p>
+a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is  <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the  <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
+</p>
+</div>
+</div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/pynit.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/pynit.html</guid>
+  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>tvm at a new company</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orge417d84" class="outline-2">
- <h2 id="orge417d84">no new problems</h2>
- <div class="outline-text-2" id="text-orge417d84">
+ <div id="outline-container-orga619099" class="outline-2">
+ <h2 id="orga619099">no new problems</h2>
+ <div class="outline-text-2" id="text-orga619099">
  <p>
 i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.
 </p>
 </div>
 
- <div id="outline-container-org2926099" class="outline-3">
- <h3 id="org2926099">using an existing scanning install or starting over</h3>
- <div class="outline-text-3" id="text-org2926099">
+ <div id="outline-container-org82dc7e9" class="outline-3">
+ <h3 id="org82dc7e9">using an existing scanning install or starting over</h3>
+ <div class="outline-text-3" id="text-org82dc7e9">
  <p>
 it may be reasonable to nuke an install if:
 </p>
@@ -678,9 +679,9 @@ those are really the only hard constraints i can think of. everything else seems
 </div>
 </div>
 
- <div id="outline-container-orgf06842c" class="outline-3">
- <h3 id="orgf06842c">are naming schemes important enough to spend time on</h3>
- <div class="outline-text-3" id="text-orgf06842c">
+ <div id="outline-container-orgf634e41" class="outline-3">
+ <h3 id="orgf634e41">are naming schemes important enough to spend time on</h3>
+ <div class="outline-text-3" id="text-orgf634e41">
  <p>
 hard yes. some of the names in use at my new place are frankly  <i>hilarious</i>. and bad. "aaah, a scan template called 'corp users', what do you suppo - oh, its for scanning production? of course."
 </p>
@@ -699,9 +700,9 @@ ProductName - Environment - Geolocation - Data
 </div>
 </div>
 
- <div id="outline-container-orgc34ac8d" class="outline-3">
- <h3 id="orgc34ac8d">a note on scan schedules</h3>
- <div class="outline-text-3" id="text-orgc34ac8d">
+ <div id="outline-container-orgb2c8cbf" class="outline-3">
+ <h3 id="orgb2c8cbf">a note on scan schedules</h3>
+ <div class="outline-text-3" id="text-orgb2c8cbf">
  <p>
 think about what a particular scan is trying to accomplish. if the goal of a scan is to get data from  <i>corporate servers</i> then a typical overnight maintenance window makes sense. 
 </p>
@@ -719,9 +720,9 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>
 
 
- <div id="outline-container-orgd8cc93c" class="outline-3">
- <h3 id="orgd8cc93c">what other things should I check on</h3>
- <div class="outline-text-3" id="text-orgd8cc93c">
+ <div id="outline-container-org14db353" class="outline-3">
+ <h3 id="org14db353">what other things should I check on</h3>
+ <div class="outline-text-3" id="text-org14db353">
  <ul class="org-ul"> <li>is the OS backing the scanning app still getting updates? a lot of people fire and forget scan setups so make sure you're not running shit off some idiots ubuntu 12 install.</li>
  <li>how much of the infrastructure are we actually scanning? do have blind spots?
  <ul class="org-ul"> <li>if there isn't an ipam then this will be reaaaaal hard to figure out, but its very important.</li>
@@ -736,15 +737,15 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>]]></description>
   <link>https://me.jowj.net/posts/tvm-at-a-new-company.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/tvm-at-a-new-company.html</guid>
-  <pubDate>Thu, 09 Apr 2020 15:19:00 -0500</pubDate>
+  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>vcards</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org07c8011" class="outline-2">
- <h2 id="org07c8011">computer recovery after a death in the family</h2>
- <div class="outline-text-2" id="text-org07c8011">
+ <div id="outline-container-orga27681b" class="outline-2">
+ <h2 id="orga27681b">computer recovery after a death in the family</h2>
+ <div class="outline-text-2" id="text-orga27681b">
  <p>
 this past week my dad and I helped my grandmother with a few Computer Things. my grandfather died at the end of last year and the process of getting "Computer Things" to a usable state for my grandmother was pretty rough.
 </p>
@@ -754,9 +755,9 @@ One of the things that was unexpectedly frustrating was transferring stuff (phot
 </p>
 </div>
 
- <div id="outline-container-org487a72b" class="outline-3">
- <h3 id="org487a72b">outline</h3>
- <div class="outline-text-3" id="text-org487a72b">
+ <div id="outline-container-orgc154f1a" class="outline-3">
+ <h3 id="orgc154f1a">outline</h3>
+ <div class="outline-text-3" id="text-orgc154f1a">
  <p>
 normally, transferring contacts from one persons icloud to another's is pretty straight forward (there's an export button on icloud.com), but if you can't succesfully auth to icloud it gets a lot trickier. there's probably a few ways to do this, but the tack i ended up taking was:
 </p>
@@ -770,9 +771,9 @@ That is the bones of what happened, but the details kept screwing me over.
 </div>
 </div>
 
- <div id="outline-container-orgf9c3460" class="outline-3">
- <h3 id="orgf9c3460">specifics</h3>
- <div class="outline-text-3" id="text-orgf9c3460">
+ <div id="outline-container-orgaa860e1" class="outline-3">
+ <h3 id="orgaa860e1">specifics</h3>
+ <div class="outline-text-3" id="text-orgaa860e1">
  <p>
 first, outlook 2010 contact exports by default come out in an outlook specific format (.msg) that cannot be imported into icloud. ok well fine, surely there's a straight forward way to deal with that. 
 </p>
@@ -861,9 +862,9 @@ my best guess is that this is just some Fancy Colour from outlook specifically, 
 </div>
 </div>
 
- <div id="outline-container-orgc642233" class="outline-3">
- <h3 id="orgc642233">what should i do when i die</h3>
- <div class="outline-text-3" id="text-orgc642233">
+ <div id="outline-container-org8dcc5ce" class="outline-3">
+ <h3 id="org8dcc5ce">what should i do when i die</h3>
+ <div class="outline-text-3" id="text-org8dcc5ce">
  <p>
 the lesson i learned during this process is:
 </p>
@@ -876,7 +877,7 @@ the lesson i learned during this process is:
 </div>]]></description>
   <link>https://me.jowj.net/posts/vcards.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/vcards.html</guid>
-  <pubDate>Thu, 09 Apr 2020 15:19:00 -0500</pubDate>
+  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
 </item>
 </channel>
 </rss>
