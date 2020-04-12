@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-04-11 Sat 18:30 -->
+<!-- 2020-04-12 Sun 08:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moving from 1pass to bitwarden</title>
@@ -70,19 +70,19 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge814bb8">background</a></li>
-<li><a href="#org580e22a">bitwarden</a></li>
-<li><a href="#orgec495ee">the bad</a></li>
-<li><a href="#orgdc8bd9b">totp issue specifics</a></li>
-<li><a href="#org648201e">the cool</a></li>
-<li><a href="#orgdb3eb9d">next steps</a></li>
+<li><a href="#orgb4719d9">background</a></li>
+<li><a href="#org03adf95">bitwarden</a></li>
+<li><a href="#orgcae39b9">the bad</a></li>
+<li><a href="#orgbc718dc">totp issue specifics</a></li>
+<li><a href="#org17682de">the cool</a></li>
+<li><a href="#org39ccf88">next steps</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orge814bb8" class="outline-2">
-<h2 id="orge814bb8">background</h2>
-<div class="outline-text-2" id="text-orge814bb8">
+<div id="outline-container-orgb4719d9" class="outline-2">
+<h2 id="orgb4719d9">background</h2>
+<div class="outline-text-2" id="text-orgb4719d9">
 <p>
 I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
 </p>
@@ -110,9 +110,9 @@ because of these issues i started looking for alternatives
 </p>
 </div>
 </div>
-<div id="outline-container-org580e22a" class="outline-2">
-<h2 id="org580e22a">bitwarden</h2>
-<div class="outline-text-2" id="text-org580e22a">
+<div id="outline-container-org03adf95" class="outline-2">
+<h2 id="org03adf95">bitwarden</h2>
+<div class="outline-text-2" id="text-org03adf95">
 <p>
 since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
 </p>
@@ -131,9 +131,9 @@ i've been living on bitwarden for ~1 week at this point and haven't felt any rea
 </div>
 </div>
 
-<div id="outline-container-orgec495ee" class="outline-2">
-<h2 id="orgec495ee">the bad</h2>
-<div class="outline-text-2" id="text-orgec495ee">
+<div id="outline-container-orgcae39b9" class="outline-2">
+<h2 id="orgcae39b9">the bad</h2>
+<div class="outline-text-2" id="text-orgcae39b9">
 <p>
 bad news first. 
 </p>
@@ -150,9 +150,9 @@ bad news first.
 </div>
 </div>
 
-<div id="outline-container-orgdc8bd9b" class="outline-2">
-<h2 id="orgdc8bd9b">totp issue specifics</h2>
-<div class="outline-text-2" id="text-orgdc8bd9b">
+<div id="outline-container-orgbc718dc" class="outline-2">
+<h2 id="orgbc718dc">totp issue specifics</h2>
+<div class="outline-text-2" id="text-orgbc718dc">
 <p>
 bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
 </p>
@@ -172,9 +172,9 @@ The desktop apps, being electron, got cached without showing the TOTP codes; sup
 </div>
 </div>
 
-<div id="outline-container-org648201e" class="outline-2">
-<h2 id="org648201e">the cool</h2>
-<div class="outline-text-2" id="text-org648201e">
+<div id="outline-container-org17682de" class="outline-2">
+<h2 id="org17682de">the cool</h2>
+<div class="outline-text-2" id="text-org17682de">
 <p>
 On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
 </p>
@@ -203,9 +203,9 @@ read about the bitwarden<sub>rs</sub> project here:
 </div>
 </div>
 
-<div id="outline-container-orgdb3eb9d" class="outline-2">
-<h2 id="orgdb3eb9d">next steps</h2>
-<div class="outline-text-2" id="text-orgdb3eb9d">
+<div id="outline-container-org39ccf88" class="outline-2">
+<h2 id="org39ccf88">next steps</h2>
+<div class="outline-text-2" id="text-org39ccf88">
 <p>
 i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
 </p>

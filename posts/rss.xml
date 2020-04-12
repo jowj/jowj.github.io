@@ -6,14 +6,14 @@
 <generator>Emacs webfeeder.el</generator>
 <link>https://me.jowj.net/posts/</link>
 <atom:link href="https://me.jowj.net/posts/rss.xml" rel="self" type="application/rss+xml"/>
-<lastBuildDate>Sat, 11 Apr 2020 18:30:56 -0500</lastBuildDate>
+<lastBuildDate>Sun, 12 Apr 2020 08:36:50 -0500</lastBuildDate>
 <item>
   <author>josiah</author>
   <title>rest api prototyping</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orgeb05e08" class="outline-2">
- <h2 id="orgeb05e08">the problem</h2>
- <div class="outline-text-2" id="text-orgeb05e08">
+ <div id="outline-container-org826504f" class="outline-2">
+ <h2 id="org826504f">the problem</h2>
+ <div class="outline-text-2" id="text-org826504f">
  <p>
 lately i've been working on a lot of web API glue projects. these are usually simple things like "service1 needs to send messages to service2 in a particular format, with a particular set of priviledges." Sometimes its more complicated, but that's usually what it breaks down to.
 </p>
@@ -29,9 +29,9 @@ this has worked great for a lot of things, but falls short when you have to gene
 </div>
 </div>
 
- <div id="outline-container-org01988d6" class="outline-2">
- <h2 id="org01988d6">Authentication and Authorization in Cylance</h2>
- <div class="outline-text-2" id="text-org01988d6">
+ <div id="outline-container-org230dc1e" class="outline-2">
+ <h2 id="org230dc1e">Authentication and Authorization in Cylance</h2>
+ <div class="outline-text-2" id="text-org230dc1e">
  <p>
 Cylance relies on something called JWT (JSON Web Token). There's an RFC for this here:  <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>. This is not possible to generate within `restclient`, so we do it in python.
 </p>
@@ -50,9 +50,9 @@ We'll add a  <code>#+name:</code> argument to the top of the  <code>org-mode</co
 </p>
 </div>
 
- <div id="outline-container-org8a3d8fb" class="outline-3">
- <h3 id="org8a3d8fb">python code</h3>
- <div class="outline-text-3" id="text-org8a3d8fb">
+ <div id="outline-container-orgd4e4e0b" class="outline-3">
+ <h3 id="orgd4e4e0b">python code</h3>
+ <div class="outline-text-3" id="text-orgd4e4e0b">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> uuid
  <span style="color: #598249;">import</span> json
@@ -105,9 +105,9 @@ this will generate a token and attach it to the name space  <code>jwt_token</cod
 </div>
 
 
- <div id="outline-container-org55e6df5" class="outline-3">
- <h3 id="org55e6df5">restclient example</h3>
- <div class="outline-text-3" id="text-org55e6df5">
+ <div id="outline-container-orgeec428e" class="outline-3">
+ <h3 id="orgeec428e">restclient example</h3>
+ <div class="outline-text-3" id="text-orgeec428e">
  <p>
 once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance's API through  <code>restclient.el</code> going forward! in order to pass the output from the registered name we used before,  <code>jwt_token</code>, we add an argument to the  <code>BEGIN_SRC</code> header, like  <code>:var x=jwt_token</code>. Then, we can set a  <code>restclient</code> local variable equal to the  <code>org-babel</code> super-variable and use it within the rest of the src block, as seen below:
 </p>
@@ -168,9 +168,9 @@ this will return my user (again, i've disturbed the output but it is roughly wha
 </div>
 </div>
 
- <div id="outline-container-orgbfb8915" class="outline-2">
- <h2 id="orgbfb8915">Troubleshooting python and org-babel</h2>
- <div class="outline-text-2" id="text-orgbfb8915">
+ <div id="outline-container-orge0c935e" class="outline-2">
+ <h2 id="orge0c935e">Troubleshooting python and org-babel</h2>
+ <div class="outline-text-2" id="text-orge0c935e">
  <p>
 I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn't find my python binary on macOS. to fix this i manually set it in my  <code>init.el</code> file, which worked for a long time.
 </p>
@@ -210,7 +210,7 @@ this block just proved that i could in fact import the right modules that were o
 </div>]]></description>
   <link>https://me.jowj.net/posts/api-prototyping.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/api-prototyping.html</guid>
-  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
 </item>
 <item>
   <title>a list of stuff i wrote</title>
@@ -226,15 +226,15 @@ this block just proved that i could in fact import the right modules that were o
 </ul></div>]]></description>
   <link>https://me.jowj.net/posts/articles.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/articles.html</guid>
-  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>css test</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org2291693" class="outline-2">
- <h2 id="org2291693">this is the first header</h2>
- <div class="outline-text-2" id="text-org2291693">
+ <div id="outline-container-orga69d8f4" class="outline-2">
+ <h2 id="orga69d8f4">this is the first header</h2>
+ <div class="outline-text-2" id="text-orga69d8f4">
  <p>
 this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
 </p>
@@ -248,16 +248,16 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </ol></div>
 </div>
 
- <div id="outline-container-org2262d70" class="outline-2">
- <h2 id="org2262d70">below is a picture embed with caption</h2>
- <div class="outline-text-2" id="text-org2262d70">
+ <div id="outline-container-org1f5010a" class="outline-2">
+ <h2 id="org1f5010a">below is a picture embed with caption</h2>
+ <div class="outline-text-2" id="text-org1f5010a">
 
- <figure id="org31458cd"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
+ <figure id="org26f8121"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
 </div>
 
- <div id="outline-container-orgcd19afd" class="outline-2">
- <h2 id="orgcd19afd">here is a python embd</h2>
- <div class="outline-text-2" id="text-orgcd19afd">
+ <div id="outline-container-orgf83558b" class="outline-2">
+ <h2 id="orgf83558b">here is a python embd</h2>
+ <div class="outline-text-2" id="text-orgf83558b">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> slack
 
@@ -305,9 +305,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>
 </div>
 
- <div id="outline-container-org99b7308" class="outline-2">
- <h2 id="org99b7308">here is a listp embed</h2>
- <div class="outline-text-2" id="text-org99b7308">
+ <div id="outline-container-org113f950" class="outline-2">
+ <h2 id="org113f950">here is a listp embed</h2>
+ <div class="outline-text-2" id="text-org113f950">
  <div class="org-src-container">
  <pre class="src src-elisp">( <span style="color: #598249;">let</span> ((proj-base (file-name-directory load-file-name)))
   ( <span style="color: #598249;">setq</span> org-publish-project-alist
@@ -320,9 +320,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>
 </div>
 </div>
- <div id="outline-container-org00c6abf" class="outline-2">
- <h2 id="org00c6abf">see links styling</h2>
- <div class="outline-text-2" id="text-org00c6abf">
+ <div id="outline-container-org1a4da87" class="outline-2">
+ <h2 id="org1a4da87">see links styling</h2>
+ <div class="outline-text-2" id="text-org1a4da87">
  <p>
  <a href="https://me.jowj.net">https://me.jowj.net</a> looks like this
 </p>
@@ -331,15 +331,15 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>]]></description>
   <link>https://me.jowj.net/posts/css.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
-  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>emacs on catalina</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orgdf487a2" class="outline-2">
- <h2 id="orgdf487a2">early days</h2>
- <div class="outline-text-2" id="text-orgdf487a2">
+ <div id="outline-container-orgcaac4fb" class="outline-2">
+ <h2 id="orgcaac4fb">early days</h2>
+ <div class="outline-text-2" id="text-orgcaac4fb">
  <p>
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
 </p>
@@ -354,9 +354,9 @@ this basically says to run this lisp to add your proper emacs path to the proper
 </div>
 </div>
 
- <div id="outline-container-org2b64508" class="outline-2">
- <h2 id="org2b64508">partial fix</h2>
- <div class="outline-text-2" id="text-org2b64508">
+ <div id="outline-container-orgfe4e9ac" class="outline-2">
+ <h2 id="orgfe4e9ac">partial fix</h2>
+ <div class="outline-text-2" id="text-orgfe4e9ac">
  <p>
 later that week, a few other people said you needed to whitelist  <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
 </p>
@@ -367,9 +367,9 @@ since I could at least launch and navigate around with my then-current janky set
 </div>
 </div>
 
- <div id="outline-container-orgd3d4da5" class="outline-2">
- <h2 id="orgd3d4da5">jankiest fix</h2>
- <div class="outline-text-2" id="text-orgd3d4da5">
+ <div id="outline-container-org3ebfff8" class="outline-2">
+ <h2 id="org3ebfff8">jankiest fix</h2>
+ <div class="outline-text-2" id="text-org3ebfff8">
  <p>
 he gives a good breakdown as to why this is needed  <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
 </p>
@@ -392,15 +392,15 @@ this is not like, super great. its makes your configuration brittle and it will 
 </div>]]></description>
   <link>https://me.jowj.net/posts/emacs-on-catalina.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/emacs-on-catalina.html</guid>
-  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>Moving from 1pass to bitwarden</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orge814bb8" class="outline-2">
- <h2 id="orge814bb8">background</h2>
- <div class="outline-text-2" id="text-orge814bb8">
+ <div id="outline-container-orgb4719d9" class="outline-2">
+ <h2 id="orgb4719d9">background</h2>
+ <div class="outline-text-2" id="text-orgb4719d9">
  <p>
 I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
 </p>
@@ -424,9 +424,9 @@ because of these issues i started looking for alternatives
 </p>
 </div>
 </div>
- <div id="outline-container-org580e22a" class="outline-2">
- <h2 id="org580e22a">bitwarden</h2>
- <div class="outline-text-2" id="text-org580e22a">
+ <div id="outline-container-org03adf95" class="outline-2">
+ <h2 id="org03adf95">bitwarden</h2>
+ <div class="outline-text-2" id="text-org03adf95">
  <p>
 since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
 </p>
@@ -442,9 +442,9 @@ i've been living on bitwarden for ~1 week at this point and haven't felt any rea
 </div>
 </div>
 
- <div id="outline-container-orgec495ee" class="outline-2">
- <h2 id="orgec495ee">the bad</h2>
- <div class="outline-text-2" id="text-orgec495ee">
+ <div id="outline-container-orgcae39b9" class="outline-2">
+ <h2 id="orgcae39b9">the bad</h2>
+ <div class="outline-text-2" id="text-orgcae39b9">
  <p>
 bad news first. 
 </p>
@@ -458,9 +458,9 @@ bad news first.
 </ol></div>
 </div>
 
- <div id="outline-container-orgdc8bd9b" class="outline-2">
- <h2 id="orgdc8bd9b">totp issue specifics</h2>
- <div class="outline-text-2" id="text-orgdc8bd9b">
+ <div id="outline-container-orgbc718dc" class="outline-2">
+ <h2 id="orgbc718dc">totp issue specifics</h2>
+ <div class="outline-text-2" id="text-orgbc718dc">
  <p>
 bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
 </p>
@@ -480,9 +480,9 @@ The desktop apps, being electron, got cached without showing the TOTP codes; sup
 </div>
 </div>
 
- <div id="outline-container-org648201e" class="outline-2">
- <h2 id="org648201e">the cool</h2>
- <div class="outline-text-2" id="text-org648201e">
+ <div id="outline-container-org17682de" class="outline-2">
+ <h2 id="org17682de">the cool</h2>
+ <div class="outline-text-2" id="text-org17682de">
  <p>
 On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
 </p>
@@ -511,9 +511,9 @@ read about the bitwarden <sub>rs</sub> project here:
 </div>
 </div>
 
- <div id="outline-container-orgdb3eb9d" class="outline-2">
- <h2 id="orgdb3eb9d">next steps</h2>
- <div class="outline-text-2" id="text-orgdb3eb9d">
+ <div id="outline-container-org39ccf88" class="outline-2">
+ <h2 id="org39ccf88">next steps</h2>
+ <div class="outline-text-2" id="text-org39ccf88">
  <p>
 i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
 </p>
@@ -526,24 +526,24 @@ i haven't figured out how i could do that, but it seems like it should be pretty
 </div>]]></description>
   <link>https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</guid>
-  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>pynit</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org4506de9" class="outline-2">
- <h2 id="org4506de9">what is this</h2>
- <div class="outline-text-2" id="text-org4506de9">
+ <div id="outline-container-orgacdb0b8" class="outline-2">
+ <h2 id="orgacdb0b8">what is this</h2>
+ <div class="outline-text-2" id="text-orgacdb0b8">
  <p>
 pynit is a personal archival script that relies on  <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it  <a href="https://github.com/jowj/pynit">here</a>.
 </p>
 </div>
 </div>
 
- <div id="outline-container-orga72e625" class="outline-2">
- <h2 id="orga72e625">why i made it</h2>
- <div class="outline-text-2" id="text-orga72e625">
+ <div id="outline-container-orgbc06235" class="outline-2">
+ <h2 id="orgbc06235">why i made it</h2>
+ <div class="outline-text-2" id="text-orgbc06235">
  <p>
 i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
 </p>
@@ -581,17 +581,17 @@ now whenever i want to revisit a particular item i have all the comments preserv
 </div>
 </div>
 
- <div id="outline-container-org20351bf" class="outline-2">
- <h2 id="org20351bf">what I learned while i made this</h2>
- <div class="outline-text-2" id="text-org20351bf">
+ <div id="outline-container-orgf004c28" class="outline-2">
+ <h2 id="orgf004c28">what I learned while i made this</h2>
+ <div class="outline-text-2" id="text-orgf004c28">
  <p>
 i learned a few things that i want to write up here, all related to python or working with rest apis:
 </p>
 </div>
 
- <div id="outline-container-orgef46d9d" class="outline-3">
- <h3 id="orgef46d9d">python</h3>
- <div class="outline-text-3" id="text-orgef46d9d">
+ <div id="outline-container-org826b1ac" class="outline-3">
+ <h3 id="org826b1ac">python</h3>
+ <div class="outline-text-3" id="text-org826b1ac">
  <p>
 i learned about  <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through  <a href="https://twitter.com/mrled">@mrled</a> and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
 </p>
@@ -634,9 +634,9 @@ this allowed me to simple add a single line to an exist function  <i>without mod
 </div>
 </div>
 
- <div id="outline-container-orga3523cc" class="outline-3">
- <h3 id="orga3523cc">rest apis</h3>
- <div class="outline-text-3" id="text-orga3523cc">
+ <div id="outline-container-org0a7f21d" class="outline-3">
+ <h3 id="org0a7f21d">rest apis</h3>
+ <div class="outline-text-3" id="text-org0a7f21d">
  <p>
 a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is  <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the  <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
 </p>
@@ -646,23 +646,23 @@ a lot of people (a lot of people!!) just have you use get requests instead of po
 </div>]]></description>
   <link>https://me.jowj.net/posts/pynit.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/pynit.html</guid>
-  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>tvm at a new company</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orga619099" class="outline-2">
- <h2 id="orga619099">no new problems</h2>
- <div class="outline-text-2" id="text-orga619099">
+ <div id="outline-container-org348067d" class="outline-2">
+ <h2 id="org348067d">no new problems</h2>
+ <div class="outline-text-2" id="text-org348067d">
  <p>
 i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.
 </p>
 </div>
 
- <div id="outline-container-org82dc7e9" class="outline-3">
- <h3 id="org82dc7e9">using an existing scanning install or starting over</h3>
- <div class="outline-text-3" id="text-org82dc7e9">
+ <div id="outline-container-orgb2a91da" class="outline-3">
+ <h3 id="orgb2a91da">using an existing scanning install or starting over</h3>
+ <div class="outline-text-3" id="text-orgb2a91da">
  <p>
 it may be reasonable to nuke an install if:
 </p>
@@ -679,9 +679,9 @@ those are really the only hard constraints i can think of. everything else seems
 </div>
 </div>
 
- <div id="outline-container-orgf634e41" class="outline-3">
- <h3 id="orgf634e41">are naming schemes important enough to spend time on</h3>
- <div class="outline-text-3" id="text-orgf634e41">
+ <div id="outline-container-org43ab550" class="outline-3">
+ <h3 id="org43ab550">are naming schemes important enough to spend time on</h3>
+ <div class="outline-text-3" id="text-org43ab550">
  <p>
 hard yes. some of the names in use at my new place are frankly  <i>hilarious</i>. and bad. "aaah, a scan template called 'corp users', what do you suppo - oh, its for scanning production? of course."
 </p>
@@ -700,9 +700,9 @@ ProductName - Environment - Geolocation - Data
 </div>
 </div>
 
- <div id="outline-container-orgb2c8cbf" class="outline-3">
- <h3 id="orgb2c8cbf">a note on scan schedules</h3>
- <div class="outline-text-3" id="text-orgb2c8cbf">
+ <div id="outline-container-orgea9cd38" class="outline-3">
+ <h3 id="orgea9cd38">a note on scan schedules</h3>
+ <div class="outline-text-3" id="text-orgea9cd38">
  <p>
 think about what a particular scan is trying to accomplish. if the goal of a scan is to get data from  <i>corporate servers</i> then a typical overnight maintenance window makes sense. 
 </p>
@@ -720,9 +720,9 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>
 
 
- <div id="outline-container-org14db353" class="outline-3">
- <h3 id="org14db353">what other things should I check on</h3>
- <div class="outline-text-3" id="text-org14db353">
+ <div id="outline-container-orgdbd63e8" class="outline-3">
+ <h3 id="orgdbd63e8">what other things should I check on</h3>
+ <div class="outline-text-3" id="text-orgdbd63e8">
  <ul class="org-ul"> <li>is the OS backing the scanning app still getting updates? a lot of people fire and forget scan setups so make sure you're not running shit off some idiots ubuntu 12 install.</li>
  <li>how much of the infrastructure are we actually scanning? do have blind spots?
  <ul class="org-ul"> <li>if there isn't an ipam then this will be reaaaaal hard to figure out, but its very important.</li>
@@ -737,15 +737,15 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>]]></description>
   <link>https://me.jowj.net/posts/tvm-at-a-new-company.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/tvm-at-a-new-company.html</guid>
-  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>vcards</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orga27681b" class="outline-2">
- <h2 id="orga27681b">computer recovery after a death in the family</h2>
- <div class="outline-text-2" id="text-orga27681b">
+ <div id="outline-container-org7e2f250" class="outline-2">
+ <h2 id="org7e2f250">computer recovery after a death in the family</h2>
+ <div class="outline-text-2" id="text-org7e2f250">
  <p>
 this past week my dad and I helped my grandmother with a few Computer Things. my grandfather died at the end of last year and the process of getting "Computer Things" to a usable state for my grandmother was pretty rough.
 </p>
@@ -755,9 +755,9 @@ One of the things that was unexpectedly frustrating was transferring stuff (phot
 </p>
 </div>
 
- <div id="outline-container-orgc154f1a" class="outline-3">
- <h3 id="orgc154f1a">outline</h3>
- <div class="outline-text-3" id="text-orgc154f1a">
+ <div id="outline-container-orgbad47fa" class="outline-3">
+ <h3 id="orgbad47fa">outline</h3>
+ <div class="outline-text-3" id="text-orgbad47fa">
  <p>
 normally, transferring contacts from one persons icloud to another's is pretty straight forward (there's an export button on icloud.com), but if you can't succesfully auth to icloud it gets a lot trickier. there's probably a few ways to do this, but the tack i ended up taking was:
 </p>
@@ -771,9 +771,9 @@ That is the bones of what happened, but the details kept screwing me over.
 </div>
 </div>
 
- <div id="outline-container-orgaa860e1" class="outline-3">
- <h3 id="orgaa860e1">specifics</h3>
- <div class="outline-text-3" id="text-orgaa860e1">
+ <div id="outline-container-org1c6b001" class="outline-3">
+ <h3 id="org1c6b001">specifics</h3>
+ <div class="outline-text-3" id="text-org1c6b001">
  <p>
 first, outlook 2010 contact exports by default come out in an outlook specific format (.msg) that cannot be imported into icloud. ok well fine, surely there's a straight forward way to deal with that. 
 </p>
@@ -862,9 +862,9 @@ my best guess is that this is just some Fancy Colour from outlook specifically, 
 </div>
 </div>
 
- <div id="outline-container-org8dcc5ce" class="outline-3">
- <h3 id="org8dcc5ce">what should i do when i die</h3>
- <div class="outline-text-3" id="text-org8dcc5ce">
+ <div id="outline-container-org876b2d2" class="outline-3">
+ <h3 id="org876b2d2">what should i do when i die</h3>
+ <div class="outline-text-3" id="text-org876b2d2">
  <p>
 the lesson i learned during this process is:
 </p>
@@ -877,7 +877,7 @@ the lesson i learned during this process is:
 </div>]]></description>
   <link>https://me.jowj.net/posts/vcards.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/vcards.html</guid>
-  <pubDate>Sat, 11 Apr 2020 18:30:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
 </item>
 </channel>
 </rss>
