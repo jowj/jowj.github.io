@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-04-12 Sun 08:36 -->
+<!-- 2020-04-12 Sun 09:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>pynit</title>
@@ -70,30 +70,30 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgacdb0b8">what is this</a></li>
-<li><a href="#orgbc06235">why i made it</a></li>
-<li><a href="#orgf004c28">what I learned while i made this</a>
+<li><a href="#org954dd26">what is this</a></li>
+<li><a href="#orgd557660">why i made it</a></li>
+<li><a href="#org941f709">what I learned while i made this</a>
 <ul>
-<li><a href="#org826b1ac">python</a></li>
-<li><a href="#org0a7f21d">rest apis</a></li>
+<li><a href="#orgef408ab">python</a></li>
+<li><a href="#orgc8ab914">rest apis</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgacdb0b8" class="outline-2">
-<h2 id="orgacdb0b8">what is this</h2>
-<div class="outline-text-2" id="text-orgacdb0b8">
+<div id="outline-container-org954dd26" class="outline-2">
+<h2 id="org954dd26">what is this</h2>
+<div class="outline-text-2" id="text-org954dd26">
 <p>
 pynit is a personal archival script that relies on <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it <a href="https://github.com/jowj/pynit">here</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgbc06235" class="outline-2">
-<h2 id="orgbc06235">why i made it</h2>
-<div class="outline-text-2" id="text-orgbc06235">
+<div id="outline-container-orgd557660" class="outline-2">
+<h2 id="orgd557660">why i made it</h2>
+<div class="outline-text-2" id="text-orgd557660">
 <p>
 i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
 </p>
@@ -137,17 +137,17 @@ now whenever i want to revisit a particular item i have all the comments preserv
 </div>
 </div>
 
-<div id="outline-container-orgf004c28" class="outline-2">
-<h2 id="orgf004c28">what I learned while i made this</h2>
-<div class="outline-text-2" id="text-orgf004c28">
+<div id="outline-container-org941f709" class="outline-2">
+<h2 id="org941f709">what I learned while i made this</h2>
+<div class="outline-text-2" id="text-org941f709">
 <p>
 i learned a few things that i want to write up here, all related to python or working with rest apis:
 </p>
 </div>
 
-<div id="outline-container-org826b1ac" class="outline-3">
-<h3 id="org826b1ac">python</h3>
-<div class="outline-text-3" id="text-org826b1ac">
+<div id="outline-container-orgef408ab" class="outline-3">
+<h3 id="orgef408ab">python</h3>
+<div class="outline-text-3" id="text-orgef408ab">
 <p>
 i learned about <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through <a href="https://twitter.com/mrled">@mrled</a> and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
 </p>
@@ -190,9 +190,9 @@ this allowed me to simple add a single line to an exist function <i>without modi
 </div>
 </div>
 
-<div id="outline-container-org0a7f21d" class="outline-3">
-<h3 id="org0a7f21d">rest apis</h3>
-<div class="outline-text-3" id="text-org0a7f21d">
+<div id="outline-container-orgc8ab914" class="outline-3">
+<h3 id="orgc8ab914">rest apis</h3>
+<div class="outline-text-3" id="text-orgc8ab914">
 <p>
 a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
 </p>

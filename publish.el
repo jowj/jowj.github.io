@@ -148,9 +148,9 @@
      "./posts"
      "https://me.jowj.net/posts/"
 
-     (delete "index.html"
+     (delete "articles.html"
     	     (mapcar (lambda (f) (replace-regexp-in-string ".*/posts/" "" f))
-    		     (file-expand-wildcards "~/Documents/projects/jlj-blog/posts/*.html")))
+    		     (file-expand-wildcards "~/Documents/projects/jowj.github.io/posts/*.html")))
      :builder 'webfeeder-make-rss
      :title "josiahs blog"
      :description "projects/writing bullshit in rss.")
@@ -161,9 +161,9 @@
      "./personal"
      "https://me.jowj.net/personal/"
 
-     (delete "index.html"
+     (delete "articles.html"
     	     (mapcar (lambda (f) (replace-regexp-in-string ".*/personal/" "" f))
-    		     (file-expand-wildcards "~/Documents/projects/jlj-blog/personal/*.html")))
+    		     (file-expand-wildcards "~/Documents/projects/jowj.github.io/personal/*.html")))
      :builder 'webfeeder-make-rss
      :title "josiahs diary"
      :description "personal bullshit in rss.")

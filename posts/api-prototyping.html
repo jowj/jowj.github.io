@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-04-12 Sun 08:36 -->
+<!-- 2020-04-12 Sun 09:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>rest api prototyping</title>
@@ -70,21 +70,21 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org826504f">the problem</a></li>
-<li><a href="#org230dc1e">Authentication and Authorization in Cylance</a>
+<li><a href="#org860bf53">the problem</a></li>
+<li><a href="#orgcf3828b">Authentication and Authorization in Cylance</a>
 <ul>
-<li><a href="#orgd4e4e0b">python code</a></li>
-<li><a href="#orgeec428e">restclient example</a></li>
+<li><a href="#orge3ccc44">python code</a></li>
+<li><a href="#orged201ce">restclient example</a></li>
 </ul>
 </li>
-<li><a href="#orge0c935e">Troubleshooting python and org-babel</a></li>
+<li><a href="#orge55f1b4">Troubleshooting python and org-babel</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org826504f" class="outline-2">
-<h2 id="org826504f">the problem</h2>
-<div class="outline-text-2" id="text-org826504f">
+<div id="outline-container-org860bf53" class="outline-2">
+<h2 id="org860bf53">the problem</h2>
+<div class="outline-text-2" id="text-org860bf53">
 <p>
 lately i've been working on a lot of web API glue projects. these are usually simple things like "service1 needs to send messages to service2 in a particular format, with a particular set of priviledges." Sometimes its more complicated, but that's usually what it breaks down to.
 </p>
@@ -100,9 +100,9 @@ this has worked great for a lot of things, but falls short when you have to gene
 </div>
 </div>
 
-<div id="outline-container-org230dc1e" class="outline-2">
-<h2 id="org230dc1e">Authentication and Authorization in Cylance</h2>
-<div class="outline-text-2" id="text-org230dc1e">
+<div id="outline-container-orgcf3828b" class="outline-2">
+<h2 id="orgcf3828b">Authentication and Authorization in Cylance</h2>
+<div class="outline-text-2" id="text-orgcf3828b">
 <p>
 Cylance relies on something called JWT (JSON Web Token). There's an RFC for this here: <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>. This is not possible to generate within `restclient`, so we do it in python.
 </p>
@@ -121,9 +121,9 @@ We'll add a <code>#+name:</code> argument to the top of the <code>org-mode</code
 </p>
 </div>
 
-<div id="outline-container-orgd4e4e0b" class="outline-3">
-<h3 id="orgd4e4e0b">python code</h3>
-<div class="outline-text-3" id="text-orgd4e4e0b">
+<div id="outline-container-orge3ccc44" class="outline-3">
+<h3 id="orge3ccc44">python code</h3>
+<div class="outline-text-3" id="text-orge3ccc44">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #598249;">import</span> uuid
 <span style="color: #598249;">import</span> json
@@ -176,9 +176,9 @@ this will generate a token and attach it to the name space <code>jwt_token</code
 </div>
 
 
-<div id="outline-container-orgeec428e" class="outline-3">
-<h3 id="orgeec428e">restclient example</h3>
-<div class="outline-text-3" id="text-orgeec428e">
+<div id="outline-container-orged201ce" class="outline-3">
+<h3 id="orged201ce">restclient example</h3>
+<div class="outline-text-3" id="text-orged201ce">
 <p>
 once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance's API through <code>restclient.el</code> going forward! in order to pass the output from the registered name we used before, <code>jwt_token</code>, we add an argument to the <code>BEGIN_SRC</code> header, like <code>:var x=jwt_token</code>. Then, we can set a <code>restclient</code> local variable equal to the <code>org-babel</code> super-variable and use it within the rest of the src block, as seen below:
 </p>
@@ -239,9 +239,9 @@ this will return my user (again, i've disturbed the output but it is roughly wha
 </div>
 </div>
 
-<div id="outline-container-orge0c935e" class="outline-2">
-<h2 id="orge0c935e">Troubleshooting python and org-babel</h2>
-<div class="outline-text-2" id="text-orge0c935e">
+<div id="outline-container-orge55f1b4" class="outline-2">
+<h2 id="orge55f1b4">Troubleshooting python and org-babel</h2>
+<div class="outline-text-2" id="text-orge55f1b4">
 <p>
 I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn't find my python binary on macOS. to fix this i manually set it in my <code>init.el</code> file, which worked for a long time.
 </p>

@@ -6,14 +6,14 @@
 <generator>Emacs webfeeder.el</generator>
 <link>https://me.jowj.net/posts/</link>
 <atom:link href="https://me.jowj.net/posts/rss.xml" rel="self" type="application/rss+xml"/>
-<lastBuildDate>Sun, 12 Apr 2020 08:36:50 -0500</lastBuildDate>
+<lastBuildDate>Sun, 12 Apr 2020 09:02:52 -0500</lastBuildDate>
 <item>
   <author>josiah</author>
   <title>rest api prototyping</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org826504f" class="outline-2">
- <h2 id="org826504f">the problem</h2>
- <div class="outline-text-2" id="text-org826504f">
+ <div id="outline-container-org860bf53" class="outline-2">
+ <h2 id="org860bf53">the problem</h2>
+ <div class="outline-text-2" id="text-org860bf53">
  <p>
 lately i've been working on a lot of web API glue projects. these are usually simple things like "service1 needs to send messages to service2 in a particular format, with a particular set of priviledges." Sometimes its more complicated, but that's usually what it breaks down to.
 </p>
@@ -29,9 +29,9 @@ this has worked great for a lot of things, but falls short when you have to gene
 </div>
 </div>
 
- <div id="outline-container-org230dc1e" class="outline-2">
- <h2 id="org230dc1e">Authentication and Authorization in Cylance</h2>
- <div class="outline-text-2" id="text-org230dc1e">
+ <div id="outline-container-orgcf3828b" class="outline-2">
+ <h2 id="orgcf3828b">Authentication and Authorization in Cylance</h2>
+ <div class="outline-text-2" id="text-orgcf3828b">
  <p>
 Cylance relies on something called JWT (JSON Web Token). There's an RFC for this here:  <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>. This is not possible to generate within `restclient`, so we do it in python.
 </p>
@@ -50,9 +50,9 @@ We'll add a  <code>#+name:</code> argument to the top of the  <code>org-mode</co
 </p>
 </div>
 
- <div id="outline-container-orgd4e4e0b" class="outline-3">
- <h3 id="orgd4e4e0b">python code</h3>
- <div class="outline-text-3" id="text-orgd4e4e0b">
+ <div id="outline-container-orge3ccc44" class="outline-3">
+ <h3 id="orge3ccc44">python code</h3>
+ <div class="outline-text-3" id="text-orge3ccc44">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> uuid
  <span style="color: #598249;">import</span> json
@@ -105,9 +105,9 @@ this will generate a token and attach it to the name space  <code>jwt_token</cod
 </div>
 
 
- <div id="outline-container-orgeec428e" class="outline-3">
- <h3 id="orgeec428e">restclient example</h3>
- <div class="outline-text-3" id="text-orgeec428e">
+ <div id="outline-container-orged201ce" class="outline-3">
+ <h3 id="orged201ce">restclient example</h3>
+ <div class="outline-text-3" id="text-orged201ce">
  <p>
 once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance's API through  <code>restclient.el</code> going forward! in order to pass the output from the registered name we used before,  <code>jwt_token</code>, we add an argument to the  <code>BEGIN_SRC</code> header, like  <code>:var x=jwt_token</code>. Then, we can set a  <code>restclient</code> local variable equal to the  <code>org-babel</code> super-variable and use it within the rest of the src block, as seen below:
 </p>
@@ -168,9 +168,9 @@ this will return my user (again, i've disturbed the output but it is roughly wha
 </div>
 </div>
 
- <div id="outline-container-orge0c935e" class="outline-2">
- <h2 id="orge0c935e">Troubleshooting python and org-babel</h2>
- <div class="outline-text-2" id="text-orge0c935e">
+ <div id="outline-container-orge55f1b4" class="outline-2">
+ <h2 id="orge55f1b4">Troubleshooting python and org-babel</h2>
+ <div class="outline-text-2" id="text-orge55f1b4">
  <p>
 I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn't find my python binary on macOS. to fix this i manually set it in my  <code>init.el</code> file, which worked for a long time.
 </p>
@@ -210,31 +210,367 @@ this block just proved that i could in fact import the right modules that were o
 </div>]]></description>
   <link>https://me.jowj.net/posts/api-prototyping.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/api-prototyping.html</guid>
-  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
 </item>
 <item>
-  <title>a list of stuff i wrote</title>
+  <author>josiah</author>
+  <title>blogging on github:pages with orgmode</title>
   <description><![CDATA[<div id="content">
- <ul class="org-ul"> <li> <a href="blogging-on-ghpages-with-orgmode.html">blogging on github:pages with orgmode</a></li>
- <li> <a href="moving-from-1pass-to-bitwarden.html">Moving from 1pass to bitwarden</a></li>
- <li> <a href="api-prototyping.html">rest api prototyping</a></li>
- <li> <a href="tvm-at-a-new-company.html">tvm at a new company</a></li>
- <li> <a href="emacs-on-catalina.html">emacs on catalina</a></li>
- <li> <a href="vcards.html">vcards</a></li>
- <li> <a href="css.html">css test</a></li>
- <li> <a href="pynit.html">pynit</a></li>
-</ul></div>]]></description>
-  <link>https://me.jowj.net/posts/articles.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/articles.html</guid>
-  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
+ <div id="outline-container-org822ba3d" class="outline-2">
+ <h2 id="org822ba3d">what i did</h2>
+ <div class="outline-text-2" id="text-org822ba3d">
+ <p>
+i've just moved from using markdown and jekyll to generate a static website on github pages to using org-mode and org-publish to generate static html files, also on github pages.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgabfa7f2" class="outline-2">
+ <h2 id="orgabfa7f2">why did i do this</h2>
+ <div class="outline-text-2" id="text-orgabfa7f2">
+ <p>
+my setup has been a pain - i do most of my writing and thinking in  <a href="https://orgmode.org/">org mode</a>, but to post stuff on  <a href="https://me.jowj.net/">https://me.jowj.net/</a> i have to convert that to markdown (relatively easy, due to a package called  <a href="https://github.com/emacsmirror/org/blob/master/lisp/ox-md.el">ox-md</a>) and use  <a href="https://jekyllrb.com/">jekyll</a> to convert md to html and handle the generation of the site. the problem with jekyll is that it  <i>sucks</i>. its a tool based on the ruby ecosystem, and since I actually publish my stuff so infrequently every time i use it i have to update something about my ruby environment. this adds probably 10-20 minutes while I remember / look up which commands i'm supposed to run and why, and figuring out what things are actually broken this time.
+</p>
+
+
+ <p>
+theming in jekyll i also don't really enjoy. i think its a fine way to get started with an easy, responsive look to a blog, but if you wanna have more particular say about it you probably will end up writing your own css. 
+</p>
+
+
+ <p>
+i wanted a way to handle multiple rss feeds; i wanted to be able to blog about personal bullshit AND project/technical work in the same site. obviously, most people are not going to give a shit about both of those things at the same time, so separating the rss feeds out seemed like a pretty straightforward way of handling that! ultimately this was harder than i wanted it to be, but it does seem to work!
+</p>
+
+
+ <p>
+i also just thought it would be cool to do everything within emacs (because my brain is broken lol). now the site is built with emacs and org mode entirely! 
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgcb89913" class="outline-2">
+ <h2 id="orgcb89913">how it works</h2>
+ <div class="outline-text-2" id="text-orgcb89913">
+ <p>
+most of the configuration and automation is in two files:  <a href="https://github.com/jowj/jowj.github.io/blob/master/publish.el">publish.el</a> and  <a href="https://github.com/jowj/jowj.github.io/blob/master/Makefile">Makefile</a> (raw links, also pasted below). publish.el has by far the most stuff in it, Makefile is just stupid simple automation.
+</p>
+</div>
+ <div id="outline-container-org05cd43a" class="outline-3">
+ <h3 id="org05cd43a">publish.el</h3>
+ <div class="outline-text-3" id="text-org05cd43a">
+ <p>
+i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the  <a href="#org981ef61">credits & references</a> entry.
+</p>
+
+ <p>
+one of the ways I differed from some of the other configurations I referenced was that i wanted the publishing process to be distinct from my personal  <a href="https://git.awful.club/jowj/chd/src/branch/master/.emacs.d">emacs configuration</a>. publishing from within emacs itself is pretty cool, but it'll be cooler when i can publish by just uploading .org files and having github actions run a container and my publishing function on  <code>git push</code>. i'm not there yet but  <a href="https://gjhenrique.com/meta.html">some people are doing this already with gitlab</a>.
+</p>
+
+ <p>
+since i won't be using my personal emacs config, i'll have to setup package management here as well:
+</p>
+ <div class="org-src-container">
+ <pre class="src src-elisp" id="org262595a"> <span style="color: #5e6263;">;;;; </span> <span style="color: #5e6263;">package setup</span>
+( <span style="color: #598249;">require</span> ' <span style="color: #15968D;">ox-publish</span>)
+(package-initialize)
+
+( <span style="color: #598249;">require</span> ' <span style="color: #15968D;">package</span>)
+( <span style="color: #598249;">setq</span> package-archives
+      '(( <span style="color: #15968D;">"melpa"</span> .  <span style="color: #15968D;">"http://melpa.milkbox.net/packages/"</span>)
+        ( <span style="color: #15968D;">"gnu"</span> .  <span style="color: #15968D;">"http://elpa.gnu.org/packages/"</span>)
+        ( <span style="color: #15968D;">"elpy"</span> .  <span style="color: #15968D;">"http://jorgenschaefer.github.io/packages/"</span>)))
+
+( <span style="color: #598249;">unless</span> (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+( <span style="color: #598249;">eval-when-compile</span>
+  ( <span style="color: #598249;">require</span> ' <span style="color: #15968D;">use-package</span>))
+
+( <span style="color: #598249;">use-package</span>  <span style="color: #15968D;">htmlize</span>
+   <span style="color: #598249;">:ensure</span> t)
+
+( <span style="color: #598249;">use-package</span>  <span style="color: #15968D;">webfeeder</span>
+   <span style="color: #598249;">:ensure</span> t)
+</pre>
+</div>
+
+ <p>
+man i got SO stuck on how to do syntax highlighting AND use my own custom css. if you use the stock html and css templates that ship with org mode (i.e. don't customize anything at all) you can easily add syntax highlighting using the  <code>htmlize</code> package. if you override the stock templates then you don't get syntax highlighting by default!! 
+</p>
+
+ <p>
+the actual solution ended up being so simple i'm mad its not in any of the documentation I found expressly, so I'm going to make sure i write a googlable phrase about it:
+</p>
+
+ <ul class="org-ul"> <li>"fix syntax highlighting when using custom css in emacs org mode by defining font-locks manually."</li>
+</ul> <div class="org-src-container">
+ <pre class="src src-elisp" id="org4307acb"> <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
+ <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">reference this guy's setup, he's a king:</span>
+ <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">https://gitlab.com/jgkamat/jgkamat.gitlab.io/-/blob/master/jgkamat-website.el</span>
+( <span style="color: #598249;">when</span> noninteractive
+   <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">Don't run in interactive mode to avoid breaking your colors</span>
+  (custom-set-faces
+   '(default                      ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#909396"</span>  <span style="color: #598249;">:background</span>  <span style="color: #15968D;">"#262626"</span>))))
+   '(font-lock-builtin-face       ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#598249"</span>))))
+   '(font-lock-comment-face       ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#5e6263"</span>))))
+   '(font-lock-constant-face      ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#15968D"</span>))))
+   '(font-lock-function-name-face ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#2F7BDE"</span>))))
+   '(font-lock-keyword-face       ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#598249"</span>))))
+   '(font-lock-string-face        ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#15968D"</span>))))
+   '(font-lock-type-face                       ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#598249"</span>))))
+   '(font-lock-variable-name-face ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#2F7BDE"</span>))))
+   '(font-lock-warning-face       ((t ( <span style="color: #598249;">:foreground</span>  <span style="color: #15968D;">"#bd3832"</span>  <span style="color: #598249;">:weight</span> bold)))))
+  ( <span style="color: #598249;">setq</span> htmlize-use-rgb-map 'force))
+</pre>
+</div>
+
+ <p>
+ok so that's all the like 'setup' type shit out of the way. after that i ran into several frustrating org mode limitations or…decisions made by org mode that make blogging with it a bit of a pain. A ton of the config is dedicated to working around those problems.
+</p>
+
+ <ul class="org-ul"> <li>why the fuck is an 'html validation link' part of the default postamble config? who is this useful for?</li>
+ <li>why does the largest orgmode package built for static site generation for org mode think you want to build off of a single org mode file with blog posts as headings?
+ <ul class="org-ul"> <li>that is stupid. org-mode itself doesn't care about your file hierarchy and neither should you :|</li>
+</ul></li>
+ <li>why is defining a custom stylesheet such a pain in the dick lmao.
+ <ul class="org-ul"> <li>there's a like a million ways to do this, ranging from updating default variables to adding it in every single .org file, but they all have frustrating limitations!</li>
+</ul></li>
+ <li>having nav buttons at the top or side of the screen for different categories is pretty basic but unsupported by default. you have to write your own weird hack for this; i chose to add it to the preamble on every page using dynamic file name expansion, but i saw several different solutions to this problem:
+ <ul class="org-ul"> <li>some people did it in the preamble like me</li>
+ <li>some people did it in the postamble</li>
+ <li>some people created a file called like "nav.org" and used org-mode  <code>includes</code> on every page to reference it. I thought this was the ugliest option in general, but its by far the easiest!</li>
+</ul></li>
+</ul> <div class="org-src-container">
+ <pre class="src src-elisp"> <span style="color: #5e6263;">;;;; </span> <span style="color: #5e6263;">custom var/func defs to deal with frustrating org limitations</span>
+( <span style="color: #598249;">setq</span> make-backup-files nil)
+( <span style="color: #598249;">setq</span> org-html-postamble t
+      org-html-validation-link nil)
+
+( <span style="color: #598249;">defvar</span>  <span style="color: #2F7BDE;">org-blog-date-format</span>  <span style="color: #15968D;">"%h %d, %Y"</span>
+   <span style="color: #15968D;">"Format for displaying publish dates."</span>)
+
+( <span style="color: #598249;">defvar</span>  <span style="color: #2F7BDE;">jlj/root</span> (expand-file-name  <span style="color: #15968D;">"."</span>))
+( <span style="color: #598249;">defvar</span>  <span style="color: #2F7BDE;">org-blog-head</span>  <span style="color: #15968D;">"<link rel=\"stylesheet\" type=\"text/css\" href=\"css/my-dark.css\"/>"</span>)
+( <span style="color: #598249;">defvar</span>  <span style="color: #2F7BDE;">org-personal-head</span>  <span style="color: #15968D;">"<link rel=\"stylesheet\" type=\"text/css\" href=\"../posts/css/my-dark.css\"/>"</span>)
+( <span style="color: #598249;">defvar</span>  <span style="color: #2F7BDE;">org-index-head</span>  <span style="color: #15968D;">"<link rel=\"stylesheet\" type=\"text/css\" href=\"posts/css/my-dark.css\"/>"</span>)
+
+( <span style="color: #598249;">defun</span>  <span style="color: #2F7BDE;">jlj/preamble</span> (info)
+   <span style="color: #15968D;">"Return preamble as a string.  INFO."</span>
+   <span style="color: #15968D;">"This is required to dynamically link shit depending on where you on in the folder structure."</span>
+  ( <span style="color: #598249;">let*</span> ((file (plist-get info  <span style="color: #598249;">:input-file</span>))
+         (prefix (file-relative-name (expand-file-name jlj/root)
+                                     (file-name-directory file))))
+    (format
+      <span style="color: #15968D;">"<a href=\"%1$s/index.html\">home</a></span>
+ <span style="color: #15968D;"><a href=\"%1$s/posts/articles.html\">essays</a></span>
+ <span style="color: #15968D;"><a href=\"%1$s/personal/articles.html\">diary</a></span>
+ <span style="color: #15968D;"><a href=\"https://git.awful.club/projects\">projects</a></span>
+ <span style="color: #15968D;"><a href=\"%1$s/resume.pdf\">resume</a>"</span>
+     prefix)))
+
+( <span style="color: #598249;">setq</span> org-html-postamble-format `(( <span style="color: #15968D;">"en"</span> ,(concat  <span style="color: #15968D;">"<p class=\"creator\">Made with %c</p></p>"</span>))))
+( <span style="color: #598249;">setq</span> org-html-preamble #'jlj/preamble)
+</pre>
+</div>
+
+ <p>
+ <code>org-publish-project-alist</code> is the meat of the static site generation. you define a list of components of your site and have different variable settings for each component. i have several different components created:
+</p>
+
+ <ul class="org-ul"> <li> <code>site-org</code> publishes all my technical writing.</li>
+ <li> <code>site-index</code> publishes just my home page.</li>
+ <li> <code>site-personal</code> publishes my diary entries.</li>
+ <li> <code>site-static</code> is currently not doing what I want it to! its  <i>supposed</i> copy ANY file that is not a .org file and publish it, but it doesn't seem to be doing that. I'm  <span class="underline">very</span> certain its just because I don't understand its arguments well, so, like, don't copy my config about that. its still being worked on!</li>
+</ul> <p>
+ <code>jlj/publish-sitemap</code> is a function that wraps  <code>org-publish-sitemap</code> and adds in my own css file. as far as I can tell, there is NO OTHER WAY to get the sitemap file generated by the  <code>org-publish-project-alist</code> declarations to use custom css. infuriating.  because this is emacs and org mode there are of course other work-arounds possible here, but!! this should not require a work around, this is basic!!
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-elisp" id="org6109833">( <span style="color: #598249;">setq</span> org-publish-project-alist
+      (list
+       (list  <span style="color: #15968D;">"site-org"</span>
+              <span style="color: #598249;">:base-directory</span>  <span style="color: #15968D;">"./source"</span>
+              <span style="color: #598249;">:recursive</span> t
+              <span style="color: #598249;">:exclude</span>  <span style="color: #15968D;">"index.org"</span>
+              <span style="color: #598249;">:publishing-function</span> '(org-html-publish-to-html)
+              <span style="color: #598249;">:publishing-directory</span>  <span style="color: #15968D;">"./posts/"</span>
+              <span style="color: #598249;">:sitemap-title</span>  <span style="color: #15968D;">"a list of stuff i wrote"</span>
+              <span style="color: #598249;">:sitemap-filename</span>  <span style="color: #15968D;">"articles.org"</span>
+              <span style="color: #598249;">:auto-sitemap</span> t
+              <span style="color: #598249;">:sitemap-style</span> 'list
+              <span style="color: #598249;">:sitemap-sort-files</span> 'anti-chronologically
+              <span style="color: #598249;">:html-html5-fancy</span> t
+              <span style="color: #598249;">:html-doctype</span>  <span style="color: #15968D;">"html5"</span>
+              <span style="color: #598249;">:html-head-include-default-style</span> nil
+              <span style="color: #598249;">:html-head</span> org-blog-head)
+       (list  <span style="color: #15968D;">"site-index"</span>
+              <span style="color: #598249;">:base-directory</span>  <span style="color: #15968D;">"."</span>
+              <span style="color: #598249;">:recursive</span> nil
+              <span style="color: #598249;">:publishing-function</span> '(org-html-publish-to-html)
+              <span style="color: #598249;">:publishing-directory</span>  <span style="color: #15968D;">"."</span>
+              <span style="color: #598249;">:html-head</span> org-index-head)
+       (list  <span style="color: #15968D;">"site-personal"</span>
+              <span style="color: #598249;">:base-directory</span>  <span style="color: #15968D;">"./personal-source"</span>
+              <span style="color: #598249;">:recursive</span> t
+              <span style="color: #598249;">:exclude</span>  <span style="color: #15968D;">"index.org"</span>
+              <span style="color: #598249;">:publishing-function</span> '(org-html-publish-to-html)
+              <span style="color: #598249;">:publishing-directory</span>  <span style="color: #15968D;">"./personal/"</span>
+              <span style="color: #598249;">:sitemap-title</span>  <span style="color: #15968D;">"personal bullshit"</span>
+              <span style="color: #598249;">:sitemap-filename</span>  <span style="color: #15968D;">"articles.org"</span>
+              <span style="color: #598249;">:auto-sitemap</span> t
+              <span style="color: #598249;">:sitemap-style</span> 'list
+              <span style="color: #598249;">:sitemap-sort-files</span> 'anti-chronologically
+              <span style="color: #598249;">:html-head-include-default-style</span> nil
+              <span style="color: #598249;">:html-head</span> org-personal-head)
+       (list  <span style="color: #15968D;">"site-static"</span>
+              <span style="color: #598249;">:base-directory</span>  <span style="color: #15968D;">"."</span>
+              <span style="color: #598249;">:base-extension</span> 'any
+              <span style="color: #598249;">:exclude</span>  <span style="color: #15968D;">"\\.org\\'"</span>
+              <span style="color: #598249;">:publishing-directory</span>  <span style="color: #15968D;">"."</span>
+              <span style="color: #598249;">:publishing-function</span> 'org-publish-attachment
+              <span style="color: #598249;">:recursive</span> t)
+       (list  <span style="color: #15968D;">"site"</span>  <span style="color: #598249;">:components</span> '( <span style="color: #15968D;">"site-org"</span>))))
+
+
+
+( <span style="color: #598249;">defun</span>  <span style="color: #2F7BDE;">jlj/publish-sitemap</span> (title list)
+   <span style="color: #15968D;">"Replace org-publish-sitemap.  TITLE and LIST are magic fuck u linter i won't do wat u tell me."</span>
+
+  (org-publish-sitemap
+   (concat  <span style="color: #15968D;">"#+TITLE: "</span> title  <span style="color: #15968D;">"\n"</span>
+           <span style="color: #15968D;">"#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"css/my-dark.css\">"</span>
+           <span style="color: #15968D;">"\n"</span>
+          (org-list-to-org list)))
+)
+</pre>
+</div>
+
+
+ <p>
+finally, i actually publish the site and then generate some rss feeds. i want so specifically talk about the rss feed generation; the most well known package for rss feed gen is  <a href="https://github.com/yyr/org-mode/blob/master/contrib/lisp/ox-rss.el">ox-rss</a> and i could not get that package to work. i used  <a href="https://gitlab.com/ambrevar/emacs-webfeeder/-/tree/master">webfeeder.el</a> and had much better luck with it.
+</p>
+
+ <p>
+its important to note that i wrap org-publish-all and the webfeeder lines with my own function  <code>jlj/publish</code>. the org project  <span class="underline">must</span> be published prior to the webfeeder feed generation.  <code>webfeeder.el</code> works by generating a feed based on your .html files, not your .org files. 
+</p>
+ <div class="org-src-container">
+ <pre class="src src-elisp">( <span style="color: #598249;">defun</span>  <span style="color: #2F7BDE;">jlj/publish</span> ()
+     <span style="color: #15968D;">"Wrap org-publish-all so that its easier to modify this in the future."</span>
+    (org-publish-all)
+
+     <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">build rss for interesting posts</span>
+    ( <span style="color: #598249;">setq</span> webfeeder-default-author  <span style="color: #15968D;">"josiah  <a href="mailto:me%40jowj.net"><me@jowj.net></a>"</span>)
+    (webfeeder-build
+      <span style="color: #15968D;">"rss.xml"</span>
+      <span style="color: #15968D;">"./posts"</span>
+      <span style="color: #15968D;">"https://me.jowj.net/posts/"</span>
+
+     (delete  <span style="color: #15968D;">"index.html"</span>
+             (mapcar ( <span style="color: #598249;">lambda</span> (f) (replace-regexp-in-string  <span style="color: #15968D;">".*/posts/"</span>  <span style="color: #15968D;">""</span> f))
+                     (file-expand-wildcards  <span style="color: #15968D;">"~/Documents/projects/jlj-blog/posts/*.html"</span>)))
+      <span style="color: #598249;">:builder</span> 'webfeeder-make-rss
+      <span style="color: #598249;">:title</span>  <span style="color: #15968D;">"josiahs blog"</span>
+      <span style="color: #598249;">:description</span>  <span style="color: #15968D;">"projects/writing bullshit in rss."</span>)
+
+     <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">build rss for diary posts</span>
+    (webfeeder-build
+      <span style="color: #15968D;">"rss.xml"</span>
+      <span style="color: #15968D;">"./personal"</span>
+      <span style="color: #15968D;">"https://me.jowj.net/personal/"</span>
+
+     (delete  <span style="color: #15968D;">"index.html"</span>
+             (mapcar ( <span style="color: #598249;">lambda</span> (f) (replace-regexp-in-string  <span style="color: #15968D;">".*/personal/"</span>  <span style="color: #15968D;">""</span> f))
+                     (file-expand-wildcards  <span style="color: #15968D;">"~/Documents/projects/jlj-blog/personal/*.html"</span>)))
+      <span style="color: #598249;">:builder</span> 'webfeeder-make-rss
+      <span style="color: #598249;">:title</span>  <span style="color: #15968D;">"josiahs diary"</span>
+      <span style="color: #598249;">:description</span>  <span style="color: #15968D;">"personal bullshit in rss."</span>)
+  )
+</pre>
+</div>
+</div>
+</div>
+ <div id="outline-container-org6b5242a" class="outline-3">
+ <h3 id="org6b5242a">Makefile</h3>
+ <div class="outline-text-3" id="text-org6b5242a">
+ <p>
+super easy makefile lol. 
+</p>
+ <ul class="org-ul"> <li>run emacs with no init file</li>
+ <li>tell it to load publish.el</li>
+ <li>tell it run my publishing function</li>
+</ul> <p>
+on clean, tell it to remove a bunch of files and folders that gave me grief. many of these won't be generated anymore, i fixed the problem that necessitated me adding the corresponding line! but i leave it in anyway.
+</p>
+
+ <p>
+if you're unfamiliar with make you can still use this without learning  <i>any</i> make primitives, you can just, in the directory with the Makefile, run these commands:
+</p>
+ <ul class="org-ul"> <li> <code>make</code> will build the site from scratch</li>
+ <li> <code>make clean</code> will delete all the generated files.</li>
+</ul> <div class="org-src-container">
+ <pre class="src src-makefile"> <span style="color: #5e6263;"># </span> <span style="color: #5e6263;">Makefile for jlj blog</span>
+ <span style="color: #2F7BDE;">.PHONY</span>: all publish publish_no_init
+
+ <span style="color: #2F7BDE;">all</span>: publish
+
+ <span style="color: #2F7BDE;">publish</span>: publish.el
+         <span style="color: #598249;">@</span>echo  <span style="color: #15968D;">"Publishing...."</span>
+        emacs --no-init --script publish.el --funcall=jlj/publish
+
+ <span style="color: #2F7BDE;">clean</span>:
+         <span style="color: #598249;">@</span>echo  <span style="color: #15968D;">"Cleaning up.."</span>
+         <span style="color: #598249;">@</span>rm -rvf *.elc
+         <span style="color: #598249;">@</span>rm -rvf posts/*.html
+         <span style="color: #598249;">@</span>rm -fv index.html
+         <span style="color: #598249;">@</span>rm -fv index.xml
+         <span style="color: #598249;">@</span>rm -fv posts/articles.xml
+         <span style="color: #598249;">@</span>rm -fv posts/rss.xml
+         <span style="color: #598249;">@</span>rm -fv posts/atom.xml
+         <span style="color: #598249;">@</span>rm -fv personal/*.html
+         <span style="color: #598249;">@</span>rm -fv personal/rss.xml
+         <span style="color: #598249;">@</span>rm -fv personal/atom.xml
+         <span style="color: #598249;">@</span>rm -fv source/*.html
+         <span style="color: #598249;">@</span>rm -rvf ~/.org-timestamps/*
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+ <div id="outline-container-org981ef61" class="outline-2">
+ <h2 id="org981ef61">credits & references</h2>
+ <div class="outline-text-2" id="text-org981ef61">
+ <p>
+there are a TON of places to read about doing this sort of thing. two folks in particular were really useful to me:
+</p>
+ <ul class="org-ul"> <li> <a href="https://ambrevar.xyz/index.html">Ambrevar</a>,  (in particular,  <a href="https://ambrevar.xyz/blog-architecture/index.html">https://ambrevar.xyz/blog-architecture/index.html</a>)</li>
+ <li> <a href="https://jgkamat.gitlab.io/">jgkamat</a>,  (in particular,  <a href="https://jgkamat.gitlab.io/blog/website1.html">https://jgkamat.gitlab.io/blog/website1.html</a>)</li>
+</ul> <p>
+jgkamat's publish files lead me to the font-face-locking approach to custom syntax highlighting.
+ambrevar actually wrote the webfeeder.el solution to the idiot org rss problem. both of these folks are fantastic.
+</p>
+
+ <ul class="org-ul"> <li> <a href="https://orgmode.org/worg/">https://orgmode.org/worg/</a> has several useful entries on org > html publishing</li>
+ <li> <a href="https://www.brautaset.org/articles/2017/blogging-with-org-mode.html">https://www.brautaset.org/articles/2017/blogging-with-org-mode.html</a></li>
+ <li> <a href="https://opensource.com/article/20/3/blog-emacs">https://opensource.com/article/20/3/blog-emacs</a></li>
+ <li> <a href="https://www.sadiqpk.org/blog/2018/08/08/blogging-with-org-mode.html">https://www.sadiqpk.org/blog/2018/08/08/blogging-with-org-mode.html</a></li>
+ <li>a lot more i've forgotten.</li>
+</ul></div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html</guid>
+  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>css test</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orga69d8f4" class="outline-2">
- <h2 id="orga69d8f4">this is the first header</h2>
- <div class="outline-text-2" id="text-orga69d8f4">
+ <div id="outline-container-org181f57e" class="outline-2">
+ <h2 id="org181f57e">this is the first header</h2>
+ <div class="outline-text-2" id="text-org181f57e">
  <p>
 this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
 </p>
@@ -248,16 +584,16 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </ol></div>
 </div>
 
- <div id="outline-container-org1f5010a" class="outline-2">
- <h2 id="org1f5010a">below is a picture embed with caption</h2>
- <div class="outline-text-2" id="text-org1f5010a">
+ <div id="outline-container-org6c64b73" class="outline-2">
+ <h2 id="org6c64b73">below is a picture embed with caption</h2>
+ <div class="outline-text-2" id="text-org6c64b73">
 
- <figure id="org26f8121"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
+ <figure id="org9f66fe1"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
 </div>
 
- <div id="outline-container-orgf83558b" class="outline-2">
- <h2 id="orgf83558b">here is a python embd</h2>
- <div class="outline-text-2" id="text-orgf83558b">
+ <div id="outline-container-orgfb35293" class="outline-2">
+ <h2 id="orgfb35293">here is a python embd</h2>
+ <div class="outline-text-2" id="text-orgfb35293">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> slack
 
@@ -305,9 +641,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>
 </div>
 
- <div id="outline-container-org113f950" class="outline-2">
- <h2 id="org113f950">here is a listp embed</h2>
- <div class="outline-text-2" id="text-org113f950">
+ <div id="outline-container-orge4bd511" class="outline-2">
+ <h2 id="orge4bd511">here is a listp embed</h2>
+ <div class="outline-text-2" id="text-orge4bd511">
  <div class="org-src-container">
  <pre class="src src-elisp">( <span style="color: #598249;">let</span> ((proj-base (file-name-directory load-file-name)))
   ( <span style="color: #598249;">setq</span> org-publish-project-alist
@@ -320,9 +656,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>
 </div>
 </div>
- <div id="outline-container-org1a4da87" class="outline-2">
- <h2 id="org1a4da87">see links styling</h2>
- <div class="outline-text-2" id="text-org1a4da87">
+ <div id="outline-container-org306d224" class="outline-2">
+ <h2 id="org306d224">see links styling</h2>
+ <div class="outline-text-2" id="text-org306d224">
  <p>
  <a href="https://me.jowj.net">https://me.jowj.net</a> looks like this
 </p>
@@ -331,15 +667,15 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>]]></description>
   <link>https://me.jowj.net/posts/css.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
-  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>emacs on catalina</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orgcaac4fb" class="outline-2">
- <h2 id="orgcaac4fb">early days</h2>
- <div class="outline-text-2" id="text-orgcaac4fb">
+ <div id="outline-container-orgf81eee0" class="outline-2">
+ <h2 id="orgf81eee0">early days</h2>
+ <div class="outline-text-2" id="text-orgf81eee0">
  <p>
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
 </p>
@@ -354,9 +690,9 @@ this basically says to run this lisp to add your proper emacs path to the proper
 </div>
 </div>
 
- <div id="outline-container-orgfe4e9ac" class="outline-2">
- <h2 id="orgfe4e9ac">partial fix</h2>
- <div class="outline-text-2" id="text-orgfe4e9ac">
+ <div id="outline-container-orga5f7ddc" class="outline-2">
+ <h2 id="orga5f7ddc">partial fix</h2>
+ <div class="outline-text-2" id="text-orga5f7ddc">
  <p>
 later that week, a few other people said you needed to whitelist  <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
 </p>
@@ -367,9 +703,9 @@ since I could at least launch and navigate around with my then-current janky set
 </div>
 </div>
 
- <div id="outline-container-org3ebfff8" class="outline-2">
- <h2 id="org3ebfff8">jankiest fix</h2>
- <div class="outline-text-2" id="text-org3ebfff8">
+ <div id="outline-container-orgb8a7ca6" class="outline-2">
+ <h2 id="orgb8a7ca6">jankiest fix</h2>
+ <div class="outline-text-2" id="text-orgb8a7ca6">
  <p>
 he gives a good breakdown as to why this is needed  <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
 </p>
@@ -392,15 +728,15 @@ this is not like, super great. its makes your configuration brittle and it will 
 </div>]]></description>
   <link>https://me.jowj.net/posts/emacs-on-catalina.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/emacs-on-catalina.html</guid>
-  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>Moving from 1pass to bitwarden</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orgb4719d9" class="outline-2">
- <h2 id="orgb4719d9">background</h2>
- <div class="outline-text-2" id="text-orgb4719d9">
+ <div id="outline-container-org66fb6ac" class="outline-2">
+ <h2 id="org66fb6ac">background</h2>
+ <div class="outline-text-2" id="text-org66fb6ac">
  <p>
 I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
 </p>
@@ -424,9 +760,9 @@ because of these issues i started looking for alternatives
 </p>
 </div>
 </div>
- <div id="outline-container-org03adf95" class="outline-2">
- <h2 id="org03adf95">bitwarden</h2>
- <div class="outline-text-2" id="text-org03adf95">
+ <div id="outline-container-orgc02e311" class="outline-2">
+ <h2 id="orgc02e311">bitwarden</h2>
+ <div class="outline-text-2" id="text-orgc02e311">
  <p>
 since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
 </p>
@@ -442,9 +778,9 @@ i've been living on bitwarden for ~1 week at this point and haven't felt any rea
 </div>
 </div>
 
- <div id="outline-container-orgcae39b9" class="outline-2">
- <h2 id="orgcae39b9">the bad</h2>
- <div class="outline-text-2" id="text-orgcae39b9">
+ <div id="outline-container-org0a991d0" class="outline-2">
+ <h2 id="org0a991d0">the bad</h2>
+ <div class="outline-text-2" id="text-org0a991d0">
  <p>
 bad news first. 
 </p>
@@ -458,9 +794,9 @@ bad news first.
 </ol></div>
 </div>
 
- <div id="outline-container-orgbc718dc" class="outline-2">
- <h2 id="orgbc718dc">totp issue specifics</h2>
- <div class="outline-text-2" id="text-orgbc718dc">
+ <div id="outline-container-orgc21ff3a" class="outline-2">
+ <h2 id="orgc21ff3a">totp issue specifics</h2>
+ <div class="outline-text-2" id="text-orgc21ff3a">
  <p>
 bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
 </p>
@@ -480,9 +816,9 @@ The desktop apps, being electron, got cached without showing the TOTP codes; sup
 </div>
 </div>
 
- <div id="outline-container-org17682de" class="outline-2">
- <h2 id="org17682de">the cool</h2>
- <div class="outline-text-2" id="text-org17682de">
+ <div id="outline-container-org21b180a" class="outline-2">
+ <h2 id="org21b180a">the cool</h2>
+ <div class="outline-text-2" id="text-org21b180a">
  <p>
 On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
 </p>
@@ -511,9 +847,9 @@ read about the bitwarden <sub>rs</sub> project here:
 </div>
 </div>
 
- <div id="outline-container-org39ccf88" class="outline-2">
- <h2 id="org39ccf88">next steps</h2>
- <div class="outline-text-2" id="text-org39ccf88">
+ <div id="outline-container-org6df0a5c" class="outline-2">
+ <h2 id="org6df0a5c">next steps</h2>
+ <div class="outline-text-2" id="text-org6df0a5c">
  <p>
 i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
 </p>
@@ -526,24 +862,24 @@ i haven't figured out how i could do that, but it seems like it should be pretty
 </div>]]></description>
   <link>https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</guid>
-  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>pynit</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orgacdb0b8" class="outline-2">
- <h2 id="orgacdb0b8">what is this</h2>
- <div class="outline-text-2" id="text-orgacdb0b8">
+ <div id="outline-container-org954dd26" class="outline-2">
+ <h2 id="org954dd26">what is this</h2>
+ <div class="outline-text-2" id="text-org954dd26">
  <p>
 pynit is a personal archival script that relies on  <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it  <a href="https://github.com/jowj/pynit">here</a>.
 </p>
 </div>
 </div>
 
- <div id="outline-container-orgbc06235" class="outline-2">
- <h2 id="orgbc06235">why i made it</h2>
- <div class="outline-text-2" id="text-orgbc06235">
+ <div id="outline-container-orgd557660" class="outline-2">
+ <h2 id="orgd557660">why i made it</h2>
+ <div class="outline-text-2" id="text-orgd557660">
  <p>
 i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
 </p>
@@ -581,17 +917,17 @@ now whenever i want to revisit a particular item i have all the comments preserv
 </div>
 </div>
 
- <div id="outline-container-orgf004c28" class="outline-2">
- <h2 id="orgf004c28">what I learned while i made this</h2>
- <div class="outline-text-2" id="text-orgf004c28">
+ <div id="outline-container-org941f709" class="outline-2">
+ <h2 id="org941f709">what I learned while i made this</h2>
+ <div class="outline-text-2" id="text-org941f709">
  <p>
 i learned a few things that i want to write up here, all related to python or working with rest apis:
 </p>
 </div>
 
- <div id="outline-container-org826b1ac" class="outline-3">
- <h3 id="org826b1ac">python</h3>
- <div class="outline-text-3" id="text-org826b1ac">
+ <div id="outline-container-orgef408ab" class="outline-3">
+ <h3 id="orgef408ab">python</h3>
+ <div class="outline-text-3" id="text-orgef408ab">
  <p>
 i learned about  <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through  <a href="https://twitter.com/mrled">@mrled</a> and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
 </p>
@@ -634,9 +970,9 @@ this allowed me to simple add a single line to an exist function  <i>without mod
 </div>
 </div>
 
- <div id="outline-container-org0a7f21d" class="outline-3">
- <h3 id="org0a7f21d">rest apis</h3>
- <div class="outline-text-3" id="text-org0a7f21d">
+ <div id="outline-container-orgc8ab914" class="outline-3">
+ <h3 id="orgc8ab914">rest apis</h3>
+ <div class="outline-text-3" id="text-orgc8ab914">
  <p>
 a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is  <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the  <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
 </p>
@@ -646,23 +982,23 @@ a lot of people (a lot of people!!) just have you use get requests instead of po
 </div>]]></description>
   <link>https://me.jowj.net/posts/pynit.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/pynit.html</guid>
-  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>tvm at a new company</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org348067d" class="outline-2">
- <h2 id="org348067d">no new problems</h2>
- <div class="outline-text-2" id="text-org348067d">
+ <div id="outline-container-org90e308c" class="outline-2">
+ <h2 id="org90e308c">no new problems</h2>
+ <div class="outline-text-2" id="text-org90e308c">
  <p>
 i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.
 </p>
 </div>
 
- <div id="outline-container-orgb2a91da" class="outline-3">
- <h3 id="orgb2a91da">using an existing scanning install or starting over</h3>
- <div class="outline-text-3" id="text-orgb2a91da">
+ <div id="outline-container-org99017bd" class="outline-3">
+ <h3 id="org99017bd">using an existing scanning install or starting over</h3>
+ <div class="outline-text-3" id="text-org99017bd">
  <p>
 it may be reasonable to nuke an install if:
 </p>
@@ -679,9 +1015,9 @@ those are really the only hard constraints i can think of. everything else seems
 </div>
 </div>
 
- <div id="outline-container-org43ab550" class="outline-3">
- <h3 id="org43ab550">are naming schemes important enough to spend time on</h3>
- <div class="outline-text-3" id="text-org43ab550">
+ <div id="outline-container-org7588bbc" class="outline-3">
+ <h3 id="org7588bbc">are naming schemes important enough to spend time on</h3>
+ <div class="outline-text-3" id="text-org7588bbc">
  <p>
 hard yes. some of the names in use at my new place are frankly  <i>hilarious</i>. and bad. "aaah, a scan template called 'corp users', what do you suppo - oh, its for scanning production? of course."
 </p>
@@ -700,9 +1036,9 @@ ProductName - Environment - Geolocation - Data
 </div>
 </div>
 
- <div id="outline-container-orgea9cd38" class="outline-3">
- <h3 id="orgea9cd38">a note on scan schedules</h3>
- <div class="outline-text-3" id="text-orgea9cd38">
+ <div id="outline-container-orgafb31a1" class="outline-3">
+ <h3 id="orgafb31a1">a note on scan schedules</h3>
+ <div class="outline-text-3" id="text-orgafb31a1">
  <p>
 think about what a particular scan is trying to accomplish. if the goal of a scan is to get data from  <i>corporate servers</i> then a typical overnight maintenance window makes sense. 
 </p>
@@ -720,9 +1056,9 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>
 
 
- <div id="outline-container-orgdbd63e8" class="outline-3">
- <h3 id="orgdbd63e8">what other things should I check on</h3>
- <div class="outline-text-3" id="text-orgdbd63e8">
+ <div id="outline-container-orgcf5194d" class="outline-3">
+ <h3 id="orgcf5194d">what other things should I check on</h3>
+ <div class="outline-text-3" id="text-orgcf5194d">
  <ul class="org-ul"> <li>is the OS backing the scanning app still getting updates? a lot of people fire and forget scan setups so make sure you're not running shit off some idiots ubuntu 12 install.</li>
  <li>how much of the infrastructure are we actually scanning? do have blind spots?
  <ul class="org-ul"> <li>if there isn't an ipam then this will be reaaaaal hard to figure out, but its very important.</li>
@@ -737,15 +1073,15 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>]]></description>
   <link>https://me.jowj.net/posts/tvm-at-a-new-company.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/tvm-at-a-new-company.html</guid>
-  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
 </item>
 <item>
   <author>josiah</author>
   <title>vcards</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org7e2f250" class="outline-2">
- <h2 id="org7e2f250">computer recovery after a death in the family</h2>
- <div class="outline-text-2" id="text-org7e2f250">
+ <div id="outline-container-org9109998" class="outline-2">
+ <h2 id="org9109998">computer recovery after a death in the family</h2>
+ <div class="outline-text-2" id="text-org9109998">
  <p>
 this past week my dad and I helped my grandmother with a few Computer Things. my grandfather died at the end of last year and the process of getting "Computer Things" to a usable state for my grandmother was pretty rough.
 </p>
@@ -755,9 +1091,9 @@ One of the things that was unexpectedly frustrating was transferring stuff (phot
 </p>
 </div>
 
- <div id="outline-container-orgbad47fa" class="outline-3">
- <h3 id="orgbad47fa">outline</h3>
- <div class="outline-text-3" id="text-orgbad47fa">
+ <div id="outline-container-orgc0a2b8b" class="outline-3">
+ <h3 id="orgc0a2b8b">outline</h3>
+ <div class="outline-text-3" id="text-orgc0a2b8b">
  <p>
 normally, transferring contacts from one persons icloud to another's is pretty straight forward (there's an export button on icloud.com), but if you can't succesfully auth to icloud it gets a lot trickier. there's probably a few ways to do this, but the tack i ended up taking was:
 </p>
@@ -771,9 +1107,9 @@ That is the bones of what happened, but the details kept screwing me over.
 </div>
 </div>
 
- <div id="outline-container-org1c6b001" class="outline-3">
- <h3 id="org1c6b001">specifics</h3>
- <div class="outline-text-3" id="text-org1c6b001">
+ <div id="outline-container-orgc9f59fd" class="outline-3">
+ <h3 id="orgc9f59fd">specifics</h3>
+ <div class="outline-text-3" id="text-orgc9f59fd">
  <p>
 first, outlook 2010 contact exports by default come out in an outlook specific format (.msg) that cannot be imported into icloud. ok well fine, surely there's a straight forward way to deal with that. 
 </p>
@@ -862,9 +1198,9 @@ my best guess is that this is just some Fancy Colour from outlook specifically, 
 </div>
 </div>
 
- <div id="outline-container-org876b2d2" class="outline-3">
- <h3 id="org876b2d2">what should i do when i die</h3>
- <div class="outline-text-3" id="text-org876b2d2">
+ <div id="outline-container-org48bac1b" class="outline-3">
+ <h3 id="org48bac1b">what should i do when i die</h3>
+ <div class="outline-text-3" id="text-org48bac1b">
  <p>
 the lesson i learned during this process is:
 </p>
@@ -877,7 +1213,7 @@ the lesson i learned during this process is:
 </div>]]></description>
   <link>https://me.jowj.net/posts/vcards.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/vcards.html</guid>
-  <pubDate>Sun, 12 Apr 2020 08:36:00 -0500</pubDate>
+  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
 </item>
 </channel>
 </rss>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-04-12 Sun 08:36 -->
+<!-- 2020-04-12 Sun 09:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>tvm at a new company</title>
@@ -70,29 +70,29 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org348067d">no new problems</a>
+<li><a href="#org90e308c">no new problems</a>
 <ul>
-<li><a href="#orgb2a91da">using an existing scanning install or starting over</a></li>
-<li><a href="#org43ab550">are naming schemes important enough to spend time on</a></li>
-<li><a href="#orgea9cd38">a note on scan schedules</a></li>
-<li><a href="#orgdbd63e8">what other things should I check on</a></li>
+<li><a href="#org99017bd">using an existing scanning install or starting over</a></li>
+<li><a href="#org7588bbc">are naming schemes important enough to spend time on</a></li>
+<li><a href="#orgafb31a1">a note on scan schedules</a></li>
+<li><a href="#orgcf5194d">what other things should I check on</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org348067d" class="outline-2">
-<h2 id="org348067d">no new problems</h2>
-<div class="outline-text-2" id="text-org348067d">
+<div id="outline-container-org90e308c" class="outline-2">
+<h2 id="org90e308c">no new problems</h2>
+<div class="outline-text-2" id="text-org90e308c">
 <p>
 i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.
 </p>
 </div>
 
-<div id="outline-container-orgb2a91da" class="outline-3">
-<h3 id="orgb2a91da">using an existing scanning install or starting over</h3>
-<div class="outline-text-3" id="text-orgb2a91da">
+<div id="outline-container-org99017bd" class="outline-3">
+<h3 id="org99017bd">using an existing scanning install or starting over</h3>
+<div class="outline-text-3" id="text-org99017bd">
 <p>
 it may be reasonable to nuke an install if:
 </p>
@@ -115,9 +115,9 @@ those are really the only hard constraints i can think of. everything else seems
 </div>
 </div>
 
-<div id="outline-container-org43ab550" class="outline-3">
-<h3 id="org43ab550">are naming schemes important enough to spend time on</h3>
-<div class="outline-text-3" id="text-org43ab550">
+<div id="outline-container-org7588bbc" class="outline-3">
+<h3 id="org7588bbc">are naming schemes important enough to spend time on</h3>
+<div class="outline-text-3" id="text-org7588bbc">
 <p>
 hard yes. some of the names in use at my new place are frankly <i>hilarious</i>. and bad. "aaah, a scan template called 'corp users', what do you suppo - oh, its for scanning production? of course."
 </p>
@@ -136,9 +136,9 @@ ProductName - Environment - Geolocation - Data
 </div>
 </div>
 
-<div id="outline-container-orgea9cd38" class="outline-3">
-<h3 id="orgea9cd38">a note on scan schedules</h3>
-<div class="outline-text-3" id="text-orgea9cd38">
+<div id="outline-container-orgafb31a1" class="outline-3">
+<h3 id="orgafb31a1">a note on scan schedules</h3>
+<div class="outline-text-3" id="text-orgafb31a1">
 <p>
 think about what a particular scan is trying to accomplish. if the goal of a scan is to get data from <i>corporate servers</i> then a typical overnight maintenance window makes sense. 
 </p>
@@ -159,9 +159,9 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>
 
 
-<div id="outline-container-orgdbd63e8" class="outline-3">
-<h3 id="orgdbd63e8">what other things should I check on</h3>
-<div class="outline-text-3" id="text-orgdbd63e8">
+<div id="outline-container-orgcf5194d" class="outline-3">
+<h3 id="orgcf5194d">what other things should I check on</h3>
+<div class="outline-text-3" id="text-orgcf5194d">
 <ul class="org-ul">
 <li>is the OS backing the scanning app still getting updates? a lot of people fire and forget scan setups so make sure you're not running shit off some idiots ubuntu 12 install.</li>
 <li>how much of the infrastructure are we actually scanning? do have blind spots?
