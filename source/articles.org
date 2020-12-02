@@ -1,10 +1,10 @@
 #+TITLE: a list of stuff i wrote
 
-- [[file:blogging-on-ghpages-with-orgmode.org][blogging on github:pages with orgmode]]
-- [[file:moving-from-1pass-to-bitwarden.org][Moving from 1pass to bitwarden]]
-- [[file:api-prototyping.org][rest api prototyping]]
-- [[file:tvm-at-a-new-company.org][tvm at a new company]]
-- [[file:emacs-on-catalina.org][emacs on catalina]]
-- [[file:vcards.org][vcards]]
-- [[file:css.org][css test]]
 - [[file:pynit.org][pynit]]
+- [[file:blogging-on-ghpages-with-orgmode.org][blogging on github:pages with orgmode]]
+- [[file:api-prototyping.org][rest api prototyping]]
+- [[file:vcards.org][vcards]]
+- [[file:emacs-on-catalina.org][emacs on catalina]]
+- [[file:tvm-at-a-new-company.org][tvm at a new company]]
+- [[file:css.org][css test]]
+- [[file:moving-from-1pass-to-bitwarden.org][Moving from 1pass to bitwarden]]

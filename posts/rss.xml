@@ -6,14 +6,132 @@
 <generator>Emacs webfeeder.el</generator>
 <link>https://me.jowj.net/posts/</link>
 <atom:link href="https://me.jowj.net/posts/rss.xml" rel="self" type="application/rss+xml"/>
-<lastBuildDate>Sun, 12 Apr 2020 09:02:52 -0500</lastBuildDate>
+<lastBuildDate>Tue, 01 Dec 2020 17:00:10 -0600</lastBuildDate>
 <item>
-  <author>josiah</author>
+  <title>pynit</title>
+  <description><![CDATA[<div id="content">
+ <div id="outline-container-org81aa799" class="outline-2">
+ <h2 id="org81aa799">what is this</h2>
+ <div class="outline-text-2" id="text-org81aa799">
+ <p>
+pynit is a personal archival script that relies on  <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it  <a href="https://github.com/jowj/pynit">here</a>.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgbc82620" class="outline-2">
+ <h2 id="orgbc82620">why i made it</h2>
+ <div class="outline-text-2" id="text-orgbc82620">
+ <p>
+i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
+</p>
+
+ <ul class="org-ul"> <li>fashion</li>
+ <li>emacs / org-mode</li>
+ <li>powershell</li>
+ <li>homelabs</li>
+ <li>secops</li>
+</ul> <p>
+my typical workflow for seeing a piece of content that was useful looked something like:
+</p>
+
+ <ul class="org-ul"> <li>view content</li>
+ <li>peruse comments (usually, the most useful part of the reddit entry)</li>
+ <li>find something that i want to revist</li>
+ <li>save it for later inside of reddit</li>
+ <li>forget about it forever, maybe revisit it within 3 months if i'm very bored</li>
+ <li>in the interim, many of the comments are deleted, links don't work, parent URL points to a dead webserver</li>
+</ul> <p>
+this is obviously not ideal. pynit helps me with about half of those problems. specifically, because i pay for `pinboard`'s archiving service, i can preserve the context in the comment section of the reddit entry. links may still be broken, but i'm perfectly fine with using archive.org for viewing the links later if i need to. as i mentioned, comments end up being the most useful thing to me most of the time.
+</p>
+
+ <p>
+it should be noted that `pinboard` can be used to archive the parent URL context as well, but i opted not to do that in order to preserve some semblance of readability in my `pinboard` feed.
+</p>
+
+ <p>
+comments are also possible to be preserved through things resavr, ceddit, removeddit, etc. these type of sites go down regularly and are not very reliable in my experience (although resavr looks promising, if limited. it only archives comments that are deleted that are > 1000 characters). 
+</p>
+
+ <p>
+now whenever i want to revisit a particular item i have all the comments preserved via pinboard, and URLs can be usable (most of the time) through archive.org.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org1765c62" class="outline-2">
+ <h2 id="org1765c62">what I learned while i made this</h2>
+ <div class="outline-text-2" id="text-org1765c62">
+ <p>
+i learned a few things that i want to write up here, all related to python or working with rest apis:
+</p>
+</div>
+
+ <div id="outline-container-orgbe6dfdd" class="outline-3">
+ <h3 id="orgbe6dfdd">python</h3>
+ <div class="outline-text-3" id="text-orgbe6dfdd">
+ <p>
+i learned about  <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through  <a href="https://twitter.com/mrled">@mrled</a>and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-python"> <span style="color: #598249;">import</span> pysnooper
+
+ <span style="color: #598249;">@pysnooper.snoop</span>()
+ <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
+     <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
+     <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
+
+     <span style="color: #598249;">return</span>(var1 + var2)
+
+ <span style="color: #598249;">print</span>(my_function())
+
+</pre>
+</div>
+
+ <p>
+this would return:
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-python">19:54:53.048881 call         4  <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
+19:54:53.049021 line         5      <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
+New var:.......  <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
+19:54:53.049094 line         6      <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
+New var:.......  <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
+19:54:53.049155 line         8      <span style="color: #598249;">return</span>(var1 + var2)
+19:54:53.049197  <span style="color: #598249;">return</span>       8      <span style="color: #598249;">return</span>(var1 + var2)
+Return value:..  <span style="color: #15968D;">'thing1thing2'</span>
+thing1thing2
+</pre>
+</div>
+
+ <p>
+this allowed me to simple add a single line to an exist function  <i>without modifying the function itself at all</i> and make sure I was actually doing what I thought I was doing. this was huge for letting me sanity check my work.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgdeebed5" class="outline-3">
+ <h3 id="orgdeebed5">rest apis</h3>
+ <div class="outline-text-3" id="text-orgdeebed5">
+ <p>
+a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is  <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the  <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
+</p>
+</div>
+</div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/pynit.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/pynit.html</guid>
+  <pubDate>Sat, 21 Nov 2020 22:01:00 -0600</pubDate>
+</item>
+<item>
   <title>rest api prototyping</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org860bf53" class="outline-2">
- <h2 id="org860bf53">the problem</h2>
- <div class="outline-text-2" id="text-org860bf53">
+ <div id="outline-container-orgc4759c1" class="outline-2">
+ <h2 id="orgc4759c1">the problem</h2>
+ <div class="outline-text-2" id="text-orgc4759c1">
  <p>
 lately i've been working on a lot of web API glue projects. these are usually simple things like "service1 needs to send messages to service2 in a particular format, with a particular set of priviledges." Sometimes its more complicated, but that's usually what it breaks down to.
 </p>
@@ -29,9 +147,9 @@ this has worked great for a lot of things, but falls short when you have to gene
 </div>
 </div>
 
- <div id="outline-container-orgcf3828b" class="outline-2">
- <h2 id="orgcf3828b">Authentication and Authorization in Cylance</h2>
- <div class="outline-text-2" id="text-orgcf3828b">
+ <div id="outline-container-org9f4d1b5" class="outline-2">
+ <h2 id="org9f4d1b5">Authentication and Authorization in Cylance</h2>
+ <div class="outline-text-2" id="text-org9f4d1b5">
  <p>
 Cylance relies on something called JWT (JSON Web Token). There's an RFC for this here:  <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>. This is not possible to generate within `restclient`, so we do it in python.
 </p>
@@ -50,9 +168,9 @@ We'll add a  <code>#+name:</code> argument to the top of the  <code>org-mode</co
 </p>
 </div>
 
- <div id="outline-container-orge3ccc44" class="outline-3">
- <h3 id="orge3ccc44">python code</h3>
- <div class="outline-text-3" id="text-orge3ccc44">
+ <div id="outline-container-org774b39f" class="outline-3">
+ <h3 id="org774b39f">python code</h3>
+ <div class="outline-text-3" id="text-org774b39f">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> uuid
  <span style="color: #598249;">import</span> json
@@ -105,9 +223,9 @@ this will generate a token and attach it to the name space  <code>jwt_token</cod
 </div>
 
 
- <div id="outline-container-orged201ce" class="outline-3">
- <h3 id="orged201ce">restclient example</h3>
- <div class="outline-text-3" id="text-orged201ce">
+ <div id="outline-container-org5a0b0e5" class="outline-3">
+ <h3 id="org5a0b0e5">restclient example</h3>
+ <div class="outline-text-3" id="text-org5a0b0e5">
  <p>
 once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance's API through  <code>restclient.el</code> going forward! in order to pass the output from the registered name we used before,  <code>jwt_token</code>, we add an argument to the  <code>BEGIN_SRC</code> header, like  <code>:var x=jwt_token</code>. Then, we can set a  <code>restclient</code> local variable equal to the  <code>org-babel</code> super-variable and use it within the rest of the src block, as seen below:
 </p>
@@ -168,9 +286,9 @@ this will return my user (again, i've disturbed the output but it is roughly wha
 </div>
 </div>
 
- <div id="outline-container-orge55f1b4" class="outline-2">
- <h2 id="orge55f1b4">Troubleshooting python and org-babel</h2>
- <div class="outline-text-2" id="text-orge55f1b4">
+ <div id="outline-container-orgdcb4de5" class="outline-2">
+ <h2 id="orgdcb4de5">Troubleshooting python and org-babel</h2>
+ <div class="outline-text-2" id="text-orgdcb4de5">
  <p>
 I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn't find my python binary on macOS. to fix this i manually set it in my  <code>init.el</code> file, which worked for a long time.
 </p>
@@ -210,24 +328,23 @@ this block just proved that i could in fact import the right modules that were o
 </div>]]></description>
   <link>https://me.jowj.net/posts/api-prototyping.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/api-prototyping.html</guid>
-  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
+  <pubDate>Sat, 21 Nov 2020 21:22:00 -0600</pubDate>
 </item>
 <item>
-  <author>josiah</author>
   <title>blogging on github:pages with orgmode</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org822ba3d" class="outline-2">
- <h2 id="org822ba3d">what i did</h2>
- <div class="outline-text-2" id="text-org822ba3d">
+ <div id="outline-container-org2a44f6c" class="outline-2">
+ <h2 id="org2a44f6c">what i did</h2>
+ <div class="outline-text-2" id="text-org2a44f6c">
  <p>
 i've just moved from using markdown and jekyll to generate a static website on github pages to using org-mode and org-publish to generate static html files, also on github pages.
 </p>
 </div>
 </div>
 
- <div id="outline-container-orgabfa7f2" class="outline-2">
- <h2 id="orgabfa7f2">why did i do this</h2>
- <div class="outline-text-2" id="text-orgabfa7f2">
+ <div id="outline-container-orgbf0ad62" class="outline-2">
+ <h2 id="orgbf0ad62">why did i do this</h2>
+ <div class="outline-text-2" id="text-orgbf0ad62">
  <p>
 my setup has been a pain - i do most of my writing and thinking in  <a href="https://orgmode.org/">org mode</a>, but to post stuff on  <a href="https://me.jowj.net/">https://me.jowj.net/</a> i have to convert that to markdown (relatively easy, due to a package called  <a href="https://github.com/emacsmirror/org/blob/master/lisp/ox-md.el">ox-md</a>) and use  <a href="https://jekyllrb.com/">jekyll</a> to convert md to html and handle the generation of the site. the problem with jekyll is that it  <i>sucks</i>. its a tool based on the ruby ecosystem, and since I actually publish my stuff so infrequently every time i use it i have to update something about my ruby environment. this adds probably 10-20 minutes while I remember / look up which commands i'm supposed to run and why, and figuring out what things are actually broken this time.
 </p>
@@ -249,18 +366,18 @@ i also just thought it would be cool to do everything within emacs (because my b
 </div>
 </div>
 
- <div id="outline-container-orgcb89913" class="outline-2">
- <h2 id="orgcb89913">how it works</h2>
- <div class="outline-text-2" id="text-orgcb89913">
+ <div id="outline-container-org979614e" class="outline-2">
+ <h2 id="org979614e">how it works</h2>
+ <div class="outline-text-2" id="text-org979614e">
  <p>
 most of the configuration and automation is in two files:  <a href="https://github.com/jowj/jowj.github.io/blob/master/publish.el">publish.el</a> and  <a href="https://github.com/jowj/jowj.github.io/blob/master/Makefile">Makefile</a> (raw links, also pasted below). publish.el has by far the most stuff in it, Makefile is just stupid simple automation.
 </p>
 </div>
- <div id="outline-container-org05cd43a" class="outline-3">
- <h3 id="org05cd43a">publish.el</h3>
- <div class="outline-text-3" id="text-org05cd43a">
+ <div id="outline-container-org4bf7377" class="outline-3">
+ <h3 id="org4bf7377">publish.el</h3>
+ <div class="outline-text-3" id="text-org4bf7377">
  <p>
-i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the  <a href="#org981ef61">credits & references</a> entry.
+i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the  <a href="#orgc3d98a0">credits & references</a> entry.
 </p>
 
  <p>
@@ -271,7 +388,7 @@ one of the ways I differed from some of the other configurations I referenced wa
 since i won't be using my personal emacs config, i'll have to setup package management here as well:
 </p>
  <div class="org-src-container">
- <pre class="src src-elisp" id="org262595a"> <span style="color: #5e6263;">;;;; </span> <span style="color: #5e6263;">package setup</span>
+ <pre class="src src-elisp" id="org6f275bd"> <span style="color: #5e6263;">;;;; </span> <span style="color: #5e6263;">package setup</span>
 ( <span style="color: #598249;">require</span> ' <span style="color: #15968D;">ox-publish</span>)
 (package-initialize)
 
@@ -306,7 +423,7 @@ the actual solution ended up being so simple i'm mad its not in any of the docum
 
  <ul class="org-ul"> <li>"fix syntax highlighting when using custom css in emacs org mode by defining font-locks manually."</li>
 </ul> <div class="org-src-container">
- <pre class="src src-elisp" id="org4307acb"> <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
+ <pre class="src src-elisp" id="org78b7372"> <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
  <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">reference this guy's setup, he's a king:</span>
  <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">https://gitlab.com/jgkamat/jgkamat.gitlab.io/-/blob/master/jgkamat-website.el</span>
 ( <span style="color: #598249;">when</span> noninteractive
@@ -388,7 +505,7 @@ ok so that's all the like 'setup' type shit out of the way. after that i ran int
 </p>
 
  <div class="org-src-container">
- <pre class="src src-elisp" id="org6109833">( <span style="color: #598249;">setq</span> org-publish-project-alist
+ <pre class="src src-elisp" id="orgd4de980">( <span style="color: #598249;">setq</span> org-publish-project-alist
       (list
        (list  <span style="color: #15968D;">"site-org"</span>
               <span style="color: #598249;">:base-directory</span>  <span style="color: #15968D;">"./source"</span>
@@ -491,9 +608,9 @@ its important to note that i wrap org-publish-all and the webfeeder lines with m
 </div>
 </div>
 </div>
- <div id="outline-container-org6b5242a" class="outline-3">
- <h3 id="org6b5242a">Makefile</h3>
- <div class="outline-text-3" id="text-org6b5242a">
+ <div id="outline-container-org29256d7" class="outline-3">
+ <h3 id="org29256d7">Makefile</h3>
+ <div class="outline-text-3" id="text-org29256d7">
  <p>
 super easy makefile lol. 
 </p>
@@ -539,9 +656,9 @@ if you're unfamiliar with make you can still use this without learning  <i>any</
 </div>
 </div>
 </div>
- <div id="outline-container-org981ef61" class="outline-2">
- <h2 id="org981ef61">credits & references</h2>
- <div class="outline-text-2" id="text-org981ef61">
+ <div id="outline-container-orgc3d98a0" class="outline-2">
+ <h2 id="orgc3d98a0">credits & references</h2>
+ <div class="outline-text-2" id="text-orgc3d98a0">
  <p>
 there are a TON of places to read about doing this sort of thing. two folks in particular were really useful to me:
 </p>
@@ -562,15 +679,14 @@ ambrevar actually wrote the webfeeder.el solution to the idiot org rss problem. 
 </div>]]></description>
   <link>https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html</guid>
-  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
+  <pubDate>Sat, 21 Nov 2020 21:22:00 -0600</pubDate>
 </item>
 <item>
-  <author>josiah</author>
   <title>css test</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org181f57e" class="outline-2">
- <h2 id="org181f57e">this is the first header</h2>
- <div class="outline-text-2" id="text-org181f57e">
+ <div id="outline-container-orgbc18f97" class="outline-2">
+ <h2 id="orgbc18f97">this is the first header</h2>
+ <div class="outline-text-2" id="text-orgbc18f97">
  <p>
 this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
 </p>
@@ -584,16 +700,16 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </ol></div>
 </div>
 
- <div id="outline-container-org6c64b73" class="outline-2">
- <h2 id="org6c64b73">below is a picture embed with caption</h2>
- <div class="outline-text-2" id="text-org6c64b73">
+ <div id="outline-container-org9a099a9" class="outline-2">
+ <h2 id="org9a099a9">below is a picture embed with caption</h2>
+ <div class="outline-text-2" id="text-org9a099a9">
 
- <figure id="org9f66fe1"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
+ <figure id="org8d7c96a"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
 </div>
 
- <div id="outline-container-orgfb35293" class="outline-2">
- <h2 id="orgfb35293">here is a python embd</h2>
- <div class="outline-text-2" id="text-orgfb35293">
+ <div id="outline-container-org9f3ddaf" class="outline-2">
+ <h2 id="org9f3ddaf">here is a python embd</h2>
+ <div class="outline-text-2" id="text-org9f3ddaf">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> slack
 
@@ -641,9 +757,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>
 </div>
 
- <div id="outline-container-orge4bd511" class="outline-2">
- <h2 id="orge4bd511">here is a listp embed</h2>
- <div class="outline-text-2" id="text-orge4bd511">
+ <div id="outline-container-orgaf268a1" class="outline-2">
+ <h2 id="orgaf268a1">here is a listp embed</h2>
+ <div class="outline-text-2" id="text-orgaf268a1">
  <div class="org-src-container">
  <pre class="src src-elisp">( <span style="color: #598249;">let</span> ((proj-base (file-name-directory load-file-name)))
   ( <span style="color: #598249;">setq</span> org-publish-project-alist
@@ -656,9 +772,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>
 </div>
 </div>
- <div id="outline-container-org306d224" class="outline-2">
- <h2 id="org306d224">see links styling</h2>
- <div class="outline-text-2" id="text-org306d224">
+ <div id="outline-container-org9b934cb" class="outline-2">
+ <h2 id="org9b934cb">see links styling</h2>
+ <div class="outline-text-2" id="text-org9b934cb">
  <p>
  <a href="https://me.jowj.net">https://me.jowj.net</a> looks like this
 </p>
@@ -667,15 +783,14 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
 </div>]]></description>
   <link>https://me.jowj.net/posts/css.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
-  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
+  <pubDate>Sat, 21 Nov 2020 21:22:00 -0600</pubDate>
 </item>
 <item>
-  <author>josiah</author>
   <title>emacs on catalina</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orgf81eee0" class="outline-2">
- <h2 id="orgf81eee0">early days</h2>
- <div class="outline-text-2" id="text-orgf81eee0">
+ <div id="outline-container-org980cb63" class="outline-2">
+ <h2 id="org980cb63">early days</h2>
+ <div class="outline-text-2" id="text-org980cb63">
  <p>
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
 </p>
@@ -690,9 +805,9 @@ this basically says to run this lisp to add your proper emacs path to the proper
 </div>
 </div>
 
- <div id="outline-container-orga5f7ddc" class="outline-2">
- <h2 id="orga5f7ddc">partial fix</h2>
- <div class="outline-text-2" id="text-orga5f7ddc">
+ <div id="outline-container-orga5303ce" class="outline-2">
+ <h2 id="orga5303ce">partial fix</h2>
+ <div class="outline-text-2" id="text-orga5303ce">
  <p>
 later that week, a few other people said you needed to whitelist  <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
 </p>
@@ -703,9 +818,9 @@ since I could at least launch and navigate around with my then-current janky set
 </div>
 </div>
 
- <div id="outline-container-orgb8a7ca6" class="outline-2">
- <h2 id="orgb8a7ca6">jankiest fix</h2>
- <div class="outline-text-2" id="text-orgb8a7ca6">
+ <div id="outline-container-org7b10b55" class="outline-2">
+ <h2 id="org7b10b55">jankiest fix</h2>
+ <div class="outline-text-2" id="text-org7b10b55">
  <p>
 he gives a good breakdown as to why this is needed  <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
 </p>
@@ -728,15 +843,14 @@ this is not like, super great. its makes your configuration brittle and it will 
 </div>]]></description>
   <link>https://me.jowj.net/posts/emacs-on-catalina.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/emacs-on-catalina.html</guid>
-  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
+  <pubDate>Sat, 21 Nov 2020 21:22:00 -0600</pubDate>
 </item>
 <item>
-  <author>josiah</author>
   <title>Moving from 1pass to bitwarden</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org66fb6ac" class="outline-2">
- <h2 id="org66fb6ac">background</h2>
- <div class="outline-text-2" id="text-org66fb6ac">
+ <div id="outline-container-org6cea658" class="outline-2">
+ <h2 id="org6cea658">background</h2>
+ <div class="outline-text-2" id="text-org6cea658">
  <p>
 I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
 </p>
@@ -760,9 +874,9 @@ because of these issues i started looking for alternatives
 </p>
 </div>
 </div>
- <div id="outline-container-orgc02e311" class="outline-2">
- <h2 id="orgc02e311">bitwarden</h2>
- <div class="outline-text-2" id="text-orgc02e311">
+ <div id="outline-container-org53351a3" class="outline-2">
+ <h2 id="org53351a3">bitwarden</h2>
+ <div class="outline-text-2" id="text-org53351a3">
  <p>
 since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
 </p>
@@ -778,9 +892,9 @@ i've been living on bitwarden for ~1 week at this point and haven't felt any rea
 </div>
 </div>
 
- <div id="outline-container-org0a991d0" class="outline-2">
- <h2 id="org0a991d0">the bad</h2>
- <div class="outline-text-2" id="text-org0a991d0">
+ <div id="outline-container-org37f408f" class="outline-2">
+ <h2 id="org37f408f">the bad</h2>
+ <div class="outline-text-2" id="text-org37f408f">
  <p>
 bad news first. 
 </p>
@@ -794,9 +908,9 @@ bad news first.
 </ol></div>
 </div>
 
- <div id="outline-container-orgc21ff3a" class="outline-2">
- <h2 id="orgc21ff3a">totp issue specifics</h2>
- <div class="outline-text-2" id="text-orgc21ff3a">
+ <div id="outline-container-org8cf25bb" class="outline-2">
+ <h2 id="org8cf25bb">totp issue specifics</h2>
+ <div class="outline-text-2" id="text-org8cf25bb">
  <p>
 bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
 </p>
@@ -816,9 +930,9 @@ The desktop apps, being electron, got cached without showing the TOTP codes; sup
 </div>
 </div>
 
- <div id="outline-container-org21b180a" class="outline-2">
- <h2 id="org21b180a">the cool</h2>
- <div class="outline-text-2" id="text-org21b180a">
+ <div id="outline-container-orgcc844fd" class="outline-2">
+ <h2 id="orgcc844fd">the cool</h2>
+ <div class="outline-text-2" id="text-orgcc844fd">
  <p>
 On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
 </p>
@@ -847,9 +961,9 @@ read about the bitwarden <sub>rs</sub> project here:
 </div>
 </div>
 
- <div id="outline-container-org6df0a5c" class="outline-2">
- <h2 id="org6df0a5c">next steps</h2>
- <div class="outline-text-2" id="text-org6df0a5c">
+ <div id="outline-container-orgddf6772" class="outline-2">
+ <h2 id="orgddf6772">next steps</h2>
+ <div class="outline-text-2" id="text-orgddf6772">
  <p>
 i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
 </p>
@@ -862,143 +976,22 @@ i haven't figured out how i could do that, but it seems like it should be pretty
 </div>]]></description>
   <link>https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</guid>
-  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
+  <pubDate>Sat, 21 Nov 2020 21:22:00 -0600</pubDate>
 </item>
 <item>
-  <author>josiah</author>
-  <title>pynit</title>
-  <description><![CDATA[<div id="content">
- <div id="outline-container-org954dd26" class="outline-2">
- <h2 id="org954dd26">what is this</h2>
- <div class="outline-text-2" id="text-org954dd26">
- <p>
-pynit is a personal archival script that relies on  <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it  <a href="https://github.com/jowj/pynit">here</a>.
-</p>
-</div>
-</div>
-
- <div id="outline-container-orgd557660" class="outline-2">
- <h2 id="orgd557660">why i made it</h2>
- <div class="outline-text-2" id="text-orgd557660">
- <p>
-i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
-</p>
-
- <ul class="org-ul"> <li>fashion</li>
- <li>emacs / org-mode</li>
- <li>powershell</li>
- <li>homelabs</li>
- <li>secops</li>
-</ul> <p>
-my typical workflow for seeing a piece of content that was useful looked something like:
-</p>
-
- <ul class="org-ul"> <li>view content</li>
- <li>peruse comments (usually, the most useful part of the reddit entry)</li>
- <li>find something that i want to revist</li>
- <li>save it for later inside of reddit</li>
- <li>forget about it forever, maybe revisit it within 3 months if i'm very bored</li>
- <li>in the interim, many of the comments are deleted, links don't work, parent URL points to a dead webserver</li>
-</ul> <p>
-this is obviously not ideal. pynit helps me with about half of those problems. specifically, because i pay for `pinboard`'s archiving service, i can preserve the context in the comment section of the reddit entry. links may still be broken, but i'm perfectly fine with using archive.org for viewing the links later if i need to. as i mentioned, comments end up being the most useful thing to me most of the time.
-</p>
-
- <p>
-it should be noted that `pinboard` can be used to archive the parent URL context as well, but i opted not to do that in order to preserve some semblance of readability in my `pinboard` feed.
-</p>
-
- <p>
-comments are also possible to be preserved through things resavr, ceddit, removeddit, etc. these type of sites go down regularly and are not very reliable in my experience (although resavr looks promising, if limited. it only archives comments that are deleted that are > 1000 characters). 
-</p>
-
- <p>
-now whenever i want to revisit a particular item i have all the comments preserved via pinboard, and URLs can be usable (most of the time) through archive.org.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org941f709" class="outline-2">
- <h2 id="org941f709">what I learned while i made this</h2>
- <div class="outline-text-2" id="text-org941f709">
- <p>
-i learned a few things that i want to write up here, all related to python or working with rest apis:
-</p>
-</div>
-
- <div id="outline-container-orgef408ab" class="outline-3">
- <h3 id="orgef408ab">python</h3>
- <div class="outline-text-3" id="text-orgef408ab">
- <p>
-i learned about  <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through  <a href="https://twitter.com/mrled">@mrled</a> and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
-</p>
-
- <div class="org-src-container">
- <pre class="src src-python"> <span style="color: #598249;">import</span> pysnooper
-
- <span style="color: #598249;">@pysnooper.snoop</span>()
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
-     <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-     <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
-
-     <span style="color: #598249;">return</span>(var1 + var2)
-
- <span style="color: #598249;">print</span>(my_function())
-
-</pre>
-</div>
-
- <p>
-this would return:
-</p>
-
- <div class="org-src-container">
- <pre class="src src-python">19:54:53.048881 call         4  <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
-19:54:53.049021 line         5      <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-New var:.......  <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-19:54:53.049094 line         6      <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
-New var:.......  <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
-19:54:53.049155 line         8      <span style="color: #598249;">return</span>(var1 + var2)
-19:54:53.049197  <span style="color: #598249;">return</span>       8      <span style="color: #598249;">return</span>(var1 + var2)
-Return value:..  <span style="color: #15968D;">'thing1thing2'</span>
-thing1thing2
-</pre>
-</div>
-
- <p>
-this allowed me to simple add a single line to an exist function  <i>without modifying the function itself at all</i> and make sure I was actually doing what I thought I was doing. this was huge for letting me sanity check my work.
-</p>
-</div>
-</div>
-
- <div id="outline-container-orgc8ab914" class="outline-3">
- <h3 id="orgc8ab914">rest apis</h3>
- <div class="outline-text-3" id="text-orgc8ab914">
- <p>
-a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is  <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the  <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
-</p>
-</div>
-</div>
-</div>
-</div>]]></description>
-  <link>https://me.jowj.net/posts/pynit.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/pynit.html</guid>
-  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
-</item>
-<item>
-  <author>josiah</author>
   <title>tvm at a new company</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org90e308c" class="outline-2">
- <h2 id="org90e308c">no new problems</h2>
- <div class="outline-text-2" id="text-org90e308c">
+ <div id="outline-container-org7a605a6" class="outline-2">
+ <h2 id="org7a605a6">no new problems</h2>
+ <div class="outline-text-2" id="text-org7a605a6">
  <p>
 i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.
 </p>
 </div>
 
- <div id="outline-container-org99017bd" class="outline-3">
- <h3 id="org99017bd">using an existing scanning install or starting over</h3>
- <div class="outline-text-3" id="text-org99017bd">
+ <div id="outline-container-org2b6c00a" class="outline-3">
+ <h3 id="org2b6c00a">using an existing scanning install or starting over</h3>
+ <div class="outline-text-3" id="text-org2b6c00a">
  <p>
 it may be reasonable to nuke an install if:
 </p>
@@ -1015,9 +1008,9 @@ those are really the only hard constraints i can think of. everything else seems
 </div>
 </div>
 
- <div id="outline-container-org7588bbc" class="outline-3">
- <h3 id="org7588bbc">are naming schemes important enough to spend time on</h3>
- <div class="outline-text-3" id="text-org7588bbc">
+ <div id="outline-container-orgb250713" class="outline-3">
+ <h3 id="orgb250713">are naming schemes important enough to spend time on</h3>
+ <div class="outline-text-3" id="text-orgb250713">
  <p>
 hard yes. some of the names in use at my new place are frankly  <i>hilarious</i>. and bad. "aaah, a scan template called 'corp users', what do you suppo - oh, its for scanning production? of course."
 </p>
@@ -1036,9 +1029,9 @@ ProductName - Environment - Geolocation - Data
 </div>
 </div>
 
- <div id="outline-container-orgafb31a1" class="outline-3">
- <h3 id="orgafb31a1">a note on scan schedules</h3>
- <div class="outline-text-3" id="text-orgafb31a1">
+ <div id="outline-container-orgfa8495b" class="outline-3">
+ <h3 id="orgfa8495b">a note on scan schedules</h3>
+ <div class="outline-text-3" id="text-orgfa8495b">
  <p>
 think about what a particular scan is trying to accomplish. if the goal of a scan is to get data from  <i>corporate servers</i> then a typical overnight maintenance window makes sense. 
 </p>
@@ -1056,9 +1049,9 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>
 
 
- <div id="outline-container-orgcf5194d" class="outline-3">
- <h3 id="orgcf5194d">what other things should I check on</h3>
- <div class="outline-text-3" id="text-orgcf5194d">
+ <div id="outline-container-org7b49c0f" class="outline-3">
+ <h3 id="org7b49c0f">what other things should I check on</h3>
+ <div class="outline-text-3" id="text-org7b49c0f">
  <ul class="org-ul"> <li>is the OS backing the scanning app still getting updates? a lot of people fire and forget scan setups so make sure you're not running shit off some idiots ubuntu 12 install.</li>
  <li>how much of the infrastructure are we actually scanning? do have blind spots?
  <ul class="org-ul"> <li>if there isn't an ipam then this will be reaaaaal hard to figure out, but its very important.</li>
@@ -1073,15 +1066,14 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>]]></description>
   <link>https://me.jowj.net/posts/tvm-at-a-new-company.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/tvm-at-a-new-company.html</guid>
-  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
+  <pubDate>Sat, 21 Nov 2020 21:22:00 -0600</pubDate>
 </item>
 <item>
-  <author>josiah</author>
   <title>vcards</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org9109998" class="outline-2">
- <h2 id="org9109998">computer recovery after a death in the family</h2>
- <div class="outline-text-2" id="text-org9109998">
+ <div id="outline-container-org4678124" class="outline-2">
+ <h2 id="org4678124">computer recovery after a death in the family</h2>
+ <div class="outline-text-2" id="text-org4678124">
  <p>
 this past week my dad and I helped my grandmother with a few Computer Things. my grandfather died at the end of last year and the process of getting "Computer Things" to a usable state for my grandmother was pretty rough.
 </p>
@@ -1091,9 +1083,9 @@ One of the things that was unexpectedly frustrating was transferring stuff (phot
 </p>
 </div>
 
- <div id="outline-container-orgc0a2b8b" class="outline-3">
- <h3 id="orgc0a2b8b">outline</h3>
- <div class="outline-text-3" id="text-orgc0a2b8b">
+ <div id="outline-container-org3c5aa10" class="outline-3">
+ <h3 id="org3c5aa10">outline</h3>
+ <div class="outline-text-3" id="text-org3c5aa10">
  <p>
 normally, transferring contacts from one persons icloud to another's is pretty straight forward (there's an export button on icloud.com), but if you can't succesfully auth to icloud it gets a lot trickier. there's probably a few ways to do this, but the tack i ended up taking was:
 </p>
@@ -1107,9 +1099,9 @@ That is the bones of what happened, but the details kept screwing me over.
 </div>
 </div>
 
- <div id="outline-container-orgc9f59fd" class="outline-3">
- <h3 id="orgc9f59fd">specifics</h3>
- <div class="outline-text-3" id="text-orgc9f59fd">
+ <div id="outline-container-org075e62d" class="outline-3">
+ <h3 id="org075e62d">specifics</h3>
+ <div class="outline-text-3" id="text-org075e62d">
  <p>
 first, outlook 2010 contact exports by default come out in an outlook specific format (.msg) that cannot be imported into icloud. ok well fine, surely there's a straight forward way to deal with that. 
 </p>
@@ -1198,9 +1190,9 @@ my best guess is that this is just some Fancy Colour from outlook specifically, 
 </div>
 </div>
 
- <div id="outline-container-org48bac1b" class="outline-3">
- <h3 id="org48bac1b">what should i do when i die</h3>
- <div class="outline-text-3" id="text-org48bac1b">
+ <div id="outline-container-org48b3139" class="outline-3">
+ <h3 id="org48b3139">what should i do when i die</h3>
+ <div class="outline-text-3" id="text-org48b3139">
  <p>
 the lesson i learned during this process is:
 </p>
@@ -1213,7 +1205,7 @@ the lesson i learned during this process is:
 </div>]]></description>
   <link>https://me.jowj.net/posts/vcards.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/vcards.html</guid>
-  <pubDate>Sun, 12 Apr 2020 09:02:00 -0500</pubDate>
+  <pubDate>Sat, 21 Nov 2020 21:22:00 -0600</pubDate>
 </item>
 </channel>
 </rss>

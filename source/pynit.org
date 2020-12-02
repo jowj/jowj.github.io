@@ -39,7 +39,7 @@ i learned a few things that i want to write up here, all related to python or wo
 
 
 
-i learned about [[https://github.com/cool-RR/PySnooper][pysnoop]] through [[https://twitter.com/mrled][@mrled]] and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
+i learned about [[https://github.com/cool-RR/PySnooper][pysnoop]] through [[https://twitter.com/mrled][@mrled]]and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
 
 #+bind: org-html-htmlize-output-type css
 #+BEGIN_SRC python

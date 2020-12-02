@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-04-12 Sun 09:02 -->
+<!-- 2020-11-21 Sat 21:22 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>rest api prototyping</title>
@@ -13,7 +13,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -70,21 +70,21 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org860bf53">the problem</a></li>
-<li><a href="#orgcf3828b">Authentication and Authorization in Cylance</a>
+<li><a href="#orgc4759c1">the problem</a></li>
+<li><a href="#org9f4d1b5">Authentication and Authorization in Cylance</a>
 <ul>
-<li><a href="#orge3ccc44">python code</a></li>
-<li><a href="#orged201ce">restclient example</a></li>
+<li><a href="#org774b39f">python code</a></li>
+<li><a href="#org5a0b0e5">restclient example</a></li>
 </ul>
 </li>
-<li><a href="#orge55f1b4">Troubleshooting python and org-babel</a></li>
+<li><a href="#orgdcb4de5">Troubleshooting python and org-babel</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org860bf53" class="outline-2">
-<h2 id="org860bf53">the problem</h2>
-<div class="outline-text-2" id="text-org860bf53">
+<div id="outline-container-orgc4759c1" class="outline-2">
+<h2 id="orgc4759c1">the problem</h2>
+<div class="outline-text-2" id="text-orgc4759c1">
 <p>
 lately i've been working on a lot of web API glue projects. these are usually simple things like "service1 needs to send messages to service2 in a particular format, with a particular set of priviledges." Sometimes its more complicated, but that's usually what it breaks down to.
 </p>
@@ -100,9 +100,9 @@ this has worked great for a lot of things, but falls short when you have to gene
 </div>
 </div>
 
-<div id="outline-container-orgcf3828b" class="outline-2">
-<h2 id="orgcf3828b">Authentication and Authorization in Cylance</h2>
-<div class="outline-text-2" id="text-orgcf3828b">
+<div id="outline-container-org9f4d1b5" class="outline-2">
+<h2 id="org9f4d1b5">Authentication and Authorization in Cylance</h2>
+<div class="outline-text-2" id="text-org9f4d1b5">
 <p>
 Cylance relies on something called JWT (JSON Web Token). There's an RFC for this here: <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>. This is not possible to generate within `restclient`, so we do it in python.
 </p>
@@ -121,9 +121,9 @@ We'll add a <code>#+name:</code> argument to the top of the <code>org-mode</code
 </p>
 </div>
 
-<div id="outline-container-orge3ccc44" class="outline-3">
-<h3 id="orge3ccc44">python code</h3>
-<div class="outline-text-3" id="text-orge3ccc44">
+<div id="outline-container-org774b39f" class="outline-3">
+<h3 id="org774b39f">python code</h3>
+<div class="outline-text-3" id="text-org774b39f">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #598249;">import</span> uuid
 <span style="color: #598249;">import</span> json
@@ -176,9 +176,9 @@ this will generate a token and attach it to the name space <code>jwt_token</code
 </div>
 
 
-<div id="outline-container-orged201ce" class="outline-3">
-<h3 id="orged201ce">restclient example</h3>
-<div class="outline-text-3" id="text-orged201ce">
+<div id="outline-container-org5a0b0e5" class="outline-3">
+<h3 id="org5a0b0e5">restclient example</h3>
+<div class="outline-text-3" id="text-org5a0b0e5">
 <p>
 once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance's API through <code>restclient.el</code> going forward! in order to pass the output from the registered name we used before, <code>jwt_token</code>, we add an argument to the <code>BEGIN_SRC</code> header, like <code>:var x=jwt_token</code>. Then, we can set a <code>restclient</code> local variable equal to the <code>org-babel</code> super-variable and use it within the rest of the src block, as seen below:
 </p>
@@ -239,9 +239,9 @@ this will return my user (again, i've disturbed the output but it is roughly wha
 </div>
 </div>
 
-<div id="outline-container-orge55f1b4" class="outline-2">
-<h2 id="orge55f1b4">Troubleshooting python and org-babel</h2>
-<div class="outline-text-2" id="text-orge55f1b4">
+<div id="outline-container-orgdcb4de5" class="outline-2">
+<h2 id="orgdcb4de5">Troubleshooting python and org-babel</h2>
+<div class="outline-text-2" id="text-orgdcb4de5">
 <p>
 I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn't find my python binary on macOS. to fix this i manually set it in my <code>init.el</code> file, which worked for a long time.
 </p>
@@ -280,7 +280,7 @@ this block just proved that i could in fact import the right modules that were o
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p></p>
 </div>
 </body>
 </html>

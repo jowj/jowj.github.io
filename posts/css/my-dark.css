@@ -44,6 +44,7 @@ p, ul, pre, td, th, label {
     font-size: 1em;
     margin-bottom: 0.5em;
     font-family: sans-serif;
+    width: 100%;
 }
 /* Override for source code blocks */
 pre {
@@ -65,7 +66,7 @@ img {
 h1, h2, h3, h4, h5, h6, h7 {
     /* All headers should not be split */
     display: inline-block;
-    width: 100%;
+    width:101%
 }
 
 /*  Simple colors here */
@@ -125,7 +126,7 @@ table {
 
 /* #main { */
 div.outline-2 {
-    max-width: 45em;
+    max-width: 55em;
     /* The lines below are useful if the "main" div isn't available and
 	   div.outline-2 has to be used. */
     position: relative;

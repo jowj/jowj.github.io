@@ -1,5 +1,6 @@
 #+TITLE: personal bullshit
 
-- [[file:2019-04-15-friendsgiving.org][2019 friendsgiving]]
-- [[file:2019-04-15-rad_boys_only.org][a thursday night sometime in 2019]]
+- [[file:rsi.org][rsi]]
 - [[file:2019-04-15-tubbesing_thanksgiving.org][2019 lt-friendsgiving]]
+- [[file:2019-04-15-rad_boys_only.org][a thursday night sometime in 2019]]
+- [[file:2019-04-15-friendsgiving.org][2019 friendsgiving]]
