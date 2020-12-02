@@ -1,5 +1,6 @@
 #+TITLE: index
 #+OPTIONS: num:nil
+#+OPTIONS: toc:nil
 #+AUTHOR: josiah
 * josiah ledbetter
   :PROPERTIES:
