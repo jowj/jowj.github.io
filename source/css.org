@@ -1,4 +1,5 @@
 #+OPTIONS: num:nil
+#+OPTIONS: toc:nil
 #+TITLE: css test
 #+AUTHOR: josiah
 * this is the first header

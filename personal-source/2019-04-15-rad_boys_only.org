@@ -1,5 +1,6 @@
 #+TITLE: a thursday night sometime in 2019 
 #+OPTIONS: num:nil
+#+OPTIONS: toc:nil
 #+AUTHOR: josiah
 
 * rad boys only

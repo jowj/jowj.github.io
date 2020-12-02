@@ -1,4 +1,5 @@
 #+OPTIONS: num:nil
+#+OPTIONS: toc:nil
 #+TITLE: Moving from 1pass to bitwarden
 #+AUTHOR: josiah
  

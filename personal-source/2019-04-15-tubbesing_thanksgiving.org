@@ -1,5 +1,6 @@
 #+TITLE: 2019 lt-friendsgiving
 #+OPTIONS: num:nil
+#+OPTIONS: toc:nil
 #+AUTHOR: josiah
 
 * seattle
