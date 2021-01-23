@@ -1,3 +1,8 @@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+TITLE: using matrix
+#+AUTHOR: josiah
+
 * introduction
 i wanna write about [[https://matrix.org][matrix]]. matrix is a 'new' protocol for decentralized communication. it can be used in a bunch of different ways: from relatively secure, favoring security over ease of use, to very open, favoring ease of use over all other concerns. i tend to use it in the, to me, bare minimum secure configuration and then focusing hard on ease of use.
 
