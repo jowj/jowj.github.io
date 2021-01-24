@@ -11,14 +11,14 @@ hi you've reached the landing page of me, the person whose name is above this te
 
 i mostly use this to make people look at my [[./resume.pdf][resume]].
 
-** talk to me
+** talk to me on:
    :PROPERTIES:
    :ID:       c61d46e9-4626-499b-8e72-cc8e44d308bc
    :END:
 
-🔮 send me an [[mailto:me@jowj.net][email]]
-
-🗑 message me on [[https://twitter.com/Jowjoso][twitter]]
+*** 🔮 [[mailto:me@jowj.net][email]]
+    
+*** 🗑 [[https://twitter.com/Jowjoso][twitter]]
 
 i am interested in emacs, python, security, and making stuff in general.
 ** c͝o̾nͭs͔uͫm̖é
