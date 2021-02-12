@@ -5,7 +5,6 @@
 ;;;; package setup
 (require 'ox-publish)
 (package-initialize)
-
 (require 'package)
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
@@ -19,12 +18,20 @@
 (eval-when-compile
   (require 'use-package))
 
+(require 'cl)
+
 (use-package htmlize
   :ensure t)
 
 ;; idiot code specific linting /build problems
 (setq python-indent-guess-indent-offset t)
 (setq python-indent-guess-indent-offset-verbose nil)
+
+
+;; configure org tooltips -> html!
+(load-file (concat default-directory "org-special-block-extras.el"))
+(add-hook #'org-mode-hook #'org-special-block-extras-mode)
+
 
 ;; fucking custom colors eluded me until this shit.
 ;; reference this guy's setup, he's a king:

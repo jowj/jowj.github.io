@@ -6,7 +6,183 @@
 <generator>Emacs webfeeder.el</generator>
 <link>https://me.jowj.net/posts/</link>
 <atom:link href="https://me.jowj.net/posts/rss.xml" rel="self" type="application/rss+xml"/>
-<lastBuildDate>Sun, 24 Jan 2021 14:05:26 -0600</lastBuildDate>
+<lastBuildDate>Fri, 12 Feb 2021 16:20:02 -0600</lastBuildDate>
+<item>
+  <title>css test</title>
+  <description><![CDATA[<div id="content">
+ <div id="outline-container-orgbc18f97" class="outline-2">
+ <h2 id="orgbc18f97">this is the first header</h2>
+ <div class="outline-text-2" id="text-orgbc18f97">
+ <p>
+this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
+</p>
+ <ol class="org-ol"> <li>item 1</li>
+ <li>item 2</li>
+ <li>item 3
+ <ul class="org-ul"> <li>unordered 1</li>
+ <li>2</li>
+ <li>3</li>
+</ul></li>
+</ol></div>
+</div>
+
+ <div id="outline-container-org9a099a9" class="outline-2">
+ <h2 id="org9a099a9">below is a picture embed with caption</h2>
+ <div class="outline-text-2" id="text-org9a099a9">
+
+ <figure id="org8d7c96a"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
+</div>
+
+ <div id="outline-container-org9f3ddaf" class="outline-2">
+ <h2 id="org9f3ddaf">here is a python embd</h2>
+ <div class="outline-text-2" id="text-org9f3ddaf">
+ <div class="org-src-container">
+ <pre class="src src-python"> <span style="color: #598249;">import</span> slack
+
+ <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">reactable_string</span>(text):
+     <span style="color: #2F7BDE;">reactable_array</span> = []
+     <span style="color: #2F7BDE;">t</span> = text.lower()
+     <span style="color: #598249;">if</span>  <span style="color: #15968D;">'cyber'</span>  <span style="color: #598249;">in</span> t:
+        reactable_array.append( <span style="color: #15968D;">'robot'</span>)
+     <span style="color: #598249;">if</span>  <span style="color: #15968D;">'flavor town'</span>  <span style="color: #598249;">in</span> t:
+        reactable_array.append( <span style="color: #15968D;">'flavortown'</span>)
+     <span style="color: #598249;">return</span> reactable_array
+
+ <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">rtm</span>(emoji, payload,  <span style="color: #598249;">id</span>, ts):
+    payload[ <span style="color: #15968D;">'web_client'</span>].reactions_add(
+        channel= <span style="color: #598249;">id</span>,
+        name=emoji,
+        timestamp=ts
+    )
+
+     <span style="color: #598249;">return</span>  <span style="color: #15968D;">None</span>
+
+
+ <span style="color: #598249;">@slack.RTMClient.run_on</span>(event= <span style="color: #15968D;">'message'</span>)
+ <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">handle_messages</span>(**payload):
+     <span style="color: #2F7BDE;">data</span> = payload[ <span style="color: #15968D;">'data'</span>]
+     <span style="color: #598249;">id</span> = data[ <span style="color: #15968D;">'channel'</span>]
+     <span style="color: #2F7BDE;">ts</span> = data[ <span style="color: #15968D;">'ts'</span>]
+
+     <span style="color: #598249;">if</span> reactable_string(data[ <span style="color: #15968D;">'text'</span>]):
+         <span style="color: #2F7BDE;">needed</span> = reactable_string(data[ <span style="color: #15968D;">'text'</span>])
+
+         <span style="color: #598249;">if</span>  <span style="color: #15968D;">'robot'</span>  <span style="color: #598249;">in</span> reactions_needed:
+            rtm( <span style="color: #15968D;">"robot_face"</span>, payload,  <span style="color: #598249;">id</span>, ts)
+         <span style="color: #598249;">if</span>  <span style="color: #15968D;">'flavortown'</span>  <span style="color: #598249;">in</span> reactions_needed:
+            rtm( <span style="color: #15968D;">"dark_sunglasses"</span>, payload,  <span style="color: #598249;">id</span>, ts)
+            rtm( <span style="color: #15968D;">"guyfieri"</span>, payload,  <span style="color: #598249;">id</span>, ts)
+
+
+ <span style="color: #598249;">if</span>  <span style="color: #598249;">__name__</span> ==  <span style="color: #15968D;">'__main__'</span>:
+     <span style="color: #2F7BDE;">stoken</span> =  <span style="color: #15968D;">'XXXXXXXXXXXXXXXX'</span>   <span style="color: #5e6263;"># </span> <span style="color: #5e6263;">Secret token!!</span>
+     <span style="color: #2F7BDE;">rtm_client</span> = slack.RTMClient(token=stoken)
+    rtm_client.start()
+</pre>
+</div>
+</div>
+</div>
+
+ <div id="outline-container-orgaf268a1" class="outline-2">
+ <h2 id="orgaf268a1">here is a listp embed</h2>
+ <div class="outline-text-2" id="text-orgaf268a1">
+ <div class="org-src-container">
+ <pre class="src src-elisp">( <span style="color: #598249;">let</span> ((proj-base (file-name-directory load-file-name)))
+  ( <span style="color: #598249;">setq</span> org-publish-project-alist
+        `(( <span style="color: #15968D;">"project-name"</span>
+            <span style="color: #598249;">:base-directory</span> ,(concat proj-base  <span style="color: #15968D;">"."</span>)
+            <span style="color: #598249;">:recursive</span> t
+            <span style="color: #598249;">:publishing-directory</span> ,(concat proj-base   <span style="color: #15968D;">"../export"</span>)
+            <span style="color: #598249;">:publishing-function</span> org-html-publish-to-html))))
+</pre>
+</div>
+</div>
+</div>
+ <div id="outline-container-org9b934cb" class="outline-2">
+ <h2 id="org9b934cb">see links styling</h2>
+ <div class="outline-text-2" id="text-org9b934cb">
+ <p>
+ <a href="https://me.jowj.net">https://me.jowj.net</a> looks like this
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgc945a48" class="outline-2">
+ <h2 id="orgc945a48">here are some tooltips</h2>
+ <div class="outline-text-2" id="text-orgc945a48">
+ <div style="column-rule-style: none;column-count: 2;">
+ <p>
+ <span style="color:orange;">Are you excited to learn some Lisp?</span>  <span style="color:blue;">Yes!</span>
+</p>
+
+ <p>
+Pop-quiz: How does  <abbr class="tooltip" title="Call FUNCTION with our remaining args, using our last arg as list of args.<br>Then return the value FUNCTION returns.<br>Thus, (apply '+ 1 2 '(3 4)) returns 10.<br><br>(fn FUNCTION &rest ARGUMENTS)">apply</abbr> work?
+</p>
+
+</div>
+
+ <details class="code-details" style="padding: 1em;
+                          background-color: #e5f5e5;
+                          /* background-color: pink; */
+                          border-radius: 15px;
+                          color: hsl(157 75%);
+                          font-size: 0.9em;
+                          box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <summary> <strong>
+                       <font face="Courier" size="3" color="green">
+                         Answer
+                      </font>
+                    </strong>
+                  </summary> <p>
+ <a class="anchor" aria-hidden="true" id="solution" href="#solution"> <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16
+   16" width="16" height="16"> <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69
+   3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10
+   5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0
+   2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5
+   0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55
+   13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+Syntactically,  <code>(apply f '(x0 ... xN)) = (f x0 ... xN)</code>.
+</p>
+
+ <p>
+</p> <p style="color: black;"> <span style="border-width:1px;border-style:solid;padding:5px"> <strong>[Musa:</strong></span> Ain't that cool?   <span style="border-width:1px;border-style:solid;padding:5px"> <strong>]</strong></span></p>
+
+
+ <style> #g0 {color: aqua; background-color:aqua;}
+       #g0:hover {color: black; background-color:white;} </style> <p>
+That is,  <span style="color:magenta;">we can  <span id="g0"> apply </span> a function to a list of arguments!</span>
+</p>
+
+
+
+
+
+</details> <br></br> <div style="padding: 1em; background-color: #CCFFCC;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"> <h3></h3>
+ <p>
+ <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"> <path fill-rule="evenodd" d="M0 2a1 1 0 011-1h14a1 1 0 011 1v9a1 1 0 01-1 1H7l-4 4v-4H1a1 1 0 01-1-1V2zm1 0h14v9H6.5L4 13.5V11H1V2zm6 6h2v2H7V8zm0-5h2v4H7V3z"></path></svg> Note that  <kbd> C-x C-e </kbd> evaluates a Lisp form!
+</p>
+
+</div>
+ <p>
+ <abbr class="tooltip" title="hello">°</abbr>&emsp13;
+ <i>Allah  <abbr class="tooltip" title="The God of Abraham; known as Elohim in the Bible">°</abbr>&emsp13; does
+not burden a soul beyond what it can bear.</i> — Quran 2:286
+</p>
+
+ <p>
+
+</p>
+
+ <p>
+ <img src="https://img.shields.io/badge/Thanks-for_reading-nil?logo=nil"></img> <a href="https://twitter.com/intent/tweet?text=This looks super neat (•̀ᴗ•́)و::&url=https://github.com/alhassy/org-special-block-extras"> <img src="https://img.shields.io/twitter/url?url=https://github.com/alhassy/org-special-block-extras"></img></a>
+ <img src="https://img.shields.io/badge/-buy_me_a-nil?logo=nil"></img> coffee|gray| <a href="https://www.buymeacoffee.com/alhassy%7Cbuy-me-a-coffee">https://www.buymeacoffee.com/alhassy%7Cbuy-me-a-coffee</a>
+</p>
+</div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/css.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
+  <pubDate>Fri, 12 Feb 2021 16:20:00 -0600</pubDate>
+</item>
 <item>
   <title>using matrix</title>
   <description><![CDATA[<div id="content">
@@ -731,110 +907,6 @@ ambrevar actually wrote the webfeeder.el solution to the idiot org rss problem. 
 </div>]]></description>
   <link>https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html</guid>
-  <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
-</item>
-<item>
-  <title>css test</title>
-  <description><![CDATA[<div id="content">
- <div id="outline-container-orgbc18f97" class="outline-2">
- <h2 id="orgbc18f97">this is the first header</h2>
- <div class="outline-text-2" id="text-orgbc18f97">
- <p>
-this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
-</p>
- <ol class="org-ol"> <li>item 1</li>
- <li>item 2</li>
- <li>item 3
- <ul class="org-ul"> <li>unordered 1</li>
- <li>2</li>
- <li>3</li>
-</ul></li>
-</ol></div>
-</div>
-
- <div id="outline-container-org9a099a9" class="outline-2">
- <h2 id="org9a099a9">below is a picture embed with caption</h2>
- <div class="outline-text-2" id="text-org9a099a9">
-
- <figure id="org8d7c96a"> <img src="file:///home/josiah/Pictures/pagedout_slack_example.png" alt="pagedout_slack_example.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.</figcaption></figure></div>
-</div>
-
- <div id="outline-container-org9f3ddaf" class="outline-2">
- <h2 id="org9f3ddaf">here is a python embd</h2>
- <div class="outline-text-2" id="text-org9f3ddaf">
- <div class="org-src-container">
- <pre class="src src-python"> <span style="color: #598249;">import</span> slack
-
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">reactable_string</span>(text):
-     <span style="color: #2F7BDE;">reactable_array</span> = []
-     <span style="color: #2F7BDE;">t</span> = text.lower()
-     <span style="color: #598249;">if</span>  <span style="color: #15968D;">'cyber'</span>  <span style="color: #598249;">in</span> t:
-        reactable_array.append( <span style="color: #15968D;">'robot'</span>)
-     <span style="color: #598249;">if</span>  <span style="color: #15968D;">'flavor town'</span>  <span style="color: #598249;">in</span> t:
-        reactable_array.append( <span style="color: #15968D;">'flavortown'</span>)
-     <span style="color: #598249;">return</span> reactable_array
-
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">rtm</span>(emoji, payload,  <span style="color: #598249;">id</span>, ts):
-    payload[ <span style="color: #15968D;">'web_client'</span>].reactions_add(
-        channel= <span style="color: #598249;">id</span>,
-        name=emoji,
-        timestamp=ts
-    )
-
-     <span style="color: #598249;">return</span>  <span style="color: #15968D;">None</span>
-
-
- <span style="color: #598249;">@slack.RTMClient.run_on</span>(event= <span style="color: #15968D;">'message'</span>)
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">handle_messages</span>(**payload):
-     <span style="color: #2F7BDE;">data</span> = payload[ <span style="color: #15968D;">'data'</span>]
-     <span style="color: #598249;">id</span> = data[ <span style="color: #15968D;">'channel'</span>]
-     <span style="color: #2F7BDE;">ts</span> = data[ <span style="color: #15968D;">'ts'</span>]
-
-     <span style="color: #598249;">if</span> reactable_string(data[ <span style="color: #15968D;">'text'</span>]):
-         <span style="color: #2F7BDE;">needed</span> = reactable_string(data[ <span style="color: #15968D;">'text'</span>])
-
-         <span style="color: #598249;">if</span>  <span style="color: #15968D;">'robot'</span>  <span style="color: #598249;">in</span> reactions_needed:
-            rtm( <span style="color: #15968D;">"robot_face"</span>, payload,  <span style="color: #598249;">id</span>, ts)
-         <span style="color: #598249;">if</span>  <span style="color: #15968D;">'flavortown'</span>  <span style="color: #598249;">in</span> reactions_needed:
-            rtm( <span style="color: #15968D;">"dark_sunglasses"</span>, payload,  <span style="color: #598249;">id</span>, ts)
-            rtm( <span style="color: #15968D;">"guyfieri"</span>, payload,  <span style="color: #598249;">id</span>, ts)
-
-
- <span style="color: #598249;">if</span>  <span style="color: #598249;">__name__</span> ==  <span style="color: #15968D;">'__main__'</span>:
-     <span style="color: #2F7BDE;">stoken</span> =  <span style="color: #15968D;">'XXXXXXXXXXXXXXXX'</span>   <span style="color: #5e6263;"># </span> <span style="color: #5e6263;">Secret token!!</span>
-     <span style="color: #2F7BDE;">rtm_client</span> = slack.RTMClient(token=stoken)
-    rtm_client.start()
-</pre>
-</div>
-</div>
-</div>
-
- <div id="outline-container-orgaf268a1" class="outline-2">
- <h2 id="orgaf268a1">here is a listp embed</h2>
- <div class="outline-text-2" id="text-orgaf268a1">
- <div class="org-src-container">
- <pre class="src src-elisp">( <span style="color: #598249;">let</span> ((proj-base (file-name-directory load-file-name)))
-  ( <span style="color: #598249;">setq</span> org-publish-project-alist
-        `(( <span style="color: #15968D;">"project-name"</span>
-            <span style="color: #598249;">:base-directory</span> ,(concat proj-base  <span style="color: #15968D;">"."</span>)
-            <span style="color: #598249;">:recursive</span> t
-            <span style="color: #598249;">:publishing-directory</span> ,(concat proj-base   <span style="color: #15968D;">"../export"</span>)
-            <span style="color: #598249;">:publishing-function</span> org-html-publish-to-html))))
-</pre>
-</div>
-</div>
-</div>
- <div id="outline-container-org9b934cb" class="outline-2">
- <h2 id="org9b934cb">see links styling</h2>
- <div class="outline-text-2" id="text-org9b934cb">
- <p>
- <a href="https://me.jowj.net">https://me.jowj.net</a> looks like this
-</p>
-</div>
-</div>
-</div>]]></description>
-  <link>https://me.jowj.net/posts/css.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
   <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
 </item>
 <item>
