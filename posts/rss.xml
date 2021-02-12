@@ -6,7 +6,7 @@
 <generator>Emacs webfeeder.el</generator>
 <link>https://me.jowj.net/posts/</link>
 <atom:link href="https://me.jowj.net/posts/rss.xml" rel="self" type="application/rss+xml"/>
-<lastBuildDate>Fri, 12 Feb 2021 16:20:02 -0600</lastBuildDate>
+<lastBuildDate>Fri, 12 Feb 2021 16:25:48 -0600</lastBuildDate>
 <item>
   <title>css test</title>
   <description><![CDATA[<div id="content">
@@ -164,8 +164,7 @@ That is,  <span style="color:magenta;">we can  <span id="g0"> apply </span> a fu
 </div>
  <p>
  <abbr class="tooltip" title="hello">°</abbr>&emsp13;
- <i>Allah  <abbr class="tooltip" title="The God of Abraham; known as Elohim in the Bible">°</abbr>&emsp13; does
-not burden a soul beyond what it can bear.</i> — Quran 2:286
+/Allah  <abbr class="tooltip" title="The God of Abraham; known as Elohim in the Bible] does<br>">°</abbr>&emsp13;this is a test of a margin/tooltip <abbr class="tooltip" title="from org mode, we write ''margin:'' and it will export to latex as a margin note, or to html as a tooltip! fucking cool.">°</abbr>&emsp13; note.
 </p>
 
  <p>
@@ -181,7 +180,7 @@ not burden a soul beyond what it can bear.</i> — Quran 2:286
 </div>]]></description>
   <link>https://me.jowj.net/posts/css.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
-  <pubDate>Fri, 12 Feb 2021 16:20:00 -0600</pubDate>
+  <pubDate>Fri, 12 Feb 2021 16:25:00 -0600</pubDate>
 </item>
 <item>
   <title>using matrix</title>

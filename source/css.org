@@ -101,8 +101,8 @@ That is, [[color:magenta][we can ((apply)) a function to a list of arguments!]]
 octoicon:report Note that kbd:C-x_C-e evaluates a Lisp form!
 #+end_box
 [[margin:][hello]]
-/Allah [[margin:][The God of Abraham; known as Elohim in the Bible]] does
-not burden a soul beyond what it can bear./ --- Quran 2:286
+/Allah [[margin:][The God of Abraham; known as Elohim in the Bible] does
+]]this is a test of a margin/tooltip[[margin:][from org mode, we write "margin:" and it will export to latex as a margin note, or to html as a tooltip! fucking cool.]] note.
 
 #+LATEX_HEADER: \usepackage{multicol}
 #+LATEX_HEADER: \usepackage{tcolorbox}
