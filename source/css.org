@@ -13,9 +13,9 @@ this is a normal paragraph, and it contains a line that wraps naturally due to l
    - 3
 
 * below is a picture embed with caption
-#+CAPTION: Make sure you use the "Bot User OAuth Access Token" in a "Classic Slack App"; anything else won't work.
-#+NAME:   fig:pagedout-slack_example.png
-[[~/Pictures/pagedout_slack_example.png]]
+#+CAPTION: i should have used a better camera for this
+#+NAME:   fig:shitty-headshot.png
+[[~/Pictures/screenshots/bad-headshot.png]]
 
 * here is a python embd
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     rtm_client.start()
 #+END_SRC
 
-* here is a listp embed
+* here is a lisp embed
 
 #+BEGIN_SRC elisp
 (let ((proj-base (file-name-directory load-file-name)))
@@ -76,40 +76,49 @@ if __name__ == '__main__':
 #+END_SRC
 * see links styling
    https://me.jowj.net looks like this
+   https://google.com looks like this
 
-* here are some tooltips
+* here are some weird org mode extras i'm playing with
+
+** using ~#+begin_parallel~ to force side by side
 #+begin_parallel
-[[color:orange][Are you excited to learn some Lisp?]] [[blue:Yes!]]
+Here's some text I want to look pretty normal
 
-Pop-quiz: How does doc:apply work?
+Text in parallel!! [[color:purple][cool]]. 
 #+end_parallel
 
+** using ~doc:anything~ to do tt on hover
+   Pop-quiz: How does doc:apply work?
+
+** creating sections for visual break ups of text
+I still have to figure out colors, obviously.
 #+begin_details Answer
 link-here:solution
 Syntactically, ~(apply f '(x0 ... xN)) = (f x0 ... xN)~.
+#+end_details
+** adding personal remarks:
+This seems kinda interesting, but mostly a novelty. No one else is gonna read my shit and also comment in org mode hah. For people who actually live in breathe latex though, this is probably rad:
 
-[[remark:Musa][Ain't that cool?]]
+[[remark:From the editor:][Ain't that cool?]]
 
+** using spoilers
 #+begin_spoiler aqua
-That is, [[color:magenta][we can ((apply)) a function to a list of arguments!]]
+Remember, 3 is weird, but 2 makes a ((spoiler lol))
 #+end_spoiler
 
-#+end_details
 
+** detail box!
+again, some colors to fix
 #+html: <br>
 #+begin_box
 octoicon:report Note that kbd:C-x_C-e evaluates a Lisp form!
 #+end_box
-[[margin:][hello]]
-/Allah [[margin:][The God of Abraham; known as Elohim in the Bible] does
-]]this is a test of a margin/tooltip[[margin:][from org mode, we write "margin:" and it will export to latex as a margin note, or to html as a tooltip! fucking cool.]] note.
+
+** latex margin vs html tooltips!
+damn i think this[[margin:][from org mode, we write "margin:" and it will export to latex as a margin note, or to html as a tooltip! fucking cool.]] is cool.
 
 #+LATEX_HEADER: \usepackage{multicol}
 #+LATEX_HEADER: \usepackage{tcolorbox}
 #+latex: In the LaTeX output, we have a glossary.
 
 show:GLOSSARY
-
-badge:Thanks|for_reading
-tweet:https://github.com/alhassy/org-special-block-extras
-badge:|buy_me_a coffee|gray|https://www.buymeacoffee.com/alhassy|buy-me-a-coffee
