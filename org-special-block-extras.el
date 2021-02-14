@@ -872,7 +872,7 @@ that is appended to the remark.
                    (format "%s made this remark" (s-upcase path)))))
   :face '(:foreground "red" :weight bold))
 
-(org-special-block-extras-defblock details (title "Details") (title-color "green")
+(org-special-block-extras-defblock details (title "Details") (title-color "orange")
   "Enclose contents in a folded up box, for HTML.
 
 For LaTeX, this is just a boring, but centered, box.
@@ -895,10 +895,10 @@ such as ‘background-color’.
                 \\end{quote}")
      (_ "<details class=\"code-details\"
                  style =\"padding: 1em;
-                          background-color: #e5f5e5;
+                          background-color: #2e174a;
                           /* background-color: pink; */
                           border-radius: 15px;
-                          color: hsl(157 75% 20%);
+                          color: hsl(0 0% 0%);
                           font-size: 0.9em;
                           box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;\">
                   <summary>
@@ -912,7 +912,7 @@ such as ‘background-color’.
                </details>"))
    title-color title contents))
 
-(org-special-block-extras-defblock Details (title "Details") (title-color "green")
+(org-special-block-extras-defblock Details (title "Details") (title-color "orange")
   "Enclose contents in a folded up box, for HTML.
 
 For LaTeX, this is just a boring, but centered, box.
@@ -935,10 +935,10 @@ such as ‘background-color’.
                 \\end{quote}")
      (_ "<details class=\"code-details\"
                  style =\"padding: 1em;
-                          background-color: #e5f5e5;
+                          background-color: #2e174a;
                           /* background-color: pink; */
                           border-radius: 15px;
-                          color: hsl(157 75% 20%);
+                          color: hsl(0 0% 0%);
                           font-size: 0.9em;
                           box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;\">
                   <summary>
@@ -952,7 +952,7 @@ such as ‘background-color’.
                </details>"))
    title-color title contents))
 
-(org-special-block-extras-defblock box (title "") (background-color nil)
+(org-special-block-extras-defblock box (title "") (background-color "jlj-prp")
   "Enclose text in a box, possibly with a title.
 
 By default, the box's COLOR is green for HTML and red for LaTeX,
@@ -990,6 +990,7 @@ Names are very rough approximates.
     ("brown"   "#CCCC99") ;; close to moss
     ("gray"    "#CCCCCC")
     ("purple"  "#CCCCFF")
+    ("jlj-prp" "#2e174a") ;; added by jlj; my purple bg colour.
     ("lime"    "#CCFF99") ;; brighter than ‘green’
     ("green"   "#CCFFCC")
     ("blue"    "#CCFFFF")
