@@ -660,7 +660,7 @@ In a link, no quotes are needed."
                  (s-split "," list)))
    contents))
 
-(org-special-block-extras-defblock spoiler (color "grey") (left "((" right "))")
+(org-special-block-extras-defblock spoiler (color "jlj-blu") (left "((" right "))")
   "Hide text enclosed in double parens ((like this)) as if it were spoilers.
    LEFT and RIGHT may be other kinds of delimiters.
    The main argument, COLOR, indicates which color to use.
@@ -994,6 +994,7 @@ Names are very rough approximates.
     ("lime"    "#CCFF99") ;; brighter than ‘green’
     ("green"   "#CCFFCC")
     ("blue"    "#CCFFFF")
+    ("jlj-blu" "#2F7BDE") ;; added by jlj; my blue spoiler coulour.
     ("orange"  "#FFCC99")
     ("peach"   "#FFCCCC")
     ("pink"    "#FFCCFF")

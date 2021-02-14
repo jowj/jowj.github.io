@@ -92,23 +92,18 @@ Text in parallel!! [[color:purple][cool]].
 
 ** creating sections for visual break ups of text
 I still have to figure out colors, obviously.
-#+begin_details Answer
+#+begin_details Details box
 link-here:solution
-Syntactically, ~(apply f '(x0 ... xN)) = (f x0 ... xN)~.
+checking background changes
 #+end_details
-** adding personal remarks:
-This seems kinda interesting, but mostly a novelty. No one else is gonna read my shit and also comment in org mode hah. For people who actually live in breathe latex though, this is probably rad:
-
-[[remark:From the editor:][Ain't that cool?]]
-
 ** using spoilers
-#+begin_spoiler aqua
-Remember, 3 is weird, but 2 makes a ((spoiler lol))
+#+begin_spoiler "#2F7BDE"
+Checking my new spoiler color ((spoiler lol))
 #+end_spoiler
 
 
 ** detail box!
-again, some colors to fix
+testing fixes
 #+html: <br>
 #+begin_box
 octoicon:report Note that kbd:C-x_C-e evaluates a Lisp form!
