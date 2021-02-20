@@ -6,12 +6,8 @@
 * uses this
 [[https://usesthis.com/][uses this]] is a collection of interviews with individuals asking them about their hardware and software uses. i love this idea. of course, i'm not interesting enough to do interviews with anyone, but i /do/ think my hardware and software uses are more interesting than many of the answerer's[[margin:][i use a macbook pro! and an iphone! and google docs for collaboration! who cares :(]].
 
-** articles from uses this that i like
-<fill this out in a clever way>
-** whoami 
-<fill this out in a clever way>
 ** hardware
-i use a collection of hardware i've built, scrounged, or borrowed over the past 8 or 9 years. I'm separating this out into a few categories:
+i use a collection of hardware i've built, scrounged, borrowed or (reluctantly) bought over the past 8 or 9 years. the place with the most New Stuff (at one point, anyway. I think most of it is a decent age now) is networking gear. I'm separating this out into a few categories:
 
 *** networking
 i love [[https://unifi-network.ui.com][unifi stuff]]. I've got two 8 port switches (one PoE, one powered regularly, got about 3 years apart), a 3port [[https://store.ui.com/collections/unifi-network-routing-switching/products/unifi-security-gateway][usg]], and a PoE [[https://www.ui.com/unifi/unifi-ap-ac-lite/][unifi ap ac lite]]. its really nice to have everything talk to a central place, and makes troubleshooting network issues a lot easier. Unifi /does/ have some problems with reliability on new updates, so I typically update once a month, giving any new updates time to settle before I apply them. I haven't had an outtage since the first month i got the USG ✨
@@ -21,28 +17,53 @@ i have a built from scratch very old "server" that used to be my main computer. 
 
 I have a raspberry pi that serves as my VPN endpoint for a site2site [[https://www.wireguard.com/][wireguard]] configuration. the pi acts as an always-on router that can talk to my home network. 
 
-I have an extremely old [[https://www.synology.com/en-us][synology]] nas, the exact model of which I can't bring to mind because my friend gave it to me several years ago, after he had owned it for 7 or so years already. it still gets updates. its slow, and not on the latest version of anything, but it does still get security updates!
+I have an extremely old [[https://www.synology.com/en-us][synology]] 4 port nas,  I can't bring to mind the exact model because my friend gave it to me several years ago, after he had owned it for a bunch of years already. it still gets updates. its slow, and not on the latest version of anything, but it does still get security updates!
 
 i have a collection of vms in [[https://www.digitalocean.com/][digital ocean]], the precise number of which fluctuates based on any ongoing projects. right now, I have 3: a [[https://pleroma.social/][pleroma]] server, a [[https://matrix.org][matrix]] server [[margin:][i have written previously about what i'm doing with matrix. if you're curious go look around my site.]], and a General Purpose server that hosts several things, including [[https://gitea.io/en-us/][gitea]], my znc server, and [[https://git.awful.club/hosted/mojojojo-bot][some]] [[https://git.awful.club/hosted/arke][bots]] that are either pointless, broken, or shitty (but are fun, and i made them!).
 
 *** user devices
-i have to many of these lol. i have a windows tower that is just for playing games. its got a Ryzen 3*** series CPU and 16 gb of ram. I've got a [[https://system76.com/][system76 oryx]] that i have used as my primary user device since 2016. Its a lovely device with a few caveats; system76 sells rebranded [[https://www.clevo.com.tw/index-en.asp][clevo]] machines, and there are more than a few QC issues with these guys. the laptop keyboard doesn't work reliably at all, though in my case that's fine because I never use it as a laptop, its always attached to my full desk setup.
+i have too many of these lol. i have a windows tower that is just for playing games. its got a Ryzen 3*** series CPU and 16 gb of ram. I've got a [[https://system76.com/][system76 oryx]] that i have used as my primary user device since 2016. Its a lovely device with a few caveats; system76 sells rebranded [[https://www.clevo.com.tw/index-en.asp][clevo]] machines, and there are more than a few QC issues with these guys. the laptop keyboard doesn't work reliably at all, though in my case that's fine because I never use it as a laptop, its always attached to my full desk setup.
 
 for mobile devices i have an iPhone XS (though i'm thinking of upgrading to the new iPhone mini in the hopes that a smaller screen and lighter weight device will help with my [[https://me.jowj.net/personal/rsi.html][rsi]]), a shitty Samsung Tablet 8 (i think?) that i use to play around with android distrobutions. right now its running [[https://lineageos.org/][lineageOS]]. I also have a switch for playing games.
 
-*** user input devices
+*** user IO devices
 I'm in the process of building out a version of [[https://me.micahrl.com/projects/deskmx/][my brother's deskmx project]]; i have 3 mixers (one acts as a preamp for mics, one is a mic input splitter to connect to all my devices, and 1 is just for headphones). this is still on going and i'll probably write about what i've done and what, if anything, i did different than my brother once its finished. 
 
 i have two [[https://input.club/devices/infinity-ergodox/][ergodox infinity]] keyboards; in the past this was so i could have one at work and one at home. now i just have one on my desk and one on my workspace, for when i inevitably change out some switches. i love these keyboards, though i do wish i could have better tenting. I also have a ~10 or 11 year old [[https://www.razer.com/gaming-keyboards/razer-blackwidow-v3-tenkeyless/RZ03-03490200-R3U1][razer black widow 10keyless]] which is just like the one linked except doesn't have backlighting or rgb or any of that. this has lasted a respectable amount of time, though I did have to replace the USB IO board in 2020.
 
-i have a stupid collection of mice, mostly as part of a "can i help my RSI" series of experiments. God's own mouse is the [[https://www.newegg.com/logitech-g9x/p/N82E16826104261][logitech g9x]], which i had for 8 or so years before it finally gave up the ghost. i love that mouse. It now sells on ebay / amazon for around 399, though when i bought it first i think i paid ~60 USD for it. I also have [https://www.amazon.com/gp/product/B07FNJB8TT/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1][logitech vertical mouse] which I am currently using for most of my computing needs, and a [https://www.amazon.com/gp/product/B07Y8ZD1P5/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1][benQ zowie EC1] which I hoped would adequately replace my g9x in terms of hand fit, and it did not :(.
+i have a stupid collection of mice, mostly as part of a "can i help my RSI" series of experiments. God's own mouse is the [[https://www.newegg.com/logitech-g9x/p/N82E16826104261][logitech g9x]], which i had for 8 or so years before it finally gave up the ghost. i love that mouse. It now sells on ebay / amazon for around 399, though when i bought it first i think i paid ~60 USD for it. I also have a [[https://www.amazon.com/gp/product/B07FNJB8TT/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1][logitech vertical mouse]] which I am currently using for most of my computing needs, and a [[https://www.amazon.com/gp/product/B07Y8ZD1P5/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1][benQ zowie EC1]] which I hoped would adequately replace my g9x in terms of hand fit, and it did not :(.
+
+*** misc
+i also have a beat to shit 80s? 90s? era hardtail bicycle that i love to death. its a piece of shit and i love it very much. i can't wait to buy another one.
+
 ** software
 *** operating systems
 <nix and debian, mac for work>
 *** desktop env
 <awesomeWM, rofi, syncthing, espanso, scrot>
 *** emacs, and all the shit i do with it
-*** programming languages
+*** programming and versioning and config management (ansible et al)
     <python / elisp for current langs. talk about shitty programming in lua too, i guess>
-
+*** services i host and use.
+    <*arr apps, plex, gitea (!!), bitwarden, digitalocean>
 ** my ideal setup
+this doesn't exist the fun part is fucking with what you have! here are some things i'd love to try out:
+
+- [[https://guix.gnu.org/][guixSD]] and all that implies; I'm fucking around with ~nixOS~ right now and i like it a lot (though, wow, rough edges). guix would be taking my like of reproducability and declarative configuration and marrying that with scheme and emacs more tightly than nix does. from a political standpoint it would also be closer to what i'd like. it seems like a pretty big usability trade off though, which is why i haven't done it yet. guixSD uses ~hurd~ rather than the linux kernel, and the learning curve for that would be /steep/.
+
+- [[https://github.com/NixOS/nixops][set up nixops]]. if I stick with nix, i'd love to play with this. ~guix~ of course has a similar tool, with [[https://guix.gnu.org/en/blog/2019/towards-guix-for-devops/][guix deploy]], if I end up there. i love the idea of moving /out/ of ~ansible~ and onto something that treats declarative management as a first class citizen with the OS. tbh ansible is sorta disappointing with that; why redhat didn't make ansible have better interfaces to rh specific stuff i'll never know. also now that rh is actually IBM i'm nervous about future stability ( a possibly silly case of nerves; its not like IBM hasn't been around a long time )
+
+- upgrade my linux laptop; i've thought about one of the newer XPS13 or 15s, as well as newer system76 options. i haven't decided what i'll end up doing. my current computer is chugging along just fine, even if i would be /so pleased/ to have usbc charging and a devices with fewer, uh, personality traits.
+
+- related to that, i'd love to standardize everything on usbc if possible. my work machine is a mbp16" which uses USBC, my personal laptop is the old standard barrel charger, my phone is fucking lightening, my backup battery is usbMicro, uuuuuugh. fuck i would love to just have like, 2 cables that did everything for me.
+
+- a change in phone; i'd like to experiment with alternatives to apple or android. the [[https://www.pine64.org/pinephone/][pinephone]] or the [[https://puri.sm/products/librem-5/][librem 5]] from purism are the two options most available to me as a US based person. [[https://jolla.com/][sailfish by Jolla]] seems like a great (android based but with real security updates, unlike lineage) alternative if you're in the EU. my understanding is that there are band issues with EU phones in the US, though i haven't seriously looked into it. i've been on iOS since i got off of my little sidekick-like phone after a very bad bicycle accident. phones are hard to change, though. I care a lot about security, privacy, and user control, and MAN. those three things are not necessarily at loggerheads by default, but the people who champion each one of those efforts in the mobile space all forget the OTHER two exist. 
+
+** articles from uses this that i like
+- alice mazzy's interview: https://usesthis.com/interviews/alice.maz/. she's always interesting. she's got writing that i like, too. her article on [[https://www.alicemaz.com/writing/minecraft.html][minecraft economies]] and breaking them is one of my favorite reads.
+- chris randall's: https://usesthis.com/interviews/chris.randall/. big focus on audio production in this one. super interesting stuff.
+- justine haupt's: https://usesthis.com/interviews/justine.haupt/. just cool topics and things she uses. check out her website, [[http://www.justine-haupt.com/][too]], she has done some cool shit
+- katherine cox-buday's: https://usesthis.com/interviews/katherine.cox-buday/. hell ya a REAL LIST of SHIT i love it
+- paul ford's: https://usesthis.com/interviews/paul.ford/. i loved this guy's detail and that he thought about why he was collecting some of his data (computers are tools for /thinking/, (to him) and not, in this context, for productivity).
+
+if there's anything you've read from uses this that you especially liked [[mailto:me@jowj.net][email me about it]]. i'd love to read whatever you liked :) 
