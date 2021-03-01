@@ -1,5 +1,6 @@
 #+TITLE: a list of stuff i wrote
 
+- [[file:uses-this.org][uses this]]
 - [[file:using-matrix.org][using-matrix]]
 - [[file:pynit.org][pynit]]
 - [[file:blogging-on-ghpages-with-orgmode.org][blogging on github:pages with orgmode]]

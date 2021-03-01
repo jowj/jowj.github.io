@@ -112,6 +112,9 @@ octoicon:report Note that kbd:C-x_C-e evaluates a Lisp form!
 ** latex margin vs html tooltips!
 damn i think this[[margin:][from org mode, we write "margin:" and it will export to latex as a margin note, or to html as a tooltip! fucking cool.]] is cool.
 
+#+begin_src org
+[[margin:][what you want in the margins.]]
+#+end_src
 #+LATEX_HEADER: \usepackage{multicol}
 #+LATEX_HEADER: \usepackage{tcolorbox}
 #+latex: In the LaTeX output, we have a glossary.
