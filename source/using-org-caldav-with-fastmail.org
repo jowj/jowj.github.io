@@ -45,21 +45,21 @@ there are a few different ways to sync calendars into org-mode. [[https://github
 
 google /really/ would prefer that you don't use caldav to talk to their calendars. org-cal is based on google's own API, and doesn't adhere to normal email standards.  this is shitty, but frankly caldav is a fucking mess, so you can't really blame them. 
 
-*** access gcal calendars with org-caldav
+** access gcal calendars with org-caldav
 so, what's a person to do if they don't have the ability to use google's api to pull down calendars, but they still need to sync gcal stuff to orgmode? well, you can do something kind of dumb, but easy. gcal publishes your calendar to an unauthed but secret URL by default. you can subscribe to that URL from within fastmail, and then sync that calendar down to org mode through fastmail! 
 
-**** doing this
+*** doing this
 1. copy the url from the google calender
 2. subscribe to the url in fastmail (and i assume any provider that uses caldav)
 3. sync that calendar down to org mode via org-caldav!
 
-**** details
+*** details
 
 access the URL that google publishes to by logging into gcal -> settings -> click on the calendar you want to access on the left hand side of the screen -> scroll down until you see "secret address in iCal format". copy that URL.
 
 subscribe to the calendar in fastmail by logging into fastmail -> settings -> click on calendars on the left hand side -> find the box labeled "Subscriptions" and paste in the URL there. hit subscribe. done!
 
-**** other options
+*** other options
 fastmail /also/ allows you to log into a few providers specifically. I suspect this is done by simply mimicking a client, so fastmail speaks the gcal API and you can have access to everything that way. I haven't tried this, though I may get curious eventually. If you try it [[mailto:me@jowj.net][i'd love to know!]]
 ** credential storage
 syncing events to org mode manually seems fine to me; i'll typically do it once, maybe twice a day. typing in credentials each time you want to sync sucks though. this type of problem is commonly solved 1 of two ways, in emacs:

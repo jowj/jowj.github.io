@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-03-08 Mon 16:30 -->
+<!-- 2021-03-08 Mon 16:33 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>using org caldav with fastmail</title>
@@ -142,9 +142,9 @@ i've recently started a new job. i take a lot of notes, and I find it useful to 
 </p>
 </div>
 
-<div id="outline-container-org4424d90" class="outline-3">
-<h3 id="org4424d90">doing this</h3>
-<div class="outline-text-3" id="text-org4424d90">
+<div id="outline-container-orgeb37b53" class="outline-3">
+<h3 id="orgeb37b53">doing this</h3>
+<div class="outline-text-3" id="text-orgeb37b53">
 <ol class="org-ol">
 <li>download <a href="https://github.com/dengste/org-caldav">org-caldav</a></li>
 <li>configure it</li>
@@ -209,28 +209,30 @@ there are a few different ways to sync calendars into org-mode. <a href="https:/
 google <i>really</i> would prefer that you don't use caldav to talk to their calendars. org-cal is based on google's own API, and doesn't adhere to normal email standards.  this is shitty, but frankly caldav is a fucking mess, so you can't really blame them. 
 </p>
 </div>
+</div>
 
-<div id="outline-container-org628e663" class="outline-4">
-<h4 id="org628e663">access gcal calendars with org-caldav</h4>
-<div class="outline-text-4" id="text-org628e663">
+<div id="outline-container-org628e663" class="outline-3">
+<h3 id="org628e663">access gcal calendars with org-caldav</h3>
+<div class="outline-text-3" id="text-org628e663">
 <p>
 so, what's a person to do if they don't have the ability to use google's api to pull down calendars, but they still need to sync gcal stuff to orgmode? well, you can do something kind of dumb, but easy. gcal publishes your calendar to an unauthed but secret URL by default. you can subscribe to that URL from within fastmail, and then sync that calendar down to org mode through fastmail! 
 </p>
 </div>
 
-<ul class="org-ul">
-<li><a id="org02707c8"></a>doing this<br>
-<div class="outline-text-5" id="text-org02707c8">
+<div id="outline-container-orgee5f0b7" class="outline-4">
+<h4 id="orgee5f0b7">doing this</h4>
+<div class="outline-text-4" id="text-orgee5f0b7">
 <ol class="org-ol">
 <li>copy the url from the google calender</li>
 <li>subscribe to the url in fastmail (and i assume any provider that uses caldav)</li>
 <li>sync that calendar down to org mode via org-caldav!</li>
 </ol>
 </div>
-</li>
+</div>
 
-<li><a id="orgde717ba"></a>details<br>
-<div class="outline-text-5" id="text-orgde717ba">
+<div id="outline-container-org5bff311" class="outline-4">
+<h4 id="org5bff311">details</h4>
+<div class="outline-text-4" id="text-org5bff311">
 <p>
 access the URL that google publishes to by logging into gcal -&gt; settings -&gt; click on the calendar you want to access on the left hand side of the screen -&gt; scroll down until you see "secret address in iCal format". copy that URL.
 </p>
@@ -239,16 +241,15 @@ access the URL that google publishes to by logging into gcal -&gt; settings -&gt
 subscribe to the calendar in fastmail by logging into fastmail -&gt; settings -&gt; click on calendars on the left hand side -&gt; find the box labeled "Subscriptions" and paste in the URL there. hit subscribe. done!
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="org3b58c84"></a>other options<br>
-<div class="outline-text-5" id="text-org3b58c84">
+<div id="outline-container-org3b58c84" class="outline-4">
+<h4 id="org3b58c84">other options</h4>
+<div class="outline-text-4" id="text-org3b58c84">
 <p>
 fastmail <i>also</i> allows you to log into a few providers specifically. I suspect this is done by simply mimicking a client, so fastmail speaks the gcal API and you can have access to everything that way. I haven't tried this, though I may get curious eventually. If you try it <a href="mailto:me@jowj.net">i'd love to know!</a>
 </p>
 </div>
-</li>
-</ul>
 </div>
 </div>
 <div id="outline-container-org955ae4c" class="outline-3">
@@ -267,9 +268,9 @@ syncing events to org mode manually seems fine to me; i'll typically do it once,
 you should encrypt the file with gpg. this is not too difficult!
 </p>
 </div>
-<div id="outline-container-orgeb37b53" class="outline-4">
-<h4 id="orgeb37b53">doing this</h4>
-<div class="outline-text-4" id="text-orgeb37b53">
+<div id="outline-container-org8d4c407" class="outline-4">
+<h4 id="org8d4c407">doing this</h4>
+<div class="outline-text-4" id="text-org8d4c407">
 <ol class="org-ol">
 <li>create a gpg key and trust it</li>
 <li>create a file that you will encrypt, adding the login details to the file</li>
@@ -279,9 +280,9 @@ you should encrypt the file with gpg. this is not too difficult!
 </div>
 </div>
 
-<div id="outline-container-org5bff311" class="outline-4">
-<h4 id="org5bff311">details</h4>
-<div class="outline-text-4" id="text-org5bff311">
+<div id="outline-container-org90f1266" class="outline-4">
+<h4 id="org90f1266">details</h4>
+<div class="outline-text-4" id="text-org90f1266">
 <p>
 you should create a gpg key and trust it. there are other guides for how to do that. here are a few:
 </p>
