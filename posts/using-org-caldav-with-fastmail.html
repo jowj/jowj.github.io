@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-03-08 Mon 16:33 -->
+<!-- 2022-02-07 Mon 17:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>using org caldav with fastmail</title>
@@ -76,50 +76,26 @@
                       text-decoration: none;}
         </style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -129,22 +105,23 @@ for the JavaScript code in this tag.
 <a href="../personal/articles.html">diary</a>
 <a href="https://git.awful.club/projects">projects</a>
 <a href="../resume.pdf">resume</a>
+<a href="../lore.html">lore</a>
 </div>
 <div id="content">
 <header>
 <h1 class="title">using org caldav with fastmail</h1>
 </header>
-<div id="outline-container-org2121fbb" class="outline-2">
-<h2 id="org2121fbb">how to sync calendar events from fastmail to your org agenda</h2>
-<div class="outline-text-2" id="text-org2121fbb">
+<div id="outline-container-org203ad29" class="outline-2">
+<h2 id="org203ad29">how to sync calendar events from fastmail to your org agenda</h2>
+<div class="outline-text-2" id="text-org203ad29">
 <p>
 i've recently started a new job. i take a lot of notes, and I find it useful to take notes for each meeting along with some metadata about each meeting. the notes i obviously take as the meeting goes on, but the metadata is already in the meeting invite. rather than entering all of it manually for each meeting, I've had org-mode pull the meeting info for me.
 </p>
 </div>
 
-<div id="outline-container-orgeb37b53" class="outline-3">
-<h3 id="orgeb37b53">doing this</h3>
-<div class="outline-text-3" id="text-orgeb37b53">
+<div id="outline-container-orgf0e75e9" class="outline-3">
+<h3 id="orgf0e75e9">doing this</h3>
+<div class="outline-text-3" id="text-orgf0e75e9">
 <ol class="org-ol">
 <li>download <a href="https://github.com/dengste/org-caldav">org-caldav</a></li>
 <li>configure it</li>
@@ -153,9 +130,9 @@ i've recently started a new job. i take a lot of notes, and I find it useful to 
 </ol>
 </div>
 
-<div id="outline-container-org606ce48" class="outline-4">
-<h4 id="org606ce48">really though,</h4>
-<div class="outline-text-4" id="text-org606ce48">
+<div id="outline-container-org26558fc" class="outline-4">
+<h4 id="org26558fc">really though,</h4>
+<div class="outline-text-4" id="text-org26558fc">
 <p>
 ok its only slightly more complicated than that. for fastmail, you can't follow the instructions as given exactly. Here's the broad way to configure it (i'll use <code>use-package</code> because so does everyone):
 </p>
@@ -198,9 +175,9 @@ copy everything after your <code>user@domain.tld</code>; that goes in your <code
 </div>
 </div>
 </div>
-<div id="outline-container-orgbc4f665" class="outline-3">
-<h3 id="orgbc4f665">org-gcal as an alternative to org-caldav</h3>
-<div class="outline-text-3" id="text-orgbc4f665">
+<div id="outline-container-orgf788c36" class="outline-3">
+<h3 id="orgf788c36">org-gcal as an alternative to org-caldav</h3>
+<div class="outline-text-3" id="text-orgf788c36">
 <p>
 there are a few different ways to sync calendars into org-mode. <a href="https://github.com/emacsmirror/org-gcal">org-gcal</a> is for folks running gcal for events. however, be warned that you must have a certain level of permission within your Google Org for that account to be useful; you need enough permission to create an API key within the org. for someone's personal accounts that probably works. if you're trying to integrate with a work account, where permissions should be more locked down, you will need to do something else.
 </p>
@@ -211,17 +188,17 @@ google <i>really</i> would prefer that you don't use caldav to talk to their cal
 </div>
 </div>
 
-<div id="outline-container-org628e663" class="outline-3">
-<h3 id="org628e663">access gcal calendars with org-caldav</h3>
-<div class="outline-text-3" id="text-org628e663">
+<div id="outline-container-orgf9e3f6b" class="outline-3">
+<h3 id="orgf9e3f6b">access gcal calendars with org-caldav</h3>
+<div class="outline-text-3" id="text-orgf9e3f6b">
 <p>
 so, what's a person to do if they don't have the ability to use google's api to pull down calendars, but they still need to sync gcal stuff to orgmode? well, you can do something kind of dumb, but easy. gcal publishes your calendar to an unauthed but secret URL by default. you can subscribe to that URL from within fastmail, and then sync that calendar down to org mode through fastmail! 
 </p>
 </div>
 
-<div id="outline-container-orgee5f0b7" class="outline-4">
-<h4 id="orgee5f0b7">doing this</h4>
-<div class="outline-text-4" id="text-orgee5f0b7">
+<div id="outline-container-orgce58551" class="outline-4">
+<h4 id="orgce58551">doing this</h4>
+<div class="outline-text-4" id="text-orgce58551">
 <ol class="org-ol">
 <li>copy the url from the google calender</li>
 <li>subscribe to the url in fastmail (and i assume any provider that uses caldav)</li>
@@ -230,9 +207,9 @@ so, what's a person to do if they don't have the ability to use google's api to 
 </div>
 </div>
 
-<div id="outline-container-org5bff311" class="outline-4">
-<h4 id="org5bff311">details</h4>
-<div class="outline-text-4" id="text-org5bff311">
+<div id="outline-container-orgd0fb752" class="outline-4">
+<h4 id="orgd0fb752">details</h4>
+<div class="outline-text-4" id="text-orgd0fb752">
 <p>
 access the URL that google publishes to by logging into gcal -&gt; settings -&gt; click on the calendar you want to access on the left hand side of the screen -&gt; scroll down until you see "secret address in iCal format". copy that URL.
 </p>
@@ -243,18 +220,18 @@ subscribe to the calendar in fastmail by logging into fastmail -&gt; settings -&
 </div>
 </div>
 
-<div id="outline-container-org3b58c84" class="outline-4">
-<h4 id="org3b58c84">other options</h4>
-<div class="outline-text-4" id="text-org3b58c84">
+<div id="outline-container-org53d1405" class="outline-4">
+<h4 id="org53d1405">other options</h4>
+<div class="outline-text-4" id="text-org53d1405">
 <p>
 fastmail <i>also</i> allows you to log into a few providers specifically. I suspect this is done by simply mimicking a client, so fastmail speaks the gcal API and you can have access to everything that way. I haven't tried this, though I may get curious eventually. If you try it <a href="mailto:me@jowj.net">i'd love to know!</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org955ae4c" class="outline-3">
-<h3 id="org955ae4c">credential storage</h3>
-<div class="outline-text-3" id="text-org955ae4c">
+<div id="outline-container-org2f90ddb" class="outline-3">
+<h3 id="org2f90ddb">credential storage</h3>
+<div class="outline-text-3" id="text-org2f90ddb">
 <p>
 syncing events to org mode manually seems fine to me; i'll typically do it once, maybe twice a day. typing in credentials each time you want to sync sucks though. this type of problem is commonly solved 1 of two ways, in emacs:
 </p>
@@ -268,9 +245,9 @@ syncing events to org mode manually seems fine to me; i'll typically do it once,
 you should encrypt the file with gpg. this is not too difficult!
 </p>
 </div>
-<div id="outline-container-org8d4c407" class="outline-4">
-<h4 id="org8d4c407">doing this</h4>
-<div class="outline-text-4" id="text-org8d4c407">
+<div id="outline-container-org2b18255" class="outline-4">
+<h4 id="org2b18255">doing this</h4>
+<div class="outline-text-4" id="text-org2b18255">
 <ol class="org-ol">
 <li>create a gpg key and trust it</li>
 <li>create a file that you will encrypt, adding the login details to the file</li>
@@ -280,9 +257,9 @@ you should encrypt the file with gpg. this is not too difficult!
 </div>
 </div>
 
-<div id="outline-container-org90f1266" class="outline-4">
-<h4 id="org90f1266">details</h4>
-<div class="outline-text-4" id="text-org90f1266">
+<div id="outline-container-org59551af" class="outline-4">
+<h4 id="org59551af">details</h4>
+<div class="outline-text-4" id="text-org59551af">
 <p>
 you should create a gpg key and trust it. there are other guides for how to do that. here are a few:
 </p>
@@ -331,7 +308,7 @@ nice!
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
 </div>
 </body>
 </html>

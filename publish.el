@@ -81,7 +81,8 @@
 <a href=\"%1$s/posts/articles.html\">essays</a>
 <a href=\"%1$s/personal/articles.html\">diary</a>
 <a href=\"https://git.awful.club/projects\">projects</a>
-<a href=\"%1$s/resume.pdf\">resume</a>"
+<a href=\"%1$s/resume.pdf\">resume</a>
+<a href=\"%1$s/lore.html\">lore</a>"
      prefix)))
 
 (setq org-html-postamble-format `(("en" ,(concat "<p class=\"creator\">Made with %c</p></p>"))))

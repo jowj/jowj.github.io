@@ -1,58 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-01-23 Sat 13:46 -->
+<!-- 2022-02-07 Mon 17:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>using matrix</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="josiah">
 <link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+        
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+        
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+        
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+        
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+        
+        <style>
+           abbr {color: red;}
+        
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -62,14 +105,15 @@ for the JavaScript code in this tag.
 <a href="../personal/articles.html">diary</a>
 <a href="https://git.awful.club/projects">projects</a>
 <a href="../resume.pdf">resume</a>
+<a href="../lore.html">lore</a>
 </div>
 <div id="content">
 <header>
 <h1 class="title">using matrix</h1>
 </header>
-<div id="outline-container-orgd1d203d" class="outline-2">
-<h2 id="orgd1d203d">introduction</h2>
-<div class="outline-text-2" id="text-orgd1d203d">
+<div id="outline-container-orga03dd1a" class="outline-2">
+<h2 id="orga03dd1a">introduction</h2>
+<div class="outline-text-2" id="text-orga03dd1a">
 <p>
 i wanna write about <a href="https://matrix.org">matrix</a>. matrix is a 'new' protocol for decentralized communication. it can be used in a bunch of different ways: from relatively secure, favoring security over ease of use, to very open, favoring ease of use over all other concerns. i tend to use it in the, to me, bare minimum secure configuration and then focusing hard on ease of use.
 </p>
@@ -94,17 +138,17 @@ i don't wanna convince you that matrix is the protocol of your dreams and you sh
 </div>
 </div>
 
-<div id="outline-container-orgd355b3b" class="outline-2">
-<h2 id="orgd355b3b">what am i doing with matrix</h2>
-<div class="outline-text-2" id="text-orgd355b3b">
+<div id="outline-container-orgbf9c478" class="outline-2">
+<h2 id="orgbf9c478">what am i doing with matrix</h2>
+<div class="outline-text-2" id="text-orgbf9c478">
 <p>
 one of the most fun / worst things about using matrix is that there's a bajillion knobs to tweak; anyone who is using it could have anywhere from 1 to n things different from my setup. here's what i'm doing:
 </p>
 </div>
 
-<div id="outline-container-orgbb87b0f" class="outline-3">
-<h3 id="orgbb87b0f">clients</h3>
-<div class="outline-text-3" id="text-orgbb87b0f">
+<div id="outline-container-org71157e0" class="outline-3">
+<h3 id="org71157e0">clients</h3>
+<div class="outline-text-3" id="text-org71157e0">
 <p>
 i'm using standard element clients for linux, macOS, iOS, and android.
 </p>
@@ -120,22 +164,22 @@ since originally writing ^ that paragraph, the new hotness for KDE clients is <a
 </div>
 
 
-<div id="outline-container-orgd1ca908" class="outline-3">
-<h3 id="orgd1ca908">servers</h3>
-<div class="outline-text-3" id="text-orgd1ca908">
+<div id="outline-container-orgbbb456e" class="outline-3">
+<h3 id="orgbbb456e">servers</h3>
+<div class="outline-text-3" id="text-orgbbb456e">
 <p>
 i'm using the <a href="https://github.com/matrix-org/synapse">synapse reference server</a>, written in python. there really aren't other options here at the moment. dendrite (written in go) looks like it will no longer be the successor to Synapse, and instead just be a testing ground. there are a few rust servers being worked on as well, but with less official support.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb2d4919" class="outline-3">
-<h3 id="orgb2d4919">bridges</h3>
-<div class="outline-text-3" id="text-orgb2d4919">
+<div id="outline-container-org85364c6" class="outline-3">
+<h3 id="org85364c6">bridges</h3>
+<div class="outline-text-3" id="text-org85364c6">
 </div>
-<div id="outline-container-orga90b482" class="outline-4">
-<h4 id="orga90b482">slack</h4>
-<div class="outline-text-4" id="text-orga90b482">
+<div id="outline-container-org49d40b8" class="outline-4">
+<h4 id="org49d40b8">slack</h4>
+<div class="outline-text-4" id="text-org49d40b8">
 <p>
 i'm currently using the <a href="https://github.com/matrix-org/matrix-appservice-slack">matrix-appservice-slack bridge</a> to bridge my local family and friends slack to my matrix server. this lets me do two things that are important to me:
 </p>
@@ -155,9 +199,9 @@ all the data replicates without hiccups between my synapse instance and the slac
 </div>
 </div>
 
-<div id="outline-container-orgcaa0fd4" class="outline-4">
-<h4 id="orgcaa0fd4">irc</h4>
-<div class="outline-text-4" id="text-orgcaa0fd4">
+<div id="outline-container-org0461603" class="outline-4">
+<h4 id="org0461603">irc</h4>
+<div class="outline-text-4" id="text-org0461603">
 <p>
 the self hosted <a href="https://github.com/matrix-org/matrix-appservice-irc">matrix-appservice-irc bridge</a> is what most people seem to use. i have used the <i>hosted</i> version on matrix.org before; i hated it. it was great to be able to talk to folks on freenode channels from element, especially given that there is no reasonable irc client on iOS! but the UX is just bad.
 </p>
@@ -168,18 +212,18 @@ i've started the learning process for self hosting it myself and having the brid
 </div>
 </div>
 
-<div id="outline-container-org7f847c8" class="outline-4">
-<h4 id="org7f847c8">discord</h4>
-<div class="outline-text-4" id="text-org7f847c8">
+<div id="outline-container-org2d028e9" class="outline-4">
+<h4 id="org2d028e9">discord</h4>
+<div class="outline-text-4" id="text-org2d028e9">
 <p>
 i'm using the <a href="https://github.com/matrix-discord/mx-puppet-discord">mx-puppet-discord</a> bridge for bridging in discord channels. I tried using the <a href="https://github.com/Half-Shot/matrix-appservice-discord">appservice discord</a> bridge but had a <i>devil</i> of a time getting it to work. mx-puppet-discord works and has (imo) a better user experience for admins, though it does seem pretty finnicky. from what I can tell, more finnicky than the appservice. at least this one i can get to run though!!
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4290f18" class="outline-4">
-<h4 id="org4290f18">combining bridges in a single room</h4>
-<div class="outline-text-4" id="text-org4290f18">
+<div id="outline-container-org037e209" class="outline-4">
+<h4 id="org037e209">combining bridges in a single room</h4>
+<div class="outline-text-4" id="text-org037e209">
 <p>
 a thing that i think is fucking <i>cool</i> and also probably a source of some of my problems is: i currently use some of these bridges to create a frankenstein room, that does bidirecitonal send like discord &lt;-&gt; matrix &lt;-&gt; slack; the channel "mothra-fuckers" (shut up) in discord talks to the channel "mothra-fuckers" in  matrix, which is also bridged to "mothra-fuckers" in slack, and anyone in any of those channels can talk to all three platforms! rad!
 </p>
@@ -188,13 +232,13 @@ a thing that i think is fucking <i>cool</i> and also probably a source of some o
 </div>
 </div>
 
-<div id="outline-container-org3887808" class="outline-2">
-<h2 id="org3887808">avoiding common pitfalls of self hosting</h2>
-<div class="outline-text-2" id="text-org3887808">
+<div id="outline-container-orgdc8490e" class="outline-2">
+<h2 id="orgdc8490e">avoiding common pitfalls of self hosting</h2>
+<div class="outline-text-2" id="text-orgdc8490e">
 </div>
-<div id="outline-container-org9b16adb" class="outline-3">
-<h3 id="org9b16adb">deployment</h3>
-<div class="outline-text-3" id="text-org9b16adb">
+<div id="outline-container-org4a7b9a7" class="outline-3">
+<h3 id="org4a7b9a7">deployment</h3>
+<div class="outline-text-3" id="text-org4a7b9a7">
 <p>
 I think the first thing you should do is eschew configuring synapse and all these bridges on your own. that fucking sucks. use <a href="https://github.com/spantaleev/matrix-docker-ansible-deploy">this set</a> of ansible roles, these guys are great, continuously update stuff, and provide meaningful changelogs for updates. their documentation is not always lovely, especially about the optional plugins they offer, but have been enough to get me started on solving the problem every time so far.
 </p>
@@ -205,9 +249,9 @@ I forked their repo and periodically update it from <code>upstream/master</code>
 </div>
 </div>
 
-<div id="outline-container-orgf5a2b73" class="outline-3">
-<h3 id="orgf5a2b73">disk space</h3>
-<div class="outline-text-3" id="text-orgf5a2b73">
+<div id="outline-container-org873422a" class="outline-3">
+<h3 id="org873422a">disk space</h3>
+<div class="outline-text-3" id="text-org873422a">
 <p>
 one of the things i keep intending to do (and have thus far put off) is move away from relying on raw disks attached to DO droplet and move towards object storage with s3/do spaces/ whatever. This is made easy if you use the previously mentioned set of ansible roles. if you don't do this, you will have to periodically go in and delete old media or add a bunch of new disk space.
 </p>
@@ -218,9 +262,9 @@ if you really must go with disks and not object storage for some reason I recomm
 </div>
 </div>
 
-<div id="outline-container-org915de9a" class="outline-3">
-<h3 id="org915de9a">backups!</h3>
-<div class="outline-text-3" id="text-org915de9a">
+<div id="outline-container-org3dcf73b" class="outline-3">
+<h3 id="org3dcf73b">backups!</h3>
+<div class="outline-text-3" id="text-org3dcf73b">
 <p>
 you should do backups. I haven't figured out a particularly great method here, yet. I do full VM snapshots through my cloud provider, but pulling data out of that environment on a regular basis is something I haven't worked out how to do well. <a href="https://github.com/matrix-org/synapse/issues/2046">here</a> is a github issue that has some community opinions on what to backup, but there's still no official guidance as far as I know.
 </p>
@@ -228,9 +272,9 @@ you should do backups. I haven't figured out a particularly great method here, y
 </div>
 </div>
 
-<div id="outline-container-orgfebc999" class="outline-2">
-<h2 id="orgfebc999">talk to me about matrix!</h2>
-<div class="outline-text-2" id="text-orgfebc999">
+<div id="outline-container-orgd9442a6" class="outline-2">
+<h2 id="orgd9442a6">talk to me about matrix!</h2>
+<div class="outline-text-2" id="text-orgd9442a6">
 <p>
 i really like matrix. i think there's a lot of cool stuff here, and I hope that it continues to improve. if you run into issues with matrix, have some questions about it you aren't sure where to ask, or just wanna chat about it, please talk to me! I've got several years experience running my home server, and all my friends are tired of hearing about matrix lmao. i'm <a href="mailto:me@jowj.net">mailto:me@jowj.net</a> on email, or @jowj:awful.club on matrix.
 </p>
@@ -238,7 +282,7 @@ i really like matrix. i think there's a lot of cool stuff here, and I hope that 
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
 </div>
 </body>
 </html>

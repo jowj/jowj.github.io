@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-02-28 Sun 21:21 -->
+<!-- 2022-02-07 Mon 17:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>uses this</title>
@@ -76,50 +76,26 @@
                       text-decoration: none;}
         </style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -129,24 +105,25 @@ for the JavaScript code in this tag.
 <a href="../personal/articles.html">diary</a>
 <a href="https://git.awful.club/projects">projects</a>
 <a href="../resume.pdf">resume</a>
+<a href="../lore.html">lore</a>
 </div>
 <div id="content">
 <header>
 <h1 class="title">uses this</h1>
 </header>
-<div id="outline-container-org3c4ab1d" class="outline-2">
-<h2 id="org3c4ab1d">uses this</h2>
-<div class="outline-text-2" id="text-org3c4ab1d">
+<div id="outline-container-orgfe4d8f2" class="outline-2">
+<h2 id="orgfe4d8f2">uses this</h2>
+<div class="outline-text-2" id="text-orgfe4d8f2">
 <p>
 <a href="https://usesthis.com/">uses this</a> is a collection of interviews with individuals asking them about their hardware and software uses. i love this topic. of course, i'm not interesting enough to do interviews with anyone, but i <i>do</i> think my hardware and software uses are more interesting than many of the real answerer's<abbr class="tooltip" title="i use a macbook pro! and an iphone! and google docs for collaboration! who cares :(">°</abbr>&emsp13;. so, here's what i use!
 </p>
 </div>
 
-<div id="outline-container-orgebb23e7" class="outline-3">
-<h3 id="orgebb23e7">hardware</h3>
-<div class="outline-text-3" id="text-orgebb23e7">
+<div id="outline-container-org3131fdd" class="outline-3">
+<h3 id="org3131fdd">hardware</h3>
+<div class="outline-text-3" id="text-org3131fdd">
 
-<figure id="orga029d02">
+<figure id="org57676f8">
 <img src="../photos/uses-this/desk2.jpeg" alt="desk2.jpeg">
 
 <figcaption><span class="figure-number">Figure 1: </span>a truly ridiculous setup</figcaption>
@@ -157,11 +134,11 @@ i use a collection of hardware i've built, scrounged, borrowed or (reluctantly) 
 </p>
 </div>
 
-<div id="outline-container-org6d415ee" class="outline-4">
-<h4 id="org6d415ee">networking</h4>
-<div class="outline-text-4" id="text-org6d415ee">
+<div id="outline-container-orgd74725c" class="outline-4">
+<h4 id="orgd74725c">networking</h4>
+<div class="outline-text-4" id="text-orgd74725c">
 
-<figure id="orgbc0f2d1">
+<figure id="orgbe834a0">
 <img src="../photos/uses-this/rack.jpeg" alt="rack.jpeg">
 
 <figcaption><span class="figure-number">Figure 2: </span>a 19" rack my brother gave me</figcaption>
@@ -177,9 +154,9 @@ the rack that the unifi stuff lives in is a 19" home network rack that is (appar
 </div>
 </div>
 
-<div id="outline-container-org6dbd1b0" class="outline-4">
-<h4 id="org6dbd1b0">servers</h4>
-<div class="outline-text-4" id="text-org6dbd1b0">
+<div id="outline-container-org7a0ff57" class="outline-4">
+<h4 id="org7a0ff57">servers</h4>
+<div class="outline-text-4" id="text-org7a0ff57">
 <p>
 i have a built from scratch very old "server" that used to be my main computer. It was the first computer I built when I moved out into my own apartment. Its got a i5-2500K, which google tells me is from 2011, so I got this about a decade ago. It has 16 gigs of ram and some very shitty graphics card. it hosts my <a href="https://git.awful.club/jowj/adc/src/branch/master/ansible/roles/mediaserver">media server shit</a>, which includes the *arr apps, plex, sabnzbd, etc.
 </p>
@@ -190,7 +167,7 @@ I have a raspberry pi that serves as my VPN endpoint for a site2site <a href="ht
 
 
 
-<figure id="orge5abd1e">
+<figure id="org85afb6d">
 <img src="../photos/uses-this/synology.jpeg" alt="synology.jpeg">
 
 <figcaption><span class="figure-number">Figure 3: </span>a very old synology that i am too lazy to dust.</figcaption>
@@ -206,9 +183,9 @@ i have a collection of vms in <a href="https://www.digitalocean.com/">digital oc
 </div>
 </div>
 
-<div id="outline-container-org706bae1" class="outline-4">
-<h4 id="org706bae1">user devices</h4>
-<div class="outline-text-4" id="text-org706bae1">
+<div id="outline-container-org9f1e641" class="outline-4">
+<h4 id="org9f1e641">user devices</h4>
+<div class="outline-text-4" id="text-org9f1e641">
 <p>
 i have too many of these lol. i have a windows tower that is just for playing games. its got a Ryzen 3*** series CPU and 16 gb of ram. I've got a <a href="https://system76.com/">system76 oryx</a> that i have used as my primary user device since 2016. Its a lovely device with a few caveats; system76 sells rebranded <a href="https://www.clevo.com.tw/index-en.asp">clevo</a> machines, and there are more than a few QC issues with these guys. the laptop keyboard doesn't work reliably at all, though in my case that's fine because I never use it as a laptop, its always attached to my full desk setup.
 </p>
@@ -219,11 +196,11 @@ for mobile devices i have an iPhone XS (though i'm thinking of side-grading to t
 </div>
 </div>
 
-<div id="outline-container-org490ea28" class="outline-4">
-<h4 id="org490ea28">user IO devices</h4>
-<div class="outline-text-4" id="text-org490ea28">
+<div id="outline-container-orga200270" class="outline-4">
+<h4 id="orga200270">user IO devices</h4>
+<div class="outline-text-4" id="text-orga200270">
 
-<figure id="orgb8d9eba">
+<figure id="org418a3e7">
 <img src="../photos/uses-this/audio-stuff.jpeg" alt="audio-stuff.jpeg">
 
 <figcaption><span class="figure-number">Figure 4: </span>my audio stuff: from left to right: a mic, a preamp, headphone mixer, mic splitter</figcaption>
@@ -234,7 +211,7 @@ I'm in the process of building out a version of <a href="https://me.micahrl.com/
 </p>
 
 
-<figure id="org4102d6a">
+<figure id="org4c5057c">
 <img src="../photos/uses-this/ergodox.jpeg" alt="ergodox.jpeg">
 
 <figcaption><span class="figure-number">Figure 5: </span>one ergodox infinity. i purchased this one from some user off r/mechmarket a few years ago.</figcaption>
@@ -245,7 +222,7 @@ i have two <a href="https://input.club/devices/infinity-ergodox/">ergodox infini
 </p>
 
 
-<figure id="org94bc0bf">
+<figure id="org1ddfba7">
 <img src="../photos/uses-this/mice.jpeg" alt="mice.jpeg">
 
 <figcaption><span class="figure-number">Figure 6: </span>some of my mice. from left to right: mx vertical, benq, kensington</figcaption>
@@ -257,9 +234,9 @@ i have a stupid collection of mice, mostly as part of a "can i help my RSI" seri
 </div>
 </div>
 
-<div id="outline-container-org0ac53a6" class="outline-4">
-<h4 id="org0ac53a6">misc</h4>
-<div class="outline-text-4" id="text-org0ac53a6">
+<div id="outline-container-orgde0788f" class="outline-4">
+<h4 id="orgde0788f">misc</h4>
+<div class="outline-text-4" id="text-orgde0788f">
 <p>
 <img src="../photos/uses-this/bike.jpeg" alt="bike.jpeg">
 i also have a beat up 90s era hardtail bicycle that i love to death. its a piece of shit and i love it very much. i am also excited to buy another bike, eventually, but this one is suiting me just fine for now.
@@ -268,24 +245,24 @@ i also have a beat up 90s era hardtail bicycle that i love to death. its a piece
 </div>
 </div>
 
-<div id="outline-container-org5291a5c" class="outline-3">
-<h3 id="org5291a5c">software</h3>
-<div class="outline-text-3" id="text-org5291a5c">
+<div id="outline-container-orgf73d88c" class="outline-3">
+<h3 id="orgf73d88c">software</h3>
+<div class="outline-text-3" id="text-orgf73d88c">
 </div>
-<div id="outline-container-org1b465eb" class="outline-4">
-<h4 id="org1b465eb">operating systems</h4>
-<div class="outline-text-4" id="text-org1b465eb">
+<div id="outline-container-orgd9d39d9" class="outline-4">
+<h4 id="orgd9d39d9">operating systems</h4>
+<div class="outline-text-4" id="text-orgd9d39d9">
 <p>
 Nothing crazy here outside of my desktop. i primarily use linux things. for my personal every day use, I rely on <a href="https://nixos.org/">nixOS</a>. i love it a lot. for all my servers i run <a href="https://www.debian.org/">debian</a>, though I hope to change that soon to <i>either</i> guix or nixos (depending on cloud support). I use macOS for work, and windows to play games that aren't fully compat with valve's proton<abbr class="tooltip" title="proton is valve's compatability tool for steam">°</abbr>&emsp13; tool. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-org733e06b" class="outline-4">
-<h4 id="org733e06b">desktop env</h4>
-<div class="outline-text-4" id="text-org733e06b">
+<div id="outline-container-orgaea9327" class="outline-4">
+<h4 id="orgaea9327">desktop env</h4>
+<div class="outline-text-4" id="text-orgaea9327">
 
-<figure id="org05b1065">
+<figure id="orgc909897">
 <img src="../photos/uses-this/desktop-env.png" alt="desktop-env.png">
 
 <figcaption><span class="figure-number">Figure 7: </span>sample fake workspace</figcaption>
@@ -301,9 +278,9 @@ on top of nixOS i have a (i'm sure terrible) desktop environment. i use <a href=
 </div>
 </div>
 
-<div id="outline-container-org5c76fef" class="outline-4">
-<h4 id="org5c76fef">emacs, and all the shit i do with it</h4>
-<div class="outline-text-4" id="text-org5c76fef">
+<div id="outline-container-orga9cd5f9" class="outline-4">
+<h4 id="orga9cd5f9">emacs, and all the shit i do with it</h4>
+<div class="outline-text-4" id="text-orga9cd5f9">
 <p>
 emacs gets its own section because its <i>so fucking good</i>. emacs is a platform for solving problems you face on your computer. in order to be a good user of emacs you need to know <a href="https://en.wikipedia.org/wiki/Emacs_Lisp">emacs lisp</a> (sorry lol). once you are comfortable at least fucking around with existing code and modifying it to better fit you, you become capable of addressing basically any problem you might run into.
 </p>
@@ -326,9 +303,9 @@ If you want to look at my dot files they are <a href="https://git.awful.club/jow
 </div>
 </div>
 
-<div id="outline-container-org5c11ae6" class="outline-4">
-<h4 id="org5c11ae6">programming and versioning and config management (ansible et al)</h4>
-<div class="outline-text-4" id="text-org5c11ae6">
+<div id="outline-container-orgf0db1c2" class="outline-4">
+<h4 id="orgf0db1c2">programming and versioning and config management (ansible et al)</h4>
+<div class="outline-text-4" id="text-orgf0db1c2">
 <p>
 i'm not doing anything very interesting here outside of my emacs/elisp usage. 
 </p>
@@ -341,9 +318,9 @@ i'm not doing anything very interesting here outside of my emacs/elisp usage.
 </div>
 </div>
 
-<div id="outline-container-org533fdc9" class="outline-4">
-<h4 id="org533fdc9">services i host and use.</h4>
-<div class="outline-text-4" id="text-org533fdc9">
+<div id="outline-container-org0252bb3" class="outline-4">
+<h4 id="org0252bb3">services i host and use.</h4>
+<div class="outline-text-4" id="text-org0252bb3">
 <p>
 as mentioned previously, my mediaserver setup hosts the <code>*arr</code> apps<abbr class="tooltip" title="these apps are radarr, sonarr, lidarr, which are download managers for tv, movies, and music">°</abbr>&emsp13;. I use plex<abbr class="tooltip" title="a personal media server">°</abbr>&emsp13; to serve media files to my users (me, friends, family). i store the configs for these things in a <code>docker-compose</code> format that deploys a <code>swarm</code>, which itself is deployed through ansible.
 </p>
@@ -363,9 +340,9 @@ this blog is currently hosted on github pages as mentioned previously. i use <a 
 </div>
 </div>
 
-<div id="outline-container-org8b95d40" class="outline-3">
-<h3 id="org8b95d40">my ideal setup</h3>
-<div class="outline-text-3" id="text-org8b95d40">
+<div id="outline-container-orge83f97b" class="outline-3">
+<h3 id="orge83f97b">my ideal setup</h3>
+<div class="outline-text-3" id="text-orge83f97b">
 <p>
 this doesn't exist the fun part is fucking with what you have! here are some things i'd love to try out:
 </p>
@@ -384,9 +361,9 @@ this doesn't exist the fun part is fucking with what you have! here are some thi
 </div>
 </div>
 
-<div id="outline-container-org5977daf" class="outline-3">
-<h3 id="org5977daf">articles from uses this that i like</h3>
-<div class="outline-text-3" id="text-org5977daf">
+<div id="outline-container-orge4bea29" class="outline-3">
+<h3 id="orge4bea29">articles from uses this that i like</h3>
+<div class="outline-text-3" id="text-orge4bea29">
 <ul class="org-ul">
 <li>alice mazzy's interview: <a href="https://usesthis.com/interviews/alice.maz/">https://usesthis.com/interviews/alice.maz/</a>. she's always interesting. she's got writing that i like, too. her article on <a href="https://www.alicemaz.com/writing/minecraft.html">minecraft economies</a> and breaking them is one of my favorite reads.</li>
 <li>chris randall's: <a href="https://usesthis.com/interviews/chris.randall/">https://usesthis.com/interviews/chris.randall/</a>. big focus on audio production in this one. super interesting stuff.</li>
@@ -403,7 +380,7 @@ if there's anything you've read from uses this that you especially liked <a href
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
 </div>
 </body>
 </html>

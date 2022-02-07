@@ -1,58 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-12-01 Tue 18:40 -->
+<!-- 2022-02-07 Mon 17:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>blogging on github:pages with orgmode</title>
+<title>blogging on <a href="https://www.github.com/pages"><img src="https://img.shields.io/github/pages?style=social"></a> with orgmode</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="josiah">
 <link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+        
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+        
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+        
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+        
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+        
+        <style>
+           abbr {color: red;}
+        
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -62,23 +105,24 @@ for the JavaScript code in this tag.
 <a href="../personal/articles.html">diary</a>
 <a href="https://git.awful.club/projects">projects</a>
 <a href="../resume.pdf">resume</a>
+<a href="../lore.html">lore</a>
 </div>
 <div id="content">
 <header>
-<h1 class="title">blogging on github:pages with orgmode</h1>
+<h1 class="title">blogging on <a href="https://www.github.com/pages"><img src="https://img.shields.io/github/pages?style=social"></a> with orgmode</h1>
 </header>
-<div id="outline-container-org2a44f6c" class="outline-2">
-<h2 id="org2a44f6c">what i did</h2>
-<div class="outline-text-2" id="text-org2a44f6c">
+<div id="outline-container-org454b0ca" class="outline-2">
+<h2 id="org454b0ca">what i did</h2>
+<div class="outline-text-2" id="text-org454b0ca">
 <p>
 i've just moved from using markdown and jekyll to generate a static website on github pages to using org-mode and org-publish to generate static html files, also on github pages.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgbf0ad62" class="outline-2">
-<h2 id="orgbf0ad62">why did i do this</h2>
-<div class="outline-text-2" id="text-orgbf0ad62">
+<div id="outline-container-orgf892fd7" class="outline-2">
+<h2 id="orgf892fd7">why did i do this</h2>
+<div class="outline-text-2" id="text-orgf892fd7">
 <p>
 my setup has been a pain - i do most of my writing and thinking in <a href="https://orgmode.org/">org mode</a>, but to post stuff on <a href="https://me.jowj.net/">https://me.jowj.net/</a> i have to convert that to markdown (relatively easy, due to a package called <a href="https://github.com/emacsmirror/org/blob/master/lisp/ox-md.el">ox-md</a>) and use <a href="https://jekyllrb.com/">jekyll</a> to convert md to html and handle the generation of the site. the problem with jekyll is that it <i>sucks</i>. its a tool based on the ruby ecosystem, and since I actually publish my stuff so infrequently every time i use it i have to update something about my ruby environment. this adds probably 10-20 minutes while I remember / look up which commands i'm supposed to run and why, and figuring out what things are actually broken this time.
 </p>
@@ -100,18 +144,18 @@ i also just thought it would be cool to do everything within emacs (because my b
 </div>
 </div>
 
-<div id="outline-container-org979614e" class="outline-2">
-<h2 id="org979614e">how it works</h2>
-<div class="outline-text-2" id="text-org979614e">
+<div id="outline-container-org80e10aa" class="outline-2">
+<h2 id="org80e10aa">how it works</h2>
+<div class="outline-text-2" id="text-org80e10aa">
 <p>
 most of the configuration and automation is in two files: <a href="https://github.com/jowj/jowj.github.io/blob/master/publish.el">publish.el</a> and <a href="https://github.com/jowj/jowj.github.io/blob/master/Makefile">Makefile</a> (raw links, also pasted below). publish.el has by far the most stuff in it, Makefile is just stupid simple automation.
 </p>
 </div>
-<div id="outline-container-org4bf7377" class="outline-3">
-<h3 id="org4bf7377">publish.el</h3>
-<div class="outline-text-3" id="text-org4bf7377">
+<div id="outline-container-org24a6b27" class="outline-3">
+<h3 id="org24a6b27">publish.el</h3>
+<div class="outline-text-3" id="text-org24a6b27">
 <p>
-i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the <a href="#orgc3d98a0">credits &amp; references</a> entry.
+i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the <a href="#orgac1c9bf">credits &amp; references</a> entry.
 </p>
 
 <p>
@@ -122,7 +166,7 @@ one of the ways I differed from some of the other configurations I referenced wa
 since i won't be using my personal emacs config, i'll have to setup package management here as well:
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org6f275bd"><span style="color: #5e6263;">;;;; </span><span style="color: #5e6263;">package setup</span>
+<pre class="src src-elisp" id="orga0f5045"><span style="color: #5e6263;">;;;; </span><span style="color: #5e6263;">package setup</span>
 (<span style="color: #598249;">require</span> '<span style="color: #15968D;">ox-publish</span>)
 (package-initialize)
 
@@ -160,7 +204,7 @@ the actual solution ended up being so simple i'm mad its not in any of the docum
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org78b7372"><span style="color: #5e6263;">;; </span><span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
+<pre class="src src-elisp" id="org1c98523"><span style="color: #5e6263;">;; </span><span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
 <span style="color: #5e6263;">;; </span><span style="color: #5e6263;">reference this guy's setup, he's a king:</span>
 <span style="color: #5e6263;">;; </span><span style="color: #5e6263;">https://gitlab.com/jgkamat/jgkamat.gitlab.io/-/blob/master/jgkamat-website.el</span>
 (<span style="color: #598249;">when</span> noninteractive
@@ -251,7 +295,7 @@ ok so that's all the like 'setup' type shit out of the way. after that i ran int
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgd4de980">(<span style="color: #598249;">setq</span> org-publish-project-alist
+<pre class="src src-elisp" id="orga8bda1f">(<span style="color: #598249;">setq</span> org-publish-project-alist
       (list
        (list <span style="color: #15968D;">"site-org"</span>
              <span style="color: #598249;">:base-directory</span> <span style="color: #15968D;">"./source"</span>
@@ -354,9 +398,9 @@ its important to note that i wrap org-publish-all and the webfeeder lines with m
 </div>
 </div>
 </div>
-<div id="outline-container-org29256d7" class="outline-3">
-<h3 id="org29256d7">Makefile</h3>
-<div class="outline-text-3" id="text-org29256d7">
+<div id="outline-container-org54b1f99" class="outline-3">
+<h3 id="org54b1f99">Makefile</h3>
+<div class="outline-text-3" id="text-org54b1f99">
 <p>
 super easy makefile lol. 
 </p>
@@ -407,9 +451,9 @@ if you're unfamiliar with make you can still use this without learning <i>any</i
 </div>
 </div>
 </div>
-<div id="outline-container-orgc3d98a0" class="outline-2">
-<h2 id="orgc3d98a0">credits &amp; references</h2>
-<div class="outline-text-2" id="text-orgc3d98a0">
+<div id="outline-container-orgac1c9bf" class="outline-2">
+<h2 id="orgac1c9bf">credits &amp; references</h2>
+<div class="outline-text-2" id="text-orgac1c9bf">
 <p>
 there are a TON of places to read about doing this sort of thing. two folks in particular were really useful to me:
 </p>
@@ -434,7 +478,7 @@ ambrevar actually wrote the webfeeder.el solution to the idiot org rss problem. 
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
 </div>
 </body>
 </html>

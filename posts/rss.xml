@@ -6,807 +6,13 @@
 <generator>Emacs webfeeder.el</generator>
 <link>https://me.jowj.net/posts/</link>
 <atom:link href="https://me.jowj.net/posts/rss.xml" rel="self" type="application/rss+xml"/>
-<lastBuildDate>Mon, 08 Mar 2021 16:33:40 -0600</lastBuildDate>
-<item>
-  <title>using org caldav with fastmail</title>
-  <description><![CDATA[<div id="content">
- <div id="outline-container-org2121fbb" class="outline-2">
- <h2 id="org2121fbb">how to sync calendar events from fastmail to your org agenda</h2>
- <div class="outline-text-2" id="text-org2121fbb">
- <p>
-i've recently started a new job. i take a lot of notes, and I find it useful to take notes for each meeting along with some metadata about each meeting. the notes i obviously take as the meeting goes on, but the metadata is already in the meeting invite. rather than entering all of it manually for each meeting, I've had org-mode pull the meeting info for me.
-</p>
-</div>
-
- <div id="outline-container-orgeb37b53" class="outline-3">
- <h3 id="orgeb37b53">doing this</h3>
- <div class="outline-text-3" id="text-orgeb37b53">
- <ol class="org-ol"> <li>download  <a href="https://github.com/dengste/org-caldav">org-caldav</a></li>
- <li>configure it</li>
- <li>run  <code>org-caldav-sync</code></li>
- <li>cool you're done</li>
-</ol></div>
-
- <div id="outline-container-org606ce48" class="outline-4">
- <h4 id="org606ce48">really though,</h4>
- <div class="outline-text-4" id="text-org606ce48">
- <p>
-ok its only slightly more complicated than that. for fastmail, you can't follow the instructions as given exactly. Here's the broad way to configure it (i'll use  <code>use-package</code> because so does everyone):
-</p>
-
- <div class="org-src-container">
- <pre class="src src-elisp">( <span style="color: #598249;">use-package</span>  <span style="color: #15968D;">org-caldav</span>
-   <span style="color: #598249;">:ensure</span> t
-   <span style="color: #598249;">:config</span>
-  ( <span style="color: #598249;">setq</span> org-caldav-url  <span style="color: #15968D;">"https://caldav.fastmail.com/dav/calendars/user/your@domain.tld/"</span>)
-  ( <span style="color: #598249;">setq</span> org-caldav-calendars
-        '(( <span style="color: #598249;">:calendar-id</span>  <span style="color: #15968D;">"00000000-0000-0000-0000-000000000000"</span>
-                         <span style="color: #598249;">:inbox</span>  <span style="color: #15968D;">"~/org/calendar-events.org"</span>)))
-  ( <span style="color: #598249;">setq</span> org-icalendar-timezone  <span style="color: #15968D;">"America/Chicago"</span>))
-
-</pre>
-</div>
-
- <p>
-that's basically it. here's one of two original examples given in repo for reference:
-</p>
-
- <div class="org-src-container">
- <pre class="src src-elisp">( <span style="color: #598249;">setq</span> org-caldav-calendars
-  '(( <span style="color: #598249;">:calendar-id</span>  <span style="color: #15968D;">"work@whatever"</span>  <span style="color: #598249;">:files</span> ( <span style="color: #15968D;">"~/org/work.org"</span>)
-      <span style="color: #598249;">:inbox</span>  <span style="color: #15968D;">"~/org/fromwork.org"</span>)
-</pre>
-</div>
-
- <p>
-the way my method differs from the original instructions is the  <code>org-caldav-url</code> and  <code>calendar-id</code> vars. the string to use for the  <code>url</code> is pulled from the fastmail documentation  <a href="https://www.fastmail.help/hc/en-us/articles/1500000278342#calendar">here</a>. the  <code>calendar-id</code> is behind your authwall; login -> settings -> calendars -> locate your calendar -> click the export button for that item. Here you should see a full URL in a text box that looks like this:
-</p>
-
- <p>
- <code>https://caldav.fastmail.com/dav/calendars/user/your@user.tld/00000000-0000-0000-0000-00000000000000000</code>
-</p>
-
- <p>
-copy everything after your  <code>user@domain.tld</code>; that goes in your  <code>calendar-id</code> field.
-</p>
-</div>
-</div>
-</div>
- <div id="outline-container-orgbc4f665" class="outline-3">
- <h3 id="orgbc4f665">org-gcal as an alternative to org-caldav</h3>
- <div class="outline-text-3" id="text-orgbc4f665">
- <p>
-there are a few different ways to sync calendars into org-mode.  <a href="https://github.com/emacsmirror/org-gcal">org-gcal</a> is for folks running gcal for events. however, be warned that you must have a certain level of permission within your Google Org for that account to be useful; you need enough permission to create an API key within the org. for someone's personal accounts that probably works. if you're trying to integrate with a work account, where permissions should be more locked down, you will need to do something else.
-</p>
-
- <p>
-google  <i>really</i> would prefer that you don't use caldav to talk to their calendars. org-cal is based on google's own API, and doesn't adhere to normal email standards.  this is shitty, but frankly caldav is a fucking mess, so you can't really blame them. 
-</p>
-</div>
-</div>
-
- <div id="outline-container-org628e663" class="outline-3">
- <h3 id="org628e663">access gcal calendars with org-caldav</h3>
- <div class="outline-text-3" id="text-org628e663">
- <p>
-so, what's a person to do if they don't have the ability to use google's api to pull down calendars, but they still need to sync gcal stuff to orgmode? well, you can do something kind of dumb, but easy. gcal publishes your calendar to an unauthed but secret URL by default. you can subscribe to that URL from within fastmail, and then sync that calendar down to org mode through fastmail! 
-</p>
-</div>
-
- <div id="outline-container-orgee5f0b7" class="outline-4">
- <h4 id="orgee5f0b7">doing this</h4>
- <div class="outline-text-4" id="text-orgee5f0b7">
- <ol class="org-ol"> <li>copy the url from the google calender</li>
- <li>subscribe to the url in fastmail (and i assume any provider that uses caldav)</li>
- <li>sync that calendar down to org mode via org-caldav!</li>
-</ol></div>
-</div>
-
- <div id="outline-container-org5bff311" class="outline-4">
- <h4 id="org5bff311">details</h4>
- <div class="outline-text-4" id="text-org5bff311">
- <p>
-access the URL that google publishes to by logging into gcal -> settings -> click on the calendar you want to access on the left hand side of the screen -> scroll down until you see "secret address in iCal format". copy that URL.
-</p>
-
- <p>
-subscribe to the calendar in fastmail by logging into fastmail -> settings -> click on calendars on the left hand side -> find the box labeled "Subscriptions" and paste in the URL there. hit subscribe. done!
-</p>
-</div>
-</div>
-
- <div id="outline-container-org3b58c84" class="outline-4">
- <h4 id="org3b58c84">other options</h4>
- <div class="outline-text-4" id="text-org3b58c84">
- <p>
-fastmail  <i>also</i> allows you to log into a few providers specifically. I suspect this is done by simply mimicking a client, so fastmail speaks the gcal API and you can have access to everything that way. I haven't tried this, though I may get curious eventually. If you try it  <a href="mailto:me@jowj.net">i'd love to know!</a>
-</p>
-</div>
-</div>
-</div>
- <div id="outline-container-org955ae4c" class="outline-3">
- <h3 id="org955ae4c">credential storage</h3>
- <div class="outline-text-3" id="text-org955ae4c">
- <p>
-syncing events to org mode manually seems fine to me; i'll typically do it once, maybe twice a day. typing in credentials each time you want to sync sucks though. this type of problem is commonly solved 1 of two ways, in emacs:
-</p>
-
- <ol class="org-ol"> <li>authinfo</li>
- <li>authinfo, but encrypted with gpg</li>
-</ol> <p>
-you should encrypt the file with gpg. this is not too difficult!
-</p>
-</div>
- <div id="outline-container-org8d4c407" class="outline-4">
- <h4 id="org8d4c407">doing this</h4>
- <div class="outline-text-4" id="text-org8d4c407">
- <ol class="org-ol"> <li>create a gpg key and trust it</li>
- <li>create a file that you will encrypt, adding the login details to the file</li>
- <li>configure emacs to look at this file for  <code>auth-sources</code></li>
- <li>test to make sure your changes work</li>
-</ol></div>
-</div>
-
- <div id="outline-container-org90f1266" class="outline-4">
- <h4 id="org90f1266">details</h4>
- <div class="outline-text-4" id="text-org90f1266">
- <p>
-you should create a gpg key and trust it. there are other guides for how to do that. here are a few:
-</p>
- <ul class="org-ul"> <li> <a href="https://blog.eleven-labs.com/en/openpgp-almost-perfect-key-pair-part-1/">https://blog.eleven-labs.com/en/openpgp-almost-perfect-key-pair-part-1/</a></li>
- <li> <a href="https://alexcabal.com/creating-the-perfect-gpg-keypair">https://alexcabal.com/creating-the-perfect-gpg-keypair</a></li>
- <li>god gpg sucks</li>
-</ul> <p>
-then, within emacs, open a file that you will encrypt. make sure it ends in  <code>.gpg</code>. when you do that, emacs will prompt you for how you want to encrypt the file. you will see your newly added gpg key and id listed as an option. use that.
-</p>
-
- <p>
-next, fill the file with your login creds in a vaguely frustrating format. here's how its supposed to look:
- <code>machine www.google.com:443 port https login your.username password your.secret</code>
-</p>
-
- <p>
-specification of port:443 and https is  <i>required</i> because  <code>authsource</code> is weird.
-</p>
-
- <p>
-now you need a minor bit of customization to make this work. the below snippet works just fine on my linux and mac machines. there are some added bits that are set if you're on a mac ( <code>epa-pinentry-mode</code> to avoid errors. the rest of pretty self explantory.
-</p>
-
- <div class="org-src-container">
- <pre class="src src-elisp">( <span style="color: #598249;">require</span> ' <span style="color: #15968D;">epa</span>)
-( <span style="color: #598249;">when</span> (eq system-type 'darwin)
-  ( <span style="color: #598249;">setf</span> epa-pinentry-mode 'loopback))
-( <span style="color: #598249;">setq</span> auth-sources '( <span style="color: #15968D;">"~/.emacs.d/yoursecrets.gpg"</span>))
-( <span style="color: #598249;">setq</span> auth-source-debug t)
-</pre>
-</div>
-
- <p>
-finally, test and make sure your calendar event sync works without prompting you for a password by evaluating that lisp and then running  <code>org-caldav-sync</code> again. if you've set everything up correctly it will auto sync and you won't have had to type anything extra!
-</p>
-
- <p>
-nice!
-</p>
-</div>
-</div>
-</div>
-</div>
-</div>]]></description>
-  <link>https://me.jowj.net/posts/using-org-caldav-with-fastmail.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/using-org-caldav-with-fastmail.html</guid>
-  <pubDate>Mon, 08 Mar 2021 16:33:00 -0600</pubDate>
-</item>
-<item>
-  <title>uses this</title>
-  <description><![CDATA[<div id="content">
- <div id="outline-container-org3c4ab1d" class="outline-2">
- <h2 id="org3c4ab1d">uses this</h2>
- <div class="outline-text-2" id="text-org3c4ab1d">
- <p>
- <a href="https://usesthis.com/">uses this</a> is a collection of interviews with individuals asking them about their hardware and software uses. i love this topic. of course, i'm not interesting enough to do interviews with anyone, but i  <i>do</i> think my hardware and software uses are more interesting than many of the real answerer's <abbr class="tooltip" title="i use a macbook pro! and an iphone! and google docs for collaboration! who cares :(">°</abbr>&emsp13;. so, here's what i use!
-</p>
-</div>
-
- <div id="outline-container-orgebb23e7" class="outline-3">
- <h3 id="orgebb23e7">hardware</h3>
- <div class="outline-text-3" id="text-orgebb23e7">
-
- <figure id="orga029d02"> <img src="../photos/uses-this/desk2.jpeg" alt="desk2.jpeg"></img> <figcaption> <span class="figure-number">Figure 1: </span>a truly ridiculous setup</figcaption></figure> <p>
-i use a collection of hardware i've built, scrounged, borrowed or (reluctantly) bought over the past 10ish years. the place with the most New Stuff is audio gear, as I put together some audio improvements now that I live work and die at home. I'm separating the hardware topic out into a few categories:
-</p>
-</div>
-
- <div id="outline-container-org6d415ee" class="outline-4">
- <h4 id="org6d415ee">networking</h4>
- <div class="outline-text-4" id="text-org6d415ee">
-
- <figure id="orgbc0f2d1"> <img src="../photos/uses-this/rack.jpeg" alt="rack.jpeg"></img> <figcaption> <span class="figure-number">Figure 2: </span>a 19" rack my brother gave me</figcaption></figure> <p>
-i love unifi <abbr class="tooltip" title="unifi makes prosumer tier network gear with more emphasis on a UI than competitors">°</abbr>&emsp13; stuff. I've got two 8 port switches (one PoE, one powered regularly, got about 3 years apart), a 3port  <a href="https://store.ui.com/collections/unifi-network-routing-switching/products/unifi-security-gateway">usg</a>, and a PoE  <a href="https://www.ui.com/unifi/unifi-ap-ac-lite/">unifi ap ac lite</a>. its really nice to have everything talk to a central place, and makes troubleshooting network issues a lot easier. Unifi  <i>does</i> have some problems with reliability on new updates, so I typically update once a month, giving any new updates time to settle before I apply them. I haven't had an outtage since the first month i got the USG ✨
-</p>
-
- <p>
-the rack that the unifi stuff lives in is a 19" home network rack that is (apparently) very popular in europe and aboslutely impossible to find parts for in the US. I have paid someone in germany a decent amount of money to 3D print fittings so tha I can have a better rack setup. I haven't tested the new parts yet so ymmv, but  <a href="https://www.drei-d-w.de/">here</a> is the website I used.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org6dbd1b0" class="outline-4">
- <h4 id="org6dbd1b0">servers</h4>
- <div class="outline-text-4" id="text-org6dbd1b0">
- <p>
-i have a built from scratch very old "server" that used to be my main computer. It was the first computer I built when I moved out into my own apartment. Its got a i5-2500K, which google tells me is from 2011, so I got this about a decade ago. It has 16 gigs of ram and some very shitty graphics card. it hosts my  <a href="https://git.awful.club/jowj/adc/src/branch/master/ansible/roles/mediaserver">media server shit</a>, which includes the *arr apps, plex, sabnzbd, etc.
-</p>
-
- <p>
-I have a raspberry pi that serves as my VPN endpoint for a site2site  <a href="https://www.wireguard.com/">wireguard</a> configuration. the pi acts as an always-on router that can talk to my home network. 
-</p>
-
-
-
- <figure id="orge5abd1e"> <img src="../photos/uses-this/synology.jpeg" alt="synology.jpeg"></img> <figcaption> <span class="figure-number">Figure 3: </span>a very old synology that i am too lazy to dust.</figcaption></figure> <p>
-I have an extremely old  <a href="https://www.synology.com/en-us">synology</a> 4 port nas. friend gave it to me several years ago, after he had owned it for a bunch of years already. it still gets updates. its slow, and soon i'll have to upgrade to still get updates, but for now its still does me good.
-</p>
-
- <p>
-i have a collection of vms in  <a href="https://www.digitalocean.com/">digital ocean</a>, the precise number of which fluctuates based on any ongoing projects. right now, I have 3: a  <a href="https://pleroma.social/">pleroma</a> server, a  <a href="https://matrix.org">matrix</a> server  <abbr class="tooltip" title="i have written previously about what i'm doing with matrix. if you're curious go look around my site.">°</abbr>&emsp13;, and a General Purpose server that hosts several things, including  <a href="https://gitea.io/en-us/">gitea</a>, my znc server, and  <a href="https://git.awful.club/hosted/mojojojo-bot">some</a>  <a href="https://git.awful.club/hosted/arke">bots</a> that are either pointless, broken, or shitty (but are fun, and i made them!).
-</p>
-</div>
-</div>
-
- <div id="outline-container-org706bae1" class="outline-4">
- <h4 id="org706bae1">user devices</h4>
- <div class="outline-text-4" id="text-org706bae1">
- <p>
-i have too many of these lol. i have a windows tower that is just for playing games. its got a Ryzen 3*** series CPU and 16 gb of ram. I've got a  <a href="https://system76.com/">system76 oryx</a> that i have used as my primary user device since 2016. Its a lovely device with a few caveats; system76 sells rebranded  <a href="https://www.clevo.com.tw/index-en.asp">clevo</a> machines, and there are more than a few QC issues with these guys. the laptop keyboard doesn't work reliably at all, though in my case that's fine because I never use it as a laptop, its always attached to my full desk setup.
-</p>
-
- <p>
-for mobile devices i have an iPhone XS (though i'm thinking of side-grading to the new iPhone mini in the hopes that a smaller screen and lighter weight device will help with my  <a href="https://me.jowj.net/personal/rsi.html">rsi</a>), a shitty Samsung Tablet 8 (i think?) that i use to play around with android distrobutions. right now its running  <a href="https://lineageos.org/">lineageOS</a>. I also have a switch for playing games.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org490ea28" class="outline-4">
- <h4 id="org490ea28">user IO devices</h4>
- <div class="outline-text-4" id="text-org490ea28">
-
- <figure id="orgb8d9eba"> <img src="../photos/uses-this/audio-stuff.jpeg" alt="audio-stuff.jpeg"></img> <figcaption> <span class="figure-number">Figure 4: </span>my audio stuff: from left to right: a mic, a preamp, headphone mixer, mic splitter</figcaption></figure> <p>
-I'm in the process of building out a version of  <a href="https://me.micahrl.com/projects/deskmx/">my brother's deskmx project</a>; i have 3 mixers (one acts as a preamp for mics, one is a mic input splitter to connect to all my devices, and 1 is just for headphones). this is still on going and i'll probably write about what i've done and what, if anything, i did different than my brother once its finished. 
-</p>
-
-
- <figure id="org4102d6a"> <img src="../photos/uses-this/ergodox.jpeg" alt="ergodox.jpeg"></img> <figcaption> <span class="figure-number">Figure 5: </span>one ergodox infinity. i purchased this one from some user off r/mechmarket a few years ago.</figcaption></figure> <p>
-i have two  <a href="https://input.club/devices/infinity-ergodox/">ergodox infinity</a> keyboards; in the past this was so i could have one at work and one at home. now i just have one on my desk and one on my workspace, for when i inevitably change out some switches. i love these keyboards, though i do wish i could have better tenting. I also have a ~10 or 11 year old  <a href="https://www.razer.com/gaming-keyboards/razer-blackwidow-v3-tenkeyless/RZ03-03490200-R3U1">razer black widow 10keyless</a> which is just like the one linked except doesn't have backlighting or rgb or any of that. this has lasted a respectable amount of time, though I did have to replace the USB IO board in 2020.
-</p>
-
-
- <figure id="org94bc0bf"> <img src="../photos/uses-this/mice.jpeg" alt="mice.jpeg"></img> <figcaption> <span class="figure-number">Figure 6: </span>some of my mice. from left to right: mx vertical, benq, kensington</figcaption></figure> <p>
-i have a stupid collection of mice, mostly as part of a "can i help my RSI" series of experiments. God's own mouse is the  <a href="https://www.newegg.com/logitech-g9x/p/N82E16826104261">logitech g9x</a>, which i had for 8 or so years before it finally gave up the ghost. i love that mouse. It now sells on ebay / amazon for 399, though when i bought it first i think i paid ~60 USD for it. I also have a  <a href="https://www.amazon.com/gp/product/B07FNJB8TT/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1">logitech vertical mouse</a> which I am currently using for most of my computing needs, and a  <a href="https://www.amazon.com/gp/product/B07Y8ZD1P5/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1">benQ zowie EC1</a> which I hoped would adequately replace my g9x in terms of hand fit, and it did not :(.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org0ac53a6" class="outline-4">
- <h4 id="org0ac53a6">misc</h4>
- <div class="outline-text-4" id="text-org0ac53a6">
- <p>
- <img src="../photos/uses-this/bike.jpeg" alt="bike.jpeg"></img>
-i also have a beat up 90s era hardtail bicycle that i love to death. its a piece of shit and i love it very much. i am also excited to buy another bike, eventually, but this one is suiting me just fine for now.
-</p>
-</div>
-</div>
-</div>
-
- <div id="outline-container-org5291a5c" class="outline-3">
- <h3 id="org5291a5c">software</h3>
- <div class="outline-text-3" id="text-org5291a5c">
-</div>
- <div id="outline-container-org1b465eb" class="outline-4">
- <h4 id="org1b465eb">operating systems</h4>
- <div class="outline-text-4" id="text-org1b465eb">
- <p>
-Nothing crazy here outside of my desktop. i primarily use linux things. for my personal every day use, I rely on  <a href="https://nixos.org/">nixOS</a>. i love it a lot. for all my servers i run  <a href="https://www.debian.org/">debian</a>, though I hope to change that soon to  <i>either</i> guix or nixos (depending on cloud support). I use macOS for work, and windows to play games that aren't fully compat with valve's proton <abbr class="tooltip" title="proton is valve's compatability tool for steam">°</abbr>&emsp13; tool. 
-</p>
-</div>
-</div>
-
- <div id="outline-container-org733e06b" class="outline-4">
- <h4 id="org733e06b">desktop env</h4>
- <div class="outline-text-4" id="text-org733e06b">
-
- <figure id="org05b1065"> <img src="../photos/uses-this/desktop-env.png" alt="desktop-env.png"></img> <figcaption> <span class="figure-number">Figure 7: </span>sample fake workspace</figcaption></figure> <p>
-this is a bit more interesting.
-</p>
-
- <p>
-on top of nixOS i have a (i'm sure terrible) desktop environment. i use  <a href="https://awesomewm.org/">awesome window manager</a> to orchestrate everything. i use  <a href="https://github.com/davatorium/rofi">rofi</a> as my launcher, window switcher, etc. I have come to rely on  <a href="https://espanso.org/">espanso</a> to give me access to emojis and text macros - an exmaple of this is I can type like  <code>:sparkles:</code> and get ✨ to appear! I also use  <a href="https://github.com/resurrecting-open-source-projects/scrot">scrot</a> to give me a good UX when screenshotting. i use  <a href="https://www.mozilla.org/en-US/firefox/new/">firefox</a> as my browser, and basically everything else that isn't terminal based I do in  <a href="https://www.gnu.org/software/emacs/">gnu emacs</a>.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org5c76fef" class="outline-4">
- <h4 id="org5c76fef">emacs, and all the shit i do with it</h4>
- <div class="outline-text-4" id="text-org5c76fef">
- <p>
-emacs gets its own section because its  <i>so fucking good</i>. emacs is a platform for solving problems you face on your computer. in order to be a good user of emacs you need to know  <a href="https://en.wikipedia.org/wiki/Emacs_Lisp">emacs lisp</a> (sorry lol). once you are comfortable at least fucking around with existing code and modifying it to better fit you, you become capable of addressing basically any problem you might run into.
-</p>
-
- <p>
-katherine cox-buday (interviewed in uses-this, who i cite at the end of this article) describes emacs and elisp like this: "If you know a little emacs-lisp, you can begin down the path of creating your own perfect tool which will grow with you, for life."  I really like that; over years I can make a tool that's worn to exactly how I hold the keyboard, how I move between applications, etc. emacs is  <i>dope</i>.
-</p>
-
- <p>
-the two primary things I do in emacs:
-</p>
- <ul class="org-ul"> <li>writing (documentation, todo lists, keeping track of my responsibilities) which is done in  <a href="https://orgmode.org/">org mode</a>.</li>
- <li>programming and interfacing with version control systems, which is done in various modes (for programming) and  <a href="https://magit.vc/">magit</a> (for vcs).</li>
-</ul> <p>
-If you want to look at my dot files they are  <a href="https://git.awful.club/jowj/chd/src/branch/master/.emacs.d">here</a>.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org5c11ae6" class="outline-4">
- <h4 id="org5c11ae6">programming and versioning and config management (ansible et al)</h4>
- <div class="outline-text-4" id="text-org5c11ae6">
- <p>
-i'm not doing anything very interesting here outside of my emacs/elisp usage. 
-</p>
- <ul class="org-ul"> <li>most things i write in python</li>
- <li>i've written some stuff in elisp that's mostly "taking code that already exists and tweaking it until I have what i want" (see my work on  <a href="https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html">blogging on ghpages with orgmode</a>)</li>
- <li>config management is done via  <a href="https://www.ansible.com/">ansible</a>.</li>
- <li>technically I also have written some  <a href="https://www.lua.org/">lua</a> to solve a  <a href="https://git.awful.club/projects/gamemode">problem</a> i had with awesomeWM.</li>
-</ul></div>
-</div>
-
- <div id="outline-container-org533fdc9" class="outline-4">
- <h4 id="org533fdc9">services i host and use.</h4>
- <div class="outline-text-4" id="text-org533fdc9">
- <p>
-as mentioned previously, my mediaserver setup hosts the  <code>*arr</code> apps <abbr class="tooltip" title="these apps are radarr, sonarr, lidarr, which are download managers for tv, movies, and music">°</abbr>&emsp13;. I use plex <abbr class="tooltip" title="a personal media server">°</abbr>&emsp13; to serve media files to my users (me, friends, family). i store the configs for these things in a  <code>docker-compose</code> format that deploys a  <code>swarm</code>, which itself is deployed through ansible.
-</p>
-
- <p>
-I use bitwarden's <abbr class="tooltip" title="bitwarden is an open source password manager.">°</abbr>&emsp13; hosted offering for my password manager. I moved to it from 1password, which I think is mostly better (especially from a polish point of view), due to the availability of clients on more platforms than 1password offered. 1pass now has a linux client, I understand, but opensource is my preference politically anyway. I've written about the process of moving to bitwarden  <a href="https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html">here</a>.
-</p>
-
- <p>
-for cloud infra services i am currently using digitalocean <abbr class="tooltip" title="DO is a <i>great</i> improvement over the Big3 cloud providers if you're just a 1 person setup. fuck aws/gcp/azure for this sort of thing; DO lets you do a bunch without learning idiot abstractions all while letting you understand what the fuck your bill is going to be at the end of the month. i fucking love DO.">°</abbr>&emsp13;. i may end up migrating off them to get to a provider that gives me more control over my OS, but i really love DO.
-</p>
-
- <p>
-this blog is currently hosted on github pages as mentioned previously. i use  <a href="https://www.fastmail.com/">fastmail</a> for email and i really like them. i'd like to not have a reliance on an australian hosted company for  <a href="https://fee.org/articles/australia-s-unprecedented-encryption-law-is-a-threat-to-global-privacy/">reasons</a> but, frankly, email is plain text anyway and trying to force encryption on top of the email platform tends to fail real bad (see gpg). long term i'd love to move but nobody else has as good a product for the same ballpark of price.
-</p>
-</div>
-</div>
-</div>
-
- <div id="outline-container-org8b95d40" class="outline-3">
- <h3 id="org8b95d40">my ideal setup</h3>
- <div class="outline-text-3" id="text-org8b95d40">
- <p>
-this doesn't exist the fun part is fucking with what you have! here are some things i'd love to try out:
-</p>
-
- <ul class="org-ul"> <li> <a href="https://guix.gnu.org/">guixSD</a> and all that implies; I'm fucking around with  <code>nixOS</code> right now and i like it a lot (though, wow, rough edges). guix would be taking my like of reproducability and declarative configuration and marrying that with scheme and emacs more tightly than nix does. from a political standpoint it would also be closer to what i'd like. it seems like a pretty big usability trade off though, which is why i haven't done it yet. guixSD uses  <code>hurd</code> rather than the linux kernel, and the learning curve for that would be  <i>steep</i>.</li>
-
- <li> <a href="https://github.com/NixOS/nixops">set up nixops</a>. if I stick with nix, i'd love to play with this.  <code>guix</code> of course has a similar tool, with  <a href="https://guix.gnu.org/en/blog/2019/towards-guix-for-devops/">guix deploy</a>, if I end up there. i love the idea of moving  <i>out</i> of  <code>ansible</code> and onto something that treats declarative management as a first class citizen with the OS. tbh ansible is sorta disappointing with that; why redhat didn't make ansible have better interfaces to rh specific stuff i'll never know. also now that rh is actually IBM i'm nervous about future stability ( a possibly silly case of nerves; its not like IBM hasn't been around a long time )</li>
-
- <li>upgrade my linux laptop; i've thought about one of the newer XPS13 or 15s, as well as newer system76 options. i haven't decided what i'll end up doing. my current computer is chugging along just fine, even if i would be  <i>so pleased</i> to have usbc charging and a device with fewer, uh, personality traits.</li>
-
- <li>related to that, i'd love to standardize everything on usbc if possible. my work machine is a mbp16" which uses USBC, my personal laptop is the old standard barrel charger, my phone is fucking lightening, my backup battery is usbMicro, uuuuuugh. fuck i would love to just have like, 2 cables that did everything for me.</li>
-
- <li>a change in phone; i'd like to experiment with alternatives to apple or android. the  <a href="https://www.pine64.org/pinephone/">pinephone</a> or the  <a href="https://puri.sm/products/librem-5/">librem 5</a> from purism are the two options most available to me as a US based person.  <a href="https://jolla.com/">sailfish by Jolla</a> seems like a great alternative if you're in the EU; SFOS is its own thing, but it has an Android compat shim that lets its own app ecosystem be bootstrapped by android. smart. my understanding is that there are band issues with EU phones in the US, though i haven't seriously looked into it. i've been on iOS since i got off of my little sidekick-like phone after a very bad bicycle accident. phones are hard to change, though. I care a lot about security, privacy, and user control, and MAN. those three things are not necessarily at loggerheads by default, but the people who champion each one of those efforts in the mobile space all have forgotten the OTHER two exist.</li>
-</ul></div>
-</div>
-
- <div id="outline-container-org5977daf" class="outline-3">
- <h3 id="org5977daf">articles from uses this that i like</h3>
- <div class="outline-text-3" id="text-org5977daf">
- <ul class="org-ul"> <li>alice mazzy's interview:  <a href="https://usesthis.com/interviews/alice.maz/">https://usesthis.com/interviews/alice.maz/</a>. she's always interesting. she's got writing that i like, too. her article on  <a href="https://www.alicemaz.com/writing/minecraft.html">minecraft economies</a> and breaking them is one of my favorite reads.</li>
- <li>chris randall's:  <a href="https://usesthis.com/interviews/chris.randall/">https://usesthis.com/interviews/chris.randall/</a>. big focus on audio production in this one. super interesting stuff.</li>
- <li>justine haupt's:  <a href="https://usesthis.com/interviews/justine.haupt/">https://usesthis.com/interviews/justine.haupt/</a>. just cool topics and things she uses. check out her website,  <a href="http://www.justine-haupt.com/">too</a>, she has done some cool shit</li>
- <li>katherine cox-buday's:  <a href="https://usesthis.com/interviews/katherine.cox-buday/">https://usesthis.com/interviews/katherine.cox-buday/</a>. hell ya a REAL LIST of SHIT i love it</li>
- <li>paul ford's:  <a href="https://usesthis.com/interviews/paul.ford/">https://usesthis.com/interviews/paul.ford/</a>. i loved this guy's detail and that he thought about why he was collecting some of his data (computers are tools for  <i>thinking</i>, (to him) and not, in this context, for productivity).</li>
-</ul> <p>
-if there's anything you've read from uses this that you especially liked  <a href="mailto:me@jowj.net">email me about it</a>. i'd love to read whatever you liked :) 
-</p>
-</div>
-</div>
-</div>
-</div>]]></description>
-  <link>https://me.jowj.net/posts/uses-this.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/uses-this.html</guid>
-  <pubDate>Sun, 28 Feb 2021 21:21:00 -0600</pubDate>
-</item>
-<item>
-  <title>css test</title>
-  <description><![CDATA[<div id="content">
- <div id="outline-container-orgbc18f97" class="outline-2">
- <h2 id="orgbc18f97">this is the first header</h2>
- <div class="outline-text-2" id="text-orgbc18f97">
- <p>
-this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
-</p>
- <ol class="org-ol"> <li>item 1</li>
- <li>item 2</li>
- <li>item 3
- <ul class="org-ul"> <li>unordered 1</li>
- <li>2</li>
- <li>3</li>
-</ul></li>
-</ol></div>
-</div>
-
- <div id="outline-container-org9a099a9" class="outline-2">
- <h2 id="org9a099a9">below is a picture embed with caption</h2>
- <div class="outline-text-2" id="text-org9a099a9">
-
- <figure id="org0e0f56f"> <img src="file:///home/josiah/Pictures/screenshots/bad-headshot.png" alt="bad-headshot.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>i should have used a better camera for this</figcaption></figure></div>
-</div>
-
- <div id="outline-container-org9f3ddaf" class="outline-2">
- <h2 id="org9f3ddaf">here is a python embd</h2>
- <div class="outline-text-2" id="text-org9f3ddaf">
- <div class="org-src-container">
- <pre class="src src-python"> <span style="color: #598249;">import</span> slack
-
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">reactable_string</span>(text):
-     <span style="color: #2F7BDE;">reactable_array</span> = []
-     <span style="color: #2F7BDE;">t</span> = text.lower()
-     <span style="color: #598249;">if</span>  <span style="color: #15968D;">'cyber'</span>  <span style="color: #598249;">in</span> t:
-        reactable_array.append( <span style="color: #15968D;">'robot'</span>)
-     <span style="color: #598249;">if</span>  <span style="color: #15968D;">'flavor town'</span>  <span style="color: #598249;">in</span> t:
-        reactable_array.append( <span style="color: #15968D;">'flavortown'</span>)
-     <span style="color: #598249;">return</span> reactable_array
-
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">rtm</span>(emoji, payload,  <span style="color: #598249;">id</span>, ts):
-    payload[ <span style="color: #15968D;">'web_client'</span>].reactions_add(
-        channel= <span style="color: #598249;">id</span>,
-        name=emoji,
-        timestamp=ts
-    )
-
-     <span style="color: #598249;">return</span>  <span style="color: #15968D;">None</span>
-
-
- <span style="color: #598249;">@slack.RTMClient.run_on</span>(event= <span style="color: #15968D;">'message'</span>)
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">handle_messages</span>(**payload):
-     <span style="color: #2F7BDE;">data</span> = payload[ <span style="color: #15968D;">'data'</span>]
-     <span style="color: #598249;">id</span> = data[ <span style="color: #15968D;">'channel'</span>]
-     <span style="color: #2F7BDE;">ts</span> = data[ <span style="color: #15968D;">'ts'</span>]
-
-     <span style="color: #598249;">if</span> reactable_string(data[ <span style="color: #15968D;">'text'</span>]):
-         <span style="color: #2F7BDE;">needed</span> = reactable_string(data[ <span style="color: #15968D;">'text'</span>])
-
-         <span style="color: #598249;">if</span>  <span style="color: #15968D;">'robot'</span>  <span style="color: #598249;">in</span> reactions_needed:
-            rtm( <span style="color: #15968D;">"robot_face"</span>, payload,  <span style="color: #598249;">id</span>, ts)
-         <span style="color: #598249;">if</span>  <span style="color: #15968D;">'flavortown'</span>  <span style="color: #598249;">in</span> reactions_needed:
-            rtm( <span style="color: #15968D;">"dark_sunglasses"</span>, payload,  <span style="color: #598249;">id</span>, ts)
-            rtm( <span style="color: #15968D;">"guyfieri"</span>, payload,  <span style="color: #598249;">id</span>, ts)
-
-
- <span style="color: #598249;">if</span>  <span style="color: #598249;">__name__</span> ==  <span style="color: #15968D;">'__main__'</span>:
-     <span style="color: #2F7BDE;">stoken</span> =  <span style="color: #15968D;">'XXXXXXXXXXXXXXXX'</span>   <span style="color: #5e6263;"># </span> <span style="color: #5e6263;">Secret token!!</span>
-     <span style="color: #2F7BDE;">rtm_client</span> = slack.RTMClient(token=stoken)
-    rtm_client.start()
-</pre>
-</div>
-</div>
-</div>
-
- <div id="outline-container-orgbef0c8a" class="outline-2">
- <h2 id="orgbef0c8a">here is a lisp embed</h2>
- <div class="outline-text-2" id="text-orgbef0c8a">
- <div class="org-src-container">
- <pre class="src src-elisp">( <span style="color: #598249;">let</span> ((proj-base (file-name-directory load-file-name)))
-  ( <span style="color: #598249;">setq</span> org-publish-project-alist
-        `(( <span style="color: #15968D;">"project-name"</span>
-            <span style="color: #598249;">:base-directory</span> ,(concat proj-base  <span style="color: #15968D;">"."</span>)
-            <span style="color: #598249;">:recursive</span> t
-            <span style="color: #598249;">:publishing-directory</span> ,(concat proj-base   <span style="color: #15968D;">"../export"</span>)
-            <span style="color: #598249;">:publishing-function</span> org-html-publish-to-html))))
-</pre>
-</div>
-</div>
-</div>
- <div id="outline-container-org9b934cb" class="outline-2">
- <h2 id="org9b934cb">see links styling</h2>
- <div class="outline-text-2" id="text-org9b934cb">
- <p>
- <a href="https://me.jowj.net">https://me.jowj.net</a> looks like this
- <a href="https://google.com">https://google.com</a> looks like this
-</p>
-</div>
-</div>
-
- <div id="outline-container-orgae2ebde" class="outline-2">
- <h2 id="orgae2ebde">here are some weird org mode extras i'm playing with</h2>
- <div class="outline-text-2" id="text-orgae2ebde">
-</div>
- <div id="outline-container-org179dbe2" class="outline-3">
- <h3 id="org179dbe2">using  <code>#+begin_parallel</code> to force side by side</h3>
- <div class="outline-text-3" id="text-org179dbe2">
- <div style="column-rule-style: none;column-count: 2;">
- <p>
-Here's some text I want to look pretty normal
-</p>
-
- <p>
-Text in parallel!!  <span style="color:purple;">cool</span>. 
-</p>
-
-</div>
-</div>
-</div>
-
- <div id="outline-container-org665753b" class="outline-3">
- <h3 id="org665753b">using  <code>doc:anything</code> to do tt on hover</h3>
- <div class="outline-text-3" id="text-org665753b">
- <p>
-Pop-quiz: How does  <abbr class="tooltip" title="Call FUNCTION with our remaining args, using our last arg as list of args.<br>Then return the value FUNCTION returns.<br>Thus, (apply '+ 1 2 '(3 4)) returns 10.<br><br>(fn FUNCTION &rest ARGUMENTS)">apply</abbr> work?
-</p>
-</div>
-</div>
-
- <div id="outline-container-org8ebe4ba" class="outline-3">
- <h3 id="org8ebe4ba">creating sections for visual break ups of text</h3>
- <div class="outline-text-3" id="text-org8ebe4ba">
- <p>
-I still have to figure out colors, obviously.
-</p>
- <details class="code-details" style="padding: 1em;
-                          background-color: #2e174a;
-                          /* background-color: pink; */
-                          border-radius: 15px;
-                          color: hsl(0 0%);
-                          font-size: 0.9em;
-                          box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <summary> <strong>
-                       <font face="Courier" size="3" color="orange">
-                         Details box
-                      </font>
-                    </strong>
-                  </summary> <p>
- <a class="anchor" aria-hidden="true" id="solution" href="#solution"> <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16
-   16" width="16" height="16"> <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69
-   3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10
-   5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0
-   2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5
-   0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55
-   13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
-checking background changes
-</p>
-
-
-</details></div>
-</div>
- <div id="outline-container-org59a884f" class="outline-3">
- <h3 id="org59a884f">using spoilers</h3>
- <div class="outline-text-3" id="text-org59a884f">
- <style> #g0 {color: #2F7BDE; background-color:#2F7BDE;}
-       #g0:hover {color: black; background-color:white;} </style> <p>
-Checking my new spoiler color  <span id="g0"> spoiler lol </span>
-</p>
-</div>
-</div>
-
-
- <div id="outline-container-org860fd1b" class="outline-3">
- <h3 id="org860fd1b">detail box!</h3>
- <div class="outline-text-3" id="text-org860fd1b">
- <p>
-testing fixes
-</p>
- <br></br> <div style="padding: 1em; background-color: #2e174a;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"> <h3></h3>
- <p>
- <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"> <path fill-rule="evenodd" d="M0 2a1 1 0 011-1h14a1 1 0 011 1v9a1 1 0 01-1 1H7l-4 4v-4H1a1 1 0 01-1-1V2zm1 0h14v9H6.5L4 13.5V11H1V2zm6 6h2v2H7V8zm0-5h2v4H7V3z"></path></svg> Note that  <kbd> C-x C-e </kbd> evaluates a Lisp form!
-</p>
-
-</div>
-</div>
-</div>
-
- <div id="outline-container-org315fde0" class="outline-3">
- <h3 id="org315fde0">latex margin vs html tooltips!</h3>
- <div class="outline-text-3" id="text-org315fde0">
- <p>
-damn i think this <abbr class="tooltip" title="from org mode, we write ''margin:'' and it will export to latex as a margin note, or to html as a tooltip! fucking cool.">°</abbr>&emsp13; is cool.
-</p>
-
- <div class="org-src-container">
- <pre class="src src-org"> <span style="color: #bebebe; font-weight: bold; text-decoration: underline; text-decoration: overline;"> <a href="margin:">what you want in the margins.</a></span>
-</pre>
-</div>
- <p>
-
-</p>
-</div>
-</div>
-</div>
-</div>]]></description>
-  <link>https://me.jowj.net/posts/css.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
-  <pubDate>Fri, 19 Feb 2021 22:56:00 -0600</pubDate>
-</item>
-<item>
-  <title>using matrix</title>
-  <description><![CDATA[<div id="content">
- <div id="outline-container-orgd1d203d" class="outline-2">
- <h2 id="orgd1d203d">introduction</h2>
- <div class="outline-text-2" id="text-orgd1d203d">
- <p>
-i wanna write about  <a href="https://matrix.org">matrix</a>. matrix is a 'new' protocol for decentralized communication. it can be used in a bunch of different ways: from relatively secure, favoring security over ease of use, to very open, favoring ease of use over all other concerns. i tend to use it in the, to me, bare minimum secure configuration and then focusing hard on ease of use.
-</p>
-
- <ul class="org-ul"> <li>i use e2ee by default</li>
- <li>i self host my home server</li>
- <li>i allow federation</li>
-</ul> <p>
-i like that i can expect message  <i>content</i> privacy and also retain relative ease of use within the same platform. i like that that i can bridge a bunch of services to a single chat client (albeit with some uh, effort / UX trade-offs). i like that there exists reference apps for basically every platform i care about (and basically all the platforms my friends care about).
-</p>
-
- <p>
-i really like matrix! but its fair to say there are also problems with it. if you're familiar with matrix at all you  <a href="https://matrix.org/blog/2019/04/11/we-have-discovered-and-addressed-a-security-breach-updated-2019-04-12">probably heard about their big security fuck up</a>. earlier, i wrote specifically that you can expect message  <i>content</i> privacy, and i'll add here that you cannot expect message  <i>metadata</i> privacy (for example, read the  <a href="https://news.ycombinator.com/item?id=23108750">first half of tptacek's reply on HN about contact lists in matrix vs signal</a>). if you self host, there's an even bigger metadata leak than for users who use a larger existing deployment.
-</p>
-
- <p>
-i don't wanna convince you that matrix is the protocol of your dreams and you should use it. i just wanna talk about what i'm using it for and maybe help a few folks who ran into some of the same issues i've now solved.
-</p>
-</div>
-</div>
-
- <div id="outline-container-orgd355b3b" class="outline-2">
- <h2 id="orgd355b3b">what am i doing with matrix</h2>
- <div class="outline-text-2" id="text-orgd355b3b">
- <p>
-one of the most fun / worst things about using matrix is that there's a bajillion knobs to tweak; anyone who is using it could have anywhere from 1 to n things different from my setup. here's what i'm doing:
-</p>
-</div>
-
- <div id="outline-container-orgbb87b0f" class="outline-3">
- <h3 id="orgbb87b0f">clients</h3>
- <div class="outline-text-3" id="text-orgbb87b0f">
- <p>
-i'm using standard element clients for linux, macOS, iOS, and android.
-</p>
-
- <p>
-i'm paying attention to ditto and nio as mobile clients; ditto is made by someone from my city which is rad! its purple, which is rad! nio is  <i>also</i> purple, so its also rad. i've played with the weechat-matrix plugin which i think fucking sucks. i've played with mirage, nheko, and a few others that just seemed incomplete. i'm hopeful that the KDE folks get a reasonably good client going with  <a href="https://blogs.kde.org/2017/09/05/konversation-2x-2018-new-user-interface-matrix-support-mobile-version">konversations2</a>, but man the last meaningful update i've seen is ages old.
-</p>
-
- <p>
-since originally writing ^ that paragraph, the new hotness for KDE clients is  <a href="https://github.com/KDE/neochat">neochat</a>; I've only cursorily looked at this but it seems like is heading the right direction. Additionally, Nheko has received a bunch of updates and its one of the desktop linux clients i'll be trying out next. I've also tried the  <a href="https://github.com/matrix-org/purple-matrix">libpurple plugin</a> which is, like, fine I guess. its libpurple. Its not feature complete and it has all the drawbacks of libpurple. I wouldn't use it.
-</p>
-</div>
-</div>
-
-
- <div id="outline-container-orgd1ca908" class="outline-3">
- <h3 id="orgd1ca908">servers</h3>
- <div class="outline-text-3" id="text-orgd1ca908">
- <p>
-i'm using the  <a href="https://github.com/matrix-org/synapse">synapse reference server</a>, written in python. there really aren't other options here at the moment. dendrite (written in go) looks like it will no longer be the successor to Synapse, and instead just be a testing ground. there are a few rust servers being worked on as well, but with less official support.
-</p>
-</div>
-</div>
-
- <div id="outline-container-orgb2d4919" class="outline-3">
- <h3 id="orgb2d4919">bridges</h3>
- <div class="outline-text-3" id="text-orgb2d4919">
-</div>
- <div id="outline-container-orga90b482" class="outline-4">
- <h4 id="orga90b482">slack</h4>
- <div class="outline-text-4" id="text-orga90b482">
- <p>
-i'm currently using the  <a href="https://github.com/matrix-org/matrix-appservice-slack">matrix-appservice-slack bridge</a> to bridge my local family and friends slack to my matrix server. this lets me do two things that are important to me:
-</p>
-
- <ul class="org-ul"> <li>pull in all messages in my public channels to my element instance, which lets me capture logs (slack requires that you pay a non-trivial amount of money per user per month if you want to have access to historic data)</li>
- <li>talk to my friends in slack from my element client.</li>
-</ul> <p>
-the second one makes me feel like i'm 12, using trillian and setting away messages in aim. i love it.
-</p>
-
- <p>
-all the data replicates without hiccups between my synapse instance and the slack api, but the presentation of threaded messages in the element clients sucks, frankly. there's  <a href="https://github.com/vector-im/riot-web/issues/2349">a bug</a> filed for it but what the final implementation will look like is anyone's guess.
-</p>
-</div>
-</div>
-
- <div id="outline-container-orgcaa0fd4" class="outline-4">
- <h4 id="orgcaa0fd4">irc</h4>
- <div class="outline-text-4" id="text-orgcaa0fd4">
- <p>
-the self hosted  <a href="https://github.com/matrix-org/matrix-appservice-irc">matrix-appservice-irc bridge</a> is what most people seem to use. i have used the  <i>hosted</i> version on matrix.org before; i hated it. it was great to be able to talk to folks on freenode channels from element, especially given that there is no reasonable irc client on iOS! but the UX is just bad.
-</p>
-
- <p>
-i've started the learning process for self hosting it myself and having the bridge treat my existing IRC bouncer as a separate IRC network but that's pretty undocumented. there are no quick and dirty guides about it, and especially since i'm isolating at home all the time now, my drive to solve this iOS irc client problem has cratered. i  <i>have</i> verified with the bridge maintainer that what i want to do is possible; its just relatively niche and hasn't been written about.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org7f847c8" class="outline-4">
- <h4 id="org7f847c8">discord</h4>
- <div class="outline-text-4" id="text-org7f847c8">
- <p>
-i'm using the  <a href="https://github.com/matrix-discord/mx-puppet-discord">mx-puppet-discord</a> bridge for bridging in discord channels. I tried using the  <a href="https://github.com/Half-Shot/matrix-appservice-discord">appservice discord</a> bridge but had a  <i>devil</i> of a time getting it to work. mx-puppet-discord works and has (imo) a better user experience for admins, though it does seem pretty finnicky. from what I can tell, more finnicky than the appservice. at least this one i can get to run though!!
-</p>
-</div>
-</div>
-
- <div id="outline-container-org4290f18" class="outline-4">
- <h4 id="org4290f18">combining bridges in a single room</h4>
- <div class="outline-text-4" id="text-org4290f18">
- <p>
-a thing that i think is fucking  <i>cool</i> and also probably a source of some of my problems is: i currently use some of these bridges to create a frankenstein room, that does bidirecitonal send like discord <-> matrix <-> slack; the channel "mothra-fuckers" (shut up) in discord talks to the channel "mothra-fuckers" in  matrix, which is also bridged to "mothra-fuckers" in slack, and anyone in any of those channels can talk to all three platforms! rad!
-</p>
-</div>
-</div>
-</div>
-</div>
-
- <div id="outline-container-org3887808" class="outline-2">
- <h2 id="org3887808">avoiding common pitfalls of self hosting</h2>
- <div class="outline-text-2" id="text-org3887808">
-</div>
- <div id="outline-container-org9b16adb" class="outline-3">
- <h3 id="org9b16adb">deployment</h3>
- <div class="outline-text-3" id="text-org9b16adb">
- <p>
-I think the first thing you should do is eschew configuring synapse and all these bridges on your own. that fucking sucks. use  <a href="https://github.com/spantaleev/matrix-docker-ansible-deploy">this set</a> of ansible roles, these guys are great, continuously update stuff, and provide meaningful changelogs for updates. their documentation is not always lovely, especially about the optional plugins they offer, but have been enough to get me started on solving the problem every time so far.
-</p>
-
- <p>
-I forked their repo and periodically update it from  <code>upstream/master</code> to pull in latest changes when I have time to commit to problem solving any issues. Mostly I don't have problems, but occasionally there are big version updates that have done things like enforce migrations from sqlite to pgsql, or enforced breaking changes with TLS, etc. 
-</p>
-</div>
-</div>
-
- <div id="outline-container-orgf5a2b73" class="outline-3">
- <h3 id="orgf5a2b73">disk space</h3>
- <div class="outline-text-3" id="text-orgf5a2b73">
- <p>
-one of the things i keep intending to do (and have thus far put off) is move away from relying on raw disks attached to DO droplet and move towards object storage with s3/do spaces/ whatever. This is made easy if you use the previously mentioned set of ansible roles. if you don't do this, you will have to periodically go in and delete old media or add a bunch of new disk space.
-</p>
-
- <p>
-if you really must go with disks and not object storage for some reason I recommend that you use external, non OS drives for very Obvious linux admin reasons. Much easier to snapshot / do backups on that sort of thing.
-</p>
-</div>
-</div>
-
- <div id="outline-container-org915de9a" class="outline-3">
- <h3 id="org915de9a">backups!</h3>
- <div class="outline-text-3" id="text-org915de9a">
- <p>
-you should do backups. I haven't figured out a particularly great method here, yet. I do full VM snapshots through my cloud provider, but pulling data out of that environment on a regular basis is something I haven't worked out how to do well.  <a href="https://github.com/matrix-org/synapse/issues/2046">here</a> is a github issue that has some community opinions on what to backup, but there's still no official guidance as far as I know.
-</p>
-</div>
-</div>
-</div>
-
- <div id="outline-container-orgfebc999" class="outline-2">
- <h2 id="orgfebc999">talk to me about matrix!</h2>
- <div class="outline-text-2" id="text-orgfebc999">
- <p>
-i really like matrix. i think there's a lot of cool stuff here, and I hope that it continues to improve. if you run into issues with matrix, have some questions about it you aren't sure where to ask, or just wanna chat about it, please talk to me! I've got several years experience running my home server, and all my friends are tired of hearing about matrix lmao. i'm  <a href="mailto:me@jowj.net">mailto:me@jowj.net</a> on email, or @jowj:awful.club on matrix.
-</p>
-</div>
-</div>
-</div>]]></description>
-  <link>https://me.jowj.net/posts/using-matrix.html</link>
-  <guid isPermaLink="false">https://me.jowj.net/posts/using-matrix.html</guid>
-  <pubDate>Sat, 23 Jan 2021 13:46:00 -0600</pubDate>
-</item>
+<lastBuildDate>Mon, 07 Feb 2022 17:23:02 -0600</lastBuildDate>
 <item>
   <title>rest api prototyping</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-orgc4759c1" class="outline-2">
- <h2 id="orgc4759c1">the problem</h2>
- <div class="outline-text-2" id="text-orgc4759c1">
+ <div id="outline-container-org8462858" class="outline-2">
+ <h2 id="org8462858">the problem</h2>
+ <div class="outline-text-2" id="text-org8462858">
  <p>
 lately i've been working on a lot of web API glue projects. these are usually simple things like "service1 needs to send messages to service2 in a particular format, with a particular set of priviledges." Sometimes its more complicated, but that's usually what it breaks down to.
 </p>
@@ -822,9 +28,9 @@ this has worked great for a lot of things, but falls short when you have to gene
 </div>
 </div>
 
- <div id="outline-container-org9f4d1b5" class="outline-2">
- <h2 id="org9f4d1b5">Authentication and Authorization in Cylance</h2>
- <div class="outline-text-2" id="text-org9f4d1b5">
+ <div id="outline-container-org4c4c819" class="outline-2">
+ <h2 id="org4c4c819">Authentication and Authorization in Cylance</h2>
+ <div class="outline-text-2" id="text-org4c4c819">
  <p>
 Cylance relies on something called JWT (JSON Web Token). There's an RFC for this here:  <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>. This is not possible to generate within `restclient`, so we do it in python.
 </p>
@@ -843,9 +49,9 @@ We'll add a  <code>#+name:</code> argument to the top of the  <code>org-mode</co
 </p>
 </div>
 
- <div id="outline-container-org774b39f" class="outline-3">
- <h3 id="org774b39f">python code</h3>
- <div class="outline-text-3" id="text-org774b39f">
+ <div id="outline-container-orgb3a8ee9" class="outline-3">
+ <h3 id="orgb3a8ee9">python code</h3>
+ <div class="outline-text-3" id="text-orgb3a8ee9">
  <div class="org-src-container">
  <pre class="src src-python"> <span style="color: #598249;">import</span> uuid
  <span style="color: #598249;">import</span> json
@@ -898,9 +104,9 @@ this will generate a token and attach it to the name space  <code>jwt_token</cod
 </div>
 
 
- <div id="outline-container-org5a0b0e5" class="outline-3">
- <h3 id="org5a0b0e5">restclient example</h3>
- <div class="outline-text-3" id="text-org5a0b0e5">
+ <div id="outline-container-orgbbda83f" class="outline-3">
+ <h3 id="orgbbda83f">restclient example</h3>
+ <div class="outline-text-3" id="text-orgbbda83f">
  <p>
 once the previous block has run to generate the json web token  we can pass it on to this restclient block and use it to query Cylance's API through  <code>restclient.el</code> going forward! in order to pass the output from the registered name we used before,  <code>jwt_token</code>, we add an argument to the  <code>BEGIN_SRC</code> header, like  <code>:var x=jwt_token</code>. Then, we can set a  <code>restclient</code> local variable equal to the  <code>org-babel</code> super-variable and use it within the rest of the src block, as seen below:
 </p>
@@ -961,9 +167,9 @@ this will return my user (again, i've disturbed the output but it is roughly wha
 </div>
 </div>
 
- <div id="outline-container-orgdcb4de5" class="outline-2">
- <h2 id="orgdcb4de5">Troubleshooting python and org-babel</h2>
- <div class="outline-text-2" id="text-orgdcb4de5">
+ <div id="outline-container-org591513b" class="outline-2">
+ <h2 id="org591513b">Troubleshooting python and org-babel</h2>
+ <div class="outline-text-2" id="text-org591513b">
  <p>
 I had huge issues with python virtual environemtns and org-babel while initially setting up this environment. i once had an issue with emacs, I belive in an older version (25 or below i think) where it couldn't find my python binary on macOS. to fix this i manually set it in my  <code>init.el</code> file, which worked for a long time.
 </p>
@@ -1003,23 +209,23 @@ this block just proved that i could in fact import the right modules that were o
 </div>]]></description>
   <link>https://me.jowj.net/posts/api-prototyping.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/api-prototyping.html</guid>
-  <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
 </item>
 <item>
-  <title>blogging on github:pages with orgmode</title>
+  <title>blogging on   with orgmode</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org2a44f6c" class="outline-2">
- <h2 id="org2a44f6c">what i did</h2>
- <div class="outline-text-2" id="text-org2a44f6c">
+ <div id="outline-container-org454b0ca" class="outline-2">
+ <h2 id="org454b0ca">what i did</h2>
+ <div class="outline-text-2" id="text-org454b0ca">
  <p>
 i've just moved from using markdown and jekyll to generate a static website on github pages to using org-mode and org-publish to generate static html files, also on github pages.
 </p>
 </div>
 </div>
 
- <div id="outline-container-orgbf0ad62" class="outline-2">
- <h2 id="orgbf0ad62">why did i do this</h2>
- <div class="outline-text-2" id="text-orgbf0ad62">
+ <div id="outline-container-orgf892fd7" class="outline-2">
+ <h2 id="orgf892fd7">why did i do this</h2>
+ <div class="outline-text-2" id="text-orgf892fd7">
  <p>
 my setup has been a pain - i do most of my writing and thinking in  <a href="https://orgmode.org/">org mode</a>, but to post stuff on  <a href="https://me.jowj.net/">https://me.jowj.net/</a> i have to convert that to markdown (relatively easy, due to a package called  <a href="https://github.com/emacsmirror/org/blob/master/lisp/ox-md.el">ox-md</a>) and use  <a href="https://jekyllrb.com/">jekyll</a> to convert md to html and handle the generation of the site. the problem with jekyll is that it  <i>sucks</i>. its a tool based on the ruby ecosystem, and since I actually publish my stuff so infrequently every time i use it i have to update something about my ruby environment. this adds probably 10-20 minutes while I remember / look up which commands i'm supposed to run and why, and figuring out what things are actually broken this time.
 </p>
@@ -1041,18 +247,18 @@ i also just thought it would be cool to do everything within emacs (because my b
 </div>
 </div>
 
- <div id="outline-container-org979614e" class="outline-2">
- <h2 id="org979614e">how it works</h2>
- <div class="outline-text-2" id="text-org979614e">
+ <div id="outline-container-org80e10aa" class="outline-2">
+ <h2 id="org80e10aa">how it works</h2>
+ <div class="outline-text-2" id="text-org80e10aa">
  <p>
 most of the configuration and automation is in two files:  <a href="https://github.com/jowj/jowj.github.io/blob/master/publish.el">publish.el</a> and  <a href="https://github.com/jowj/jowj.github.io/blob/master/Makefile">Makefile</a> (raw links, also pasted below). publish.el has by far the most stuff in it, Makefile is just stupid simple automation.
 </p>
 </div>
- <div id="outline-container-org4bf7377" class="outline-3">
- <h3 id="org4bf7377">publish.el</h3>
- <div class="outline-text-3" id="text-org4bf7377">
+ <div id="outline-container-org24a6b27" class="outline-3">
+ <h3 id="org24a6b27">publish.el</h3>
+ <div class="outline-text-3" id="text-org24a6b27">
  <p>
-i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the  <a href="#orgc3d98a0">credits & references</a> entry.
+i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the  <a href="#orgac1c9bf">credits & references</a> entry.
 </p>
 
  <p>
@@ -1063,7 +269,7 @@ one of the ways I differed from some of the other configurations I referenced wa
 since i won't be using my personal emacs config, i'll have to setup package management here as well:
 </p>
  <div class="org-src-container">
- <pre class="src src-elisp" id="org6f275bd"> <span style="color: #5e6263;">;;;; </span> <span style="color: #5e6263;">package setup</span>
+ <pre class="src src-elisp" id="orga0f5045"> <span style="color: #5e6263;">;;;; </span> <span style="color: #5e6263;">package setup</span>
 ( <span style="color: #598249;">require</span> ' <span style="color: #15968D;">ox-publish</span>)
 (package-initialize)
 
@@ -1098,7 +304,7 @@ the actual solution ended up being so simple i'm mad its not in any of the docum
 
  <ul class="org-ul"> <li>"fix syntax highlighting when using custom css in emacs org mode by defining font-locks manually."</li>
 </ul> <div class="org-src-container">
- <pre class="src src-elisp" id="org78b7372"> <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
+ <pre class="src src-elisp" id="org1c98523"> <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
  <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">reference this guy's setup, he's a king:</span>
  <span style="color: #5e6263;">;; </span> <span style="color: #5e6263;">https://gitlab.com/jgkamat/jgkamat.gitlab.io/-/blob/master/jgkamat-website.el</span>
 ( <span style="color: #598249;">when</span> noninteractive
@@ -1180,7 +386,7 @@ ok so that's all the like 'setup' type shit out of the way. after that i ran int
 </p>
 
  <div class="org-src-container">
- <pre class="src src-elisp" id="orgd4de980">( <span style="color: #598249;">setq</span> org-publish-project-alist
+ <pre class="src src-elisp" id="orga8bda1f">( <span style="color: #598249;">setq</span> org-publish-project-alist
       (list
        (list  <span style="color: #15968D;">"site-org"</span>
               <span style="color: #598249;">:base-directory</span>  <span style="color: #15968D;">"./source"</span>
@@ -1283,9 +489,9 @@ its important to note that i wrap org-publish-all and the webfeeder lines with m
 </div>
 </div>
 </div>
- <div id="outline-container-org29256d7" class="outline-3">
- <h3 id="org29256d7">Makefile</h3>
- <div class="outline-text-3" id="text-org29256d7">
+ <div id="outline-container-org54b1f99" class="outline-3">
+ <h3 id="org54b1f99">Makefile</h3>
+ <div class="outline-text-3" id="text-org54b1f99">
  <p>
 super easy makefile lol. 
 </p>
@@ -1331,9 +537,9 @@ if you're unfamiliar with make you can still use this without learning  <i>any</
 </div>
 </div>
 </div>
- <div id="outline-container-orgc3d98a0" class="outline-2">
- <h2 id="orgc3d98a0">credits & references</h2>
- <div class="outline-text-2" id="text-orgc3d98a0">
+ <div id="outline-container-orgac1c9bf" class="outline-2">
+ <h2 id="orgac1c9bf">credits & references</h2>
+ <div class="outline-text-2" id="text-orgac1c9bf">
  <p>
 there are a TON of places to read about doing this sort of thing. two folks in particular were really useful to me:
 </p>
@@ -1354,14 +560,223 @@ ambrevar actually wrote the webfeeder.el solution to the idiot org rss problem. 
 </div>]]></description>
   <link>https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html</guid>
-  <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
+</item>
+<item>
+  <title>css test</title>
+  <description><![CDATA[<div id="content">
+ <div id="outline-container-org405bfe4" class="outline-2">
+ <h2 id="org405bfe4">this is the first header</h2>
+ <div class="outline-text-2" id="text-org405bfe4">
+ <p>
+this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
+</p>
+ <ol class="org-ol"> <li>item 1</li>
+ <li>item 2</li>
+ <li>item 3
+ <ul class="org-ul"> <li>unordered 1</li>
+ <li>2</li>
+ <li>3</li>
+</ul></li>
+</ol></div>
+</div>
+
+ <div id="outline-container-org889344c" class="outline-2">
+ <h2 id="org889344c">below is a picture embed with caption</h2>
+ <div class="outline-text-2" id="text-org889344c">
+
+ <figure id="org71476d3"> <img src="file:///home/josiah/Pictures/screenshots/bad-headshot.png" alt="bad-headshot.png"></img> <figcaption> <span class="figure-number">Figure 1: </span>i should have used a better camera for this</figcaption></figure></div>
+</div>
+
+ <div id="outline-container-org57b2cac" class="outline-2">
+ <h2 id="org57b2cac">here is a python embd</h2>
+ <div class="outline-text-2" id="text-org57b2cac">
+ <div class="org-src-container">
+ <pre class="src src-python"> <span style="color: #598249;">import</span> slack
+
+ <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">reactable_string</span>(text):
+     <span style="color: #2F7BDE;">reactable_array</span> = []
+     <span style="color: #2F7BDE;">t</span> = text.lower()
+     <span style="color: #598249;">if</span>  <span style="color: #15968D;">'cyber'</span>  <span style="color: #598249;">in</span> t:
+        reactable_array.append( <span style="color: #15968D;">'robot'</span>)
+     <span style="color: #598249;">if</span>  <span style="color: #15968D;">'flavor town'</span>  <span style="color: #598249;">in</span> t:
+        reactable_array.append( <span style="color: #15968D;">'flavortown'</span>)
+     <span style="color: #598249;">return</span> reactable_array
+
+ <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">rtm</span>(emoji, payload,  <span style="color: #598249;">id</span>, ts):
+    payload[ <span style="color: #15968D;">'web_client'</span>].reactions_add(
+        channel= <span style="color: #598249;">id</span>,
+        name=emoji,
+        timestamp=ts
+    )
+
+     <span style="color: #598249;">return</span>  <span style="color: #15968D;">None</span>
+
+
+ <span style="color: #598249;">@slack.RTMClient.run_on</span>(event= <span style="color: #15968D;">'message'</span>)
+ <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">handle_messages</span>(**payload):
+     <span style="color: #2F7BDE;">data</span> = payload[ <span style="color: #15968D;">'data'</span>]
+     <span style="color: #598249;">id</span> = data[ <span style="color: #15968D;">'channel'</span>]
+     <span style="color: #2F7BDE;">ts</span> = data[ <span style="color: #15968D;">'ts'</span>]
+
+     <span style="color: #598249;">if</span> reactable_string(data[ <span style="color: #15968D;">'text'</span>]):
+         <span style="color: #2F7BDE;">needed</span> = reactable_string(data[ <span style="color: #15968D;">'text'</span>])
+
+         <span style="color: #598249;">if</span>  <span style="color: #15968D;">'robot'</span>  <span style="color: #598249;">in</span> reactions_needed:
+            rtm( <span style="color: #15968D;">"robot_face"</span>, payload,  <span style="color: #598249;">id</span>, ts)
+         <span style="color: #598249;">if</span>  <span style="color: #15968D;">'flavortown'</span>  <span style="color: #598249;">in</span> reactions_needed:
+            rtm( <span style="color: #15968D;">"dark_sunglasses"</span>, payload,  <span style="color: #598249;">id</span>, ts)
+            rtm( <span style="color: #15968D;">"guyfieri"</span>, payload,  <span style="color: #598249;">id</span>, ts)
+
+
+ <span style="color: #598249;">if</span>  <span style="color: #598249;">__name__</span> ==  <span style="color: #15968D;">'__main__'</span>:
+     <span style="color: #2F7BDE;">stoken</span> =  <span style="color: #15968D;">'XXXXXXXXXXXXXXXX'</span>   <span style="color: #5e6263;"># </span> <span style="color: #5e6263;">Secret token!!</span>
+     <span style="color: #2F7BDE;">rtm_client</span> = slack.RTMClient(token=stoken)
+    rtm_client.start()
+</pre>
+</div>
+</div>
+</div>
+
+ <div id="outline-container-org895ba8d" class="outline-2">
+ <h2 id="org895ba8d">here is a lisp embed</h2>
+ <div class="outline-text-2" id="text-org895ba8d">
+ <div class="org-src-container">
+ <pre class="src src-elisp">( <span style="color: #598249;">let</span> ((proj-base (file-name-directory load-file-name)))
+  ( <span style="color: #598249;">setq</span> org-publish-project-alist
+        `(( <span style="color: #15968D;">"project-name"</span>
+            <span style="color: #598249;">:base-directory</span> ,(concat proj-base  <span style="color: #15968D;">"."</span>)
+            <span style="color: #598249;">:recursive</span> t
+            <span style="color: #598249;">:publishing-directory</span> ,(concat proj-base   <span style="color: #15968D;">"../export"</span>)
+            <span style="color: #598249;">:publishing-function</span> org-html-publish-to-html))))
+</pre>
+</div>
+</div>
+</div>
+ <div id="outline-container-org17be4cd" class="outline-2">
+ <h2 id="org17be4cd">see links styling</h2>
+ <div class="outline-text-2" id="text-org17be4cd">
+ <p>
+ <a href="https://me.jowj.net">https://me.jowj.net</a> looks like this
+ <a href="https://google.com">https://google.com</a> looks like this
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org5bfb855" class="outline-2">
+ <h2 id="org5bfb855">here are some weird org mode extras i'm playing with</h2>
+ <div class="outline-text-2" id="text-org5bfb855">
+</div>
+ <div id="outline-container-org6db7a17" class="outline-3">
+ <h3 id="org6db7a17">using  <code>#+begin_parallel</code> to force side by side</h3>
+ <div class="outline-text-3" id="text-org6db7a17">
+ <div style="column-rule-style: none;column-count: 2;">
+ <p>
+Here's some text I want to look pretty normal
+</p>
+
+ <p>
+Text in parallel!!  <span style="color:purple;">cool</span>. 
+</p>
+
+</div>
+</div>
+</div>
+
+ <div id="outline-container-org8d25e4b" class="outline-3">
+ <h3 id="org8d25e4b">using  <code>doc:anything</code> to do tt on hover</h3>
+ <div class="outline-text-3" id="text-org8d25e4b">
+ <p>
+Pop-quiz: How does  <abbr class="tooltip" title="Call FUNCTION with our remaining args, using our last arg as list of args.<br>Then return the value FUNCTION returns.<br>Thus, (apply '+ 1 2 '(3 4)) returns 10.<br><br>(fn FUNCTION &rest ARGUMENTS)">apply</abbr> work?
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org384daca" class="outline-3">
+ <h3 id="org384daca">creating sections for visual break ups of text</h3>
+ <div class="outline-text-3" id="text-org384daca">
+ <p>
+I still have to figure out colors, obviously.
+</p>
+ <details class="code-details" style="padding: 1em;
+                          background-color: #2e174a;
+                          /* background-color: pink; */
+                          border-radius: 15px;
+                          color: hsl(0 0%);
+                          font-size: 0.9em;
+                          box-shadow: 0.05em 0.1em 5px 0.01em  #00000057;"> <summary> <strong>
+                       <font face="Courier" size="3" color="orange">
+                         Details box
+                      </font>
+                    </strong>
+                  </summary> <p>
+ <a class="anchor" aria-hidden="true" id="solution" href="#solution"> <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16
+   16" width="16" height="16"> <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69
+   3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10
+   5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0
+   2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5
+   0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55
+   13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>
+checking background changes
+</p>
+
+
+</details></div>
+</div>
+ <div id="outline-container-org74789e8" class="outline-3">
+ <h3 id="org74789e8">using spoilers</h3>
+ <div class="outline-text-3" id="text-org74789e8">
+ <style> #g40 {color: #2F7BDE; background-color:#2F7BDE;}
+       #g40:hover {color: black; background-color:white;} </style> <p>
+Checking my new spoiler color  <span id="g40"> spoiler lol </span>
+</p>
+</div>
+</div>
+
+
+ <div id="outline-container-org99d3f39" class="outline-3">
+ <h3 id="org99d3f39">detail box!</h3>
+ <div class="outline-text-3" id="text-org99d3f39">
+ <p>
+testing fixes
+</p>
+ <br></br> <div style="padding: 1em; background-color: #2e174a;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"> <h3></h3>
+ <p>
+ <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"> <path fill-rule="evenodd" d="M0 2a1 1 0 011-1h14a1 1 0 011 1v9a1 1 0 01-1 1H7l-4 4v-4H1a1 1 0 01-1-1V2zm1 0h14v9H6.5L4 13.5V11H1V2zm6 6h2v2H7V8zm0-5h2v4H7V3z"></path></svg> Note that  <kbd> C-x C-e </kbd> evaluates a Lisp form!
+</p>
+
+</div>
+</div>
+</div>
+
+ <div id="outline-container-org5a8b59e" class="outline-3">
+ <h3 id="org5a8b59e">latex margin vs html tooltips!</h3>
+ <div class="outline-text-3" id="text-org5a8b59e">
+ <p>
+damn i think this <abbr class="tooltip" title="from org mode, we write ''margin:'' and it will export to latex as a margin note, or to html as a tooltip! fucking cool.">°</abbr>&emsp13; is cool.
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-org"> <span style="color: #bebebe; font-weight: bold; text-decoration: underline; text-decoration: overline;"> <a href="margin:">what you want in the margins.</a></span>
+</pre>
+</div>
+ <p>
+
+</p>
+</div>
+</div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/css.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/css.html</guid>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
 </item>
 <item>
   <title>emacs on catalina</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org980cb63" class="outline-2">
- <h2 id="org980cb63">early days</h2>
- <div class="outline-text-2" id="text-org980cb63">
+ <div id="outline-container-org560f11c" class="outline-2">
+ <h2 id="org560f11c">early days</h2>
+ <div class="outline-text-2" id="text-org560f11c">
  <p>
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
 </p>
@@ -1376,9 +791,9 @@ this basically says to run this lisp to add your proper emacs path to the proper
 </div>
 </div>
 
- <div id="outline-container-orga5303ce" class="outline-2">
- <h2 id="orga5303ce">partial fix</h2>
- <div class="outline-text-2" id="text-orga5303ce">
+ <div id="outline-container-org5022fb3" class="outline-2">
+ <h2 id="org5022fb3">partial fix</h2>
+ <div class="outline-text-2" id="text-org5022fb3">
  <p>
 later that week, a few other people said you needed to whitelist  <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
 </p>
@@ -1389,9 +804,9 @@ since I could at least launch and navigate around with my then-current janky set
 </div>
 </div>
 
- <div id="outline-container-org7b10b55" class="outline-2">
- <h2 id="org7b10b55">jankiest fix</h2>
- <div class="outline-text-2" id="text-org7b10b55">
+ <div id="outline-container-orgb51d500" class="outline-2">
+ <h2 id="orgb51d500">jankiest fix</h2>
+ <div class="outline-text-2" id="text-orgb51d500">
  <p>
 he gives a good breakdown as to why this is needed  <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
 </p>
@@ -1414,14 +829,14 @@ this is not like, super great. its makes your configuration brittle and it will 
 </div>]]></description>
   <link>https://me.jowj.net/posts/emacs-on-catalina.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/emacs-on-catalina.html</guid>
-  <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
 </item>
 <item>
   <title>Moving from 1pass to bitwarden</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org6cea658" class="outline-2">
- <h2 id="org6cea658">background</h2>
- <div class="outline-text-2" id="text-org6cea658">
+ <div id="outline-container-org6262c8e" class="outline-2">
+ <h2 id="org6262c8e">background</h2>
+ <div class="outline-text-2" id="text-org6262c8e">
  <p>
 I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
 </p>
@@ -1445,9 +860,9 @@ because of these issues i started looking for alternatives
 </p>
 </div>
 </div>
- <div id="outline-container-org53351a3" class="outline-2">
- <h2 id="org53351a3">bitwarden</h2>
- <div class="outline-text-2" id="text-org53351a3">
+ <div id="outline-container-org9473e64" class="outline-2">
+ <h2 id="org9473e64">bitwarden</h2>
+ <div class="outline-text-2" id="text-org9473e64">
  <p>
 since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
 </p>
@@ -1463,9 +878,9 @@ i've been living on bitwarden for ~1 week at this point and haven't felt any rea
 </div>
 </div>
 
- <div id="outline-container-org37f408f" class="outline-2">
- <h2 id="org37f408f">the bad</h2>
- <div class="outline-text-2" id="text-org37f408f">
+ <div id="outline-container-orgd81ee6e" class="outline-2">
+ <h2 id="orgd81ee6e">the bad</h2>
+ <div class="outline-text-2" id="text-orgd81ee6e">
  <p>
 bad news first. 
 </p>
@@ -1479,9 +894,9 @@ bad news first.
 </ol></div>
 </div>
 
- <div id="outline-container-org8cf25bb" class="outline-2">
- <h2 id="org8cf25bb">totp issue specifics</h2>
- <div class="outline-text-2" id="text-org8cf25bb">
+ <div id="outline-container-org84783e5" class="outline-2">
+ <h2 id="org84783e5">totp issue specifics</h2>
+ <div class="outline-text-2" id="text-org84783e5">
  <p>
 bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
 </p>
@@ -1501,9 +916,9 @@ The desktop apps, being electron, got cached without showing the TOTP codes; sup
 </div>
 </div>
 
- <div id="outline-container-orgcc844fd" class="outline-2">
- <h2 id="orgcc844fd">the cool</h2>
- <div class="outline-text-2" id="text-orgcc844fd">
+ <div id="outline-container-org65373e2" class="outline-2">
+ <h2 id="org65373e2">the cool</h2>
+ <div class="outline-text-2" id="text-org65373e2">
  <p>
 On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
 </p>
@@ -1532,9 +947,9 @@ read about the bitwarden <sub>rs</sub> project here:
 </div>
 </div>
 
- <div id="outline-container-orgddf6772" class="outline-2">
- <h2 id="orgddf6772">next steps</h2>
- <div class="outline-text-2" id="text-orgddf6772">
+ <div id="outline-container-orgf0eeaf8" class="outline-2">
+ <h2 id="orgf0eeaf8">next steps</h2>
+ <div class="outline-text-2" id="text-orgf0eeaf8">
  <p>
 i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
 </p>
@@ -1547,23 +962,23 @@ i haven't figured out how i could do that, but it seems like it should be pretty
 </div>]]></description>
   <link>https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html</guid>
-  <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
 </item>
 <item>
   <title>pynit</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org81aa799" class="outline-2">
- <h2 id="org81aa799">what is this</h2>
- <div class="outline-text-2" id="text-org81aa799">
+ <div id="outline-container-org79a70dc" class="outline-2">
+ <h2 id="org79a70dc">what is this</h2>
+ <div class="outline-text-2" id="text-org79a70dc">
  <p>
 pynit is a personal archival script that relies on  <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it  <a href="https://github.com/jowj/pynit">here</a>.
 </p>
 </div>
 </div>
 
- <div id="outline-container-orgbc82620" class="outline-2">
- <h2 id="orgbc82620">why i made it</h2>
- <div class="outline-text-2" id="text-orgbc82620">
+ <div id="outline-container-orgc65eb74" class="outline-2">
+ <h2 id="orgc65eb74">why i made it</h2>
+ <div class="outline-text-2" id="text-orgc65eb74">
  <p>
 i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
 </p>
@@ -1601,32 +1016,32 @@ now whenever i want to revisit a particular item i have all the comments preserv
 </div>
 </div>
 
- <div id="outline-container-org1765c62" class="outline-2">
- <h2 id="org1765c62">what I learned while i made this</h2>
- <div class="outline-text-2" id="text-org1765c62">
+ <div id="outline-container-orgcafb03f" class="outline-2">
+ <h2 id="orgcafb03f">what I learned while i made this</h2>
+ <div class="outline-text-2" id="text-orgcafb03f">
  <p>
 i learned a few things that i want to write up here, all related to python or working with rest apis:
 </p>
 </div>
 
- <div id="outline-container-orgbe6dfdd" class="outline-3">
- <h3 id="orgbe6dfdd">python</h3>
- <div class="outline-text-3" id="text-orgbe6dfdd">
+ <div id="outline-container-org157abcb" class="outline-3">
+ <h3 id="org157abcb">python</h3>
+ <div class="outline-text-3" id="text-org157abcb">
  <p>
 i learned about  <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through  <a href="https://twitter.com/mrled">@mrled</a>and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
 </p>
 
  <div class="org-src-container">
- <pre class="src src-python"> <span style="color: #598249;">import</span> pysnooper
+ <pre class="src src-python"> <span class="org-keyword">import</span> pysnooper
 
- <span style="color: #598249;">@pysnooper.snoop</span>()
- <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
-     <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-     <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
+ <span class="org-type">@pysnooper.snoop</span>()
+ <span class="org-keyword">def</span>  <span class="org-function-name">my_function</span>():
+     <span class="org-variable-name">var1</span> =  <span class="org-string">'thing1'</span>
+     <span class="org-variable-name">var2</span> =  <span class="org-string">'thing2'</span>
 
-     <span style="color: #598249;">return</span>(var1 + var2)
+     <span class="org-keyword">return</span>(var1 + var2)
 
- <span style="color: #598249;">print</span>(my_function())
+ <span class="org-keyword">print</span>(my_function())
 
 </pre>
 </div>
@@ -1636,14 +1051,14 @@ this would return:
 </p>
 
  <div class="org-src-container">
- <pre class="src src-python">19:54:53.048881 call         4  <span style="color: #598249;">def</span>  <span style="color: #2F7BDE;">my_function</span>():
-19:54:53.049021 line         5      <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-New var:.......  <span style="color: #2F7BDE;">var1</span> =  <span style="color: #15968D;">'thing1'</span>
-19:54:53.049094 line         6      <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
-New var:.......  <span style="color: #2F7BDE;">var2</span> =  <span style="color: #15968D;">'thing2'</span>
-19:54:53.049155 line         8      <span style="color: #598249;">return</span>(var1 + var2)
-19:54:53.049197  <span style="color: #598249;">return</span>       8      <span style="color: #598249;">return</span>(var1 + var2)
-Return value:..  <span style="color: #15968D;">'thing1thing2'</span>
+ <pre class="src src-python">19:54:53.048881 call         4  <span class="org-keyword">def</span>  <span class="org-function-name">my_function</span>():
+19:54:53.049021 line         5      <span class="org-variable-name">var1</span> =  <span class="org-string">'thing1'</span>
+New var:.......  <span class="org-variable-name">var1</span> =  <span class="org-string">'thing1'</span>
+19:54:53.049094 line         6      <span class="org-variable-name">var2</span> =  <span class="org-string">'thing2'</span>
+New var:.......  <span class="org-variable-name">var2</span> =  <span class="org-string">'thing2'</span>
+19:54:53.049155 line         8      <span class="org-keyword">return</span>(var1 + var2)
+19:54:53.049197  <span class="org-keyword">return</span>       8      <span class="org-keyword">return</span>(var1 + var2)
+Return value:..  <span class="org-string">'thing1thing2'</span>
 thing1thing2
 </pre>
 </div>
@@ -1654,9 +1069,9 @@ this allowed me to simple add a single line to an exist function  <i>without mod
 </div>
 </div>
 
- <div id="outline-container-orgdeebed5" class="outline-3">
- <h3 id="orgdeebed5">rest apis</h3>
- <div class="outline-text-3" id="text-orgdeebed5">
+ <div id="outline-container-org9c98c80" class="outline-3">
+ <h3 id="org9c98c80">rest apis</h3>
+ <div class="outline-text-3" id="text-org9c98c80">
  <p>
 a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is  <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the  <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
 </p>
@@ -1666,22 +1081,22 @@ a lot of people (a lot of people!!) just have you use get requests instead of po
 </div>]]></description>
   <link>https://me.jowj.net/posts/pynit.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/pynit.html</guid>
-  <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
 </item>
 <item>
   <title>tvm at a new company</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org7a605a6" class="outline-2">
- <h2 id="org7a605a6">no new problems</h2>
- <div class="outline-text-2" id="text-org7a605a6">
+ <div id="outline-container-org459a1d5" class="outline-2">
+ <h2 id="org459a1d5">no new problems</h2>
+ <div class="outline-text-2" id="text-org459a1d5">
  <p>
 i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.
 </p>
 </div>
 
- <div id="outline-container-org2b6c00a" class="outline-3">
- <h3 id="org2b6c00a">using an existing scanning install or starting over</h3>
- <div class="outline-text-3" id="text-org2b6c00a">
+ <div id="outline-container-org505e320" class="outline-3">
+ <h3 id="org505e320">using an existing scanning install or starting over</h3>
+ <div class="outline-text-3" id="text-org505e320">
  <p>
 it may be reasonable to nuke an install if:
 </p>
@@ -1698,9 +1113,9 @@ those are really the only hard constraints i can think of. everything else seems
 </div>
 </div>
 
- <div id="outline-container-orgb250713" class="outline-3">
- <h3 id="orgb250713">are naming schemes important enough to spend time on</h3>
- <div class="outline-text-3" id="text-orgb250713">
+ <div id="outline-container-org0d8038b" class="outline-3">
+ <h3 id="org0d8038b">are naming schemes important enough to spend time on</h3>
+ <div class="outline-text-3" id="text-org0d8038b">
  <p>
 hard yes. some of the names in use at my new place are frankly  <i>hilarious</i>. and bad. "aaah, a scan template called 'corp users', what do you suppo - oh, its for scanning production? of course."
 </p>
@@ -1719,9 +1134,9 @@ ProductName - Environment - Geolocation - Data
 </div>
 </div>
 
- <div id="outline-container-orgfa8495b" class="outline-3">
- <h3 id="orgfa8495b">a note on scan schedules</h3>
- <div class="outline-text-3" id="text-orgfa8495b">
+ <div id="outline-container-orgb02f7f7" class="outline-3">
+ <h3 id="orgb02f7f7">a note on scan schedules</h3>
+ <div class="outline-text-3" id="text-orgb02f7f7">
  <p>
 think about what a particular scan is trying to accomplish. if the goal of a scan is to get data from  <i>corporate servers</i> then a typical overnight maintenance window makes sense. 
 </p>
@@ -1739,9 +1154,9 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>
 
 
- <div id="outline-container-org7b49c0f" class="outline-3">
- <h3 id="org7b49c0f">what other things should I check on</h3>
- <div class="outline-text-3" id="text-org7b49c0f">
+ <div id="outline-container-org69cd817" class="outline-3">
+ <h3 id="org69cd817">what other things should I check on</h3>
+ <div class="outline-text-3" id="text-org69cd817">
  <ul class="org-ul"> <li>is the OS backing the scanning app still getting updates? a lot of people fire and forget scan setups so make sure you're not running shit off some idiots ubuntu 12 install.</li>
  <li>how much of the infrastructure are we actually scanning? do have blind spots?
  <ul class="org-ul"> <li>if there isn't an ipam then this will be reaaaaal hard to figure out, but its very important.</li>
@@ -1756,14 +1171,599 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>]]></description>
   <link>https://me.jowj.net/posts/tvm-at-a-new-company.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/tvm-at-a-new-company.html</guid>
-  <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
+</item>
+<item>
+  <title>uses this</title>
+  <description><![CDATA[<div id="content">
+ <div id="outline-container-orgfe4d8f2" class="outline-2">
+ <h2 id="orgfe4d8f2">uses this</h2>
+ <div class="outline-text-2" id="text-orgfe4d8f2">
+ <p>
+ <a href="https://usesthis.com/">uses this</a> is a collection of interviews with individuals asking them about their hardware and software uses. i love this topic. of course, i'm not interesting enough to do interviews with anyone, but i  <i>do</i> think my hardware and software uses are more interesting than many of the real answerer's <abbr class="tooltip" title="i use a macbook pro! and an iphone! and google docs for collaboration! who cares :(">°</abbr>&emsp13;. so, here's what i use!
+</p>
+</div>
+
+ <div id="outline-container-org3131fdd" class="outline-3">
+ <h3 id="org3131fdd">hardware</h3>
+ <div class="outline-text-3" id="text-org3131fdd">
+
+ <figure id="org57676f8"> <img src="../photos/uses-this/desk2.jpeg" alt="desk2.jpeg"></img> <figcaption> <span class="figure-number">Figure 1: </span>a truly ridiculous setup</figcaption></figure> <p>
+i use a collection of hardware i've built, scrounged, borrowed or (reluctantly) bought over the past 10ish years. the place with the most New Stuff is audio gear, as I put together some audio improvements now that I live work and die at home. I'm separating the hardware topic out into a few categories:
+</p>
+</div>
+
+ <div id="outline-container-orgd74725c" class="outline-4">
+ <h4 id="orgd74725c">networking</h4>
+ <div class="outline-text-4" id="text-orgd74725c">
+
+ <figure id="orgbe834a0"> <img src="../photos/uses-this/rack.jpeg" alt="rack.jpeg"></img> <figcaption> <span class="figure-number">Figure 2: </span>a 19" rack my brother gave me</figcaption></figure> <p>
+i love unifi <abbr class="tooltip" title="unifi makes prosumer tier network gear with more emphasis on a UI than competitors">°</abbr>&emsp13; stuff. I've got two 8 port switches (one PoE, one powered regularly, got about 3 years apart), a 3port  <a href="https://store.ui.com/collections/unifi-network-routing-switching/products/unifi-security-gateway">usg</a>, and a PoE  <a href="https://www.ui.com/unifi/unifi-ap-ac-lite/">unifi ap ac lite</a>. its really nice to have everything talk to a central place, and makes troubleshooting network issues a lot easier. Unifi  <i>does</i> have some problems with reliability on new updates, so I typically update once a month, giving any new updates time to settle before I apply them. I haven't had an outtage since the first month i got the USG ✨
+</p>
+
+ <p>
+the rack that the unifi stuff lives in is a 19" home network rack that is (apparently) very popular in europe and aboslutely impossible to find parts for in the US. I have paid someone in germany a decent amount of money to 3D print fittings so tha I can have a better rack setup. I haven't tested the new parts yet so ymmv, but  <a href="https://www.drei-d-w.de/">here</a> is the website I used.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org7a0ff57" class="outline-4">
+ <h4 id="org7a0ff57">servers</h4>
+ <div class="outline-text-4" id="text-org7a0ff57">
+ <p>
+i have a built from scratch very old "server" that used to be my main computer. It was the first computer I built when I moved out into my own apartment. Its got a i5-2500K, which google tells me is from 2011, so I got this about a decade ago. It has 16 gigs of ram and some very shitty graphics card. it hosts my  <a href="https://git.awful.club/jowj/adc/src/branch/master/ansible/roles/mediaserver">media server shit</a>, which includes the *arr apps, plex, sabnzbd, etc.
+</p>
+
+ <p>
+I have a raspberry pi that serves as my VPN endpoint for a site2site  <a href="https://www.wireguard.com/">wireguard</a> configuration. the pi acts as an always-on router that can talk to my home network. 
+</p>
+
+
+
+ <figure id="org85afb6d"> <img src="../photos/uses-this/synology.jpeg" alt="synology.jpeg"></img> <figcaption> <span class="figure-number">Figure 3: </span>a very old synology that i am too lazy to dust.</figcaption></figure> <p>
+I have an extremely old  <a href="https://www.synology.com/en-us">synology</a> 4 port nas. friend gave it to me several years ago, after he had owned it for a bunch of years already. it still gets updates. its slow, and soon i'll have to upgrade to still get updates, but for now its still does me good.
+</p>
+
+ <p>
+i have a collection of vms in  <a href="https://www.digitalocean.com/">digital ocean</a>, the precise number of which fluctuates based on any ongoing projects. right now, I have 3: a  <a href="https://pleroma.social/">pleroma</a> server, a  <a href="https://matrix.org">matrix</a> server  <abbr class="tooltip" title="i have written previously about what i'm doing with matrix. if you're curious go look around my site.">°</abbr>&emsp13;, and a General Purpose server that hosts several things, including  <a href="https://gitea.io/en-us/">gitea</a>, my znc server, and  <a href="https://git.awful.club/hosted/mojojojo-bot">some</a>  <a href="https://git.awful.club/hosted/arke">bots</a> that are either pointless, broken, or shitty (but are fun, and i made them!).
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org9f1e641" class="outline-4">
+ <h4 id="org9f1e641">user devices</h4>
+ <div class="outline-text-4" id="text-org9f1e641">
+ <p>
+i have too many of these lol. i have a windows tower that is just for playing games. its got a Ryzen 3*** series CPU and 16 gb of ram. I've got a  <a href="https://system76.com/">system76 oryx</a> that i have used as my primary user device since 2016. Its a lovely device with a few caveats; system76 sells rebranded  <a href="https://www.clevo.com.tw/index-en.asp">clevo</a> machines, and there are more than a few QC issues with these guys. the laptop keyboard doesn't work reliably at all, though in my case that's fine because I never use it as a laptop, its always attached to my full desk setup.
+</p>
+
+ <p>
+for mobile devices i have an iPhone XS (though i'm thinking of side-grading to the new iPhone mini in the hopes that a smaller screen and lighter weight device will help with my  <a href="https://me.jowj.net/personal/rsi.html">rsi</a>), a shitty Samsung Tablet 8 (i think?) that i use to play around with android distrobutions. right now its running  <a href="https://lineageos.org/">lineageOS</a>. I also have a switch for playing games.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orga200270" class="outline-4">
+ <h4 id="orga200270">user IO devices</h4>
+ <div class="outline-text-4" id="text-orga200270">
+
+ <figure id="org418a3e7"> <img src="../photos/uses-this/audio-stuff.jpeg" alt="audio-stuff.jpeg"></img> <figcaption> <span class="figure-number">Figure 4: </span>my audio stuff: from left to right: a mic, a preamp, headphone mixer, mic splitter</figcaption></figure> <p>
+I'm in the process of building out a version of  <a href="https://me.micahrl.com/projects/deskmx/">my brother's deskmx project</a>; i have 3 mixers (one acts as a preamp for mics, one is a mic input splitter to connect to all my devices, and 1 is just for headphones). this is still on going and i'll probably write about what i've done and what, if anything, i did different than my brother once its finished. 
+</p>
+
+
+ <figure id="org4c5057c"> <img src="../photos/uses-this/ergodox.jpeg" alt="ergodox.jpeg"></img> <figcaption> <span class="figure-number">Figure 5: </span>one ergodox infinity. i purchased this one from some user off r/mechmarket a few years ago.</figcaption></figure> <p>
+i have two  <a href="https://input.club/devices/infinity-ergodox/">ergodox infinity</a> keyboards; in the past this was so i could have one at work and one at home. now i just have one on my desk and one on my workspace, for when i inevitably change out some switches. i love these keyboards, though i do wish i could have better tenting. I also have a ~10 or 11 year old  <a href="https://www.razer.com/gaming-keyboards/razer-blackwidow-v3-tenkeyless/RZ03-03490200-R3U1">razer black widow 10keyless</a> which is just like the one linked except doesn't have backlighting or rgb or any of that. this has lasted a respectable amount of time, though I did have to replace the USB IO board in 2020.
+</p>
+
+
+ <figure id="org1ddfba7"> <img src="../photos/uses-this/mice.jpeg" alt="mice.jpeg"></img> <figcaption> <span class="figure-number">Figure 6: </span>some of my mice. from left to right: mx vertical, benq, kensington</figcaption></figure> <p>
+i have a stupid collection of mice, mostly as part of a "can i help my RSI" series of experiments. God's own mouse is the  <a href="https://www.newegg.com/logitech-g9x/p/N82E16826104261">logitech g9x</a>, which i had for 8 or so years before it finally gave up the ghost. i love that mouse. It now sells on ebay / amazon for 399, though when i bought it first i think i paid ~60 USD for it. I also have a  <a href="https://www.amazon.com/gp/product/B07FNJB8TT/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1">logitech vertical mouse</a> which I am currently using for most of my computing needs, and a  <a href="https://www.amazon.com/gp/product/B07Y8ZD1P5/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1">benQ zowie EC1</a> which I hoped would adequately replace my g9x in terms of hand fit, and it did not :(.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgde0788f" class="outline-4">
+ <h4 id="orgde0788f">misc</h4>
+ <div class="outline-text-4" id="text-orgde0788f">
+ <p>
+ <img src="../photos/uses-this/bike.jpeg" alt="bike.jpeg"></img>
+i also have a beat up 90s era hardtail bicycle that i love to death. its a piece of shit and i love it very much. i am also excited to buy another bike, eventually, but this one is suiting me just fine for now.
+</p>
+</div>
+</div>
+</div>
+
+ <div id="outline-container-orgf73d88c" class="outline-3">
+ <h3 id="orgf73d88c">software</h3>
+ <div class="outline-text-3" id="text-orgf73d88c">
+</div>
+ <div id="outline-container-orgd9d39d9" class="outline-4">
+ <h4 id="orgd9d39d9">operating systems</h4>
+ <div class="outline-text-4" id="text-orgd9d39d9">
+ <p>
+Nothing crazy here outside of my desktop. i primarily use linux things. for my personal every day use, I rely on  <a href="https://nixos.org/">nixOS</a>. i love it a lot. for all my servers i run  <a href="https://www.debian.org/">debian</a>, though I hope to change that soon to  <i>either</i> guix or nixos (depending on cloud support). I use macOS for work, and windows to play games that aren't fully compat with valve's proton <abbr class="tooltip" title="proton is valve's compatability tool for steam">°</abbr>&emsp13; tool. 
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgaea9327" class="outline-4">
+ <h4 id="orgaea9327">desktop env</h4>
+ <div class="outline-text-4" id="text-orgaea9327">
+
+ <figure id="orgc909897"> <img src="../photos/uses-this/desktop-env.png" alt="desktop-env.png"></img> <figcaption> <span class="figure-number">Figure 7: </span>sample fake workspace</figcaption></figure> <p>
+this is a bit more interesting.
+</p>
+
+ <p>
+on top of nixOS i have a (i'm sure terrible) desktop environment. i use  <a href="https://awesomewm.org/">awesome window manager</a> to orchestrate everything. i use  <a href="https://github.com/davatorium/rofi">rofi</a> as my launcher, window switcher, etc. I have come to rely on  <a href="https://espanso.org/">espanso</a> to give me access to emojis and text macros - an exmaple of this is I can type like  <code>:sparkles:</code> and get ✨ to appear! I also use  <a href="https://github.com/resurrecting-open-source-projects/scrot">scrot</a> to give me a good UX when screenshotting. i use  <a href="https://www.mozilla.org/en-US/firefox/new/">firefox</a> as my browser, and basically everything else that isn't terminal based I do in  <a href="https://www.gnu.org/software/emacs/">gnu emacs</a>.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orga9cd5f9" class="outline-4">
+ <h4 id="orga9cd5f9">emacs, and all the shit i do with it</h4>
+ <div class="outline-text-4" id="text-orga9cd5f9">
+ <p>
+emacs gets its own section because its  <i>so fucking good</i>. emacs is a platform for solving problems you face on your computer. in order to be a good user of emacs you need to know  <a href="https://en.wikipedia.org/wiki/Emacs_Lisp">emacs lisp</a> (sorry lol). once you are comfortable at least fucking around with existing code and modifying it to better fit you, you become capable of addressing basically any problem you might run into.
+</p>
+
+ <p>
+katherine cox-buday (interviewed in uses-this, who i cite at the end of this article) describes emacs and elisp like this: "If you know a little emacs-lisp, you can begin down the path of creating your own perfect tool which will grow with you, for life."  I really like that; over years I can make a tool that's worn to exactly how I hold the keyboard, how I move between applications, etc. emacs is  <i>dope</i>.
+</p>
+
+ <p>
+the two primary things I do in emacs:
+</p>
+ <ul class="org-ul"> <li>writing (documentation, todo lists, keeping track of my responsibilities) which is done in  <a href="https://orgmode.org/">org mode</a>.</li>
+ <li>programming and interfacing with version control systems, which is done in various modes (for programming) and  <a href="https://magit.vc/">magit</a> (for vcs).</li>
+</ul> <p>
+If you want to look at my dot files they are  <a href="https://git.awful.club/jowj/chd/src/branch/master/.emacs.d">here</a>.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgf0db1c2" class="outline-4">
+ <h4 id="orgf0db1c2">programming and versioning and config management (ansible et al)</h4>
+ <div class="outline-text-4" id="text-orgf0db1c2">
+ <p>
+i'm not doing anything very interesting here outside of my emacs/elisp usage. 
+</p>
+ <ul class="org-ul"> <li>most things i write in python</li>
+ <li>i've written some stuff in elisp that's mostly "taking code that already exists and tweaking it until I have what i want" (see my work on  <a href="https://me.jowj.net/posts/blogging-on-ghpages-with-orgmode.html">blogging on ghpages with orgmode</a>)</li>
+ <li>config management is done via  <a href="https://www.ansible.com/">ansible</a>.</li>
+ <li>technically I also have written some  <a href="https://www.lua.org/">lua</a> to solve a  <a href="https://git.awful.club/projects/gamemode">problem</a> i had with awesomeWM.</li>
+</ul></div>
+</div>
+
+ <div id="outline-container-org0252bb3" class="outline-4">
+ <h4 id="org0252bb3">services i host and use.</h4>
+ <div class="outline-text-4" id="text-org0252bb3">
+ <p>
+as mentioned previously, my mediaserver setup hosts the  <code>*arr</code> apps <abbr class="tooltip" title="these apps are radarr, sonarr, lidarr, which are download managers for tv, movies, and music">°</abbr>&emsp13;. I use plex <abbr class="tooltip" title="a personal media server">°</abbr>&emsp13; to serve media files to my users (me, friends, family). i store the configs for these things in a  <code>docker-compose</code> format that deploys a  <code>swarm</code>, which itself is deployed through ansible.
+</p>
+
+ <p>
+I use bitwarden's <abbr class="tooltip" title="bitwarden is an open source password manager.">°</abbr>&emsp13; hosted offering for my password manager. I moved to it from 1password, which I think is mostly better (especially from a polish point of view), due to the availability of clients on more platforms than 1password offered. 1pass now has a linux client, I understand, but opensource is my preference politically anyway. I've written about the process of moving to bitwarden  <a href="https://me.jowj.net/posts/moving-from-1pass-to-bitwarden.html">here</a>.
+</p>
+
+ <p>
+for cloud infra services i am currently using digitalocean <abbr class="tooltip" title="DO is a <i>great</i> improvement over the Big3 cloud providers if you're just a 1 person setup. fuck aws/gcp/azure for this sort of thing; DO lets you do a bunch without learning idiot abstractions all while letting you understand what the fuck your bill is going to be at the end of the month. i fucking love DO.">°</abbr>&emsp13;. i may end up migrating off them to get to a provider that gives me more control over my OS, but i really love DO.
+</p>
+
+ <p>
+this blog is currently hosted on github pages as mentioned previously. i use  <a href="https://www.fastmail.com/">fastmail</a> for email and i really like them. i'd like to not have a reliance on an australian hosted company for  <a href="https://fee.org/articles/australia-s-unprecedented-encryption-law-is-a-threat-to-global-privacy/">reasons</a> but, frankly, email is plain text anyway and trying to force encryption on top of the email platform tends to fail real bad (see gpg). long term i'd love to move but nobody else has as good a product for the same ballpark of price.
+</p>
+</div>
+</div>
+</div>
+
+ <div id="outline-container-orge83f97b" class="outline-3">
+ <h3 id="orge83f97b">my ideal setup</h3>
+ <div class="outline-text-3" id="text-orge83f97b">
+ <p>
+this doesn't exist the fun part is fucking with what you have! here are some things i'd love to try out:
+</p>
+
+ <ul class="org-ul"> <li> <a href="https://guix.gnu.org/">guixSD</a> and all that implies; I'm fucking around with  <code>nixOS</code> right now and i like it a lot (though, wow, rough edges). guix would be taking my like of reproducability and declarative configuration and marrying that with scheme and emacs more tightly than nix does. from a political standpoint it would also be closer to what i'd like. it seems like a pretty big usability trade off though, which is why i haven't done it yet. guixSD uses  <code>hurd</code> rather than the linux kernel, and the learning curve for that would be  <i>steep</i>.</li>
+
+ <li> <a href="https://github.com/NixOS/nixops">set up nixops</a>. if I stick with nix, i'd love to play with this.  <code>guix</code> of course has a similar tool, with  <a href="https://guix.gnu.org/en/blog/2019/towards-guix-for-devops/">guix deploy</a>, if I end up there. i love the idea of moving  <i>out</i> of  <code>ansible</code> and onto something that treats declarative management as a first class citizen with the OS. tbh ansible is sorta disappointing with that; why redhat didn't make ansible have better interfaces to rh specific stuff i'll never know. also now that rh is actually IBM i'm nervous about future stability ( a possibly silly case of nerves; its not like IBM hasn't been around a long time )</li>
+
+ <li>upgrade my linux laptop; i've thought about one of the newer XPS13 or 15s, as well as newer system76 options. i haven't decided what i'll end up doing. my current computer is chugging along just fine, even if i would be  <i>so pleased</i> to have usbc charging and a device with fewer, uh, personality traits.</li>
+
+ <li>related to that, i'd love to standardize everything on usbc if possible. my work machine is a mbp16" which uses USBC, my personal laptop is the old standard barrel charger, my phone is fucking lightening, my backup battery is usbMicro, uuuuuugh. fuck i would love to just have like, 2 cables that did everything for me.</li>
+
+ <li>a change in phone; i'd like to experiment with alternatives to apple or android. the  <a href="https://www.pine64.org/pinephone/">pinephone</a> or the  <a href="https://puri.sm/products/librem-5/">librem 5</a> from purism are the two options most available to me as a US based person.  <a href="https://jolla.com/">sailfish by Jolla</a> seems like a great alternative if you're in the EU; SFOS is its own thing, but it has an Android compat shim that lets its own app ecosystem be bootstrapped by android. smart. my understanding is that there are band issues with EU phones in the US, though i haven't seriously looked into it. i've been on iOS since i got off of my little sidekick-like phone after a very bad bicycle accident. phones are hard to change, though. I care a lot about security, privacy, and user control, and MAN. those three things are not necessarily at loggerheads by default, but the people who champion each one of those efforts in the mobile space all have forgotten the OTHER two exist.</li>
+</ul></div>
+</div>
+
+ <div id="outline-container-orge4bea29" class="outline-3">
+ <h3 id="orge4bea29">articles from uses this that i like</h3>
+ <div class="outline-text-3" id="text-orge4bea29">
+ <ul class="org-ul"> <li>alice mazzy's interview:  <a href="https://usesthis.com/interviews/alice.maz/">https://usesthis.com/interviews/alice.maz/</a>. she's always interesting. she's got writing that i like, too. her article on  <a href="https://www.alicemaz.com/writing/minecraft.html">minecraft economies</a> and breaking them is one of my favorite reads.</li>
+ <li>chris randall's:  <a href="https://usesthis.com/interviews/chris.randall/">https://usesthis.com/interviews/chris.randall/</a>. big focus on audio production in this one. super interesting stuff.</li>
+ <li>justine haupt's:  <a href="https://usesthis.com/interviews/justine.haupt/">https://usesthis.com/interviews/justine.haupt/</a>. just cool topics and things she uses. check out her website,  <a href="http://www.justine-haupt.com/">too</a>, she has done some cool shit</li>
+ <li>katherine cox-buday's:  <a href="https://usesthis.com/interviews/katherine.cox-buday/">https://usesthis.com/interviews/katherine.cox-buday/</a>. hell ya a REAL LIST of SHIT i love it</li>
+ <li>paul ford's:  <a href="https://usesthis.com/interviews/paul.ford/">https://usesthis.com/interviews/paul.ford/</a>. i loved this guy's detail and that he thought about why he was collecting some of his data (computers are tools for  <i>thinking</i>, (to him) and not, in this context, for productivity).</li>
+</ul> <p>
+if there's anything you've read from uses this that you especially liked  <a href="mailto:me@jowj.net">email me about it</a>. i'd love to read whatever you liked :) 
+</p>
+</div>
+</div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/uses-this.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/uses-this.html</guid>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
+</item>
+<item>
+  <title>using matrix</title>
+  <description><![CDATA[<div id="content">
+ <div id="outline-container-orga03dd1a" class="outline-2">
+ <h2 id="orga03dd1a">introduction</h2>
+ <div class="outline-text-2" id="text-orga03dd1a">
+ <p>
+i wanna write about  <a href="https://matrix.org">matrix</a>. matrix is a 'new' protocol for decentralized communication. it can be used in a bunch of different ways: from relatively secure, favoring security over ease of use, to very open, favoring ease of use over all other concerns. i tend to use it in the, to me, bare minimum secure configuration and then focusing hard on ease of use.
+</p>
+
+ <ul class="org-ul"> <li>i use e2ee by default</li>
+ <li>i self host my home server</li>
+ <li>i allow federation</li>
+</ul> <p>
+i like that i can expect message  <i>content</i> privacy and also retain relative ease of use within the same platform. i like that that i can bridge a bunch of services to a single chat client (albeit with some uh, effort / UX trade-offs). i like that there exists reference apps for basically every platform i care about (and basically all the platforms my friends care about).
+</p>
+
+ <p>
+i really like matrix! but its fair to say there are also problems with it. if you're familiar with matrix at all you  <a href="https://matrix.org/blog/2019/04/11/we-have-discovered-and-addressed-a-security-breach-updated-2019-04-12">probably heard about their big security fuck up</a>. earlier, i wrote specifically that you can expect message  <i>content</i> privacy, and i'll add here that you cannot expect message  <i>metadata</i> privacy (for example, read the  <a href="https://news.ycombinator.com/item?id=23108750">first half of tptacek's reply on HN about contact lists in matrix vs signal</a>). if you self host, there's an even bigger metadata leak than for users who use a larger existing deployment.
+</p>
+
+ <p>
+i don't wanna convince you that matrix is the protocol of your dreams and you should use it. i just wanna talk about what i'm using it for and maybe help a few folks who ran into some of the same issues i've now solved.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgbf9c478" class="outline-2">
+ <h2 id="orgbf9c478">what am i doing with matrix</h2>
+ <div class="outline-text-2" id="text-orgbf9c478">
+ <p>
+one of the most fun / worst things about using matrix is that there's a bajillion knobs to tweak; anyone who is using it could have anywhere from 1 to n things different from my setup. here's what i'm doing:
+</p>
+</div>
+
+ <div id="outline-container-org71157e0" class="outline-3">
+ <h3 id="org71157e0">clients</h3>
+ <div class="outline-text-3" id="text-org71157e0">
+ <p>
+i'm using standard element clients for linux, macOS, iOS, and android.
+</p>
+
+ <p>
+i'm paying attention to ditto and nio as mobile clients; ditto is made by someone from my city which is rad! its purple, which is rad! nio is  <i>also</i> purple, so its also rad. i've played with the weechat-matrix plugin which i think fucking sucks. i've played with mirage, nheko, and a few others that just seemed incomplete. i'm hopeful that the KDE folks get a reasonably good client going with  <a href="https://blogs.kde.org/2017/09/05/konversation-2x-2018-new-user-interface-matrix-support-mobile-version">konversations2</a>, but man the last meaningful update i've seen is ages old.
+</p>
+
+ <p>
+since originally writing ^ that paragraph, the new hotness for KDE clients is  <a href="https://github.com/KDE/neochat">neochat</a>; I've only cursorily looked at this but it seems like is heading the right direction. Additionally, Nheko has received a bunch of updates and its one of the desktop linux clients i'll be trying out next. I've also tried the  <a href="https://github.com/matrix-org/purple-matrix">libpurple plugin</a> which is, like, fine I guess. its libpurple. Its not feature complete and it has all the drawbacks of libpurple. I wouldn't use it.
+</p>
+</div>
+</div>
+
+
+ <div id="outline-container-orgbbb456e" class="outline-3">
+ <h3 id="orgbbb456e">servers</h3>
+ <div class="outline-text-3" id="text-orgbbb456e">
+ <p>
+i'm using the  <a href="https://github.com/matrix-org/synapse">synapse reference server</a>, written in python. there really aren't other options here at the moment. dendrite (written in go) looks like it will no longer be the successor to Synapse, and instead just be a testing ground. there are a few rust servers being worked on as well, but with less official support.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org85364c6" class="outline-3">
+ <h3 id="org85364c6">bridges</h3>
+ <div class="outline-text-3" id="text-org85364c6">
+</div>
+ <div id="outline-container-org49d40b8" class="outline-4">
+ <h4 id="org49d40b8">slack</h4>
+ <div class="outline-text-4" id="text-org49d40b8">
+ <p>
+i'm currently using the  <a href="https://github.com/matrix-org/matrix-appservice-slack">matrix-appservice-slack bridge</a> to bridge my local family and friends slack to my matrix server. this lets me do two things that are important to me:
+</p>
+
+ <ul class="org-ul"> <li>pull in all messages in my public channels to my element instance, which lets me capture logs (slack requires that you pay a non-trivial amount of money per user per month if you want to have access to historic data)</li>
+ <li>talk to my friends in slack from my element client.</li>
+</ul> <p>
+the second one makes me feel like i'm 12, using trillian and setting away messages in aim. i love it.
+</p>
+
+ <p>
+all the data replicates without hiccups between my synapse instance and the slack api, but the presentation of threaded messages in the element clients sucks, frankly. there's  <a href="https://github.com/vector-im/riot-web/issues/2349">a bug</a> filed for it but what the final implementation will look like is anyone's guess.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org0461603" class="outline-4">
+ <h4 id="org0461603">irc</h4>
+ <div class="outline-text-4" id="text-org0461603">
+ <p>
+the self hosted  <a href="https://github.com/matrix-org/matrix-appservice-irc">matrix-appservice-irc bridge</a> is what most people seem to use. i have used the  <i>hosted</i> version on matrix.org before; i hated it. it was great to be able to talk to folks on freenode channels from element, especially given that there is no reasonable irc client on iOS! but the UX is just bad.
+</p>
+
+ <p>
+i've started the learning process for self hosting it myself and having the bridge treat my existing IRC bouncer as a separate IRC network but that's pretty undocumented. there are no quick and dirty guides about it, and especially since i'm isolating at home all the time now, my drive to solve this iOS irc client problem has cratered. i  <i>have</i> verified with the bridge maintainer that what i want to do is possible; its just relatively niche and hasn't been written about.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org2d028e9" class="outline-4">
+ <h4 id="org2d028e9">discord</h4>
+ <div class="outline-text-4" id="text-org2d028e9">
+ <p>
+i'm using the  <a href="https://github.com/matrix-discord/mx-puppet-discord">mx-puppet-discord</a> bridge for bridging in discord channels. I tried using the  <a href="https://github.com/Half-Shot/matrix-appservice-discord">appservice discord</a> bridge but had a  <i>devil</i> of a time getting it to work. mx-puppet-discord works and has (imo) a better user experience for admins, though it does seem pretty finnicky. from what I can tell, more finnicky than the appservice. at least this one i can get to run though!!
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org037e209" class="outline-4">
+ <h4 id="org037e209">combining bridges in a single room</h4>
+ <div class="outline-text-4" id="text-org037e209">
+ <p>
+a thing that i think is fucking  <i>cool</i> and also probably a source of some of my problems is: i currently use some of these bridges to create a frankenstein room, that does bidirecitonal send like discord <-> matrix <-> slack; the channel "mothra-fuckers" (shut up) in discord talks to the channel "mothra-fuckers" in  matrix, which is also bridged to "mothra-fuckers" in slack, and anyone in any of those channels can talk to all three platforms! rad!
+</p>
+</div>
+</div>
+</div>
+</div>
+
+ <div id="outline-container-orgdc8490e" class="outline-2">
+ <h2 id="orgdc8490e">avoiding common pitfalls of self hosting</h2>
+ <div class="outline-text-2" id="text-orgdc8490e">
+</div>
+ <div id="outline-container-org4a7b9a7" class="outline-3">
+ <h3 id="org4a7b9a7">deployment</h3>
+ <div class="outline-text-3" id="text-org4a7b9a7">
+ <p>
+I think the first thing you should do is eschew configuring synapse and all these bridges on your own. that fucking sucks. use  <a href="https://github.com/spantaleev/matrix-docker-ansible-deploy">this set</a> of ansible roles, these guys are great, continuously update stuff, and provide meaningful changelogs for updates. their documentation is not always lovely, especially about the optional plugins they offer, but have been enough to get me started on solving the problem every time so far.
+</p>
+
+ <p>
+I forked their repo and periodically update it from  <code>upstream/master</code> to pull in latest changes when I have time to commit to problem solving any issues. Mostly I don't have problems, but occasionally there are big version updates that have done things like enforce migrations from sqlite to pgsql, or enforced breaking changes with TLS, etc. 
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org873422a" class="outline-3">
+ <h3 id="org873422a">disk space</h3>
+ <div class="outline-text-3" id="text-org873422a">
+ <p>
+one of the things i keep intending to do (and have thus far put off) is move away from relying on raw disks attached to DO droplet and move towards object storage with s3/do spaces/ whatever. This is made easy if you use the previously mentioned set of ansible roles. if you don't do this, you will have to periodically go in and delete old media or add a bunch of new disk space.
+</p>
+
+ <p>
+if you really must go with disks and not object storage for some reason I recommend that you use external, non OS drives for very Obvious linux admin reasons. Much easier to snapshot / do backups on that sort of thing.
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org3dcf73b" class="outline-3">
+ <h3 id="org3dcf73b">backups!</h3>
+ <div class="outline-text-3" id="text-org3dcf73b">
+ <p>
+you should do backups. I haven't figured out a particularly great method here, yet. I do full VM snapshots through my cloud provider, but pulling data out of that environment on a regular basis is something I haven't worked out how to do well.  <a href="https://github.com/matrix-org/synapse/issues/2046">here</a> is a github issue that has some community opinions on what to backup, but there's still no official guidance as far as I know.
+</p>
+</div>
+</div>
+</div>
+
+ <div id="outline-container-orgd9442a6" class="outline-2">
+ <h2 id="orgd9442a6">talk to me about matrix!</h2>
+ <div class="outline-text-2" id="text-orgd9442a6">
+ <p>
+i really like matrix. i think there's a lot of cool stuff here, and I hope that it continues to improve. if you run into issues with matrix, have some questions about it you aren't sure where to ask, or just wanna chat about it, please talk to me! I've got several years experience running my home server, and all my friends are tired of hearing about matrix lmao. i'm  <a href="mailto:me@jowj.net">mailto:me@jowj.net</a> on email, or @jowj:awful.club on matrix.
+</p>
+</div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/using-matrix.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/using-matrix.html</guid>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
+</item>
+<item>
+  <title>using org caldav with fastmail</title>
+  <description><![CDATA[<div id="content">
+ <div id="outline-container-org203ad29" class="outline-2">
+ <h2 id="org203ad29">how to sync calendar events from fastmail to your org agenda</h2>
+ <div class="outline-text-2" id="text-org203ad29">
+ <p>
+i've recently started a new job. i take a lot of notes, and I find it useful to take notes for each meeting along with some metadata about each meeting. the notes i obviously take as the meeting goes on, but the metadata is already in the meeting invite. rather than entering all of it manually for each meeting, I've had org-mode pull the meeting info for me.
+</p>
+</div>
+
+ <div id="outline-container-orgf0e75e9" class="outline-3">
+ <h3 id="orgf0e75e9">doing this</h3>
+ <div class="outline-text-3" id="text-orgf0e75e9">
+ <ol class="org-ol"> <li>download  <a href="https://github.com/dengste/org-caldav">org-caldav</a></li>
+ <li>configure it</li>
+ <li>run  <code>org-caldav-sync</code></li>
+ <li>cool you're done</li>
+</ol></div>
+
+ <div id="outline-container-org26558fc" class="outline-4">
+ <h4 id="org26558fc">really though,</h4>
+ <div class="outline-text-4" id="text-org26558fc">
+ <p>
+ok its only slightly more complicated than that. for fastmail, you can't follow the instructions as given exactly. Here's the broad way to configure it (i'll use  <code>use-package</code> because so does everyone):
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-elisp">( <span style="color: #598249;">use-package</span>  <span style="color: #15968D;">org-caldav</span>
+   <span style="color: #598249;">:ensure</span> t
+   <span style="color: #598249;">:config</span>
+  ( <span style="color: #598249;">setq</span> org-caldav-url  <span style="color: #15968D;">"https://caldav.fastmail.com/dav/calendars/user/your@domain.tld/"</span>)
+  ( <span style="color: #598249;">setq</span> org-caldav-calendars
+        '(( <span style="color: #598249;">:calendar-id</span>  <span style="color: #15968D;">"00000000-0000-0000-0000-000000000000"</span>
+                         <span style="color: #598249;">:inbox</span>  <span style="color: #15968D;">"~/org/calendar-events.org"</span>)))
+  ( <span style="color: #598249;">setq</span> org-icalendar-timezone  <span style="color: #15968D;">"America/Chicago"</span>))
+
+</pre>
+</div>
+
+ <p>
+that's basically it. here's one of two original examples given in repo for reference:
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-elisp">( <span style="color: #598249;">setq</span> org-caldav-calendars
+  '(( <span style="color: #598249;">:calendar-id</span>  <span style="color: #15968D;">"work@whatever"</span>  <span style="color: #598249;">:files</span> ( <span style="color: #15968D;">"~/org/work.org"</span>)
+      <span style="color: #598249;">:inbox</span>  <span style="color: #15968D;">"~/org/fromwork.org"</span>)
+</pre>
+</div>
+
+ <p>
+the way my method differs from the original instructions is the  <code>org-caldav-url</code> and  <code>calendar-id</code> vars. the string to use for the  <code>url</code> is pulled from the fastmail documentation  <a href="https://www.fastmail.help/hc/en-us/articles/1500000278342#calendar">here</a>. the  <code>calendar-id</code> is behind your authwall; login -> settings -> calendars -> locate your calendar -> click the export button for that item. Here you should see a full URL in a text box that looks like this:
+</p>
+
+ <p>
+ <code>https://caldav.fastmail.com/dav/calendars/user/your@user.tld/00000000-0000-0000-0000-00000000000000000</code>
+</p>
+
+ <p>
+copy everything after your  <code>user@domain.tld</code>; that goes in your  <code>calendar-id</code> field.
+</p>
+</div>
+</div>
+</div>
+ <div id="outline-container-orgf788c36" class="outline-3">
+ <h3 id="orgf788c36">org-gcal as an alternative to org-caldav</h3>
+ <div class="outline-text-3" id="text-orgf788c36">
+ <p>
+there are a few different ways to sync calendars into org-mode.  <a href="https://github.com/emacsmirror/org-gcal">org-gcal</a> is for folks running gcal for events. however, be warned that you must have a certain level of permission within your Google Org for that account to be useful; you need enough permission to create an API key within the org. for someone's personal accounts that probably works. if you're trying to integrate with a work account, where permissions should be more locked down, you will need to do something else.
+</p>
+
+ <p>
+google  <i>really</i> would prefer that you don't use caldav to talk to their calendars. org-cal is based on google's own API, and doesn't adhere to normal email standards.  this is shitty, but frankly caldav is a fucking mess, so you can't really blame them. 
+</p>
+</div>
+</div>
+
+ <div id="outline-container-orgf9e3f6b" class="outline-3">
+ <h3 id="orgf9e3f6b">access gcal calendars with org-caldav</h3>
+ <div class="outline-text-3" id="text-orgf9e3f6b">
+ <p>
+so, what's a person to do if they don't have the ability to use google's api to pull down calendars, but they still need to sync gcal stuff to orgmode? well, you can do something kind of dumb, but easy. gcal publishes your calendar to an unauthed but secret URL by default. you can subscribe to that URL from within fastmail, and then sync that calendar down to org mode through fastmail! 
+</p>
+</div>
+
+ <div id="outline-container-orgce58551" class="outline-4">
+ <h4 id="orgce58551">doing this</h4>
+ <div class="outline-text-4" id="text-orgce58551">
+ <ol class="org-ol"> <li>copy the url from the google calender</li>
+ <li>subscribe to the url in fastmail (and i assume any provider that uses caldav)</li>
+ <li>sync that calendar down to org mode via org-caldav!</li>
+</ol></div>
+</div>
+
+ <div id="outline-container-orgd0fb752" class="outline-4">
+ <h4 id="orgd0fb752">details</h4>
+ <div class="outline-text-4" id="text-orgd0fb752">
+ <p>
+access the URL that google publishes to by logging into gcal -> settings -> click on the calendar you want to access on the left hand side of the screen -> scroll down until you see "secret address in iCal format". copy that URL.
+</p>
+
+ <p>
+subscribe to the calendar in fastmail by logging into fastmail -> settings -> click on calendars on the left hand side -> find the box labeled "Subscriptions" and paste in the URL there. hit subscribe. done!
+</p>
+</div>
+</div>
+
+ <div id="outline-container-org53d1405" class="outline-4">
+ <h4 id="org53d1405">other options</h4>
+ <div class="outline-text-4" id="text-org53d1405">
+ <p>
+fastmail  <i>also</i> allows you to log into a few providers specifically. I suspect this is done by simply mimicking a client, so fastmail speaks the gcal API and you can have access to everything that way. I haven't tried this, though I may get curious eventually. If you try it  <a href="mailto:me@jowj.net">i'd love to know!</a>
+</p>
+</div>
+</div>
+</div>
+ <div id="outline-container-org2f90ddb" class="outline-3">
+ <h3 id="org2f90ddb">credential storage</h3>
+ <div class="outline-text-3" id="text-org2f90ddb">
+ <p>
+syncing events to org mode manually seems fine to me; i'll typically do it once, maybe twice a day. typing in credentials each time you want to sync sucks though. this type of problem is commonly solved 1 of two ways, in emacs:
+</p>
+
+ <ol class="org-ol"> <li>authinfo</li>
+ <li>authinfo, but encrypted with gpg</li>
+</ol> <p>
+you should encrypt the file with gpg. this is not too difficult!
+</p>
+</div>
+ <div id="outline-container-org2b18255" class="outline-4">
+ <h4 id="org2b18255">doing this</h4>
+ <div class="outline-text-4" id="text-org2b18255">
+ <ol class="org-ol"> <li>create a gpg key and trust it</li>
+ <li>create a file that you will encrypt, adding the login details to the file</li>
+ <li>configure emacs to look at this file for  <code>auth-sources</code></li>
+ <li>test to make sure your changes work</li>
+</ol></div>
+</div>
+
+ <div id="outline-container-org59551af" class="outline-4">
+ <h4 id="org59551af">details</h4>
+ <div class="outline-text-4" id="text-org59551af">
+ <p>
+you should create a gpg key and trust it. there are other guides for how to do that. here are a few:
+</p>
+ <ul class="org-ul"> <li> <a href="https://blog.eleven-labs.com/en/openpgp-almost-perfect-key-pair-part-1/">https://blog.eleven-labs.com/en/openpgp-almost-perfect-key-pair-part-1/</a></li>
+ <li> <a href="https://alexcabal.com/creating-the-perfect-gpg-keypair">https://alexcabal.com/creating-the-perfect-gpg-keypair</a></li>
+ <li>god gpg sucks</li>
+</ul> <p>
+then, within emacs, open a file that you will encrypt. make sure it ends in  <code>.gpg</code>. when you do that, emacs will prompt you for how you want to encrypt the file. you will see your newly added gpg key and id listed as an option. use that.
+</p>
+
+ <p>
+next, fill the file with your login creds in a vaguely frustrating format. here's how its supposed to look:
+ <code>machine www.google.com:443 port https login your.username password your.secret</code>
+</p>
+
+ <p>
+specification of port:443 and https is  <i>required</i> because  <code>authsource</code> is weird.
+</p>
+
+ <p>
+now you need a minor bit of customization to make this work. the below snippet works just fine on my linux and mac machines. there are some added bits that are set if you're on a mac ( <code>epa-pinentry-mode</code> to avoid errors. the rest of pretty self explantory.
+</p>
+
+ <div class="org-src-container">
+ <pre class="src src-elisp">( <span style="color: #598249;">require</span> ' <span style="color: #15968D;">epa</span>)
+( <span style="color: #598249;">when</span> (eq system-type 'darwin)
+  ( <span style="color: #598249;">setf</span> epa-pinentry-mode 'loopback))
+( <span style="color: #598249;">setq</span> auth-sources '( <span style="color: #15968D;">"~/.emacs.d/yoursecrets.gpg"</span>))
+( <span style="color: #598249;">setq</span> auth-source-debug t)
+</pre>
+</div>
+
+ <p>
+finally, test and make sure your calendar event sync works without prompting you for a password by evaluating that lisp and then running  <code>org-caldav-sync</code> again. if you've set everything up correctly it will auto sync and you won't have had to type anything extra!
+</p>
+
+ <p>
+nice!
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>]]></description>
+  <link>https://me.jowj.net/posts/using-org-caldav-with-fastmail.html</link>
+  <guid isPermaLink="false">https://me.jowj.net/posts/using-org-caldav-with-fastmail.html</guid>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
 </item>
 <item>
   <title>vcards</title>
   <description><![CDATA[<div id="content">
- <div id="outline-container-org4678124" class="outline-2">
- <h2 id="org4678124">computer recovery after a death in the family</h2>
- <div class="outline-text-2" id="text-org4678124">
+ <div id="outline-container-org320d063" class="outline-2">
+ <h2 id="org320d063">computer recovery after a death in the family</h2>
+ <div class="outline-text-2" id="text-org320d063">
  <p>
 this past week my dad and I helped my grandmother with a few Computer Things. my grandfather died at the end of last year and the process of getting "Computer Things" to a usable state for my grandmother was pretty rough.
 </p>
@@ -1773,9 +1773,9 @@ One of the things that was unexpectedly frustrating was transferring stuff (phot
 </p>
 </div>
 
- <div id="outline-container-org3c5aa10" class="outline-3">
- <h3 id="org3c5aa10">outline</h3>
- <div class="outline-text-3" id="text-org3c5aa10">
+ <div id="outline-container-org7b76cc6" class="outline-3">
+ <h3 id="org7b76cc6">outline</h3>
+ <div class="outline-text-3" id="text-org7b76cc6">
  <p>
 normally, transferring contacts from one persons icloud to another's is pretty straight forward (there's an export button on icloud.com), but if you can't succesfully auth to icloud it gets a lot trickier. there's probably a few ways to do this, but the tack i ended up taking was:
 </p>
@@ -1789,9 +1789,9 @@ That is the bones of what happened, but the details kept screwing me over.
 </div>
 </div>
 
- <div id="outline-container-org075e62d" class="outline-3">
- <h3 id="org075e62d">specifics</h3>
- <div class="outline-text-3" id="text-org075e62d">
+ <div id="outline-container-orgbcc601f" class="outline-3">
+ <h3 id="orgbcc601f">specifics</h3>
+ <div class="outline-text-3" id="text-orgbcc601f">
  <p>
 first, outlook 2010 contact exports by default come out in an outlook specific format (.msg) that cannot be imported into icloud. ok well fine, surely there's a straight forward way to deal with that. 
 </p>
@@ -1880,9 +1880,9 @@ my best guess is that this is just some Fancy Colour from outlook specifically, 
 </div>
 </div>
 
- <div id="outline-container-org48b3139" class="outline-3">
- <h3 id="org48b3139">what should i do when i die</h3>
- <div class="outline-text-3" id="text-org48b3139">
+ <div id="outline-container-org3b48230" class="outline-3">
+ <h3 id="org3b48230">what should i do when i die</h3>
+ <div class="outline-text-3" id="text-org3b48230">
  <p>
 the lesson i learned during this process is:
 </p>
@@ -1895,7 +1895,7 @@ the lesson i learned during this process is:
 </div>]]></description>
   <link>https://me.jowj.net/posts/vcards.html</link>
   <guid isPermaLink="false">https://me.jowj.net/posts/vcards.html</guid>
-  <pubDate>Tue, 01 Dec 2020 18:40:00 -0600</pubDate>
+  <pubDate>Mon, 07 Feb 2022 17:14:00 -0600</pubDate>
 </item>
 </channel>
 </rss>

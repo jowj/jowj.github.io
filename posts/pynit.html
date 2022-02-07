@@ -1,58 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-12-01 Tue 18:40 -->
+<!-- 2022-02-07 Mon 17:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>pynit</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="josiah">
 <link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+        
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+        
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+        
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+        
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+        
+        <style>
+           abbr {color: red;}
+        
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -62,23 +105,24 @@ for the JavaScript code in this tag.
 <a href="../personal/articles.html">diary</a>
 <a href="https://git.awful.club/projects">projects</a>
 <a href="../resume.pdf">resume</a>
+<a href="../lore.html">lore</a>
 </div>
 <div id="content">
 <header>
 <h1 class="title">pynit</h1>
 </header>
-<div id="outline-container-org81aa799" class="outline-2">
-<h2 id="org81aa799">what is this</h2>
-<div class="outline-text-2" id="text-org81aa799">
+<div id="outline-container-org79a70dc" class="outline-2">
+<h2 id="org79a70dc">what is this</h2>
+<div class="outline-text-2" id="text-org79a70dc">
 <p>
 pynit is a personal archival script that relies on <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it <a href="https://github.com/jowj/pynit">here</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgbc82620" class="outline-2">
-<h2 id="orgbc82620">why i made it</h2>
-<div class="outline-text-2" id="text-orgbc82620">
+<div id="outline-container-orgc65eb74" class="outline-2">
+<h2 id="orgc65eb74">why i made it</h2>
+<div class="outline-text-2" id="text-orgc65eb74">
 <p>
 i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
 </p>
@@ -122,32 +166,32 @@ now whenever i want to revisit a particular item i have all the comments preserv
 </div>
 </div>
 
-<div id="outline-container-org1765c62" class="outline-2">
-<h2 id="org1765c62">what I learned while i made this</h2>
-<div class="outline-text-2" id="text-org1765c62">
+<div id="outline-container-orgcafb03f" class="outline-2">
+<h2 id="orgcafb03f">what I learned while i made this</h2>
+<div class="outline-text-2" id="text-orgcafb03f">
 <p>
 i learned a few things that i want to write up here, all related to python or working with rest apis:
 </p>
 </div>
 
-<div id="outline-container-orgbe6dfdd" class="outline-3">
-<h3 id="orgbe6dfdd">python</h3>
-<div class="outline-text-3" id="text-orgbe6dfdd">
+<div id="outline-container-org157abcb" class="outline-3">
+<h3 id="org157abcb">python</h3>
+<div class="outline-text-3" id="text-org157abcb">
 <p>
 i learned about <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through <a href="https://twitter.com/mrled">@mrled</a>and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #598249;">import</span> pysnooper
+<pre class="src src-python"><span class="org-keyword">import</span> pysnooper
 
-<span style="color: #598249;">@pysnooper.snoop</span>()
-<span style="color: #598249;">def</span> <span style="color: #2F7BDE;">my_function</span>():
-    <span style="color: #2F7BDE;">var1</span> = <span style="color: #15968D;">'thing1'</span>
-    <span style="color: #2F7BDE;">var2</span> = <span style="color: #15968D;">'thing2'</span>
+<span class="org-type">@pysnooper.snoop</span>()
+<span class="org-keyword">def</span> <span class="org-function-name">my_function</span>():
+    <span class="org-variable-name">var1</span> = <span class="org-string">'thing1'</span>
+    <span class="org-variable-name">var2</span> = <span class="org-string">'thing2'</span>
 
-    <span style="color: #598249;">return</span>(var1 + var2)
+    <span class="org-keyword">return</span>(var1 + var2)
 
-<span style="color: #598249;">print</span>(my_function())
+<span class="org-keyword">print</span>(my_function())
 
 </pre>
 </div>
@@ -157,14 +201,14 @@ this would return:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python">19:54:53.048881 call         4 <span style="color: #598249;">def</span> <span style="color: #2F7BDE;">my_function</span>():
-19:54:53.049021 line         5     <span style="color: #2F7BDE;">var1</span> = <span style="color: #15968D;">'thing1'</span>
-New var:....... <span style="color: #2F7BDE;">var1</span> = <span style="color: #15968D;">'thing1'</span>
-19:54:53.049094 line         6     <span style="color: #2F7BDE;">var2</span> = <span style="color: #15968D;">'thing2'</span>
-New var:....... <span style="color: #2F7BDE;">var2</span> = <span style="color: #15968D;">'thing2'</span>
-19:54:53.049155 line         8     <span style="color: #598249;">return</span>(var1 + var2)
-19:54:53.049197 <span style="color: #598249;">return</span>       8     <span style="color: #598249;">return</span>(var1 + var2)
-Return value:.. <span style="color: #15968D;">'thing1thing2'</span>
+<pre class="src src-python">19:54:53.048881 call         4 <span class="org-keyword">def</span> <span class="org-function-name">my_function</span>():
+19:54:53.049021 line         5     <span class="org-variable-name">var1</span> = <span class="org-string">'thing1'</span>
+New var:....... <span class="org-variable-name">var1</span> = <span class="org-string">'thing1'</span>
+19:54:53.049094 line         6     <span class="org-variable-name">var2</span> = <span class="org-string">'thing2'</span>
+New var:....... <span class="org-variable-name">var2</span> = <span class="org-string">'thing2'</span>
+19:54:53.049155 line         8     <span class="org-keyword">return</span>(var1 + var2)
+19:54:53.049197 <span class="org-keyword">return</span>       8     <span class="org-keyword">return</span>(var1 + var2)
+Return value:.. <span class="org-string">'thing1thing2'</span>
 thing1thing2
 </pre>
 </div>
@@ -175,9 +219,9 @@ this allowed me to simple add a single line to an exist function <i>without modi
 </div>
 </div>
 
-<div id="outline-container-orgdeebed5" class="outline-3">
-<h3 id="orgdeebed5">rest apis</h3>
-<div class="outline-text-3" id="text-orgdeebed5">
+<div id="outline-container-org9c98c80" class="outline-3">
+<h3 id="org9c98c80">rest apis</h3>
+<div class="outline-text-3" id="text-org9c98c80">
 <p>
 a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
 </p>
@@ -186,7 +230,7 @@ a lot of people (a lot of people!!) just have you use get requests instead of po
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
 </div>
 </body>
 </html>

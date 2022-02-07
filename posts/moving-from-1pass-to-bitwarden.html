@@ -1,58 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-12-01 Tue 18:40 -->
+<!-- 2022-02-07 Mon 17:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moving from 1pass to bitwarden</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="josiah">
 <link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+        
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+        
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+        
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+        
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+        
+        <style>
+           abbr {color: red;}
+        
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -62,14 +105,15 @@ for the JavaScript code in this tag.
 <a href="../personal/articles.html">diary</a>
 <a href="https://git.awful.club/projects">projects</a>
 <a href="../resume.pdf">resume</a>
+<a href="../lore.html">lore</a>
 </div>
 <div id="content">
 <header>
 <h1 class="title">Moving from 1pass to bitwarden</h1>
 </header>
-<div id="outline-container-org6cea658" class="outline-2">
-<h2 id="org6cea658">background</h2>
-<div class="outline-text-2" id="text-org6cea658">
+<div id="outline-container-org6262c8e" class="outline-2">
+<h2 id="org6262c8e">background</h2>
+<div class="outline-text-2" id="text-org6262c8e">
 <p>
 I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
 </p>
@@ -97,9 +141,9 @@ because of these issues i started looking for alternatives
 </p>
 </div>
 </div>
-<div id="outline-container-org53351a3" class="outline-2">
-<h2 id="org53351a3">bitwarden</h2>
-<div class="outline-text-2" id="text-org53351a3">
+<div id="outline-container-org9473e64" class="outline-2">
+<h2 id="org9473e64">bitwarden</h2>
+<div class="outline-text-2" id="text-org9473e64">
 <p>
 since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
 </p>
@@ -118,9 +162,9 @@ i've been living on bitwarden for ~1 week at this point and haven't felt any rea
 </div>
 </div>
 
-<div id="outline-container-org37f408f" class="outline-2">
-<h2 id="org37f408f">the bad</h2>
-<div class="outline-text-2" id="text-org37f408f">
+<div id="outline-container-orgd81ee6e" class="outline-2">
+<h2 id="orgd81ee6e">the bad</h2>
+<div class="outline-text-2" id="text-orgd81ee6e">
 <p>
 bad news first. 
 </p>
@@ -137,9 +181,9 @@ bad news first.
 </div>
 </div>
 
-<div id="outline-container-org8cf25bb" class="outline-2">
-<h2 id="org8cf25bb">totp issue specifics</h2>
-<div class="outline-text-2" id="text-org8cf25bb">
+<div id="outline-container-org84783e5" class="outline-2">
+<h2 id="org84783e5">totp issue specifics</h2>
+<div class="outline-text-2" id="text-org84783e5">
 <p>
 bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
 </p>
@@ -159,9 +203,9 @@ The desktop apps, being electron, got cached without showing the TOTP codes; sup
 </div>
 </div>
 
-<div id="outline-container-orgcc844fd" class="outline-2">
-<h2 id="orgcc844fd">the cool</h2>
-<div class="outline-text-2" id="text-orgcc844fd">
+<div id="outline-container-org65373e2" class="outline-2">
+<h2 id="org65373e2">the cool</h2>
+<div class="outline-text-2" id="text-org65373e2">
 <p>
 On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
 </p>
@@ -190,9 +234,9 @@ read about the bitwarden<sub>rs</sub> project here:
 </div>
 </div>
 
-<div id="outline-container-orgddf6772" class="outline-2">
-<h2 id="orgddf6772">next steps</h2>
-<div class="outline-text-2" id="text-orgddf6772">
+<div id="outline-container-orgf0eeaf8" class="outline-2">
+<h2 id="orgf0eeaf8">next steps</h2>
+<div class="outline-text-2" id="text-orgf0eeaf8">
 <p>
 i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
 </p>
@@ -204,7 +248,7 @@ i haven't figured out how i could do that, but it seems like it should be pretty
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
 </div>
 </body>
 </html>

@@ -66,6 +66,8 @@
 ;; String and list manipulation libraries
 ;; https://github.com/magnars/dash.el
 ;; https://github.com/magnars/s.el
+(use-package dash-functional
+  :ensure t)
 
 (require 's)               ;; “The long lost Emacs string manipulation library”
 (require 'dash)            ;; “A modern list library for Emacs”

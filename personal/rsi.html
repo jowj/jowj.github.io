@@ -3,58 +3,101 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-12-01 Tue 18:40 -->
+<!-- 2022-02-07 Mon 17:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>rsi</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="josiah" />
 <link rel="stylesheet" type="text/css" href="../posts/css/my-dark.css"/>
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+        
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+        
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+        
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+        
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+        
+        <style>
+           abbr {color: red;}
+        
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -64,13 +107,14 @@ for the JavaScript code in this tag.
 <a href="../personal/articles.html">diary</a>
 <a href="https://git.awful.club/projects">projects</a>
 <a href="../resume.pdf">resume</a>
+<a href="../lore.html">lore</a>
 </div>
 <div id="content">
 <h1 class="title">rsi</h1>
 
-<div id="outline-container-org4efdd3a" class="outline-2">
-<h2 id="org4efdd3a">this is about my experience with rsi</h2>
-<div class="outline-text-2" id="text-org4efdd3a">
+<div id="outline-container-org23e3853" class="outline-2">
+<h2 id="org23e3853">this is about my experience with rsi</h2>
+<div class="outline-text-2" id="text-org23e3853">
 <p>
 i have daily, constant pain in my arms and pinkies. i hate it. this is the second time i've had RSI (the first time went away after i implemented a stretching regime before daily starcraft practice). it is depressing and stressful, it makes me worried i won't be able to do my job. it really sucks in the middle of a pandemic with everything completely online and through a computer. 
 </p>
@@ -83,9 +127,9 @@ i also <i>love</i> computers. i spend a lot of time on them for fun, and rsi is 
 this post isn't really about any one thing; its just me having RSI and talking about it.
 </p>
 </div>
-<div id="outline-container-orgce424e8" class="outline-3">
-<h3 id="orgce424e8">what and when it happened</h3>
-<div class="outline-text-3" id="text-orgce424e8">
+<div id="outline-container-org08b769c" class="outline-3">
+<h3 id="org08b769c">what and when it happened</h3>
+<div class="outline-text-3" id="text-org08b769c">
 <p>
 in 2020, in may, i started noticing rsi symptoms. i was halfway through a difficult professional training called the <a href="https://www.offensive-security.com/pwk-oscp/">OSCP</a>, and felt i needed to push through. this was a mistake. 
 </p>
@@ -96,9 +140,9 @@ i continued to work hard, staying at my computer for 10-14 hours every day. i di
 </div>
 </div>
 
-<div id="outline-container-org39deacb" class="outline-3">
-<h3 id="org39deacb">a digression about rsi and medical understanding of RSI</h3>
-<div class="outline-text-3" id="text-org39deacb">
+<div id="outline-container-orgf674af7" class="outline-3">
+<h3 id="orgf674af7">a digression about rsi and medical understanding of RSI</h3>
+<div class="outline-text-3" id="text-orgf674af7">
 <p>
 there isn't a lot of agreed upon science for rsi. every medical professional has agreed with my official diagnosis of "golfer's elbow". i also have all the symptoms of "tennis elbow" (the same thing as golfer's elbow but on the other side of the elbow, basically). My doctor recommended a brace, my PT recommended <i>never</i> wearing a brace, saying it would make things worse.
 </p>
@@ -109,9 +153,9 @@ this was pretty confusing. turns out, there is not a medical consensus on what, 
 </div>
 </div>
 
-<div id="outline-container-org72c2dec" class="outline-3">
-<h3 id="org72c2dec">what i've done</h3>
-<div class="outline-text-3" id="text-org72c2dec">
+<div id="outline-container-orgb2d925d" class="outline-3">
+<h3 id="orgb2d925d">what i've done</h3>
+<div class="outline-text-3" id="text-orgb2d925d">
 <p>
 just to list out everything, here's a non comprehensive list of what i've done in pursuit of not having daily rsi pain:
 </p>
@@ -127,17 +171,17 @@ just to list out everything, here's a non comprehensive list of what i've done i
 </div>
 </div>
 
-<div id="outline-container-org0066b52" class="outline-3">
-<h3 id="org0066b52">what i'm doing now</h3>
-<div class="outline-text-3" id="text-org0066b52">
+<div id="outline-container-orgea25f9c" class="outline-3">
+<h3 id="orgea25f9c">what i'm doing now</h3>
+<div class="outline-text-3" id="text-orgea25f9c">
 <p>
 in my head i've broken down my current self-directed plan into two parts: equipment and process. 
 </p>
 </div>
 
-<div id="outline-container-org5b16790" class="outline-4">
-<h4 id="org5b16790">equipment list</h4>
-<div class="outline-text-4" id="text-org5b16790">
+<div id="outline-container-orgae00621" class="outline-4">
+<h4 id="orgae00621">equipment list</h4>
+<div class="outline-text-4" id="text-orgae00621">
 <p>
 The desk specific items are are all about preventing further damage to my hands and arms while still allowing me to work.
 </p>
@@ -156,17 +200,17 @@ The desk specific items are are all about preventing further damage to my hands 
 </div>
 </div>
 
-<div id="outline-container-org8804c15" class="outline-4">
-<h4 id="org8804c15">process</h4>
-<div class="outline-text-4" id="text-org8804c15">
+<div id="outline-container-org4553d08" class="outline-4">
+<h4 id="org4553d08">process</h4>
+<div class="outline-text-4" id="text-org4553d08">
 <p>
 this is mostly about pain management and upkeep. I have a daily routine and then some flex activities to help on specifically bad days. some ✌️😒✌️ experts ✌️😒✌️ opine that rsi is purely psychosomatic, and can be treated by talk therapy and meditation. i personally am willing to believe that there is at least a kernel of wisdom there, though i think that the most famous guy in particular is a fucking liar, so I'm hedging my bets.
 </p>
 </div>
 
 <ul class="org-ul">
-<li><a id="org902e391"></a>Daily routine:<br />
-<div class="outline-text-5" id="text-org902e391">
+<li><a id="orga84cdb9"></a>Daily routine:<br />
+<div class="outline-text-5" id="text-orga84cdb9">
 <ul class="org-ul">
 <li>~30 minutes meditation and journal to keep my stress manageable.</li>
 <li>~45 minutes yoga</li>
@@ -178,8 +222,8 @@ this is mostly about pain management and upkeep. I have a daily routine and then
 </div>
 </li>
 
-<li><a id="org086f4da"></a>Bad day relief:<br />
-<div class="outline-text-5" id="text-org086f4da">
+<li><a id="orgf3500bf"></a>Bad day relief:<br />
+<div class="outline-text-5" id="text-orgf3500bf">
 <ul class="org-ul">
 <li>massage gun helps for ~15 minutes at a time; very temporary pain relief</li>
 <li>lacrosse ball works the same way, but for different muscle groups.</li>
@@ -192,9 +236,9 @@ this is mostly about pain management and upkeep. I have a daily routine and then
 </div>
 </div>
 
-<div id="outline-container-org88bec15" class="outline-3">
-<h3 id="org88bec15">what i'm going to do</h3>
-<div class="outline-text-3" id="text-org88bec15">
+<div id="outline-container-org743915a" class="outline-3">
+<h3 id="org743915a">what i'm going to do</h3>
+<div class="outline-text-3" id="text-org743915a">
 <p>
 i am not totally sure. i'm continuing to add to and refine my daily routine. i am about to add in several more body weight exercises, especially upper arm and back focused ones. I've only just added in grip training, hoping to simulate rock climbing. i haven't had RSI when I was climbing, or doing trapeze, or pole dancing. anecdotally, a lot of people on hacker news / the rsi subreddit report that rock climbing helped them tremendously. 
 </p>
@@ -206,9 +250,9 @@ i think there's probably room to add talk therapy to my list of Tried Treatments
 </div>
 </div>
 
-<div id="outline-container-org0506057" class="outline-2">
-<h2 id="org0506057">prior art, acknowledgements, and references</h2>
-<div class="outline-text-2" id="text-org0506057">
+<div id="outline-container-org6599ec4" class="outline-2">
+<h2 id="org6599ec4">prior art, acknowledgements, and references</h2>
+<div class="outline-text-2" id="text-org6599ec4">
 <p>
 <a href="https://twitter.com/mrled">my brother</a> has written about RSI and how it affected him. he also wrote a website to show his custom keyboard layout and how that's help him. you can look at that <a href="https://keymap.click">here</a>.
 </p>
@@ -232,7 +276,7 @@ i think there's probably room to add talk therapy to my list of Tried Treatments
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
 </div>
 </body>
 </html>
