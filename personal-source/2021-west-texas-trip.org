@@ -44,14 +44,14 @@ the car eventually got /utterly/ packed. i've never filled a car so thoroughly b
 
 * in big brend ranch
 ** day 2 in BBR and The Big Mistake
- we started the day at a fairly normal time, between 7 and 8, but it took a long while for us to really get going. we made coffee in a french press by boiling potable water in the one cooking dish i brought, a dutch oven; we made a breakfast of eggs and bacon in the same dish; we cleaned up and +ran from+ heroically fought large mean wasps who were interested in our bacon. finally, around 10 or 10:30 we get on bikes and decide to ride to the ranger station and get some advice.
+ we started the day at a fairly normal time, between 7 and 8, but it took a long while for us to really get going. we made coffee in a french press by boiling potable water in the one cooking dish i brought, a dutch oven; we made a breakfast of eggs and bacon in the same dish; we cleaned up and +ran from+ heroically fought large mean wasps who were interested in our bacon. finally, around 10 or 10:30 we got on bikes and rode to the ranger station to get some advice.
 
  #+html: <br>
  #+begin_box
  readers who have been to the desert before might notice that this is a bit late in the day to get started.
  #+end_box
 
- the route to the ranger station is ~1 mile from our camp ground but by the time we get there we're a bit out of breath -- we traveled back to the station via the same road we drove in on, a road in name only. the ranger at the station gave us some maps, we picked a route, and set off again on our steeds
+ the route to the ranger station wass ~1 mile from our camp ground but by the time we got there we're a bit out of breath -- we traveled back to the station via the same road we drove in on, a road in name only. the ranger at the station gave us some maps, we picked a route, and set off again on our steeds
 
  <insert picture of steeds>
 
@@ -60,19 +60,22 @@ the car eventually got /utterly/ packed. i've never filled a car so thoroughly b
  before this account goes any further its worth pointing out: we are big idiots, and I specifically am the largest idiot. I knew better but am not used to overriding other people unless i'm really very sure, and my hesitency could've really hurt us!
  #+end_box
 
- because we are bad planners and didn't think too much about what we were doing, we had to go back the direction we came and then some just to get to the road that gets to the trailhead. we ride (bump, really) through a vague path for 3 miles before finally hitting the trailhead. as we arrive I run out of water. my brother still has half his nalgene left. the maps the ranger gave us show that the trail was only 2 miles long or so; we figure 40 minutes, maybe an hour, then we head back, and we can share the remaining water.
+ because we are bad planners and didn't think too much about what we were doing, we had to go back the direction we came and then some just to get to the road that gets to the trailhead. we ride (bump, really) through a vague path for 3 miles before finally hitting the trailhead. as we arrive I ranout of water. my brother still had half his nalgene left. the maps the ranger gave us showed that the trail was only 2 miles long or so; we figured 40 minutes, maybe an hour, make it to the end, then we head back sharing the remaining water.
 
- oops.
+ #+html: <br>
+ #+begin_box
+ do not do this lol
+ #+end_box
 
- we continue on with our bikes on the trail and that was such a cool experience; neither of us had ever done trail riding before, and taking bikes up and down draws, jumping edges, and trying to just Stay On the Bike was so much fun. We drink more of the water as time goes on, and eventually we run out. I tell Micah I'm really nervous and want to head back, but he convinces me we're almost at the end and we would be upset if we didn't finish the trail! we give it another 10 minutes before I say I'm uncomfortable and we actually head back.
+ we continued on with our bikes on the trail and that was such a cool experience; neither of us had ever done trail riding before, and taking bikes up and down draws, jumping edges, and trying to just Stay On the Bike was so much fun. We drank more of the water as time goes on, and eventually we ran out. I told Micah I was really nervous and wanting to head back, but he persuaded me that  we were almost at the end and we would be upset if we didn't finish the trail! we give it another 10 minutes (that felt like an eternity) before I say I'm uncomfortable and we actually head back.
 
- the ride back down was rough; we're both exhausted, its well past 1 PM at this point. the sun is beating down on us. we reapply sun screen during a breather but what we really wish we had was /water/. the sand, fun and challenging on the way in, is a mire on the way out. when we finally make it to the trail head we rest in the shade of the compostable toilet building and dread the upcoming ride to camp.
+ the ride back down was rough; we were both exhausted, and it was well past 1 PM at this point. the sun was beating down on us. we reapplied sun screen during a breather but what we really wished we had was /water/. the sand, fun and challenging on the way in, was a mire on the way out. when we finally make it to the trail head we rested in the shade of the compostable toilet building and dreaded the upcoming ride to camp.
 
- the ride to camp was excruciating. neither of us have had water for several hours, and its well past the time we should've eaten lunch. we're both shakey and slow, trying our best to stay on our bikes whenever the road turns from sharp rocks to loose sand, both of us aware that we /really/ erred getting to this point.
+ the ride to camp was excruciating. neither of us had anything to drink for over an hour, and its well past the time we should've eaten lunch. we're both shakey and slow, trying our best to stay on our bikes whenever the road turns from sharp rocks to loose sand, both of us aware that we /really/ erred getting to this point.
 
- finally, past 3 PM, I see the turn off to our campsite. Micah's a ways behind me. I turn in, go down the hill, and stumble off my bike to get water and food. we sit there, mostly silent, filling our bottles from the main jugs we brought in and eating a mix of suger foods and whatever we could find that didn't require cooking. the first words we say to each other are about how there was a while there we thought we might have needed SAR.
+ finally, a bit short of 3 PM, I saw the turn off to our campsite. Micah a ways behind me. I turned in, went down the hill, and stumbled off my bike to get water and food. we both sat there, mostly silent, filling our bottles from the main jugs we brought in and eating a mix of suger foods and whatever we could find that didn't require cooking. the first words we said to each other are about how there was a while there we thought we might have needed SAR.
 
- we do nothing else the whole day. we cook dinner but I couldn't tell you what we made. I recall it being good, but not as good as the grilled cheese from the night before. we go to bed early.
+ we did nothing else the whole day. we cooked dinner but I couldn't tell you what we made. I recall it being good, but not as good as the grilled cheese from the night before. we go to bed early. I /slept/.
 
 ** day 3 in bbr
    - long morning
@@ -82,6 +85,34 @@ the car eventually got /utterly/ packed. i've never filled a car so thoroughly b
    - still cutting it close on the water thing!
    - second hike in the evening instead  of doing nothing!
 
+   we started the day I think even slower than the day before. we felt surprisingly able and refreshed, but I think maybe we were hesitant to get the day started, savoring the rest in memory of the exhausting afternoon before. we made coffee. we made breakfast, eggs and bacon again. we talked about what we were gonna do that day. we decided to revenge ourself on the trailhead. I was bummed that meant seeing some of the same sights we saw the day before, but agreed it would feel gratifying to conquor the route that nearly killed us.
+
+ #+html: <br>
+ #+begin_box
+ it's especially fun to note that: this was the shortest, tamest route in the park! we are not good at this.
+ #+end_box
+
+ this time, however, we were gonna do things right. we filled our waterbottles from the main water jugs, then we filled my 2.5gal container of water and tucked /that/ in my saddlebags. Our plan was to lug it all right to the trailhead, leave the bikes and the large 2.5gal of water there, fill up, and go through the trail on foot. we head off sometime between 10:30 and 11 and make good time. both of us had become /much/ more proficient at riding through the terrain.
+
+  #+html: <br>
+ #+begin_box
+ the biggest thing I learned is that, when approaching a stretch of loose sand, you can build up some speed and keep you front wheel perfectly straight and you're much less likely to get derailed or have to walk. the peddling motion rocks your wheel from side to side and hurts your ability to stay on the bike.
+ #+end_box
+
+ at the trailhead we follow the plan, filling up our water bottles and leaving everything by the compostable toilets. walking, instead of riding, was absolutely the right choice -- the route was much easier on foot. we eventually make it to where we turned back and press on, excited, thinking we were close to the end. we absolutely were NOT, we were maybe a 3rd of the way there! the rest of the route was down and up, back down and back up two gorges. its beautiful and isolated; the last gorge we go down into is full of truly green vegetation thriving in the shadow of the rock walls.
+
+ <insert picture>
+
+ we finally, exhausted, climb the ridge to the very end of the trail and look out over a gorgeous vista: a canyon, as wide as you can see and an opposite side far in the distance.
+
+ <insert picture>
+
+ we sit and sparingly drink water before heading down the ridge to eat snacks in the shade. we started heading back after about 20 minutes of rest. on the way back to our bikes we met several different hiking parties, all of them as surprised as we were to find that they were, in fact, no where near the end of the trail. I ran out of water before we made it back to the bikes, though Micah still had some and we shared from his. I vowed to buy a nalgene.
+
+ other than some incredibly annoying wasps, we refilled our water and started back to camp without incident. the sand and rock was again much more difficult on the way home, but it was incredibly satisyfing to have actually finished the fucking thing. we arrived at camp and sat and read for a while, before making dinner. we even hiked around our campsite that night, going up to the ridge line in the moonlight and stomping around. the desert is lovely at night.
+
+ <insert picture>
+ 
 * transition day: leaving the park, arriving in marfa
 
   - leaving the park, a bigger adventure than arriving
