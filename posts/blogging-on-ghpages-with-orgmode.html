@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-02-07 Mon 17:14 -->
+<!-- 2022-07-02 Sat 14:47 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>blogging on <a href="https://www.github.com/pages"><img src="https://img.shields.io/github/pages?style=social"></a> with orgmode</title>
@@ -111,18 +111,18 @@
 <header>
 <h1 class="title">blogging on <a href="https://www.github.com/pages"><img src="https://img.shields.io/github/pages?style=social"></a> with orgmode</h1>
 </header>
-<div id="outline-container-org454b0ca" class="outline-2">
-<h2 id="org454b0ca">what i did</h2>
-<div class="outline-text-2" id="text-org454b0ca">
+<div id="outline-container-org1eab6c3" class="outline-2">
+<h2 id="org1eab6c3">what i did</h2>
+<div class="outline-text-2" id="text-org1eab6c3">
 <p>
 i've just moved from using markdown and jekyll to generate a static website on github pages to using org-mode and org-publish to generate static html files, also on github pages.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf892fd7" class="outline-2">
-<h2 id="orgf892fd7">why did i do this</h2>
-<div class="outline-text-2" id="text-orgf892fd7">
+<div id="outline-container-org3e43326" class="outline-2">
+<h2 id="org3e43326">why did i do this</h2>
+<div class="outline-text-2" id="text-org3e43326">
 <p>
 my setup has been a pain - i do most of my writing and thinking in <a href="https://orgmode.org/">org mode</a>, but to post stuff on <a href="https://me.jowj.net/">https://me.jowj.net/</a> i have to convert that to markdown (relatively easy, due to a package called <a href="https://github.com/emacsmirror/org/blob/master/lisp/ox-md.el">ox-md</a>) and use <a href="https://jekyllrb.com/">jekyll</a> to convert md to html and handle the generation of the site. the problem with jekyll is that it <i>sucks</i>. its a tool based on the ruby ecosystem, and since I actually publish my stuff so infrequently every time i use it i have to update something about my ruby environment. this adds probably 10-20 minutes while I remember / look up which commands i'm supposed to run and why, and figuring out what things are actually broken this time.
 </p>
@@ -144,18 +144,18 @@ i also just thought it would be cool to do everything within emacs (because my b
 </div>
 </div>
 
-<div id="outline-container-org80e10aa" class="outline-2">
-<h2 id="org80e10aa">how it works</h2>
-<div class="outline-text-2" id="text-org80e10aa">
+<div id="outline-container-orgbd4248f" class="outline-2">
+<h2 id="orgbd4248f">how it works</h2>
+<div class="outline-text-2" id="text-orgbd4248f">
 <p>
 most of the configuration and automation is in two files: <a href="https://github.com/jowj/jowj.github.io/blob/master/publish.el">publish.el</a> and <a href="https://github.com/jowj/jowj.github.io/blob/master/Makefile">Makefile</a> (raw links, also pasted below). publish.el has by far the most stuff in it, Makefile is just stupid simple automation.
 </p>
 </div>
-<div id="outline-container-org24a6b27" class="outline-3">
-<h3 id="org24a6b27">publish.el</h3>
-<div class="outline-text-3" id="text-org24a6b27">
+<div id="outline-container-org7c28afe" class="outline-3">
+<h3 id="org7c28afe">publish.el</h3>
+<div class="outline-text-3" id="text-org7c28afe">
 <p>
-i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the <a href="#orgac1c9bf">credits &amp; references</a> entry.
+i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the <a href="#orge958f99">credits &amp; references</a> entry.
 </p>
 
 <p>
@@ -166,7 +166,7 @@ one of the ways I differed from some of the other configurations I referenced wa
 since i won't be using my personal emacs config, i'll have to setup package management here as well:
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="orga0f5045"><span style="color: #5e6263;">;;;; </span><span style="color: #5e6263;">package setup</span>
+<pre class="src src-elisp" id="org12a5b93"><span style="color: #5e6263;">;;;; </span><span style="color: #5e6263;">package setup</span>
 (<span style="color: #598249;">require</span> '<span style="color: #15968D;">ox-publish</span>)
 (package-initialize)
 
@@ -204,7 +204,7 @@ the actual solution ended up being so simple i'm mad its not in any of the docum
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org1c98523"><span style="color: #5e6263;">;; </span><span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
+<pre class="src src-elisp" id="org4269369"><span style="color: #5e6263;">;; </span><span style="color: #5e6263;">fucking custom colors eluded me until this shit.</span>
 <span style="color: #5e6263;">;; </span><span style="color: #5e6263;">reference this guy's setup, he's a king:</span>
 <span style="color: #5e6263;">;; </span><span style="color: #5e6263;">https://gitlab.com/jgkamat/jgkamat.gitlab.io/-/blob/master/jgkamat-website.el</span>
 (<span style="color: #598249;">when</span> noninteractive
@@ -295,7 +295,7 @@ ok so that's all the like 'setup' type shit out of the way. after that i ran int
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orga8bda1f">(<span style="color: #598249;">setq</span> org-publish-project-alist
+<pre class="src src-elisp" id="org427dcb7">(<span style="color: #598249;">setq</span> org-publish-project-alist
       (list
        (list <span style="color: #15968D;">"site-org"</span>
              <span style="color: #598249;">:base-directory</span> <span style="color: #15968D;">"./source"</span>
@@ -398,9 +398,9 @@ its important to note that i wrap org-publish-all and the webfeeder lines with m
 </div>
 </div>
 </div>
-<div id="outline-container-org54b1f99" class="outline-3">
-<h3 id="org54b1f99">Makefile</h3>
-<div class="outline-text-3" id="text-org54b1f99">
+<div id="outline-container-org90347d8" class="outline-3">
+<h3 id="org90347d8">Makefile</h3>
+<div class="outline-text-3" id="text-org90347d8">
 <p>
 super easy makefile lol. 
 </p>
@@ -451,9 +451,9 @@ if you're unfamiliar with make you can still use this without learning <i>any</i
 </div>
 </div>
 </div>
-<div id="outline-container-orgac1c9bf" class="outline-2">
-<h2 id="orgac1c9bf">credits &amp; references</h2>
-<div class="outline-text-2" id="text-orgac1c9bf">
+<div id="outline-container-orge958f99" class="outline-2">
+<h2 id="orge958f99">credits &amp; references</h2>
+<div class="outline-text-2" id="text-orge958f99">
 <p>
 there are a TON of places to read about doing this sort of thing. two folks in particular were really useful to me:
 </p>

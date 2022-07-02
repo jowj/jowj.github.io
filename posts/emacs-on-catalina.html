@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-02-07 Mon 17:14 -->
+<!-- 2022-07-02 Sat 14:47 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>emacs on catalina</title>
@@ -111,9 +111,9 @@
 <header>
 <h1 class="title">emacs on catalina</h1>
 </header>
-<div id="outline-container-org560f11c" class="outline-2">
-<h2 id="org560f11c">early days</h2>
-<div class="outline-text-2" id="text-org560f11c">
+<div id="outline-container-org2fac9ab" class="outline-2">
+<h2 id="org2fac9ab">early days</h2>
+<div class="outline-text-2" id="text-org2fac9ab">
 <p>
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
 </p>
@@ -128,9 +128,9 @@ this basically says to run this lisp to add your proper emacs path to the proper
 </div>
 </div>
 
-<div id="outline-container-org5022fb3" class="outline-2">
-<h2 id="org5022fb3">partial fix</h2>
-<div class="outline-text-2" id="text-org5022fb3">
+<div id="outline-container-org6c89664" class="outline-2">
+<h2 id="org6c89664">partial fix</h2>
+<div class="outline-text-2" id="text-org6c89664">
 <p>
 later that week, a few other people said you needed to whitelist <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
 </p>
@@ -141,9 +141,9 @@ since I could at least launch and navigate around with my then-current janky set
 </div>
 </div>
 
-<div id="outline-container-orgb51d500" class="outline-2">
-<h2 id="orgb51d500">jankiest fix</h2>
-<div class="outline-text-2" id="text-orgb51d500">
+<div id="outline-container-org100c5d5" class="outline-2">
+<h2 id="org100c5d5">jankiest fix</h2>
+<div class="outline-text-2" id="text-org100c5d5">
 <p>
 he gives a good breakdown as to why this is needed <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
 </p>

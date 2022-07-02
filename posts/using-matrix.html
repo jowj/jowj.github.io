@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-02-07 Mon 17:14 -->
+<!-- 2022-07-02 Sat 14:47 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>using matrix</title>
@@ -111,9 +111,9 @@
 <header>
 <h1 class="title">using matrix</h1>
 </header>
-<div id="outline-container-orga03dd1a" class="outline-2">
-<h2 id="orga03dd1a">introduction</h2>
-<div class="outline-text-2" id="text-orga03dd1a">
+<div id="outline-container-orgf7cd807" class="outline-2">
+<h2 id="orgf7cd807">introduction</h2>
+<div class="outline-text-2" id="text-orgf7cd807">
 <p>
 i wanna write about <a href="https://matrix.org">matrix</a>. matrix is a 'new' protocol for decentralized communication. it can be used in a bunch of different ways: from relatively secure, favoring security over ease of use, to very open, favoring ease of use over all other concerns. i tend to use it in the, to me, bare minimum secure configuration and then focusing hard on ease of use.
 </p>
@@ -138,17 +138,17 @@ i don't wanna convince you that matrix is the protocol of your dreams and you sh
 </div>
 </div>
 
-<div id="outline-container-orgbf9c478" class="outline-2">
-<h2 id="orgbf9c478">what am i doing with matrix</h2>
-<div class="outline-text-2" id="text-orgbf9c478">
+<div id="outline-container-orga110331" class="outline-2">
+<h2 id="orga110331">what am i doing with matrix</h2>
+<div class="outline-text-2" id="text-orga110331">
 <p>
 one of the most fun / worst things about using matrix is that there's a bajillion knobs to tweak; anyone who is using it could have anywhere from 1 to n things different from my setup. here's what i'm doing:
 </p>
 </div>
 
-<div id="outline-container-org71157e0" class="outline-3">
-<h3 id="org71157e0">clients</h3>
-<div class="outline-text-3" id="text-org71157e0">
+<div id="outline-container-org3b840f4" class="outline-3">
+<h3 id="org3b840f4">clients</h3>
+<div class="outline-text-3" id="text-org3b840f4">
 <p>
 i'm using standard element clients for linux, macOS, iOS, and android.
 </p>
@@ -164,22 +164,22 @@ since originally writing ^ that paragraph, the new hotness for KDE clients is <a
 </div>
 
 
-<div id="outline-container-orgbbb456e" class="outline-3">
-<h3 id="orgbbb456e">servers</h3>
-<div class="outline-text-3" id="text-orgbbb456e">
+<div id="outline-container-org6fd035e" class="outline-3">
+<h3 id="org6fd035e">servers</h3>
+<div class="outline-text-3" id="text-org6fd035e">
 <p>
 i'm using the <a href="https://github.com/matrix-org/synapse">synapse reference server</a>, written in python. there really aren't other options here at the moment. dendrite (written in go) looks like it will no longer be the successor to Synapse, and instead just be a testing ground. there are a few rust servers being worked on as well, but with less official support.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org85364c6" class="outline-3">
-<h3 id="org85364c6">bridges</h3>
-<div class="outline-text-3" id="text-org85364c6">
+<div id="outline-container-orgc863538" class="outline-3">
+<h3 id="orgc863538">bridges</h3>
+<div class="outline-text-3" id="text-orgc863538">
 </div>
-<div id="outline-container-org49d40b8" class="outline-4">
-<h4 id="org49d40b8">slack</h4>
-<div class="outline-text-4" id="text-org49d40b8">
+<div id="outline-container-org699c621" class="outline-4">
+<h4 id="org699c621">slack</h4>
+<div class="outline-text-4" id="text-org699c621">
 <p>
 i'm currently using the <a href="https://github.com/matrix-org/matrix-appservice-slack">matrix-appservice-slack bridge</a> to bridge my local family and friends slack to my matrix server. this lets me do two things that are important to me:
 </p>
@@ -199,9 +199,9 @@ all the data replicates without hiccups between my synapse instance and the slac
 </div>
 </div>
 
-<div id="outline-container-org0461603" class="outline-4">
-<h4 id="org0461603">irc</h4>
-<div class="outline-text-4" id="text-org0461603">
+<div id="outline-container-org5de0335" class="outline-4">
+<h4 id="org5de0335">irc</h4>
+<div class="outline-text-4" id="text-org5de0335">
 <p>
 the self hosted <a href="https://github.com/matrix-org/matrix-appservice-irc">matrix-appservice-irc bridge</a> is what most people seem to use. i have used the <i>hosted</i> version on matrix.org before; i hated it. it was great to be able to talk to folks on freenode channels from element, especially given that there is no reasonable irc client on iOS! but the UX is just bad.
 </p>
@@ -212,18 +212,18 @@ i've started the learning process for self hosting it myself and having the brid
 </div>
 </div>
 
-<div id="outline-container-org2d028e9" class="outline-4">
-<h4 id="org2d028e9">discord</h4>
-<div class="outline-text-4" id="text-org2d028e9">
+<div id="outline-container-orgeb5853b" class="outline-4">
+<h4 id="orgeb5853b">discord</h4>
+<div class="outline-text-4" id="text-orgeb5853b">
 <p>
 i'm using the <a href="https://github.com/matrix-discord/mx-puppet-discord">mx-puppet-discord</a> bridge for bridging in discord channels. I tried using the <a href="https://github.com/Half-Shot/matrix-appservice-discord">appservice discord</a> bridge but had a <i>devil</i> of a time getting it to work. mx-puppet-discord works and has (imo) a better user experience for admins, though it does seem pretty finnicky. from what I can tell, more finnicky than the appservice. at least this one i can get to run though!!
 </p>
 </div>
 </div>
 
-<div id="outline-container-org037e209" class="outline-4">
-<h4 id="org037e209">combining bridges in a single room</h4>
-<div class="outline-text-4" id="text-org037e209">
+<div id="outline-container-org0729a72" class="outline-4">
+<h4 id="org0729a72">combining bridges in a single room</h4>
+<div class="outline-text-4" id="text-org0729a72">
 <p>
 a thing that i think is fucking <i>cool</i> and also probably a source of some of my problems is: i currently use some of these bridges to create a frankenstein room, that does bidirecitonal send like discord &lt;-&gt; matrix &lt;-&gt; slack; the channel "mothra-fuckers" (shut up) in discord talks to the channel "mothra-fuckers" in  matrix, which is also bridged to "mothra-fuckers" in slack, and anyone in any of those channels can talk to all three platforms! rad!
 </p>
@@ -232,13 +232,13 @@ a thing that i think is fucking <i>cool</i> and also probably a source of some o
 </div>
 </div>
 
-<div id="outline-container-orgdc8490e" class="outline-2">
-<h2 id="orgdc8490e">avoiding common pitfalls of self hosting</h2>
-<div class="outline-text-2" id="text-orgdc8490e">
+<div id="outline-container-orgc7d3bea" class="outline-2">
+<h2 id="orgc7d3bea">avoiding common pitfalls of self hosting</h2>
+<div class="outline-text-2" id="text-orgc7d3bea">
 </div>
-<div id="outline-container-org4a7b9a7" class="outline-3">
-<h3 id="org4a7b9a7">deployment</h3>
-<div class="outline-text-3" id="text-org4a7b9a7">
+<div id="outline-container-org31ed581" class="outline-3">
+<h3 id="org31ed581">deployment</h3>
+<div class="outline-text-3" id="text-org31ed581">
 <p>
 I think the first thing you should do is eschew configuring synapse and all these bridges on your own. that fucking sucks. use <a href="https://github.com/spantaleev/matrix-docker-ansible-deploy">this set</a> of ansible roles, these guys are great, continuously update stuff, and provide meaningful changelogs for updates. their documentation is not always lovely, especially about the optional plugins they offer, but have been enough to get me started on solving the problem every time so far.
 </p>
@@ -249,9 +249,9 @@ I forked their repo and periodically update it from <code>upstream/master</code>
 </div>
 </div>
 
-<div id="outline-container-org873422a" class="outline-3">
-<h3 id="org873422a">disk space</h3>
-<div class="outline-text-3" id="text-org873422a">
+<div id="outline-container-orgc8bef77" class="outline-3">
+<h3 id="orgc8bef77">disk space</h3>
+<div class="outline-text-3" id="text-orgc8bef77">
 <p>
 one of the things i keep intending to do (and have thus far put off) is move away from relying on raw disks attached to DO droplet and move towards object storage with s3/do spaces/ whatever. This is made easy if you use the previously mentioned set of ansible roles. if you don't do this, you will have to periodically go in and delete old media or add a bunch of new disk space.
 </p>
@@ -262,9 +262,9 @@ if you really must go with disks and not object storage for some reason I recomm
 </div>
 </div>
 
-<div id="outline-container-org3dcf73b" class="outline-3">
-<h3 id="org3dcf73b">backups!</h3>
-<div class="outline-text-3" id="text-org3dcf73b">
+<div id="outline-container-org1d6bdd3" class="outline-3">
+<h3 id="org1d6bdd3">backups!</h3>
+<div class="outline-text-3" id="text-org1d6bdd3">
 <p>
 you should do backups. I haven't figured out a particularly great method here, yet. I do full VM snapshots through my cloud provider, but pulling data out of that environment on a regular basis is something I haven't worked out how to do well. <a href="https://github.com/matrix-org/synapse/issues/2046">here</a> is a github issue that has some community opinions on what to backup, but there's still no official guidance as far as I know.
 </p>
@@ -272,9 +272,9 @@ you should do backups. I haven't figured out a particularly great method here, y
 </div>
 </div>
 
-<div id="outline-container-orgd9442a6" class="outline-2">
-<h2 id="orgd9442a6">talk to me about matrix!</h2>
-<div class="outline-text-2" id="text-orgd9442a6">
+<div id="outline-container-org33e3a57" class="outline-2">
+<h2 id="org33e3a57">talk to me about matrix!</h2>
+<div class="outline-text-2" id="text-org33e3a57">
 <p>
 i really like matrix. i think there's a lot of cool stuff here, and I hope that it continues to improve. if you run into issues with matrix, have some questions about it you aren't sure where to ask, or just wanna chat about it, please talk to me! I've got several years experience running my home server, and all my friends are tired of hearing about matrix lmao. i'm <a href="mailto:me@jowj.net">mailto:me@jowj.net</a> on email, or @jowj:awful.club on matrix.
 </p>
