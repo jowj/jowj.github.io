@@ -1,0 +1,158 @@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+TITLE: my opinions on task management and notes
+#+AUTHOR: josiah
+
+* Purpose and audience
+purpose:
+- explain options in the field
+- explain my own note process
+- explain how my note process fits into the field
+
+audience:
+- on some level, my brother
+- someone techy, but not a programmer
+  
+* Outline
+  - Introduction
+    - why am i writing this
+    - 
+  - Concepts / Ideology
+    - ZTK https://en.wikipedia.org/wiki/Zettelkasten
+    - GTD https://en.wikipedia.org/wiki/Getting_Things_Done
+    - just notes I guess
+    - file formats
+    - data portability
+  - Implementations / Apps
+    - Big players in the space
+      - Org mode / emacs
+      - Obsidian
+      - Roam Research
+    - Honerable mentions
+      - Logseq
+      - nvalt 
+    - Non Opinionated options
+      - fsnotes
+      - standard notes
+      - Evernote
+      - OneNote
+  - My setup and how it fits in
+    - org mode in emacs
+    - mobile story + device sync
+    - why emacs/org mode
+      - org capture + refile are incredible
+      - plaintext search
+      - task management
+	- scheduling
+	- calendar
+	- time tracking
+
+
+
+* Introduction
+Note taking systems have come up at work a lot; whether about flavor of the month applications (Roam Research! Obisidian!); whether you should write up notes in a private wiki; is there a particular best ideology like [[https://en.wikipedia.org/wiki/Zettelkasten][Zettelkasten]] (ZTK) or [[https://en.wikipedia.org/wiki/Getting_Things_Done][Getting Things Done]] (GTD). I have A Lot of opinions about note taking and productivity, and wrote up a quick and dirty summary of options on apps / ideology. This post is a longer form write up task management, producivity systems, and notes generally from that original summary.
+
+This post assumes you are a knowledge worker of some kind, and thus have a need for the heavier weight systems like ZTK or GTD. This post does not assume you are a programmer or work in tech. You should feel comfortable reading this if you're the kind of person who needs a robust note / task management system regardless of technical aptitude.
+
+* Concepts / ideology / religious warfare
+Always start with ideas before implementation. I'm sure there's more sects out there than I am aware of, but there are three mainstream knowledge management styles: Zettelkasten, Getting Things Done, and then just "writing shit down and hoping you find it later". The third is by far the most common when it comes to note taking, and variations on GTD are the most common task management system. ZTK is trendy methodlogy for knowledge management and discovery but doesn't really focus on task management necessarily (though some folks do bolt ZTK and GTD together!)
+
+** Getting Things Done
+   You can buy a book on GTD by the idea's creator, [[https://en.wikipedia.org/wiki/David_Allen_(author)][David Allen]], and if you like the system after reading about it here and want to learn it in its Pure Form or whatever then I absolutely encourage you to do that. However, my personal opinion is that adhering to the concepts outlined by its author is not all that useful to most people. Instead, I recommend taking some GTD's core ideas and adapting them to fit you use-case.
+
+   For example, here's a workflow sample of GTD taken from Wikipedia:
+
+ #+html:
+ #+begin_box
+ 1. The most annoying, distracting, or interesting task is chosen, and defined as an "incomplete".
+ 2. A description of the successful outcome of the "incomplete" is written down in one sentence, along with the criteria by which the task will be considered completed.
+ 3. The next step required to approach completion of the task is written down.
+ 4. A self-assessment is made of the emotions experienced after completing the steps of this process. 
+ #+end_box
+
+ This is an excellent tip for many people. It helps them get their hands around a task they've been procrastinating on and show that the task is maybe more tractable than originally thought. However, I often don't /need/ this sort of thing. Slavishly reproducing this is not useful to me. Instead, I focus on the core tools and concepts required to make any GTD system function:
+
+ Core needs (summarized):
+ 1. You need to be able to capture ideas/tasks/whatever as they come to you, hopefully without interrupting your workflow too much.
+ 2. You need to (either right away, or later during a review period) break down that idea/task, so you can figure out next steps.
+ 3. You need to be able to find your captured and clarified task/idea/bullshit later
+ 4. You need to review what you’ve captured and update/delete/whatever your bullshit
+ 5. (outside the scope of the system) actually do stuff with what you’ve captured.
+
+ Core tools:
+ - An inbox
+ - A trash can
+ - A filing system for reference material
+ - A calendar 
+ 
+ #+html:
+ #+begin_box
+ A quick explainer on these tools:
+ - An inbox is where un-filed ideas/tasks go. If a new idea or task comes to you, you should put it here.
+ - A trash can is self-explanatory, and often doesn't have to be in the system itself; you can just delete an entry or file it if it might be useful later.
+ - A filing system allows you take un-filed items and move them to a semantically appropriate place after you've thought about it / broken it down into sub tasks / added context (like "Mowing the lawn" might go under "house maintenance"). This makes it much easier to find things later on. This is heirarchical, so you can have nested structures like "Personal" > "Relationships" > "Josiah" > a number of items relating to your relationship with me.
+ - A calendar allows you to schedule tasks and mark them as due on certain dates. This is a big one for keeping me productive over the long term.
+ #+end_box
+
+ With these tools you're able to meet all the requirements from the "needs" section mentioned above. When examining tools you want to make sure a tool has all the right bits that map to these tools and support these needs.
+
+** Competing ideologies
+   The other religions are wrong, kill the heretics.
+
+*** Zettelkasten
+
+    I know very little about ZTK other than that it exists and that scientists /love/ it. The basic idea is kind of like note cards; each idea or concept has card, and that card will have topic tags that can be used to reference other notes. This is useful for learning about a new concept over time - it allows you to reference what you had previously understand and square it with your new understanding, as well as reference related ideas or events to deepen your understanding. One could think of this as basically "tagging, the methodology". 
+
+    If this style makes intuitive sense for you over the hierarchical filing system approach then more power to you. Hierarchies always ended up working better for me.
+
+*** Plain notes   
+    The "just take notes" method is objectively inferior to either GTD/ZTK for the knowledge worker use case, but I think gets used frequently due to how difficult it is to start using the proper tooling (the tooling ecosystem is pretty bad and only recently has it started improving). Just take notes people tend to rely on one of two methods for getting data back from entries they've added:
+   - plain text search (which is very valuable, and finally being treated as important in modern note systems), or:
+   - they don't. They rely on the act of recording the data to improve their memory, but never reference the recorded data ever again.
+
+** A note on plain text search
+   This is not possible in many, many note taking applications. I encourage you to select for this capability; using a tool that rolls its own search /and/ does not allow plain text search is a recipe for disaster. Tech workers have probably all encountered a wiki system called [[https://en.wikipedia.org/wiki/Confluence_(software)][Confluence]] that does this. This system is near universally reviled by non-management types because its such a pain to find data once its in there. I've heard it referred to as "write once find never" software because the search is so bad.
+
+** File formats and data portability
+   A good note taking system should not be beholden to a single app, developer, or company. Your note system should be as future proof as possible, and to that end you should use an open data format (as in, not proprietary) that's supported by a wide range of applications. That way, if your favored app goes the way of the dodo, your notes are 4 clicks away from being imported to the next app. If you use a proprietary file format you could /lose access to all your data/ if a company goes bankrupt.
+
+   Relatedly, you should care about where your notes are stored. Its very easy to get up and going with a cloud based note system, but cost you access and convenience in the long run. I recommend you select for a note taking app that is [[https://www.inkandswitch.com/local-first/][Local First]] - that is, it can use the cloud for backups and syncing files, but you should be storing notes locally on your devices.
+
+   This doesn't necessarily tie into plain text search, but frequently does. If a given note taking app uses their own file format or stores all your notes in a cloud solution you are unlikely to be able to perform plain text search on your notes. This does not need to be true 100% of the time, but I can't think of an exception off the top of my head.
+
+   Modern good note taking solutions have taken to building off of one or two file formats that are human readable, stored locally as well as in a given cloud solution, and plain text searchable. The two formats are:
+   - Markdown (the most common, widely understood, widely supported)
+   - Orgmode (rarer, steeper learning curve, tooling is rougher, IMO more powerful)
+
+   I obviously prefer orgmode, but as long as you're on one of these two you'll be fine.
+
+* Implementations and apps
+** Big players
+   There are 
+*** Org mode / emacs (mine!)
+
+*** Obsidian
+
+*** Roam Research
+
+** Honerable mentions
+
+* My setup
+** intro
+** mobile story + device sync
+** why emacs/org
+*** capture + refile
+*** plaintext search in app and out
+*** task managemetn
+**** scheduling
+**** calendar
+**** time tracking
+
+* raw
+  
+
+
+  Implementations! I love org-mode, its really incredible. Basically no one I talk to wants to use emacs to use a note system though (fair). The mobile story for org mode use is just fucking awful. Obsidian (a la Pasquale’s rec) seems really nice to me, I like its system a lot. It would support both ZK style workflows or GTD. It uses markdown, the inferior markup language (though google says someone wrote an org-mode backend for it, too:smiling_imp:).Logseq is a mac only desktop app for note taking that is similar to obsidian. AFAIK the only reason to care about it is that it supports both markdown and org mode out of the box. Also supports GTD and ZK style flows. Has a hosted component but its open source, you can use it free either without hosted features or by hosting yourself (at least, as far as I can tell!).Roam Research (as mentioned by Carlo) is supposed to be /RAD/, scientist friends I know fucking love it; I am not excited about paying a subscription for a notes app, but apparently the features are to die for.Less opinionated note apps that might work for you:https://fsnot.es/ — mac ecosystem, open source and fast. markdown. encrypt individual notes easily if you’re worried about whatever.
+https://standardnotes.com/features -- markdown, good security, privacy efforts. Don’t love to pay a sub for note apps, but some folks don’t mind.
+https://evernote.com/ — the original greatest note app. I used to really love it. If I wanted something like this now I’d probably just use onenote, its better in basically every way.
+https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app — I would be convicted of a crime if I didn’t mention onenote. Excellent note offering, works everywhere. I don’t like its support for things like GTD, but it works the best for the most people IMO.Finally, Kelly mentioned DayOne which is a fucking incredible app. I love them. e2ee journals and notes, with a particular bent towards journaling. no support for a task management system really. i use it all the time, though admittedly not for work writing.
