@@ -120,3 +120,6 @@ damn i think this[[margin:][from org mode, we write "margin:" and it will export
 #+latex: In the LaTeX output, we have a glossary.
 
 show:GLOSSARY
+
+** try out more here:
+   https://alhassy.github.io/org-special-block-extras/
