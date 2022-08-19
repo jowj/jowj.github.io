@@ -1,5 +1,6 @@
 #+TITLE: a list of stuff i wrote
 
+- [[file:my-opinions-on-notetaking.org][my opinions on task management and notes]]
 - [[file:using-org-caldav-with-fastmail.org][using org caldav with fastmail]]
 - [[file:vcards.org][vcards]]
 - [[file:uses-this.org][uses this]]
