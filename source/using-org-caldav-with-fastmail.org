@@ -2,6 +2,7 @@
 #+OPTIONS: toc:nil
 #+TITLE: using org caldav with fastmail
 #+AUTHOR: josiah
+#+CATEGORY: orgmode
 
 * how to sync calendar events from fastmail to your org agenda
 i've recently started a new job. i take a lot of notes, and I find it useful to take notes for each meeting along with some metadata about each meeting. the notes i obviously take as the meeting goes on, but the metadata is already in the meeting invite. rather than entering all of it manually for each meeting, I've had org-mode pull the meeting info for me.

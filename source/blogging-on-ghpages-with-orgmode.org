@@ -2,6 +2,7 @@
 #+OPTIONS: toc:nil
 #+TITLE: blogging on github:pages with orgmode
 #+AUTHOR: josiah
+#+CATEGORY: orgmode
 
 * what i did
 i've just moved from using markdown and jekyll to generate a static website on github pages to using org-mode and org-publish to generate static html files, also on github pages.

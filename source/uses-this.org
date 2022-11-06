@@ -2,6 +2,7 @@
 #+OPTIONS: toc:nil
 #+TITLE: uses this
 #+AUTHOR: josiah
+#+CATEGORY: usesthis
 
 * uses this
 [[https://usesthis.com/][uses this]] is a collection of interviews with individuals asking them about their hardware and software uses. i love this topic. of course, i'm not interesting enough to do interviews with anyone, but i /do/ think my hardware and software uses are more interesting than many of the real answerer's[[margin:][i use a macbook pro! and an iphone! and google docs for collaboration! who cares :(]]. so, here's what i use!

@@ -2,6 +2,7 @@
 #+OPTIONS: toc:nil
 #+TITLE: tvm at a new company
 #+AUTHOR: josiah
+#+CATEGORY: security
 
 * no new problems
 i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.

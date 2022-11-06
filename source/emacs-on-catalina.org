@@ -2,6 +2,7 @@
 #+OPTIONS: toc:nil
 #+TITLE: emacs on catalina
 #+AUTHOR: josiah
+#+CATEGORY: emacs
 
 * early days
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.

@@ -2,6 +2,7 @@
 #+OPTIONS: toc:nil
 #+TITLE: Moving from 1pass to bitwarden
 #+AUTHOR: josiah
+#+CATEGORY: security
  
 ** background
  I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.

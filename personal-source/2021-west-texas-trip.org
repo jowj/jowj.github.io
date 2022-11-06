@@ -2,6 +2,7 @@
 #+OPTIONS: num:nil
 #+OPTIONS: toc:nil
 #+AUTHOR: josiah
+#+CATEGORY: trips
 
 * Family vacations, planning
 We used to go on family vacations every other year or so. Often, those vacations were very high stress - our family was large, and navigating the world with 5 kids + whatever family we visited was just tough. We've never really gone on a family vacation now that we're all adults.

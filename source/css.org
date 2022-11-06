@@ -2,6 +2,8 @@
 #+OPTIONS: toc:nil
 #+TITLE: css test
 #+AUTHOR: josiah
+#+CATEGORY: orgmode
+
 * this is the first header
 this is a normal paragraph, and it contains a line that wraps naturally due to length. its pretty cool. below me is a list:
 #+ATTR_LATEX: :options [noitemsep]

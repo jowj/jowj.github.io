@@ -2,6 +2,7 @@
 #+OPTIONS: num:nil
 #+OPTIONS: toc:nil
 #+AUTHOR: josiah
+#+CATEGORY: TheGoofTroop
 
 * rad boys only
 we are boys and we are rad

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-07-02 Sat 14:47 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moving from 1pass to bitwarden</title>
@@ -100,20 +99,22 @@
 </head>
 <body>
 <div id="preamble" class="status">
+<nav>
 <a href="../index.html">home</a>
 <a href="../posts/articles.html">essays</a>
 <a href="../personal/articles.html">diary</a>
 <a href="https://git.awful.club/projects">projects</a>
 <a href="../resume.pdf">resume</a>
 <a href="../lore.html">lore</a>
+</nav>
 </div>
 <div id="content">
 <header>
 <h1 class="title">Moving from 1pass to bitwarden</h1>
 </header>
-<div id="outline-container-org08e8e08" class="outline-2">
-<h2 id="org08e8e08">background</h2>
-<div class="outline-text-2" id="text-org08e8e08">
+<div id="outline-container-orge7a267a" class="outline-2">
+<h2 id="orge7a267a">background</h2>
+<div class="outline-text-2" id="text-orge7a267a">
 <p>
 I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
 </p>
@@ -141,9 +142,9 @@ because of these issues i started looking for alternatives
 </p>
 </div>
 </div>
-<div id="outline-container-org9a69e82" class="outline-2">
-<h2 id="org9a69e82">bitwarden</h2>
-<div class="outline-text-2" id="text-org9a69e82">
+<div id="outline-container-org8369d1f" class="outline-2">
+<h2 id="org8369d1f">bitwarden</h2>
+<div class="outline-text-2" id="text-org8369d1f">
 <p>
 since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
 </p>
@@ -162,9 +163,9 @@ i've been living on bitwarden for ~1 week at this point and haven't felt any rea
 </div>
 </div>
 
-<div id="outline-container-org9f91ed4" class="outline-2">
-<h2 id="org9f91ed4">the bad</h2>
-<div class="outline-text-2" id="text-org9f91ed4">
+<div id="outline-container-org00c5e83" class="outline-2">
+<h2 id="org00c5e83">the bad</h2>
+<div class="outline-text-2" id="text-org00c5e83">
 <p>
 bad news first. 
 </p>
@@ -181,9 +182,9 @@ bad news first.
 </div>
 </div>
 
-<div id="outline-container-org078735c" class="outline-2">
-<h2 id="org078735c">totp issue specifics</h2>
-<div class="outline-text-2" id="text-org078735c">
+<div id="outline-container-orge4e664e" class="outline-2">
+<h2 id="orge4e664e">totp issue specifics</h2>
+<div class="outline-text-2" id="text-orge4e664e">
 <p>
 bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
 </p>
@@ -203,9 +204,9 @@ The desktop apps, being electron, got cached without showing the TOTP codes; sup
 </div>
 </div>
 
-<div id="outline-container-orgeaae4bf" class="outline-2">
-<h2 id="orgeaae4bf">the cool</h2>
-<div class="outline-text-2" id="text-orgeaae4bf">
+<div id="outline-container-org46f6aad" class="outline-2">
+<h2 id="org46f6aad">the cool</h2>
+<div class="outline-text-2" id="text-org46f6aad">
 <p>
 On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
 </p>
@@ -234,9 +235,9 @@ read about the bitwarden<sub>rs</sub> project here:
 </div>
 </div>
 
-<div id="outline-container-orgde369c6" class="outline-2">
-<h2 id="orgde369c6">next steps</h2>
-<div class="outline-text-2" id="text-orgde369c6">
+<div id="outline-container-orgd6bb8f9" class="outline-2">
+<h2 id="orgd6bb8f9">next steps</h2>
+<div class="outline-text-2" id="text-orgd6bb8f9">
 <p>
 i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
 </p>

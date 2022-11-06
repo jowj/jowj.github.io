@@ -2,6 +2,7 @@
 #+OPTIONS: num:nil
 #+OPTIONS: toc:nil
 #+AUTHOR: josiah
+#+CATEGORY: thanksgiving
 
 * seattle
 we flew in to seattle from austin at 845 am. don’t take that flight it was fucking horrible but it did give us a full day there despite flying for 4 hours. 

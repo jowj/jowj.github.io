@@ -2,6 +2,7 @@
 #+OPTIONS: num:nil
 #+OPTIONS: toc:nil
 #+AUTHOR: josiah
+#+CATEGORY: friendsgiving
 
 [[file:../photos/friendsgiving/friendsgiving-header.jpeg]]
 

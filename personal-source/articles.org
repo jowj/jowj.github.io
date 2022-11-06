@@ -1,7 +1,7 @@
 #+TITLE: personal bullshit
 
-- [[file:2021-west-texas-trip.org][big bend trip]]
-- [[file:2019-04-15-friendsgiving.org][2019 friendsgiving]]
-- [[file:2019-04-15-rad_boys_only.org][a thursday night sometime in 2019]]
-- [[file:2019-04-15-tubbesing_thanksgiving.org][2019 lt-friendsgiving]]
-- [[file:rsi.org][rsi]]
+- 2022-07-02 - [[file:2021-west-texas-trip.org][big bend trip]] (trips)
+- 2022-05-22 - [[file:2019-04-15-friendsgiving.org][2019 friendsgiving]] (friendsgiving)
+- 2022-05-15 - [[file:2019-04-15-rad_boys_only.org][a thursday night sometime in 2019]] (TheGoofTroop)
+- 2022-05-15 - [[file:2019-04-15-tubbesing_thanksgiving.org][2019 lt-friendsgiving]] (thanksgiving)
+- 2022-05-15 - [[file:rsi.org][rsi]] (rsi)
