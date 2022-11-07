@@ -85,15 +85,16 @@ pre {
     background:rgba(57, 60, 63, 0.99);
 }
   
-a:link, a:hover, a:active {
+a:link, a:active, a:visited {
     color: white;
-    border-bottom: 4px solid  #cc99ff;
+    border-bottom: 2px solid  #cc99ff;
     padding: 0px 0px;
 
 }
-a:visited {
+a:hover {
     color: white;
-    border-bottom: 4px solid  #cc99ff;
+    border-bottom: 2px solid  #cc99ff;
+    background-color: 2px solid  #cc99ff;
     padding: 0px 0px;
 }
 
@@ -210,6 +211,7 @@ a {
 }
 a:hover {
     border-bottom: 1px dotted;
+    background-color: #cc99ff;
 }
 
 #postamble p {
