@@ -68,10 +68,10 @@
              </script>
         
         <style>
-           abbr {color: red;}
+           abbr {color:  #cc99ff;}
         
            .tooltip { border-bottom: 1px dotted #000;
-                      color:red;
+                      color: #cc99ff;
                       text-decoration: none;}
         </style>
 <script type="text/javascript">
@@ -103,7 +103,7 @@
 <a href="../index.html">home</a>
 <a href="../posts/articles.html">essays</a>
 <a href="../personal/articles.html">diary</a>
-<a href="https://git.awful.club/projects">projects</a>
+<a href="../projects.html">projects</a>
 <a href="../resume.pdf">resume</a>
 <a href="../lore.html">lore</a>
 </nav>
@@ -112,17 +112,17 @@
 <header>
 <h1 class="title">tvm at a new company</h1>
 </header>
-<div id="outline-container-org7c5cf9e" class="outline-2">
-<h2 id="org7c5cf9e">no new problems</h2>
-<div class="outline-text-2" id="text-org7c5cf9e">
+<div id="outline-container-org26a56a8" class="outline-2">
+<h2 id="org26a56a8">no new problems</h2>
+<div class="outline-text-2" id="text-org26a56a8">
 <p>
 i recently started a new job and am faced with the usual: "please set up our scanners and Make Us Secure", "What Do These Alerts Mean", etc etc. i keep thinking about the scanning / threat and vulnerability management (TVM) aspect, so i want to write about that. here are a list of questions that i've been asking myself, along with some possible answers.
 </p>
 </div>
 
-<div id="outline-container-orga0d3916" class="outline-3">
-<h3 id="orga0d3916">using an existing scanning install or starting over</h3>
-<div class="outline-text-3" id="text-orga0d3916">
+<div id="outline-container-org4d2d1b4" class="outline-3">
+<h3 id="org4d2d1b4">using an existing scanning install or starting over</h3>
+<div class="outline-text-3" id="text-org4d2d1b4">
 <p>
 it may be reasonable to nuke an install if:
 </p>
@@ -145,9 +145,9 @@ those are really the only hard constraints i can think of. everything else seems
 </div>
 </div>
 
-<div id="outline-container-orgf592486" class="outline-3">
-<h3 id="orgf592486">are naming schemes important enough to spend time on</h3>
-<div class="outline-text-3" id="text-orgf592486">
+<div id="outline-container-org60b171f" class="outline-3">
+<h3 id="org60b171f">are naming schemes important enough to spend time on</h3>
+<div class="outline-text-3" id="text-org60b171f">
 <p>
 hard yes. some of the names in use at my new place are frankly <i>hilarious</i>. and bad. "aaah, a scan template called 'corp users', what do you suppo - oh, its for scanning production? of course."
 </p>
@@ -166,9 +166,9 @@ ProductName - Environment - Geolocation - Data
 </div>
 </div>
 
-<div id="outline-container-org87e73ff" class="outline-3">
-<h3 id="org87e73ff">a note on scan schedules</h3>
-<div class="outline-text-3" id="text-org87e73ff">
+<div id="outline-container-orgf794902" class="outline-3">
+<h3 id="orgf794902">a note on scan schedules</h3>
+<div class="outline-text-3" id="text-orgf794902">
 <p>
 think about what a particular scan is trying to accomplish. if the goal of a scan is to get data from <i>corporate servers</i> then a typical overnight maintenance window makes sense. 
 </p>
@@ -189,9 +189,9 @@ ok, apparently the title should be "two notes on scans". if your goal is to scan
 </div>
 
 
-<div id="outline-container-orgbe36c36" class="outline-3">
-<h3 id="orgbe36c36">what other things should I check on</h3>
-<div class="outline-text-3" id="text-orgbe36c36">
+<div id="outline-container-org1c02245" class="outline-3">
+<h3 id="org1c02245">what other things should I check on</h3>
+<div class="outline-text-3" id="text-org1c02245">
 <ul class="org-ul">
 <li>is the OS backing the scanning app still getting updates? a lot of people fire and forget scan setups so make sure you're not running shit off some idiots ubuntu 12 install.</li>
 <li>how much of the infrastructure are we actually scanning? do have blind spots?

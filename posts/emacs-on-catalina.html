@@ -68,10 +68,10 @@
              </script>
         
         <style>
-           abbr {color: red;}
+           abbr {color:  #cc99ff;}
         
            .tooltip { border-bottom: 1px dotted #000;
-                      color:red;
+                      color: #cc99ff;
                       text-decoration: none;}
         </style>
 <script type="text/javascript">
@@ -103,7 +103,7 @@
 <a href="../index.html">home</a>
 <a href="../posts/articles.html">essays</a>
 <a href="../personal/articles.html">diary</a>
-<a href="https://git.awful.club/projects">projects</a>
+<a href="../projects.html">projects</a>
 <a href="../resume.pdf">resume</a>
 <a href="../lore.html">lore</a>
 </nav>
@@ -112,9 +112,9 @@
 <header>
 <h1 class="title">emacs on catalina</h1>
 </header>
-<div id="outline-container-orga029f53" class="outline-2">
-<h2 id="orga029f53">early days</h2>
-<div class="outline-text-2" id="text-orga029f53">
+<div id="outline-container-org36445b1" class="outline-2">
+<h2 id="org36445b1">early days</h2>
+<div class="outline-text-2" id="text-org36445b1">
 <p>
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
 </p>
@@ -129,9 +129,9 @@ this basically says to run this lisp to add your proper emacs path to the proper
 </div>
 </div>
 
-<div id="outline-container-orgf4b1058" class="outline-2">
-<h2 id="orgf4b1058">partial fix</h2>
-<div class="outline-text-2" id="text-orgf4b1058">
+<div id="outline-container-org80c3402" class="outline-2">
+<h2 id="org80c3402">partial fix</h2>
+<div class="outline-text-2" id="text-org80c3402">
 <p>
 later that week, a few other people said you needed to whitelist <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
 </p>
@@ -142,9 +142,9 @@ since I could at least launch and navigate around with my then-current janky set
 </div>
 </div>
 
-<div id="outline-container-org325c9d7" class="outline-2">
-<h2 id="org325c9d7">jankiest fix</h2>
-<div class="outline-text-2" id="text-org325c9d7">
+<div id="outline-container-orgacab0de" class="outline-2">
+<h2 id="orgacab0de">jankiest fix</h2>
+<div class="outline-text-2" id="text-orgacab0de">
 <p>
 he gives a good breakdown as to why this is needed <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
 </p>
