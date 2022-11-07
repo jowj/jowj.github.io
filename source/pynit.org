@@ -2,7 +2,7 @@
 #+OPTIONS: toc:nil
 #+TITLE: pynit
 #+AUTHOR: josiah
-#+CATEGORY: python
+#+CATEGORY: projects
 
 * what is this
 pynit is a personal archival script that relies on [[https://pinboard.in][pinboard]]. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it [[https://github.com/jowj/pynit][here]].

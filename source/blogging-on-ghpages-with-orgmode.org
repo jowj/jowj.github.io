@@ -1,6 +1,6 @@
 #+OPTIONS: num:nil
 #+OPTIONS: toc:nil
-#+TITLE: blogging on github:pages with orgmode
+#+TITLE: blogging on github pages with orgmode
 #+AUTHOR: josiah
 #+CATEGORY: orgmode
 
