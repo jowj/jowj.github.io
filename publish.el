@@ -153,12 +153,20 @@ date only if they differ."
      prefix)))
 
 
-(defun my-site-format-entry (entry style project)
+(defun diary-format-entry (entry style project)
   (format "%s - [[file:%s][%s]] (%s)"
-          (format-time-string "%Y-%m-%d" (org-publish-find-date entry project))
+          (ambrevar/git-creation-date (concat "personal-source/" entry))
           entry
           (org-publish-find-title entry project)
           (org-find-category (expand-file-name entry (plist-get (cdr project) :base-directory)))))
+
+(defun posts-format-entry (entry style project)
+  (format "%s - [[file:%s][%s]] (%s)"
+          (ambrevar/git-creation-date (concat "source/" entry))
+          entry
+          (org-publish-find-title entry project)
+          (org-find-category (expand-file-name entry (plist-get (cdr project) :base-directory)))))
+
 
 (defun org-find-category (file)
   (with-temp-buffer
@@ -186,7 +194,7 @@ date only if they differ."
              :auto-sitemap t
              :sitemap-style 'list
              :sitemap-sort-files 'anti-chronologically
-	     :sitemap-format-entry 'my-site-format-entry
+	     :sitemap-format-entry 'posts-format-entry
 	     :html-html5-fancy t
 	     :html-doctype "html5"
              :html-head-include-default-style nil
@@ -202,7 +210,7 @@ date only if they differ."
              :recursive t
 	     :exclude "index.org"
              :publishing-function '(org-html-publish-to-html)
-	     :sitemap-format-entry 'my-site-format-entry
+	     :sitemap-format-entry 'diary-format-entry
 	     :time-stamp-file t
              :publishing-directory "./personal/"
 	     :sitemap-title "personal bullshit"
