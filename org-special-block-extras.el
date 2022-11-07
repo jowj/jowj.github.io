@@ -176,10 +176,10 @@
              </script>
         
         <style>
-           abbr {color: red;}
+           abbr {color:  #cc99ff;}
         
            .tooltip { border-bottom: 1px dotted #000;
-                      color:red;
+                      color: #cc99ff;
                       text-decoration: none;}
         </style>
         ")))
@@ -538,7 +538,7 @@ Namely,
 ;; with default values being "red" and "".
 ;; (Assuming we already called org-special-block-extras-short-names. )
 (org-special-block-extras-defblock rremark
-  (editor "Editor Remark" :face '(:foreground "red" :weight bold)) (color "red" signoff "")
+  (editor "Editor Remark" :face '(:foreground "#cc99ff" :weight bold)) (color "#cc99ff" signoff "")
   ; :please-preserve-new-lines
   "Top level (HTML & LaTeX) editorial remarks; in Emacs they're angry red."
   (format (if (equal backend 'html)
@@ -609,7 +609,7 @@ A full example:
    really "Solution, for real")
   "Show the answers to a problem, but with a reprimand in case no attempt was made."
   (org-special-block-extras-thread-blockcall raw-contents
-                    (details really :title-color "red")
+                    (details really :title-color "#cc99ff")
                     (box reprimand :background-color "blue")
                     (details title)))
 
@@ -804,7 +804,7 @@ with all ‘:kᵢ:’ lines stripped out.
   "Should editor comments be shown in the output or not.")
 
 (org-special-block-extras-defblock remark
-      (editor "Editor Remark" :face '(:foreground "red" :weight bold)) (color "black" signoff "" strong nil)
+      (editor "Editor Remark" :face '(:foreground "#cc99ff" :weight bold)) (color "black" signoff "" strong nil)
 ; :inline-please__see_margin_block_for_a_similar_incantation ; ⇒ crashes!
 "Format CONTENTS as an first-class editor comment according to BACKEND.
 
@@ -872,7 +872,7 @@ that is appended to the remark.
                  (goto-char position)
                  (-let [(&plist :path) (cadr (org-element-context))]
                    (format "%s made this remark" (s-upcase path)))))
-  :face '(:foreground "red" :weight bold))
+  :face '(:foreground "#cc99ff" :weight bold))
 
 (org-special-block-extras-defblock details (title "Details") (title-color "orange")
   "Enclose contents in a folded up box, for HTML.

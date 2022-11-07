@@ -17,21 +17,21 @@ h1 {
     font-size: 1.6666666666666667em;
     margin-bottom: 0.9em;
     font-family: sans-serif;
-    color: #E05F27;
+    color: white;
 }
 h2 {
     margin: 0;
     font-size: 1.5em;
     margin-bottom: 0.75em;
     font-family: sans-serif;
-    color: #2F7BDE;
+    color: white;
 }
 h3 {
     margin: 0;
     font-size: 1.3333333333333333em;
     margin-bottom: 0.75em;
     font-family: sans-serif;
-    color: #598249;
+    color: white;
 }
 h4 {
     margin: 0;
@@ -84,11 +84,18 @@ pre {
 ::-moz-selection  {
     background:rgba(57, 60, 63, 0.99);
 }
-a:link, a:hover, a:active {
-    color: #08C;
+  
+a:link, a:active, a:visited {
+    color: white;
+    border-bottom: 2px solid  #cc99ff;
+    padding: 0px 0px;
+
 }
-a:visited {
-    color: #B566FF;
+a:hover {
+    color: white;
+    border-bottom: 2px solid  #cc99ff;
+    background-color: 2px solid  #cc99ff;
+    padding: 0px 0px;
 }
 
 p.small, #postamble {
@@ -204,6 +211,7 @@ a {
 }
 a:hover {
     border-bottom: 1px dotted;
+    background-color: #cc99ff;
 }
 
 #postamble p {
