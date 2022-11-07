@@ -8,7 +8,7 @@
 - 2020-03-29 - [[file:api-prototyping.org][rest api prototyping]] (orgmode)
 - 2021-01-23 - [[file:using-matrix.org][using matrix]] (matrix)
 - 2020-03-29 - [[file:tvm-at-a-new-company.org][tvm at a new company]] (security)
-- 2020-03-29 - [[file:pynit.org][pynit]] (python)
+- 2020-03-29 - [[file:pynit.org][pynit]] (projects)
 - 2022-07-04 - [[file:my-opinions-on-notetaking.org][my opinions on task management and notes]] (notes)
 - 2020-03-29 - [[file:moving-from-1pass-to-bitwarden.org][Moving from 1pass to bitwarden]] (security)
 - 2020-03-29 - [[file:emacs-on-catalina.org][emacs on catalina]] (emacs)
