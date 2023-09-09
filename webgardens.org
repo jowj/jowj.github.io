@@ -9,7 +9,7 @@
 ** my own pot
 #+begin_export html
 <iframe
-  src="https://me.jowj.net/webgarden.html"
+  src="webgarden.html"
   height="250px"
   width="250px"
   scrolling="no"

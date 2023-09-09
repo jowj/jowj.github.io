@@ -91,12 +91,6 @@ a:link, a:active, a:visited {
     padding: 0px 0px;
 
 }
-a:hover {
-    color: white;
-    border-bottom: 2px solid  #cc99ff;
-    background-color: 2px solid  #cc99ff;
-    padding: 0px 0px;
-}
 
 p.small, #postamble {
     margin: 0;
@@ -106,6 +100,7 @@ p.small, #postamble {
 table {
     border-collapse: collapse;
     margin-bottom: 1.5em;
+    border: none;
 }
 /* @end */
 
@@ -237,4 +232,63 @@ a:hover {
 }
 .div-center {
     text-align: center;
+}
+/* Everything below this is about the web garden table. Fuck. */
+/* Site icon refers to the single table data entry */
+.site-icon  {
+    width: 200px ;
+    height: 200px ; 
+    justify-content: center ;
+    text-align: center ; 
+}
+
+.parent-link:link, .parent-link:active, .parent-link:visited {
+    color: white;
+    border-bottom: 0px solid  #000000;
+    padding: 0px 0px;    
+}
+
+.parent-link:hover  {
+    border-top: 200px dotted;
+    background-color: #cc99ff;
+}
+
+.webgarden-body {
+    width: 250px ;
+    height: 250px ;
+}
+
+/* Configure the table as a whole */
+.garden-table {
+    border: none;
+    width:240px;
+    height:225x;
+}
+
+/* Configure the row wrapper for the site icon */
+.icon-row {
+    text-align: center;
+    height: 200px;
+    width: 240px;
+    white-space: nowrap;    
+    border: none;    
+}
+
+/* configure row wrapper for links */
+.link-row {
+    text-align: left;
+    vertical-align: bottom;
+    overflow: hidden;
+    height: 25px;
+    width: 225x;
+    white-space: nowrap;    
+    border: none
+}
+
+.hello-tb {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    border: none;
+    height:min-content;
 }
