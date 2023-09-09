@@ -1,4 +1,4 @@
-#+TITLE: index
+#+TITLE: josiahs greenhouse
 #+OPTIONS: num:nil
 #+OPTIONS: toc:nil
 #+AUTHOR: josiah
