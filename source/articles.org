@@ -1,6 +1,6 @@
 #+TITLE: a list of stuff i wrote
 
-- - [[file:security-chat-channels.org][Do security in public]] (notes)
+- 2024-09-15 - [[file:security-chat-channels.org][Do security in public]] (notes)
 - 2020-03-29 - [[file:vcards.org][vcards]] (vcards)
 - 2021-03-08 - [[file:using-org-caldav-with-fastmail.org][using org caldav with fastmail]] (orgmode)
 - 2021-01-23 - [[file:using-matrix.org][using matrix]] (matrix)
