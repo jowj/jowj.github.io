@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-11-07 -->
+<!-- 2024-09-14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>index</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="josiah" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -41,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -190,8 +191,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="posts/css/my-dark.css"/>
 
@@ -261,28 +261,6 @@
                       color: #cc99ff;
                       text-decoration: none;}
         </style>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -295,20 +273,20 @@
 <a href="./lore.html">lore</a>
 </nav>
 </div>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">index</h1>
 
-<div id="outline-container-org1810b83" class="outline-2">
-<h2 id="org1810b83">projects</h2>
-<div class="outline-text-2" id="text-org1810b83">
+<div id="outline-container-orgb97ca74" class="outline-2">
+<h2 id="orgb97ca74">projects</h2>
+<div class="outline-text-2" id="text-orgb97ca74">
 <p>
 I've worked on a few things that i'm proud of. Here's the highlights.
 </p>
 </div>
 
-<div id="outline-container-org453504e" class="outline-3">
-<h3 id="org453504e"><a href="https://git.awful.club/projects/pynit">Pynit</a></h3>
-<div class="outline-text-3" id="text-org453504e">
+<div id="outline-container-org185a831" class="outline-3">
+<h3 id="org185a831"><a href="https://git.awful.club/projects/pynit">Pynit</a></h3>
+<div class="outline-text-3" id="text-org185a831">
 <ul class="org-ul">
 <li>Created: 2019</li>
 <li>Status: Archived</li>
@@ -319,9 +297,9 @@ pynit is a personal archival script that relies on pinboard. it pulls in saved p
 </div>
 </div>
 
-<div id="outline-container-orgb6ec4c3" class="outline-3">
-<h3 id="orgb6ec4c3"><a href="https://me.jowj.net/">jowj.net</a></h3>
-<div class="outline-text-3" id="text-orgb6ec4c3">
+<div id="outline-container-org11a7db9" class="outline-3">
+<h3 id="org11a7db9"><a href="https://me.jowj.net/">jowj.net</a></h3>
+<div class="outline-text-3" id="text-org11a7db9">
 <ul class="org-ul">
 <li>Created: 2016</li>
 <li>Status: Maintained</li>
@@ -334,7 +312,7 @@ This site! This site is a <del>cursed collection of elisp</del> cool experiment 
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</p></p>
 </div>
 </body>
 </html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Do security in public</title>
+<meta name="author" content="josiah" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+        
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+        
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+        
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+        
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+        
+        <style>
+           abbr {color:  #cc99ff;}
+        
+           .tooltip { border-bottom: 1px dotted #000;
+                      color: #cc99ff;
+                      text-decoration: none;}
+        </style>
+</head>
+<body>
+<div id="preamble" class="status">
+<nav>
+<a href="../index.html">home</a>
+<a href="../posts/articles.html">essays</a>
+<a href="../personal/articles.html">diary</a>
+<a href="../projects.html">projects</a>
+<a href="../resume.pdf">resume</a>
+<a href="../lore.html">lore</a>
+</nav>
+</div>
+<div id="content" class="content">
+<header>
+<h1 class="title">Do security in public</h1>
+</header>
+<div id="outline-container-org5e15f6d" class="outline-2">
+<h2 id="org5e15f6d">You should have an #ask-security channel</h2>
+<div class="outline-text-2" id="text-org5e15f6d">
+<p>
+I recently had a conversation at work on this topic and I wanted to jot down some of my thoughts about it. 
+</p>
+
+<p>
+You should have an #ask-security channel, and either every service owner within your security org should monitor it, or you should have your SOC triage it and tag in sevice owners as needed.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1548996" class="outline-2">
+<h2 id="org1548996">Some people will think disagree with me, but in most environments they'll be wrong</h2>
+<div class="outline-text-2" id="text-org1548996">
+<p>
+Management or other security minded engineers might push back on this for risk aversion reasons, like:
+</p>
+</div>
+
+<div id="outline-container-org790cde1" class="outline-3">
+<h3 id="org790cde1">Post intrusion data leaking</h3>
+<div class="outline-text-3" id="text-org790cde1">
+<div style="padding: 1em; background-color: #2e174a;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>but what if...</h3>
+<p>
+&#x2026;we're breached? I see people talk about slack use in post-exploitation reports! Shouldn't we take steps to prevent slack, or any chat app, housing sensitive data?
+</p>
+
+</div>
+
+<p>
+A fair question! But, I think it implicitly frames this as "we aren't having sensitive conversations in slack now", which is almost certainly <b>wrong</b>. A few points:
+</p>
+
+<ol class="org-ol">
+<li>Right now, your company has all kinds of security impacting conversations in channels all over your chatapp. There is basically no (cheap) way to prevent this. Centralizing them into a single channel (or 2, whatever) could even make IR <i>easier</i> because you'd have a better idea of what was talked about and where.</li>
+<li>Just because you do security in public doesn't mean there aren't things that should be discussed in higher-trust environs. You can easily create a process by which teams move sensitive issues from the public channel to DMs, zoom, or Jira.</li>
+<li>Slack is a communication medium, and has been used in a bunch of recent breaches precisely because it houses more efficient communication than other com mediums. One approach to dealing with this is to add additional friction to the coms process, but this slows us as much as it slows attackers (or more!). All decisions can be made on a spectrum of usability vs security, and there's a lot of circumstances where I'd push for an emphasis on security over usability. Here, though, I think the benefits outweighs the harms for a public slack channel.</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org0dfa4d5" class="outline-3">
+<h3 id="org0dfa4d5">Regulatory environments</h3>
+<div class="outline-text-3" id="text-org0dfa4d5">
+<div style="padding: 1em; background-color: #2e174a;border-radius: 15px; font-size: 0.9em; box-shadow: 0.05em 0.1em 5px 0.01em #00000057;"><h3>but what if...</h3>
+<p>
+&#x2026;we made promises to regulators about where data lives? Slack doesn't give us the guarantees we promise customers.
+</p>
+
+</div>
+<p>
+This is a valid reason! If this applies to you, I recommend re-evaluating your chat strategy. Self hosting your chat app allows you to make whatever guarantees you like without compromising the speed at which you work. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd10f26d" class="outline-2">
+<h2 id="orgd10f26d">Benefits of a public security forum</h2>
+<div class="outline-text-2" id="text-orgd10f26d">
+</div>
+<div id="outline-container-org73a55dd" class="outline-3">
+<h3 id="org73a55dd">Raising security's profile</h3>
+<div class="outline-text-3" id="text-org73a55dd">
+<p>
+Having public discussions about security raises the profile of security, which can (hopefully) be used to normalize discussing security issues and encourage engineers in non security focused domains to be more proactive about security.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1590156" class="outline-3">
+<h3 id="org1590156">Faster results</h3>
+<div class="outline-text-3" id="text-org1590156">
+<p>
+Slack channel discussions tend to lead to faster resolutions of issues. If an engineer can directly ask a question, get an answer, and move on about her day without having to wait the mandatory 48 hour turn around time on a Jira comment, that engineer is able to stay focused on her task without context switching. We should be supporting that as much as possible!
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8e577ff" class="outline-2">
+<h2 id="org8e577ff">Things to avoid when implemting a public security channel</h2>
+<div class="outline-text-2" id="text-org8e577ff">
+<p>
+A common failure mode I see is a channel gets set up, but never reaches critical mass and then ends up disused. This can happen for a lot of reasons, but especially these are common:
+</p>
+
+<ul class="org-ul">
+<li>A channel that's hard to discover because its not public</li>
+<li>A channel that's known but requires a direct invite</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga7be1f5" class="outline-2">
+<h2 id="orga7be1f5">talk to me</h2>
+<div class="outline-text-2" id="text-orga7be1f5">
+<p>
+If you disagree with this premise i am interested in talking to you! please, yell (politely) at me.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</p></p>
+</div>
+</body>
+</html>

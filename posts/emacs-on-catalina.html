@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>emacs on catalina</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="josiah">
+<meta name="author" content="josiah" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
 
         <style>
@@ -74,28 +74,6 @@
                       color: #cc99ff;
                       text-decoration: none;}
         </style>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -108,13 +86,13 @@
 <a href="../lore.html">lore</a>
 </nav>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">emacs on catalina</h1>
 </header>
-<div id="outline-container-org36445b1" class="outline-2">
-<h2 id="org36445b1">early days</h2>
-<div class="outline-text-2" id="text-org36445b1">
+<div id="outline-container-orgc448022" class="outline-2">
+<h2 id="orgc448022">early days</h2>
+<div class="outline-text-2" id="text-orgc448022">
 <p>
 i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.
 </p>
@@ -129,9 +107,9 @@ this basically says to run this lisp to add your proper emacs path to the proper
 </div>
 </div>
 
-<div id="outline-container-org80c3402" class="outline-2">
-<h2 id="org80c3402">partial fix</h2>
-<div class="outline-text-2" id="text-org80c3402">
+<div id="outline-container-orgc4d5107" class="outline-2">
+<h2 id="orgc4d5107">partial fix</h2>
+<div class="outline-text-2" id="text-orgc4d5107">
 <p>
 later that week, a few other people said you needed to whitelist <span class="underline">ruby's</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn't work either (though they were actually correct that ruby was involved).
 </p>
@@ -142,9 +120,9 @@ since I could at least launch and navigate around with my then-current janky set
 </div>
 </div>
 
-<div id="outline-container-orgacab0de" class="outline-2">
-<h2 id="orgacab0de">jankiest fix</h2>
-<div class="outline-text-2" id="text-orgacab0de">
+<div id="outline-container-orgec0c011" class="outline-2">
+<h2 id="orgec0c011">jankiest fix</h2>
+<div class="outline-text-2" id="text-orgec0c011">
 <p>
 he gives a good breakdown as to why this is needed <span class="underline">instead of</span> the ruby application whitelisting. here's the quick fix:
 </p>
@@ -166,7 +144,7 @@ this is not like, super great. its makes your configuration brittle and it will 
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</p></p>
 </div>
 </body>
 </html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>pynit</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="josiah">
+<meta name="author" content="josiah" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
 
         <style>
@@ -74,28 +74,6 @@
                       color: #cc99ff;
                       text-decoration: none;}
         </style>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -108,22 +86,22 @@
 <a href="../lore.html">lore</a>
 </nav>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">pynit</h1>
 </header>
-<div id="outline-container-orgf225980" class="outline-2">
-<h2 id="orgf225980">what is this</h2>
-<div class="outline-text-2" id="text-orgf225980">
+<div id="outline-container-org66da80e" class="outline-2">
+<h2 id="org66da80e">what is this</h2>
+<div class="outline-text-2" id="text-org66da80e">
 <p>
 pynit is a personal archival script that relies on <a href="https://pinboard.in">pinboard</a>. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it <a href="https://github.com/jowj/pynit">here</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4c37b23" class="outline-2">
-<h2 id="org4c37b23">why i made it</h2>
-<div class="outline-text-2" id="text-org4c37b23">
+<div id="outline-container-org4bec608" class="outline-2">
+<h2 id="org4bec608">why i made it</h2>
+<div class="outline-text-2" id="text-org4bec608">
 <p>
 i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:
 </p>
@@ -167,17 +145,17 @@ now whenever i want to revisit a particular item i have all the comments preserv
 </div>
 </div>
 
-<div id="outline-container-org9eed055" class="outline-2">
-<h2 id="org9eed055">what I learned while i made this</h2>
-<div class="outline-text-2" id="text-org9eed055">
+<div id="outline-container-org93ff973" class="outline-2">
+<h2 id="org93ff973">what I learned while i made this</h2>
+<div class="outline-text-2" id="text-org93ff973">
 <p>
 i learned a few things that i want to write up here, all related to python or working with rest apis:
 </p>
 </div>
 
-<div id="outline-container-orgdadcfd6" class="outline-3">
-<h3 id="orgdadcfd6">python</h3>
-<div class="outline-text-3" id="text-orgdadcfd6">
+<div id="outline-container-org2ee1aa5" class="outline-3">
+<h3 id="org2ee1aa5">python</h3>
+<div class="outline-text-3" id="text-org2ee1aa5">
 <p>
 i learned about <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> through <a href="https://twitter.com/mrled">@mrled</a>and it was SO useful. there may be more ways to use it (read their github page, its got great examples), but i primarily used it by decorating a function i wanted to inspect, like:
 </p>
@@ -187,12 +165,12 @@ i learned about <a href="https://github.com/cool-RR/PySnooper">pysnoop</a> throu
 
 <span class="org-type">@pysnooper.snoop</span>()
 <span class="org-keyword">def</span> <span class="org-function-name">my_function</span>():
-    <span class="org-variable-name">var1</span> = <span class="org-string">'thing1'</span>
-    <span class="org-variable-name">var2</span> = <span class="org-string">'thing2'</span>
+    <span class="org-variable-name">var1</span> <span class="org-operator">=</span> <span class="org-string">'thing1'</span>
+    <span class="org-variable-name">var2</span> <span class="org-operator">=</span> <span class="org-string">'thing2'</span>
 
-    <span class="org-keyword">return</span>(var1 + var2)
+    <span class="org-keyword">return</span>(var1 <span class="org-operator">+</span> var2)
 
-<span class="org-keyword">print</span>(my_function())
+<span class="org-builtin">print</span>(my_function())
 
 </pre>
 </div>
@@ -203,12 +181,12 @@ this would return:
 
 <div class="org-src-container">
 <pre class="src src-python">19:54:53.048881 call         4 <span class="org-keyword">def</span> <span class="org-function-name">my_function</span>():
-19:54:53.049021 line         5     <span class="org-variable-name">var1</span> = <span class="org-string">'thing1'</span>
-New var:....... <span class="org-variable-name">var1</span> = <span class="org-string">'thing1'</span>
-19:54:53.049094 line         6     <span class="org-variable-name">var2</span> = <span class="org-string">'thing2'</span>
-New var:....... <span class="org-variable-name">var2</span> = <span class="org-string">'thing2'</span>
-19:54:53.049155 line         8     <span class="org-keyword">return</span>(var1 + var2)
-19:54:53.049197 <span class="org-keyword">return</span>       8     <span class="org-keyword">return</span>(var1 + var2)
+19:54:53.049021 line         5     var1 <span class="org-operator">=</span> <span class="org-string">'thing1'</span>
+New var:....... var1 <span class="org-operator">=</span> <span class="org-string">'thing1'</span>
+19:54:53.049094 line         6     var2 <span class="org-operator">=</span> <span class="org-string">'thing2'</span>
+New var:....... var2 <span class="org-operator">=</span> <span class="org-string">'thing2'</span>
+19:54:53.049155 line         8     <span class="org-keyword">return</span>(var1 <span class="org-operator">+</span> var2)
+19:54:53.049197 <span class="org-keyword">return</span>       8     <span class="org-keyword">return</span>(var1 <span class="org-operator">+</span> var2)
 Return value:.. <span class="org-string">'thing1thing2'</span>
 thing1thing2
 </pre>
@@ -220,9 +198,9 @@ this allowed me to simple add a single line to an exist function <i>without modi
 </div>
 </div>
 
-<div id="outline-container-org0753494" class="outline-3">
-<h3 id="org0753494">rest apis</h3>
-<div class="outline-text-3" id="text-org0753494">
+<div id="outline-container-org50bf0ae" class="outline-3">
+<h3 id="org50bf0ae">rest apis</h3>
+<div class="outline-text-3" id="text-org50bf0ae">
 <p>
 a lot of people (a lot of people!!) just have you use get requests instead of posts, even when you're posting stuff. i am not a Web Man, so i don't understand the why, but if all you've ever done is <i>read</i> about working with rest apis then the real world may be confusing when you try and post something that requires a get request. the <a href="https://pinboard.in/api">pinboard api docs</a> for instance require get requests when you mean posts for backwards compatibility with the `delicious` api.
 </p>
@@ -231,7 +209,7 @@ a lot of people (a lot of people!!) just have you use get requests instead of po
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</p></p>
 </div>
 </body>
 </html>

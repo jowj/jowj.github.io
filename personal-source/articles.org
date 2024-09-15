@@ -1,7 +1,7 @@
 #+TITLE: personal bullshit
 
-- 2020-04-09 - [[file:2019-04-15-rad_boys_only.org][a thursday night sometime in 2019]] (TheGoofTroop)
-- 2020-04-09 - [[file:2019-04-15-tubbesing_thanksgiving.org][2019 lt-friendsgiving]] (thanksgiving)
 - 2020-12-01 - [[file:rsi.org][rsi]] (rsi)
 - 2021-11-10 - [[file:2021-west-texas-trip.org][big bend trip]] (trips)
+- 2020-04-09 - [[file:2019-04-15-tubbesing_thanksgiving.org][2019 lt-friendsgiving]] (thanksgiving)
+- 2020-04-09 - [[file:2019-04-15-rad_boys_only.org][a thursday night sometime in 2019]] (TheGoofTroop)
 - 2020-04-09 - [[file:2019-04-15-friendsgiving.org][2019 friendsgiving]] (friendsgiving)

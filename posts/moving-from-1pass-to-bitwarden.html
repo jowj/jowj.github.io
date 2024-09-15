@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Moving from 1pass to bitwarden</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="josiah">
+<meta name="author" content="josiah" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="css/my-dark.css"/>
 
         <style>
@@ -74,28 +74,6 @@
                       color: #cc99ff;
                       text-decoration: none;}
         </style>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -108,13 +86,13 @@
 <a href="../lore.html">lore</a>
 </nav>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">Moving from 1pass to bitwarden</h1>
 </header>
-<div id="outline-container-orgdc8f7b6" class="outline-2">
-<h2 id="orgdc8f7b6">background</h2>
-<div class="outline-text-2" id="text-orgdc8f7b6">
+<div id="outline-container-org2e0e535" class="outline-2">
+<h2 id="org2e0e535">background</h2>
+<div class="outline-text-2" id="text-org2e0e535">
 <p>
 I've been a 1pass user for a long time. I started with 1pass4; I used it with Mac and Windows endpoints. I've used it on iOS for almost that entire time. I've tried to use other things, like Enpass when I first tried to move to linux as a home os, or LastPass for certain jobs, but frankly none of them hold up.
 </p>
@@ -142,9 +120,9 @@ because of these issues i started looking for alternatives
 </p>
 </div>
 </div>
-<div id="outline-container-orgc2f32e5" class="outline-2">
-<h2 id="orgc2f32e5">bitwarden</h2>
-<div class="outline-text-2" id="text-orgc2f32e5">
+<div id="outline-container-orgb48c2ad" class="outline-2">
+<h2 id="orgb48c2ad">bitwarden</h2>
+<div class="outline-text-2" id="text-orgb48c2ad">
 <p>
 since i was looking for a new service anyway I decided to start with bitwarden, which I liked in abstract because I could eventually self host it. I never really moved beyond them; i've kept appraised of other options like keepass, lastpass, remembear, and others, but none of them have all of these things:
 </p>
@@ -163,9 +141,9 @@ i've been living on bitwarden for ~1 week at this point and haven't felt any rea
 </div>
 </div>
 
-<div id="outline-container-org212a996" class="outline-2">
-<h2 id="org212a996">the bad</h2>
-<div class="outline-text-2" id="text-org212a996">
+<div id="outline-container-org314d367" class="outline-2">
+<h2 id="org314d367">the bad</h2>
+<div class="outline-text-2" id="text-org314d367">
 <p>
 bad news first. 
 </p>
@@ -182,9 +160,9 @@ bad news first.
 </div>
 </div>
 
-<div id="outline-container-orgfb9b2be" class="outline-2">
-<h2 id="orgfb9b2be">totp issue specifics</h2>
-<div class="outline-text-2" id="text-orgfb9b2be">
+<div id="outline-container-org87070ca" class="outline-2">
+<h2 id="org87070ca">totp issue specifics</h2>
+<div class="outline-text-2" id="text-org87070ca">
 <p>
 bitwarden has different kinds of accounts, and there are different bitwarden service hosts that have different features. A free bitwarden account doesn't have TOTP support; that's one of the things they leave beyond a paywall. It seems pretty fair to me.
 </p>
@@ -204,9 +182,9 @@ The desktop apps, being electron, got cached without showing the TOTP codes; sup
 </div>
 </div>
 
-<div id="outline-container-orgcbcc3e7" class="outline-2">
-<h2 id="orgcbcc3e7">the cool</h2>
-<div class="outline-text-2" id="text-orgcbcc3e7">
+<div id="outline-container-org19df191" class="outline-2">
+<h2 id="org19df191">the cool</h2>
+<div class="outline-text-2" id="text-org19df191">
 <p>
 On bitwarden's side there's a lot to be said for their importer from 1password's bespoke format. that just works! rare as hell, even brought in totp codes, great.
 </p>
@@ -235,9 +213,9 @@ read about the bitwarden<sub>rs</sub> project here:
 </div>
 </div>
 
-<div id="outline-container-org625686b" class="outline-2">
-<h2 id="org625686b">next steps</h2>
-<div class="outline-text-2" id="text-org625686b">
+<div id="outline-container-org3c3e312" class="outline-2">
+<h2 id="org3c3e312">next steps</h2>
+<div class="outline-text-2" id="text-org3c3e312">
 <p>
 i'm prboably gonna stay on bw premium on their paid service for a while. its only $10 anyway, cheaper than 1pass. I think the next think I might do is mirror my server data onto something i self host; that way even if bw gets breached and owned so bad their backups are hosed I can still restore on prem.
 </p>
@@ -249,7 +227,7 @@ i haven't figured out how i could do that, but it seems like it should be pretty
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p></p>
+<p class="creator">Made with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</p></p>
 </div>
 </body>
 </html>
