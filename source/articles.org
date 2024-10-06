@@ -1,5 +1,6 @@
 #+TITLE: a list of stuff i wrote
 
+- - [[file:ringtones-from-gba-roms.org][Project notes: getting playable audio files out of a .gba rom]] (project)
 - 2024-09-15 - [[file:security-chat-channels.org][Do security in public]] (notes)
 - 2020-03-29 - [[file:vcards.org][vcards]] (vcards)
 - 2021-03-08 - [[file:using-org-caldav-with-fastmail.org][using org caldav with fastmail]] (orgmode)
