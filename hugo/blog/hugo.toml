@@ -1,0 +1,38 @@
+baseURL = "https://me.jowj.net/"
+title = "josiah's blog"
+languageCode = "en-us"
+theme = "jowj-theme"
+
+[markup]
+[markup.highlight]
+codeFences = true
+guessSyntax = false
+tabWidth = 4
+style = "monokai"   # or another style you prefer
+lineNos = false
+
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+hardWraps = false # Changed from the previous suggestion
+
+
+[[menus.main]]
+name = 'Home'
+pageRef = '/'
+weight = 10
+
+[[menus.main]]
+name = 'Posts'
+pageRef = '/posts'
+weight = 20
+
+[[menus.main]]
+name = 'Tags'
+pageRef = '/tags'
+weight = 30
+
+[module]
+[module.hugoVersion]
+extended = false
+min = "0.116.0"

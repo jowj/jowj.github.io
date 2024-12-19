@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+	<meta name="generator" content="Hugo 0.140.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>josiah&#39;s blog</title>
+<link rel="stylesheet" href="/css/my-dark.css">
+
+</head>
+<body>
+  <header>
+    <h1>josiah&#39;s blog</h1>
+
+  <nav>
+    <ul>
+    <li>
+      <a aria-current="page" class="active" href="/">Home</a>
+    </li>
+    <li>
+      <a href="/posts/">Posts</a>
+    </li>
+    <li>
+      <a href="/tags/">Tags</a>
+    </li>
+    </ul>
+  </nav>
+
+
+  </header>
+  <main>
+    
+  <p>Laborum voluptate pariatur ex culpa magna nostrud est incididunt fugiat
+pariatur do dolor ipsum enim. Consequat tempor do dolor eu. Non id id anim anim
+excepteur excepteur pariatur nostrud qui irure ullamco.</p>
+
+  
+    <h2><a href="/posts/post/">My Test Post</a></h2>
+    <h1 id="this-is-the-first-headersdsdasd">this is the first headersdsdasd</h1>
+<p>this is a normal paragraph, and it contains a line that wraps naturally
+due to length. its pretty cool. below me is a list:</p>
+<ol>
+<li>item 1</li>
+<li>item 2s</li>
+<li>item 3
+<ul>
+<li>unordered 1</li>
+<li>2</li>
+<li>3</li>
+</ul>
+</li>
+</ol>
+<h1 id="here-is-a-python-embd">here is a python embd</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> slack
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reactable_string</span>(text):
+</span></span><span style="display:flex;"><span>    reactable_array <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;cyber&#39;</span> <span style="color:#f92672">in</span> t:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># panick!sdf</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> slack
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reactable_string</span>(text):
+</span></span><span style="display:flex;"><span>    reactable_array <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> text<span style="color:#f92672">.</span>lower()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;cyber&#39;</span> <span style="color:#f92672">in</span> t:
+</span></span><span style="display:flex;"><span>        reactable_array<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;robot&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;flavor town&#39;</span> <span style="color:#f92672">in</span> t:
+</span></span><span style="display:flex;"><span>        reactable_array<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;flavortown&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> reactable_array
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rtm</span>(emoji, payload, id, ts):
+</span></span><span style="display:flex;"><span>    payload[<span style="color:#e6db74">&#39;web_client&#39;</span>]<span style="color:#f92672">.</span>reactions_add(
+</span></span><span style="display:flex;"><span>        channel<span style="color:#f92672">=</span>id,
+</span></span><span style="display:flex;"><span>        name<span style="color:#f92672">=</span>emoji,
+</span></span><span style="display:flex;"><span>        timestamp<span style="color:#f92672">=</span>ts
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@slack.RTMClient.run_on</span>(event<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;message&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_messages</span>(<span style="color:#f92672">**</span>payload):
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> payload[<span style="color:#e6db74">&#39;data&#39;</span>]
+</span></span><span style="display:flex;"><span>    id <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;channel&#39;</span>]
+</span></span><span style="display:flex;"><span>    ts <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;ts&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> reactable_string(data[<span style="color:#e6db74">&#39;text&#39;</span>]):
+</span></span><span style="display:flex;"><span>        needed <span style="color:#f92672">=</span> reactable_string(data[<span style="color:#e6db74">&#39;text&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;robot&#39;</span> <span style="color:#f92672">in</span> reactions_needed:
+</span></span><span style="display:flex;"><span>            rtm(<span style="color:#e6db74">&#34;robot_face&#34;</span>, payload, id, ts)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;flavortown&#39;</span> <span style="color:#f92672">in</span> reactions_needed:
+</span></span><span style="display:flex;"><span>            rtm(<span style="color:#e6db74">&#34;dark_sunglasses&#34;</span>, payload, id, ts)
+</span></span><span style="display:flex;"><span>            rtm(<span style="color:#e6db74">&#34;guyfieri&#34;</span>, payload, id, ts)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    stoken <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;XXXXXXXXXXXXXXXX&#39;</span>  <span style="color:#75715e"># Secret token!!</span>
+</span></span><span style="display:flex;"><span>    rtm_client <span style="color:#f92672">=</span> slack<span style="color:#f92672">.</span>RTMClient(token<span style="color:#f92672">=</span>stoken)
+</span></span><span style="display:flex;"><span>    rtm_client<span style="color:#f92672">.</span>start()
+</span></span></code></pre></div><h1 id="here-is-a-lisp-embedss">here is a lisp embedss</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>(<span style="color:#66d9ef">let</span> ((proj-base (file-name-directory load-file-name)))
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">setq</span> org-publish-project-alist
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">`</span>((<span style="color:#e6db74">&#34;project-name&#34;</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">:base-directory</span> <span style="color:#f92672">,</span>(concat proj-base <span style="color:#e6db74">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">:recursive</span> <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">:publishing-directory</span> <span style="color:#f92672">,</span>(concat proj-base  <span style="color:#e6db74">&#34;../export&#34;</span>)
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">:publishing-function</span> org-html-publish-to-html))))
+</span></span></code></pre></div><h1 id="see-links-styling">see links styling</h1>
+<p><a href="https://me.jowj.net">https://me.jowj.net</a> looks like this <a href="https://google.com">https://google.com</a> looks like
+this</p>
+  
+    <h2><a href="/posts/post-3/">Post 3</a></h2>
+    <p>Occaecat aliqua consequat laborum ut ex aute aliqua culpa quis irure esse magna dolore quis. Proident fugiat labore eu laboris officia Lorem enim. Ipsum occaecat cillum ut tempor id sint aliqua incididunt nisi incididunt reprehenderit. Voluptate ad minim sint est aute aliquip esse occaecat tempor officia qui sunt. Aute ex ipsum id ut in est velit est laborum incididunt. Aliqua qui id do esse sunt eiusmod id deserunt eu nostrud aute sit ipsum. Deserunt esse cillum Lorem non magna adipisicing mollit amet consequat.</p>
+  
+    <h2><a href="/posts/post-2/">Post 2</a></h2>
+    <p>Anim eiusmod irure incididunt sint cupidatat. Incididunt irure irure irure nisi ipsum do ut quis fugiat consectetur proident cupidatat incididunt cillum. Dolore voluptate occaecat qui mollit laborum ullamco et. Ipsum laboris officia anim laboris culpa eiusmod ex magna ex cupidatat anim ipsum aute. Mollit aliquip occaecat qui sunt velit ut cupidatat reprehenderit enim sunt laborum. Velit veniam in officia nulla adipisicing ut duis officia.</p>
+<p>Exercitation voluptate irure in irure tempor mollit Lorem nostrud ad officia. Velit id fugiat occaecat do tempor. Sit officia Lorem aliquip eu deserunt consectetur. Aute proident deserunt in nulla aliquip dolore ipsum Lorem ut cupidatat consectetur sit sint laborum. Esse cupidatat sit sint sunt tempor exercitation deserunt. Labore dolor duis laborum est do nisi ut veniam dolor et nostrud nostrud.</p>
+  
+    <h2><a href="/posts/post-1/">Post 1</a></h2>
+    <p>Tempor proident minim aliquip reprehenderit dolor et ad anim Lorem duis sint eiusmod. Labore ut ea duis dolor. Incididunt consectetur proident qui occaecat incididunt do nisi Lorem. Tempor do laborum elit laboris excepteur eiusmod do. Eiusmod nisi excepteur ut amet pariatur adipisicing Lorem.</p>
+<p>Occaecat nulla excepteur dolore excepteur duis eiusmod ullamco officia anim in voluptate ea occaecat officia. Cillum sint esse velit ea officia minim fugiat. Elit ea esse id aliquip pariatur cupidatat id duis minim incididunt ea ea. Anim ut duis sunt nisi. Culpa cillum sit voluptate voluptate eiusmod dolor. Enim nisi Lorem ipsum irure est excepteur voluptate eu in enim nisi. Nostrud ipsum Lorem anim sint labore consequat do.</p>
+  
+
+  </main>
+  <footer>
+    <p>copyright 2024. i love you on every page.</p>
+
+  </footer>
+</body>
+</html>

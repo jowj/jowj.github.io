@@ -1,0 +1,294 @@
+/* Yah, I can't build websites for my life. Nothing to see here. */
+
+#preamble {
+    text-align: center
+}
+
+body {
+    /* Stolen from boostrap, is this good? */
+    font-size: 18px;
+    color: #dddddd;
+    background-color: #111111;
+    font-family: sans-serif;
+    line-height: 1.3;
+}
+h1 {
+    margin: 0;
+    font-size: 1.6666666666666667em;
+    margin-bottom: 0.9em;
+    font-family: sans-serif;
+    color: white;
+}
+h2 {
+    margin: 0;
+    font-size: 1.5em;
+    margin-bottom: 0.75em;
+    font-family: sans-serif;
+    color: white;
+}
+h3 {
+    margin: 0;
+    font-size: 1.3333333333333333em;
+    margin-bottom: 0.75em;
+    font-family: sans-serif;
+    color: white;
+}
+h4 {
+    margin: 0;
+    font-size: 1.1666666666666667em;
+    margin-bottom: 0.5em;
+    font-family: sans-serif;
+}
+p, ul, pre, td, th, label {
+    margin: 0;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    font-family: sans-serif;
+    width: 95%;
+}
+/* Override for source code blocks */
+pre {
+    font-family: monospace;
+}
+
+code {
+    /* no wrapping in code blocks (in addition to pre) */
+    white-space: nowrap;
+}
+
+
+/* Fit images */
+img {
+    max-width:100%;
+    max-height:100%;
+}
+
+h1, h2, h3, h4, h5, h6, h7 {
+    /* All headers should not be split */
+    display: inline-block;
+    width:101%
+}
+
+/*  Simple colors here */
+h5, h6, h7, li {
+    color: #909396;
+}
+pre {
+    background-color: #2B2B2C;
+    color: #909396;
+    border: 1px solid black;
+}
+::selection {
+    background:rgba(57, 60, 63, 0.99);
+}
+::-moz-selection  {
+    background:rgba(57, 60, 63, 0.99);
+}
+  
+a:link, a:active, a:visited {
+    color: white;
+    border-bottom: 2px solid  #cc99ff;
+    padding: 0px 0px;
+
+}
+
+p.small, #postamble {
+    margin: 0;
+    font-size: 0.8333333333333334em;
+    margin-bottom: 1.8em;
+}
+table {
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+    border: none;
+}
+/* @end */
+
+/* @group Layout */
+
+#content {
+    max-width: 63em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* #header {
+	height: 10em;
+}
+*/
+
+#table-of-contents {
+    max-width: 15em;
+    float: right;
+    overflow: auto;
+    font-size: 16px;
+    position: relative;
+    z-index: 10;
+}
+
+/* #main { */
+div.outline-2 {
+    max-width: 55em;
+    /* The lines below are useful if the "main" div isn't available and
+	   div.outline-2 has to be used. */
+    position: relative;
+}
+
+#postamble {
+    clear: both;
+    text-align: center;
+}
+
+div.outline-2 pre {
+    overflow: auto;
+}
+
+/* @end */
+
+/* @group Header */
+
+h1.title {
+    margin-top: 10px;
+    text-align: center;
+}
+
+h1.title {
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-bottom: 0.8em;
+}
+
+/* @end */
+
+/* @group Table of Contents */
+
+#table-of-contents ul,
+#table-of-contents ol {
+    padding-left: 1em;
+}
+
+/* @end */
+
+/* @group Outline Level 2 */
+
+.outline-2 h2 {
+    background: #2a2a2a;
+    border-bottom: 1px solid #161616;
+    border-radius: 2px;
+}
+
+.outline-2 {
+    padding: 5px;
+    /* margin-bottom: 10px; */
+    /* border-top: 1px solid #ccc; */
+}
+
+/* @end */
+
+td {
+    border: 1px solid black;
+}
+
+
+h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
+    background-color: #2d1414;
+    border: 1px solid #161616;
+    border-radius: 2px;
+}
+
+.outline-1, .outline-2, .outline-3, .outline-4, .outline-5, .outline-6 {
+    margin-left: 1em;
+}
+
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    border-bottom: 1px dotted;
+    background-color: #cc99ff;
+}
+
+#postamble p {
+    margin: 0px;
+}
+
+.footpara { display: inline; }
+
+.footdef { margin-bottom: 3em; font-size: 80%; }
+
+.div-wrap {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
+}
+
+.div-left {
+    grid-column: span 2 / auto;
+}
+.div-right {
+    grid-column: span 2 / auto;
+    text-align: right;
+}
+.div-center {
+    text-align: center;
+}
+/* Everything below this is about the web garden table. Fuck. */
+/* Site icon refers to the single table data entry */
+.site-icon  {
+    width: 200px ;
+    height: 200px ; 
+    justify-content: center ;
+    text-align: center ; 
+}
+
+.parent-link:link, .parent-link:active, .parent-link:visited {
+    color: white;
+    border-bottom: 0px solid  #000000;
+    padding: 0px 0px;    
+}
+
+.parent-link:hover  {
+    border-top: 200px dotted;
+    background-color: #cc99ff;
+}
+
+.webgarden-body {
+    width: 250px ;
+    height: 250px ;
+}
+
+/* Configure the table as a whole */
+.garden-table {
+    border: none;
+    width:240px;
+    height:225x;
+}
+
+/* Configure the row wrapper for the site icon */
+.icon-row {
+    text-align: center;
+    height: 200px;
+    width: 240px;
+    white-space: nowrap;    
+    border: none;    
+}
+
+/* configure row wrapper for links */
+.link-row {
+    text-align: left;
+    vertical-align: bottom;
+    overflow: hidden;
+    height: 25px;
+    width: 225x;
+    white-space: nowrap;    
+    border: none
+}
+
+.hello-tb {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    border: none;
+    height:min-content;
+}
