@@ -147,37 +147,18 @@ table {
 
 /* @group Layout */
 
+/* content area */
 main {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* #header {
-	height: 10em;
-}
-*/
-
-#table-of-contents {
-    max-width: 15em;
-    float: right;
-    overflow: auto;
-    font-size: 16px;
-    position: relative;
-    z-index: 10;
-}
-
-/* #main { */
-div.outline-2 {
-    max-width: 55em;
-    /* The lines below are useful if the "main" div isn't available and
-	   div.outline-2 has to be used. */
-    position: relative;
-}
-
-#postamble {
-    clear: both;
+header {
+    max-width: 1200px;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div.outline-2 pre {
@@ -318,4 +299,15 @@ h6 span {
     padding: 0;
     border: none;
     height: min-content;
+}
+
+/* style home page alone *.div-center */
+home {
+    text-align: center;
+}
+
+/* style copywrite */
+copyright {
+    font-size: 7px;
+    text-align: center;
 }
