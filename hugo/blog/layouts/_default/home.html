@@ -1,7 +1,0 @@
-{{ define "main" }} ﻿<title>
-    {{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title
-    site.Title }}{{ end }}
-</title>
-{{ .Content }} {{ range site.RegularPages }}
-<h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-{{ .Summary }} {{ end }} {{ end }}
