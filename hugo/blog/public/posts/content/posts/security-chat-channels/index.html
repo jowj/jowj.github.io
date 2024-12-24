@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Do security in public | josiah&#39;s blog</title>
+<link rel="stylesheet" href="/css/my-dark.css">
+
+</head>
+<body>
+  <header>
+    <h1>josiah&#39;s blog</h1>
+<nav>
+    <a href="">home</a>
+    <a href="posts/">posts</a>
+    <a href="personal/">diary</a>
+    <a href="projects/">projects</a>
+    <a href="resume.pdf">resume</a>
+    <a href="lore/">lore</a>
+</nav>
+
+
+  </header>
+  <main>
+    
+  <h1>Do security in public</h1>
+
+  
+  
+  <time datetime="0001-01-01T00:00:00&#43;00:00">January 1, 1</time>
+
+  <h2 id="you-should-have-an-ask-security-channel">You should have an #ask-security channel</h2>
+<p>I recently had a conversation at work on this topic and I wanted to jot down some of my thoughts about it.</p>
+<p>You should have an #ask-security channel, and either every service owner within your security org should monitor it, or you should have your SOC triage it and tag in sevice owners as needed.</p>
+<p>Having an explicit venue for security conversations provides a bunch of benefits, like:</p>
+<ul>
+<li>Raising security awareness within the engineering orgs</li>
+<li>Gives faces to the Security team, which is especially useful since Security is often propped up as a boogeyman who makes unpopular policy decisions</li>
+<li>Allows teams to ask security-impacting questions without going through a formal process like a security review</li>
+</ul>
+<h2 id="exceptions-but--mostly--not-practical-ones">Exceptions, but (mostly) not practical ones</h2>
+<p>Management or other security minded engineers might push back on this for risk aversion reasons, like:</p>
+<h3 id="post-intrusion-data-leaking">Post intrusion data leaking</h3>
+<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3>but what if...</h3>
+<p>&hellip;we&rsquo;re breached? I see people talk about slack use in post-exploitation reports! Shouldn&rsquo;t we take steps to prevent slack, or any chat app, housing sensitive data?</p>
+</div>
+<p>A fair question! But, the question implicitly frames the scenario as &ldquo;we aren&rsquo;t having sensitive conversations in slack now&rdquo;, which is almost certainly incorrect. A few points:</p>
+<ol>
+<li>Right now, your company has all kinds of security impacting conversations in channels all over your chatapp. There is basically no (cheap) way to prevent this. Centralizing them into a single channel (or 2, whatever) could even make IR <em>easier</em> because you&rsquo;d have a better idea of what was talked about and where.</li>
+<li>Just because you do security in public doesn&rsquo;t mean there aren&rsquo;t things that should be discussed in higher-trust environs. You can easily create a process by which teams move sensitive issues from the public channel to DMs, zoom, or Jira.</li>
+<li>Slack’s value lies in its efficiency as a communication tool, which is exactly what makes it attractive to attackers. Recent breaches have highlighted this risk. One approach to dealing with this is to add additional friction to the coms process, but this slows us as much as it slows attackers (or more!).</li>
+</ol>
+<p>All decisions can be made on a spectrum of usability vs security, and there&rsquo;s a lot of circumstances where I&rsquo;d push for an emphasis on security over usability. Here, though, the benefits outweighs the harms for a public slack channel.</p>
+<h3 id="regulatory-environments">Regulatory environments</h3>
+<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3>but what if...</h3>
+<p>&hellip;we made promises to regulators about where data lives? Slack doesn&rsquo;t give us the guarantees we promise customers.</p>
+</div>
+<p>This is a valid reason! If this applies to you, I recommend re-evaluating your chat strategy. Self hosting your chat app allows you to make whatever guarantees you like without compromising the speed at which you work.</p>
+<h2 id="benefits-of-a-public-security-forum">Benefits of a public security forum</h2>
+<h3 id="raising-security-s-profile">Raising security&rsquo;s profile</h3>
+<p>Having public discussions about security raises the profile of security, which can be used to normalize discussing security issues and encourage engineers in non security focused domains to be more proactive about security. It also lets other employees who may not be cognizant of security in general watch practioners talk through their process, and weigh risk appropriately. We can all learn via modelled behavior, and this is one way of modeling behavior we want to see in engineering teams.</p>
+<h3 id="faster-results">Faster results</h3>
+<p>Slack channel discussions tend to lead to faster resolutions of issues. If an engineer can directly ask a question, get an answer, and move on about her day without having to wait the mandatory 48 hour turn around time on a Jira comment, that engineer is able to stay focused on her task without context switching. We should be supporting that as much as possible!</p>
+<h2 id="things-to-avoid-when-implementing-a-public-security-channel">Things to avoid when implementing a public security channel</h2>
+<p>A common failure mode I see is a channel gets set up, but never reaches critical mass and then ends up disused. This can happen for a lot of reasons, but especially these are common:</p>
+<ul>
+<li>A channel that&rsquo;s hard to discover because its not public</li>
+<li>A channel that&rsquo;s known but requires a direct invite</li>
+</ul>
+<h2 id="talk-to-me">Talk to me</h2>
+<p>If you disagree with this premise i am interested in talking to you! please, <a href="mailto:me@jowj.net">yell</a> (politely) at me.</p>
+
+  
+
+
+  </main>
+  <footer>
+    <p>copyright 2024. i love you on every page.</p>
+
+  </footer>
+</body>
+</html>

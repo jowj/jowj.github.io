@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>blogging on github pages with orgmode | josiah&#39;s blog</title>
+<link rel="stylesheet" href="/css/my-dark.css">
+
+</head>
+<body>
+  <header>
+    <h1>josiah&#39;s blog</h1>
+<nav>
+    <a href="/">/home</a>
+    <a href="/posts/">/posts</a>
+    <a href="/personal/">/diary</a>
+    <a href="/projects/">/projects</a>
+    <a href="/resume.pdf">/resume</a>
+    <a href="/lore/">/lore</a>
+</nav>
+
+
+  </header>
+  <main>
+    
+<h1>blogging on github pages with orgmode</h1>
+
+ 
+<time datetime="2020-04-11T00:00:00&#43;00:00">April 11, 2020</time>
+
+<h2 id="what-i-did">what i did</h2>
+<p>i&rsquo;ve just moved from using markdown and jekyll to generate a static website on github pages to using org-mode and org-publish to generate static html files, also on github pages.</p>
+<h2 id="why-did-i-do-this">why did i do this</h2>
+<p>my setup has been a pain - i do most of my writing and thinking in <a href="https://orgmode.org/">org mode</a>, but to post stuff on <a href="https://me.jowj.net/">https://me.jowj.net/</a> i have to convert that to markdown (relatively easy, due to a package called <a href="https://github.com/emacsmirror/org/blob/master/lisp/ox-md.el">ox-md</a>) and use <a href="https://jekyllrb.com/">jekyll</a> to convert md to html and handle the generation of the site. the problem with jekyll is that it <em>sucks</em>. its a tool based on the ruby ecosystem, and since I actually publish my stuff so infrequently every time i use it i have to update something about my ruby environment. this adds probably 10-20 minutes while I remember / look up which commands i&rsquo;m supposed to run and why, and figuring out what things are actually broken this time.</p>
+<p>theming in jekyll i also don&rsquo;t really enjoy. i think its a fine way to get started with an easy, responsive look to a blog, but if you wanna have more particular say about it you probably will end up writing your own css.</p>
+<p>i wanted a way to handle multiple rss feeds; i wanted to be able to blog about personal bullshit AND project/technical work in the same site. obviously, most people are not going to give a shit about both of those things at the same time, so separating the rss feeds out seemed like a pretty straightforward way of handling that! ultimately this was harder than i wanted it to be, but it does seem to work!</p>
+<p>i also just thought it would be cool to do everything within emacs (because my brain is broken lol). now the site is built with emacs and org mode entirely!</p>
+<h2 id="how-it-works">how it works</h2>
+<p>most of the configuration and automation is in two files: <a href="https://github.com/jowj/jowj.github.io/blob/master/publish.el">publish.el</a> and <a href="https://github.com/jowj/jowj.github.io/blob/master/Makefile">Makefile</a> (raw links, also pasted below). publish.el has by far the most stuff in it, Makefile is just stupid simple automation.</p>
+<h3 id="publish-dot-el">publish.el</h3>
+<p>i cribbed from several places to build this. in particular, two folks had done something similar and i referred to their work heavily. see the <a href="#credits-and-references">credits &amp; references</a> entry.</p>
+<p>one of the ways I differed from some of the other configurations I referenced was that i wanted the publishing process to be distinct from my personal <a href="https://git.awful.club/jowj/chd/src/branch/master/.emacs.d">emacs configuration</a>. publishing from within emacs itself is pretty cool, but it&rsquo;ll be cooler when i can publish by just uploading .org files and having github actions run a container and my publishing function on <code>git push</code>. i&rsquo;m not there yet but <a href="https://gjhenrique.com/meta.html">some people are doing this already with gitlab</a>.</p>
+<p>since i won&rsquo;t be using my personal emacs config, i&rsquo;ll have to setup package management here as well:</p>
+<p><a id="code-snippet--handle package setup"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;;;; package setup</span>
+</span></span><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;ox-publish</span>)
+</span></span><span style="display:flex;"><span>(package-initialize)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;package</span>)
+</span></span><span style="display:flex;"><span>(setq package-archives
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">&#34;melpa&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;http://melpa.milkbox.net/packages/&#34;</span>)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;gnu&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;http://elpa.gnu.org/packages/&#34;</span>)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;elpy&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;http://jorgenschaefer.github.io/packages/&#34;</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(unless (package-installed-p <span style="color:#e6db74">&#39;use-package</span>)
+</span></span><span style="display:flex;"><span>  (package-refresh-contents)
+</span></span><span style="display:flex;"><span>  (package-install <span style="color:#e6db74">&#39;use-package</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(eval-when-compile
+</span></span><span style="display:flex;"><span>  (require <span style="color:#e6db74">&#39;use-package</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(use-package htmlize
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(use-package webfeeder
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>)
+</span></span></code></pre></div><p>man i got SO stuck on how to do syntax highlighting AND use my own custom css. if you use the stock html and css templates that ship with org mode (i.e. don&rsquo;t customize anything at all) you can easily add syntax highlighting using the <code>htmlize</code> package. if you override the stock templates then you don&rsquo;t get syntax highlighting by default!!</p>
+<p>the actual solution ended up being so simple i&rsquo;m mad its not in any of the documentation I found expressly, so I&rsquo;m going to make sure i write a googlable phrase about it:</p>
+<ul>
+<li>&ldquo;fix syntax highlighting when using custom css in emacs org mode by defining font-locks manually.&rdquo;</li>
+</ul>
+<!--listend-->
+<p><a id="code-snippet--fix syntax highlighting."></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; fucking custom colors eluded me until this shit.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; reference this guy&#39;s setup, he&#39;s a king:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://gitlab.com/jgkamat/jgkamat.gitlab.io/-/blob/master/jgkamat-website.el</span>
+</span></span><span style="display:flex;"><span>(when noninteractive
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; Don&#39;t run in interactive mode to avoid breaking your colors</span>
+</span></span><span style="display:flex;"><span>  (custom-set-faces
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(default                      ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#909396&#34;</span> :background <span style="color:#e6db74">&#34;#262626&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-builtin-face       ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#598249&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-comment-face       ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#5e6263&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-constant-face      ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#15968D&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-function-name-face ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#2F7BDE&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-keyword-face       ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#598249&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-string-face        ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#15968D&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-type-face		       ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#598249&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-variable-name-face ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#2F7BDE&#34;</span>))))
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#39;</span>(font-lock-warning-face       ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;#bd3832&#34;</span> :weight bold)))))
+</span></span><span style="display:flex;"><span>  (setq htmlize-use-rgb-map <span style="color:#e6db74">&#39;force</span>))
+</span></span></code></pre></div><p>ok so that&rsquo;s all the like &lsquo;setup&rsquo; type shit out of the way. after that i ran into several frustrating org mode limitations or&hellip;decisions made by org mode that make blogging with it a bit of a pain. A ton of the config is dedicated to working around those problems.</p>
+<ul>
+<li>why the fuck is an &lsquo;html validation link&rsquo; part of the default postamble config? who is this useful for?</li>
+<li>why does the largest orgmode package built for static site generation for org mode think you want to build off of a single org mode file with blog posts as headings?
+<ul>
+<li>that is stupid. org-mode itself doesn&rsquo;t care about your file hierarchy and neither should you :|</li>
+</ul>
+</li>
+<li>why is defining a custom stylesheet such a pain in the dick lmao.
+<ul>
+<li>there&rsquo;s a like a million ways to do this, ranging from updating default variables to adding it in every single .org file, but they all have frustrating limitations!</li>
+</ul>
+</li>
+<li>having nav buttons at the top or side of the screen for different categories is pretty basic but unsupported by default. you have to write your own weird hack for this; i chose to add it to the preamble on every page using dynamic file name expansion, but i saw several different solutions to this problem:
+<ul>
+<li>some people did it in the preamble like me</li>
+<li>some people did it in the postamble</li>
+<li>some people created a file called like &ldquo;nav.org&rdquo; and used org-mode <code>includes</code> on every page to reference it. I thought this was the ugliest option in general, but its by far the easiest!</li>
+</ul>
+</li>
+</ul>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;;;; custom var/func defs to deal with frustrating org limitations</span>
+</span></span><span style="display:flex;"><span>(setq make-backup-files <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>(setq org-html-postamble <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>      org-html-validation-link <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defvar org-blog-date-format <span style="color:#e6db74">&#34;%h %d, %Y&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Format for displaying publish dates.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defvar jlj/root (<span style="color:#a6e22e">expand-file-name</span> <span style="color:#e6db74">&#34;.&#34;</span>))
+</span></span><span style="display:flex;"><span>(defvar org-blog-head <span style="color:#e6db74">&#34;&lt;link rel=\&#34;stylesheet\&#34; type=\&#34;text/css\&#34; href=\&#34;css/my-dark.css\&#34;/&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>(defvar org-personal-head <span style="color:#e6db74">&#34;&lt;link rel=\&#34;stylesheet\&#34; type=\&#34;text/css\&#34; href=\&#34;../posts/css/my-dark.css\&#34;/&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>(defvar org-index-head <span style="color:#e6db74">&#34;&lt;link rel=\&#34;stylesheet\&#34; type=\&#34;text/css\&#34; href=\&#34;posts/css/my-dark.css\&#34;/&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun jlj/preamble (info)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Return preamble as a string.  INFO.&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;This is required to dynamically link shit depending on where you on in the folder structure.&#34;</span>
+</span></span><span style="display:flex;"><span>  (let* ((file (<span style="color:#a6e22e">plist-get</span> info :input-file))
+</span></span><span style="display:flex;"><span>         (prefix (file-relative-name (<span style="color:#a6e22e">expand-file-name</span> jlj/root)
+</span></span><span style="display:flex;"><span>                                     (<span style="color:#a6e22e">file-name-directory</span> file))))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">format</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;&lt;a href=\&#34;%1$s/index.html\&#34;&gt;home&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;a href=\&#34;%1$s/posts/articles.html\&#34;&gt;essays&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;a href=\&#34;%1$s/personal/articles.html\&#34;&gt;diary&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;a href=\&#34;https://git.awful.club/projects\&#34;&gt;projects&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;a href=\&#34;%1$s/resume.pdf\&#34;&gt;resume&lt;/a&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>     prefix)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(setq org-html-postamble-format <span style="color:#f92672">`</span>((<span style="color:#e6db74">&#34;en&#34;</span> <span style="color:#f92672">,</span>(<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;&lt;p class=\&#34;creator\&#34;&gt;Made with %c&lt;/p&gt;&lt;/p&gt;&#34;</span>))))
+</span></span><span style="display:flex;"><span>(setq org-html-preamble <span style="color:#a6e22e">#&#39;</span>jlj/preamble)
+</span></span></code></pre></div><p><code>org-publish-project-alist</code> is the meat of the static site generation. you define a list of components of your site and have different variable settings for each component. i have several different components created:</p>
+<ul>
+<li><code>site-org</code> publishes all my technical writing.</li>
+<li><code>site-index</code> publishes just my home page.</li>
+<li><code>site-personal</code> publishes my diary entries.</li>
+<li><code>site-static</code> is currently not doing what I want it to! its <em>supposed</em> copy ANY file that is not a .org file and publish it, but it doesn&rsquo;t seem to be doing that. I&rsquo;m <span class="underline">very</span> certain its just because I don&rsquo;t understand its arguments well, so, like, don&rsquo;t copy my config about that. its still being worked on!</li>
+</ul>
+<p><code>jlj/publish-sitemap</code> is a function that wraps <code>org-publish-sitemap</code> and adds in my own css file. as far as I can tell, there is NO OTHER WAY to get the sitemap file generated by the <code>org-publish-project-alist</code> declarations to use custom css. infuriating.  because this is emacs and org mode there are of course other work-arounds possible here, but!! this should not require a work around, this is basic!!</p>
+<p><a id="code-snippet--Configuring org-publish-project-alist"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq org-publish-project-alist
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">list</span>
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">list</span> <span style="color:#e6db74">&#34;site-org&#34;</span>
+</span></span><span style="display:flex;"><span>             :base-directory <span style="color:#e6db74">&#34;./source&#34;</span>
+</span></span><span style="display:flex;"><span>             :recursive <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>             :exclude <span style="color:#e6db74">&#34;index.org&#34;</span>
+</span></span><span style="display:flex;"><span>             :publishing-function <span style="color:#f92672">&#39;</span>(org-html-publish-to-html)
+</span></span><span style="display:flex;"><span>             :publishing-directory <span style="color:#e6db74">&#34;./posts/&#34;</span>
+</span></span><span style="display:flex;"><span>             :sitemap-title <span style="color:#e6db74">&#34;a list of stuff i wrote&#34;</span>
+</span></span><span style="display:flex;"><span>             :sitemap-filename <span style="color:#e6db74">&#34;articles.org&#34;</span>
+</span></span><span style="display:flex;"><span>             :auto-sitemap <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>             :sitemap-style <span style="color:#e6db74">&#39;list</span>
+</span></span><span style="display:flex;"><span>             :sitemap-sort-files <span style="color:#e6db74">&#39;anti-chronologically</span>
+</span></span><span style="display:flex;"><span>             :html-html5-fancy <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>             :html-doctype <span style="color:#e6db74">&#34;html5&#34;</span>
+</span></span><span style="display:flex;"><span>             :html-head-include-default-style <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>             :html-head org-blog-head)
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">list</span> <span style="color:#e6db74">&#34;site-index&#34;</span>
+</span></span><span style="display:flex;"><span>             :base-directory <span style="color:#e6db74">&#34;.&#34;</span>
+</span></span><span style="display:flex;"><span>             :recursive <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>             :publishing-function <span style="color:#f92672">&#39;</span>(org-html-publish-to-html)
+</span></span><span style="display:flex;"><span>             :publishing-directory <span style="color:#e6db74">&#34;.&#34;</span>
+</span></span><span style="display:flex;"><span>             :html-head org-index-head)
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">list</span> <span style="color:#e6db74">&#34;site-personal&#34;</span>
+</span></span><span style="display:flex;"><span>             :base-directory <span style="color:#e6db74">&#34;./personal-source&#34;</span>
+</span></span><span style="display:flex;"><span>             :recursive <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>             :exclude <span style="color:#e6db74">&#34;index.org&#34;</span>
+</span></span><span style="display:flex;"><span>             :publishing-function <span style="color:#f92672">&#39;</span>(org-html-publish-to-html)
+</span></span><span style="display:flex;"><span>             :publishing-directory <span style="color:#e6db74">&#34;./personal/&#34;</span>
+</span></span><span style="display:flex;"><span>             :sitemap-title <span style="color:#e6db74">&#34;personal bullshit&#34;</span>
+</span></span><span style="display:flex;"><span>             :sitemap-filename <span style="color:#e6db74">&#34;articles.org&#34;</span>
+</span></span><span style="display:flex;"><span>             :auto-sitemap <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>             :sitemap-style <span style="color:#e6db74">&#39;list</span>
+</span></span><span style="display:flex;"><span>             :sitemap-sort-files <span style="color:#e6db74">&#39;anti-chronologically</span>
+</span></span><span style="display:flex;"><span>             :html-head-include-default-style <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>             :html-head org-personal-head)
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">list</span> <span style="color:#e6db74">&#34;site-static&#34;</span>
+</span></span><span style="display:flex;"><span>             :base-directory <span style="color:#e6db74">&#34;.&#34;</span>
+</span></span><span style="display:flex;"><span>             :base-extension <span style="color:#e6db74">&#39;any</span>
+</span></span><span style="display:flex;"><span>             :exclude <span style="color:#e6db74">&#34;\\.org\\&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>             :publishing-directory <span style="color:#e6db74">&#34;.&#34;</span>
+</span></span><span style="display:flex;"><span>             :publishing-function <span style="color:#e6db74">&#39;org-publish-attachment</span>
+</span></span><span style="display:flex;"><span>             :recursive <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">list</span> <span style="color:#e6db74">&#34;site&#34;</span> :components <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;site-org&#34;</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun jlj/publish-sitemap (title <span style="color:#a6e22e">list</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Replace org-publish-sitemap.  TITLE and LIST are magic fuck u linter i won&#39;t do wat u tell me.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  (org-publish-sitemap
+</span></span><span style="display:flex;"><span>   (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;#+TITLE: &#34;</span> title <span style="color:#e6db74">&#34;\n&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;#+HTML_HEAD: &lt;link rel=\&#34;stylesheet\&#34; type=\&#34;text/css\&#34; href=\&#34;css/my-dark.css\&#34;&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;\n&#34;</span>
+</span></span><span style="display:flex;"><span>          (org-list-to-org <span style="color:#a6e22e">list</span>)))
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>finally, i actually publish the site and then generate some rss feeds. i want so specifically talk about the rss feed generation; the most well known package for rss feed gen is <a href="https://github.com/yyr/org-mode/blob/master/contrib/lisp/ox-rss.el">ox-rss</a> and i could not get that package to work. i used <a href="https://gitlab.com/ambrevar/emacs-webfeeder/-/tree/master">webfeeder.el</a> and had much better luck with it.</p>
+<p>its important to note that i wrap org-publish-all and the webfeeder lines with my own function <code>jlj/publish</code>. the org project <span class="underline">must</span> be published prior to the webfeeder feed generation. <code>webfeeder.el</code> works by generating a feed based on your .html files, not your .org files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun jlj/publish ()
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Wrap org-publish-all so that its easier to modify this in the future.&#34;</span>
+</span></span><span style="display:flex;"><span>    (org-publish-all)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">;; build rss for interesting posts</span>
+</span></span><span style="display:flex;"><span>    (setq webfeeder-default-author <span style="color:#e6db74">&#34;josiah &lt;me@jowj.net&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>    (webfeeder-build
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;rss.xml&#34;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;./posts&#34;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;https://me.jowj.net/posts/&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">delete</span> <span style="color:#e6db74">&#34;index.html&#34;</span>
+</span></span><span style="display:flex;"><span>             (<span style="color:#a6e22e">mapcar</span> (lambda (f) (replace-regexp-in-string <span style="color:#e6db74">&#34;.*/posts/&#34;</span> <span style="color:#e6db74">&#34;&#34;</span> f))
+</span></span><span style="display:flex;"><span>                     (file-expand-wildcards <span style="color:#e6db74">&#34;~/Documents/projects/jlj-blog/posts/*.html&#34;</span>)))
+</span></span><span style="display:flex;"><span>     :builder <span style="color:#e6db74">&#39;webfeeder-make-rss</span>
+</span></span><span style="display:flex;"><span>     :title <span style="color:#e6db74">&#34;josiahs blog&#34;</span>
+</span></span><span style="display:flex;"><span>     :description <span style="color:#e6db74">&#34;projects/writing bullshit in rss.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">;; build rss for diary posts</span>
+</span></span><span style="display:flex;"><span>    (webfeeder-build
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;rss.xml&#34;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;./personal&#34;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;https://me.jowj.net/personal/&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">delete</span> <span style="color:#e6db74">&#34;index.html&#34;</span>
+</span></span><span style="display:flex;"><span>             (<span style="color:#a6e22e">mapcar</span> (lambda (f) (replace-regexp-in-string <span style="color:#e6db74">&#34;.*/personal/&#34;</span> <span style="color:#e6db74">&#34;&#34;</span> f))
+</span></span><span style="display:flex;"><span>                     (file-expand-wildcards <span style="color:#e6db74">&#34;~/Documents/projects/jlj-blog/personal/*.html&#34;</span>)))
+</span></span><span style="display:flex;"><span>     :builder <span style="color:#e6db74">&#39;webfeeder-make-rss</span>
+</span></span><span style="display:flex;"><span>     :title <span style="color:#e6db74">&#34;josiahs diary&#34;</span>
+</span></span><span style="display:flex;"><span>     :description <span style="color:#e6db74">&#34;personal bullshit in rss.&#34;</span>)
+</span></span><span style="display:flex;"><span>  )
+</span></span></code></pre></div><h3 id="makefile">Makefile</h3>
+<p>super easy makefile lol.</p>
+<ul>
+<li>run emacs with no init file</li>
+<li>tell it to load publish.el</li>
+<li>tell it run my publishing function</li>
+</ul>
+<p>on clean, tell it to remove a bunch of files and folders that gave me grief. many of these won&rsquo;t be generated anymore, i fixed the problem that necessitated me adding the corresponding line! but i leave it in anyway.</p>
+<p>if you&rsquo;re unfamiliar with make you can still use this without learning <em>any</em> make primitives, you can just, in the directory with the Makefile, run these commands:</p>
+<ul>
+<li><code>make</code> will build the site from scratch</li>
+<li><code>make clean</code> will delete all the generated files.</li>
+</ul>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#75715e"># Makefile for jlj blog
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> all publish publish_no_init
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">all</span><span style="color:#f92672">:</span> publish
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">publish</span><span style="color:#f92672">:</span> publish.el
+</span></span><span style="display:flex;"><span>        @echo <span style="color:#e6db74">&#34;Publishing....&#34;</span>
+</span></span><span style="display:flex;"><span>        emacs --no-init --script publish.el --funcall<span style="color:#f92672">=</span>jlj/publish
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        @echo <span style="color:#e6db74">&#34;Cleaning up..&#34;</span>
+</span></span><span style="display:flex;"><span>        @rm -rvf *.elc
+</span></span><span style="display:flex;"><span>        @rm -rvf posts/*.html
+</span></span><span style="display:flex;"><span>        @rm -fv index.html
+</span></span><span style="display:flex;"><span>        @rm -fv index.xml
+</span></span><span style="display:flex;"><span>        @rm -fv posts/articles.xml
+</span></span><span style="display:flex;"><span>        @rm -fv posts/rss.xml
+</span></span><span style="display:flex;"><span>        @rm -fv posts/atom.xml
+</span></span><span style="display:flex;"><span>        @rm -fv personal/*.html
+</span></span><span style="display:flex;"><span>        @rm -fv personal/rss.xml
+</span></span><span style="display:flex;"><span>        @rm -fv personal/atom.xml
+</span></span><span style="display:flex;"><span>        @rm -fv source/*.html
+</span></span><span style="display:flex;"><span>        @rm -rvf ~/.org-timestamps/*
+</span></span></code></pre></div><h2 id="credits-and-references">credits &amp; references</h2>
+<p>there are a TON of places to read about doing this sort of thing. two folks in particular were really useful to me:</p>
+<ul>
+<li><a href="https://ambrevar.xyz/index.html">Ambrevar</a>,  (in particular, <a href="https://ambrevar.xyz/blog-architecture/index.html">https://ambrevar.xyz/blog-architecture/index.html</a>)</li>
+<li><a href="https://jgkamat.gitlab.io/">jgkamat</a>,  (in particular, <a href="https://jgkamat.gitlab.io/blog/website1.html">https://jgkamat.gitlab.io/blog/website1.html</a>)</li>
+</ul>
+<p>jgkamat&rsquo;s publish files lead me to the font-face-locking approach to custom syntax highlighting.
+ambrevar actually wrote the webfeeder.el solution to the idiot org rss problem. both of these folks are fantastic.</p>
+<ul>
+<li><a href="https://orgmode.org/worg/">https://orgmode.org/worg/</a> has several useful entries on org &gt; html publishing</li>
+<li><a href="https://www.brautaset.org/articles/2017/blogging-with-org-mode.html">https://www.brautaset.org/articles/2017/blogging-with-org-mode.html</a></li>
+<li><a href="https://opensource.com/article/20/3/blog-emacs">https://opensource.com/article/20/3/blog-emacs</a></li>
+<li><a href="https://www.sadiqpk.org/blog/2018/08/08/blogging-with-org-mode.html">https://www.sadiqpk.org/blog/2018/08/08/blogging-with-org-mode.html</a></li>
+<li>a lot more i&rsquo;ve forgotten.</li>
+</ul>
+ 
+ 
+  </main>
+  <footer>
+    <copyright>
+    <p>MOVE THE WORLD BENEATH YOUR WHEELS.</p>
+</copyright>
+
+  </footer>
+</body>
+</html>

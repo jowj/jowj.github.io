@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>emacs on catalina | josiah&#39;s blog</title>
+<link rel="stylesheet" href="/css/my-dark.css">
+
+</head>
+<body>
+  <header>
+    <h1>josiah&#39;s blog</h1>
+<nav>
+    <a href="/">/home</a>
+    <a href="/posts/">/posts</a>
+    <a href="/personal/">/diary</a>
+    <a href="/projects/">/projects</a>
+    <a href="/resume.pdf">/resume</a>
+    <a href="/lore/">/lore</a>
+</nav>
+
+
+  </header>
+  <main>
+    
+<h1>emacs on catalina</h1>
+
+ 
+<time datetime="2020-03-29T00:00:00&#43;00:00">March 29, 2020</time>
+
+<h2 id="early-days">early days</h2>
+<p>i had to move from mojave to catalina during the beta to test some security tooling for work (spoilers: it sucked, though now cylance has actually fixed their catalina problems) and the process was r o u g h almost entirely because of emacs.</p>
+<p>at first there was only a single reddit post detailing what emacs users might need to know about. it linked to <a href="https://gist.github.com/dive/f64c645a9086afce8e5dd2590071dbf9">this gist</a>.</p>
+<p>this basically says to run this lisp to add your proper emacs path to the proper exclusions and then you won&rsquo;t have any problems. Ok great! but that didn&rsquo;t work. I could now <em>launch</em> emacs from Spotlight and navigate around my Docs/Downloads/whatever, but i was totally unable to <em>swap</em> to emacs from Spotlight. this also impacted using hammerspoon as a launcher, i&rsquo;m guessing because the primative behind both mechanisms is the same.</p>
+<h2 id="partial-fix">partial fix</h2>
+<p>later that week, a few other people said you needed to whitelist <span class="underline">ruby&rsquo;s</span> executable because that was actually how homebrew installed emacs; the emacs executable is called from a ruby script (which is called by a ball rolling down a train track headed towards a toothpick which,) and thus needs to be whitelisted as well. but that didn&rsquo;t work either (though they were actually correct that ruby was involved).</p>
+<p>since I could at least launch and navigate around with my then-current janky set up i stopped spending Paid Time on it and moved on. i ran the the rest of the catalina beta out and then reported back on my experience with our security tools, whatever. a few weeks ago i finally got mad enough at the situation to spend some more time looking at this and found the answer really soon! apparently a bunch of people had similar problems to me and so there are several blogs about the problem now! the one I found most helpful was <a href="https://spin.atomicobject.com/2019/12/12/fixing-emacs-macos-catalina/">this guy</a>.</p>
+<h2 id="jankiest-fix">jankiest fix</h2>
+<p>he gives a good breakdown as to why this is needed <span class="underline">instead of</span> the ruby application whitelisting. here&rsquo;s the quick fix:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>% cd  /Applications /Emacs.app /Contents /MacOS
+</span></span><span style="display:flex;"><span>% mv Emacs Emacs-launcher
+</span></span><span style="display:flex;"><span>% mv Emacs-x86_64- 10_14 Emacs
+</span></span><span style="display:flex;"><span>% cd  /Applications /Emacs.app /Contents /
+</span></span><span style="display:flex;"><span>% rm  -rf _CodeSignature
+</span></span></code></pre></div><p>this is not like, super great. its makes your configuration brittle and it will break when you update emacs! version 27 is looming i hear. but at least i can fucking swap to emacs again.</p>
+ 
+ 
+  </main>
+  <footer>
+    <copyright>
+    <p>MOVE THE WORLD BENEATH YOUR WHEELS.</p>
+</copyright>
+
+  </footer>
+</body>
+</html>
