@@ -3,6 +3,7 @@ title = "my opinions on task management and notes"
 date = 2022-07-04
 author = ["josiah"]
 draft = false
+tags = ["pim", "emacs", "orgmode"]
 +++
 
 ## Introduction {#introduction}

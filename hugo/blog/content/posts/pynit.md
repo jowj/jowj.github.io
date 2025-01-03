@@ -3,6 +3,7 @@ title = "pynit"
 date = 2020-03-29
 author = ["josiah"]
 draft = false
+tags = ["project notes"]
 +++
 
 ## what is this {#what-is-this}

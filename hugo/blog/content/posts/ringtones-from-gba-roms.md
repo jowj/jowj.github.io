@@ -3,6 +3,7 @@ title = "Project notes: getting playable audio files out of a .gba rom"
 date = 2024-10-06
 author = ["josiah"]
 draft = false
+tags = ["project notes"]
 +++
 
 I want to have, say, a ring tone from megaman battle network 3 blue, somehow. I don’t know what i want exactly, but something from that game. I own the game 8 times over, surely there's a way to do this.

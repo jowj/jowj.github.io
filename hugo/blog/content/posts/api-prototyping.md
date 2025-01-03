@@ -3,6 +3,7 @@ title = "rest api prototyping"
 date = 2020-03-29
 author = ["josiah"]
 draft = false
+tags = ["emacs", "orgmode"]
 +++
 
 ## the problem {#the-problem}

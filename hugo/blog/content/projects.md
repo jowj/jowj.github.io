@@ -4,8 +4,6 @@ author = ["josiah"]
 draft = false
 +++
 
-
-# projects
 I've worked on a few things that i'm proud of. Here's the highlights.
 
 ## [Pynit](https://git.awful.club/projects/pynit)

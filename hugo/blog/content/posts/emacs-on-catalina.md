@@ -3,6 +3,7 @@ title = "emacs on catalina"
 date = 2020-03-29
 author = ["josiah"]
 draft = false
+tags = ["emacs"]
 +++
 
 ## early days {#early-days}

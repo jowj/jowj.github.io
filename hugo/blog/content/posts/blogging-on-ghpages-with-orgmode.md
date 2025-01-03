@@ -3,6 +3,7 @@ title = "blogging on github pages with orgmode"
 date = 2020-04-11
 author = ["josiah"]
 draft = false
+tags = ["project notes", "emacs", "orgmode"]
 +++
 
 ## what i did {#what-i-did}

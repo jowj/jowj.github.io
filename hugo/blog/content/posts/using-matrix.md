@@ -3,6 +3,7 @@ title = "using matrix"
 date = 2021-01-23
 author = ["josiah"]
 draft = false
+tags = ["matrix"]
 +++
 
 ## introduction {#introduction}

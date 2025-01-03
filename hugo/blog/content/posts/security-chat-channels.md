@@ -3,6 +3,7 @@ title = "Do security in public"
 date = 2024-09-15
 author = ["josiah"]
 draft = false
+tags = ["security"]
 +++
 
 ## You should have an #ask-security channel {#you-should-have-an-ask-security-channel}

@@ -14,4 +14,4 @@ hi you've reached the landing page of me, the person whose name is above this te
 - [accursed deeds](/projects)
 - [oh lord where did i put my diary](/diary)
 ## assume
-- its very presumptuous of you, but if you insist, [here is my resume](/resume)
+- you must be here for my [resume](/resume)

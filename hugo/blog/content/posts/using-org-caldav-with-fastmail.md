@@ -3,6 +3,7 @@ title = "using org caldav with fastmail"
 date = 2021-03-08
 author = ["josiah"]
 draft = false
+tags = ["emacs", "email"]
 +++
 
 ## how to sync calendar events from fastmail to your org agenda {#how-to-sync-calendar-events-from-fastmail-to-your-org-agenda}

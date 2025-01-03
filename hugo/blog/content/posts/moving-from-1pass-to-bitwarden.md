@@ -3,6 +3,7 @@ title = "Moving from 1pass to bitwarden"
 date = 2020-03-29
 author = ["josiah"]
 draft = false
+tags = ["security"]
 +++
 
 ## background {#background}
