@@ -1,6 +1,6 @@
 .bundle/
 vendor/
-/.DS_Store
+**/.DS_Store
 /site-index.cache
 /site-org.cache
 /site-personal.cache
