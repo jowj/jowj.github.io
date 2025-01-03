@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Project Notes on josiah&#39;s blog</title>
+    <link>http://localhost:1313/tags/project-notes/</link>
+    <description>Recent content in Project Notes on josiah&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/project-notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project notes: getting playable audio files out of a .gba rom</title>
+      <link>http://localhost:1313/posts/ringtones-from-gba-roms/</link>
+      <pubDate>Sun, 06 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ringtones-from-gba-roms/</guid>
+      <description>&lt;p&gt;I want to have, say, a ring tone from megaman battle network 3 blue, somehow. I don’t know what i want exactly, but something from that game. I own the game 8 times over, surely there&amp;rsquo;s a way to do this.&lt;/p&gt;&#xA;&lt;h2 id=&#34;outline&#34;&gt;Outline&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;How do I get the files from the .gba file itself?&#xA;&lt;ol&gt;&#xA;&lt;li&gt;This is apparently annoying and lossy, but &lt;code&gt;vgmtrans&lt;/code&gt; ~works.&lt;/li&gt;&#xA;&lt;li&gt;I was suggested several other options but they require manually editing makefiles and compiling c++, gross, lets skip those.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;VGMtrans&lt;/code&gt; is pretty self explantory, poke around the UI to find the files you want. You’ll have to play every sound collection in there to know what they are though.&lt;/li&gt;&#xA;&lt;li&gt;Export all your files in various formats to your file system, again, just in the UI.&lt;/li&gt;&#xA;&lt;li&gt;Next, a digression into how the resultant audio files work:&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;code&gt;.MID&lt;/code&gt; files are midi files, which contain music &lt;em&gt;sequences&lt;/em&gt; but no &lt;em&gt;sound&lt;/em&gt;.&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;DLS&lt;/code&gt; is a “downloadable sounds” file, which contains sound samples that can be used by MIDI&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;SF2&lt;/code&gt; is a soundfount file, basically an alternative to DLS.&lt;/li&gt;&#xA;&lt;li&gt;Probably you only need either DLS or SF2 at a single time, just depends on what’s supported by the DAW you’ll be working with in next step&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Now you have all the bare files exported, but you need to recombine them into a file that your phone can understand.&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;code&gt;LMMS&lt;/code&gt; is free / open source. There’s better options, but not without a price tag.&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;LMMS&lt;/code&gt; works, I did an original POC with it, but its not easily automatable. But! There is something that IS automatiable on the commandline called  &lt;code&gt;fluidsynth&lt;/code&gt;  that gets us alllllmost all the way there - it can give us &lt;code&gt;.wav&lt;/code&gt; files.&lt;/li&gt;&#xA;&lt;li&gt;Once you have a &lt;code&gt;.wav&lt;/code&gt; its easy to use ffmpeg to get &lt;code&gt;.mp3&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;conversion-script&#34;&gt;Conversion script&lt;/h2&gt;&#xA;&lt;p&gt;I llm’d a script to do this for me en masse:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>blogging on github pages with orgmode</title>
+      <link>http://localhost:1313/posts/blogging-on-ghpages-with-orgmode/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/blogging-on-ghpages-with-orgmode/</guid>
+      <description>&lt;h2 id=&#34;what-i-did&#34;&gt;what i did&lt;/h2&gt;&#xA;&lt;p&gt;i&amp;rsquo;ve just moved from using markdown and jekyll to generate a static website on github pages to using org-mode and org-publish to generate static html files, also on github pages.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-did-i-do-this&#34;&gt;why did i do this&lt;/h2&gt;&#xA;&lt;p&gt;my setup has been a pain - i do most of my writing and thinking in &lt;a href=&#34;https://orgmode.org/&#34;&gt;org mode&lt;/a&gt;, but to post stuff on &lt;a href=&#34;https://me.jowj.net/&#34;&gt;https://me.jowj.net/&lt;/a&gt; i have to convert that to markdown (relatively easy, due to a package called &lt;a href=&#34;https://github.com/emacsmirror/org/blob/master/lisp/ox-md.el&#34;&gt;ox-md&lt;/a&gt;) and use &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;jekyll&lt;/a&gt; to convert md to html and handle the generation of the site. the problem with jekyll is that it &lt;em&gt;sucks&lt;/em&gt;. its a tool based on the ruby ecosystem, and since I actually publish my stuff so infrequently every time i use it i have to update something about my ruby environment. this adds probably 10-20 minutes while I remember / look up which commands i&amp;rsquo;m supposed to run and why, and figuring out what things are actually broken this time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pynit</title>
+      <link>http://localhost:1313/posts/pynit/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/pynit/</guid>
+      <description>&lt;h2 id=&#34;what-is-this&#34;&gt;what is this&lt;/h2&gt;&#xA;&lt;p&gt;pynit is a personal archival script that relies on &lt;a href=&#34;https://pinboard.in&#34;&gt;pinboard&lt;/a&gt;. it pulls in posts through the reddit api (by way of `praw`) and adds them to the linked `pinboard` account. you can get it &lt;a href=&#34;https://github.com/jowj/pynit&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-i-made-it&#34;&gt;why i made it&lt;/h2&gt;&#xA;&lt;p&gt;i use reddit (foolish, i know) to keep up to date on a lot of bullshit in the world, although primarily:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;fashion&lt;/li&gt;&#xA;&lt;li&gt;emacs / org-mode&lt;/li&gt;&#xA;&lt;li&gt;powershell&lt;/li&gt;&#xA;&lt;li&gt;homelabs&lt;/li&gt;&#xA;&lt;li&gt;secops&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;my typical workflow for seeing a piece of content that was useful looked something like:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

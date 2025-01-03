@@ -134,5 +134,26 @@
       <guid>http://localhost:1313/posts/vcards/</guid>
       <description>&lt;h2 id=&#34;computer-recovery-after-a-death-in-the-family&#34;&gt;computer recovery after a death in the family&lt;/h2&gt;&#xA;&lt;p&gt;this past week my dad and I helped my grandmother with a few Computer Things. my grandfather died at the end of last year and the process of getting &amp;ldquo;Computer Things&amp;rdquo; to a usable state for my grandmother was pretty rough.&lt;/p&gt;&#xA;&lt;p&gt;One of the things that was unexpectedly frustrating was transferring stuff (photos, contacts, whatever) from my granddad&amp;rsquo;s account to my grandmothers. as near as i can tell, a different family member had been helping my grandmother and closed several of my grandfather&amp;rsquo;s old accounts. including email accounts and &lt;em&gt;iCloud&lt;/em&gt; accounts.&lt;/p&gt;</description>
     </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/</guid>
+      <description>&lt;h1 id=&#34;stuff-i-talk-about&#34;&gt;stuff i talk about&lt;/h1&gt;&#xA;&lt;div&gt;&#xA;  &lt;h2&gt;All Tags&lt;/h2&gt;&#xA;  &lt;ul&gt;&#xA;      &lt;li&gt;&#xA;        &lt;a href=&#34;http://localhost:1313/tags/emacs&#34;&gt;&#xA;          emacs (5)&#xA;        &lt;/a&gt;&#xA;      &lt;/li&gt;&#xA;      &lt;li&gt;&#xA;        &lt;a href=&#34;http://localhost:1313/tags/email&#34;&gt;&#xA;          email (1)&#xA;        &lt;/a&gt;&#xA;      &lt;/li&gt;&#xA;      &lt;li&gt;&#xA;        &lt;a href=&#34;http://localhost:1313/tags/matrix&#34;&gt;&#xA;          matrix (1)&#xA;        &lt;/a&gt;&#xA;      &lt;/li&gt;&#xA;      &lt;li&gt;&#xA;        &lt;a href=&#34;http://localhost:1313/tags/orgmode&#34;&gt;&#xA;          orgmode (3)&#xA;        &lt;/a&gt;&#xA;      &lt;/li&gt;&#xA;      &lt;li&gt;&#xA;        &lt;a href=&#34;http://localhost:1313/tags/pim&#34;&gt;&#xA;          pim (1)&#xA;        &lt;/a&gt;&#xA;      &lt;/li&gt;&#xA;      &lt;li&gt;&#xA;        &lt;a href=&#34;http://localhost:1313/tags/project-notes&#34;&gt;&#xA;          project notes (3)&#xA;        &lt;/a&gt;&#xA;      &lt;/li&gt;&#xA;      &lt;li&gt;&#xA;        &lt;a href=&#34;http://localhost:1313/tags/security&#34;&gt;&#xA;          security (3)&#xA;        &lt;/a&gt;&#xA;      &lt;/li&gt;&#xA;  &lt;/ul&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>lore</title>
+      <link>http://localhost:1313/lore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/lore/</guid>
+      <description>&lt;h1 id=&#34;information-about-past-me&#34;&gt;information about past me&lt;/h1&gt;&#xA;&lt;h2 id=&#34;starcraft-ii&#34;&gt;Starcraft II&lt;/h2&gt;&#xA;&lt;p&gt;I used to compete in Starcraft II. I never did actually make it to pro level, but I did actually make money from playing sometimes. I eventually got to Rank1 Master (just outside the top200 in the US). Here&amp;rsquo;s me beating a middling famous streamer (who rages):&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=YQdRdL48sSA&#34;&gt;https://www.youtube.com/watch?v=YQdRdL48sSA&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;While I never made pro I did stick around in the scene, eventually writing for TeamLiquid Strategy. I wrote a bunch, a few front pagers and a lot more posts/guides/breakdowns. Here&amp;rsquo;s what I could find, including my biggest piece:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>projects</title>
+      <link>http://localhost:1313/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve worked on a few things that i&amp;rsquo;m proud of. Here&amp;rsquo;s the highlights.&lt;/p&gt;&#xA;&lt;h2 id=&#34;pynithttpsgitawfulclubprojectspynit&#34;&gt;&lt;a href=&#34;https://git.awful.club/projects/pynit&#34;&gt;Pynit&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Created: 2019&lt;/li&gt;&#xA;&lt;li&gt;Status: Archived&#xA;pynit is a personal archival script that relies on pinboard. it pulls in saved posts through the reddit api (by way of &lt;del&gt;praw&lt;/del&gt;) and adds them to the linked &lt;del&gt;pinboard&lt;/del&gt; account. I&amp;rsquo;ve written briefly about what I learned during this project &lt;a href=&#34;../posts/pynit/&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;jowjnethttpsmejowjnet&#34;&gt;&lt;a href=&#34;https://me.jowj.net/&#34;&gt;jowj.net&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Created: 2016&lt;/li&gt;&#xA;&lt;li&gt;Status: Maintained&#xA;This site! This site is a +cursed collection of elisp+ cool experiment in running a blog using orgmode and elisp. I&amp;rsquo;ve written about this project &lt;a href=&#34;here&#34;&gt;../posts/blogging-on-ghpages-with-orgmode.html&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
   </channel>
 </rss>

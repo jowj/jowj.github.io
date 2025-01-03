@@ -25,10 +25,7 @@
     
 <h1>rest api prototyping</h1>
 
- 
-<time datetime="2020-03-29T00:00:00&#43;00:00">March 29, 2020</time>
-
-<h2 id="the-problem">the problem</h2>
+  <h2 id="the-problem">the problem</h2>
 <p>lately i&rsquo;ve been working on a lot of web API glue projects. these are usually simple things like &ldquo;service1 needs to send messages to service2 in a particular format, with a particular set of priviledges.&rdquo; Sometimes its more complicated, but that&rsquo;s usually what it breaks down to.</p>
 <p>at first I was writing python code the whole time, exploring the API through python (ugh) and kept getting frustrated; it felt like I wasn&rsquo;t able to go as fast as I would like, I kept making silly mistakes that I wouldn&rsquo;t catch until much later, etc. To fix this, i&rsquo;ve moved to prototyping in <a href="https://github.com/pashky/restclient.el">restclient.el</a> - this is a featureful rest client that you interact with through plain text (i.e., you can version control it!) within emacs.</p>
 <p>this has worked great for a lot of things, but falls short when you have to generate an auth token programmatically (instead of using a static key) for each request. this problem is solvable using: a different kind of glue lol. i use python to create the auth token, org-babel to register the result and then pass it to `restclient` which will continue to be my prototyping tool of choice. this write up will go over how i stitch each part together; i&rsquo;ll use Cylance as an example service for api requests.</p>
@@ -136,6 +133,13 @@ User-Agent: Emacs Restclient
 </span></span></code></pre></div><p>this block just proved that i could in fact import the right modules that were only in the venv.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> jwt
 </span></span></code></pre></div> 
+  <div>
+    <div>josiah&#39;s site:</div>
+    <ul>
+        <li><a href="/tags/emacs/">Emacs</a></li>
+        <li><a href="/tags/orgmode/">Orgmode</a></li>
+    </ul>
+  </div>
  
   </main>
   <footer>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Matrix on josiah&#39;s blog</title>
+    <link>http://localhost:1313/tags/matrix/</link>
+    <description>Recent content in Matrix on josiah&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/matrix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>using matrix</title>
+      <link>http://localhost:1313/posts/using-matrix/</link>
+      <pubDate>Sat, 23 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/using-matrix/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;introduction&lt;/h2&gt;&#xA;&lt;p&gt;i wanna write about &lt;a href=&#34;https://matrix.org&#34;&gt;matrix&lt;/a&gt;. matrix is a &amp;rsquo;new&amp;rsquo; protocol for decentralized communication. it can be used in a bunch of different ways: from relatively secure, favoring security over ease of use, to very open, favoring ease of use over all other concerns. i tend to use it in the, to me, bare minimum secure configuration and then focusing hard on ease of use.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;i use e2ee by default&lt;/li&gt;&#xA;&lt;li&gt;i self host my home server&lt;/li&gt;&#xA;&lt;li&gt;i allow federation&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;i like that i can expect message &lt;em&gt;content&lt;/em&gt; privacy and also retain relative ease of use within the same platform. i like that that i can bridge a bunch of services to a single chat client (albeit with some uh, effort / UX trade-offs). i like that there exists reference apps for basically every platform i care about (and basically all the platforms my friends care about).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

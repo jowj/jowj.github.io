@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pim on josiah&#39;s blog</title>
+    <link>http://localhost:1313/tags/pim/</link>
+    <description>Recent content in Pim on josiah&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/pim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>my opinions on task management and notes</title>
+      <link>http://localhost:1313/posts/my-opinions-on-notetaking/</link>
+      <pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/my-opinions-on-notetaking/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Note taking systems have come up at work a lot; flavor of the month applications (Roam Research! Obisidian!); whether you should write up notes in a private wiki; particular ideologies like &lt;a href=&#34;https://en.wikipedia.org/wiki/Zettelkasten&#34;&gt;Zettelkasten&lt;/a&gt; (ZTK) or &lt;a href=&#34;https://en.wikipedia.org/wiki/Getting_Things_Done&#34;&gt;Getting Things Done&lt;/a&gt; (GTD); etc. I have A Lot of Opinions about note taking and productivity, and wrote up a quick and dirty summary of options on apps / ideology for coworkers. This post is a longer form write up on task management, productivity systems, and notes generally from that original summary.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
