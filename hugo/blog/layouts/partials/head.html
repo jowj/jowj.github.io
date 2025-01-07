@@ -2,3 +2,6 @@
 <meta name="viewport" content="width=device-width">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
 <link rel="stylesheet" href="{{ "css/my-dark.css" | relURL }}">
+
+<!-- Add these lines for SVG favicon support -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
