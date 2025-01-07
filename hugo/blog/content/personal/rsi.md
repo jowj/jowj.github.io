@@ -1,9 +1,12 @@
-+++
-title = "rsi"
-date = 2020-12-01
-author = ["josiah"]
-draft = false
-+++
+---
+title: "rsi"
+date: 2020-12-01
+params:
+    author: "josiah"
+draft: false
+aliases:
+    - /personal/rsi.html
+---
 
 ## this is about my experience with rsi {#this-is-about-my-experience-with-rsi}
 

@@ -1,9 +1,11 @@
-+++
-title = "big bend trip"
-date = 2021-11-10
-author = ["josiah"]
-draft = false
-+++
+---
+title: "big bend trip"
+date: 2021-11-10
+author: ["josiah"]
+draft: false
+aliases:
+    - /personal/2021-west-texas-trip.html
+---
 
 ## Family vacations, planning {#family-vacations-planning}
 

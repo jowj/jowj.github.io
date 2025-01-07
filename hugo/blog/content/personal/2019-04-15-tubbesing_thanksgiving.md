@@ -1,9 +1,11 @@
-+++
-title = "2019 lt-friendsgiving"
-date = 2020-04-09
-author = ["josiah"]
-draft = false
-+++
+---
+title: "2019 lt-friendsgiving"
+date: 2020-04-09
+author: ["josiah"]
+draft: false
+aliases:
+    - /personal/2019-04-15-tubbesing_thanksgiving.html
+---
 
 ## seattle {#seattle}
 

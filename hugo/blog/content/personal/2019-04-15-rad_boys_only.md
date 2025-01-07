@@ -1,9 +1,11 @@
-+++
-title = "a thursday night sometime in 2019"
-date = 2020-04-09
-author = ["josiah"]
-draft = false
-+++
+---
+title: "a thursday night sometime in 2019"
+date: 2020-04-09
+author: ["josiah"]
+draft: false
+aliases:
+    - /personal/2019-04-15-rad_boys_only.html
+---
 
 ## rad boys only {#rad-boys-only}
 
