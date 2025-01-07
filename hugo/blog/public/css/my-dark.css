@@ -1,9 +1,5 @@
 /* Yah, I can't build websites for my life. Nothing to see here. */
 
-#preamble {
-    text-align: center;
-}
-
 body {
     /* Stolen from boostrap, is this good? */
     font-size: 18px;
@@ -132,8 +128,7 @@ a:hover {
     background-color: #cc99ff;
 }
 
-p.small,
-#postamble {
+p.small {
     margin: 0;
     font-size: 0.8333333333333334em;
     margin-bottom: 1.8em;
@@ -154,13 +149,6 @@ main {
     margin-right: auto;
 }
 
-header {
-    max-width: 1200px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 div.outline-2 pre {
     overflow: auto;
 }
@@ -168,11 +156,6 @@ div.outline-2 pre {
 /* @end */
 
 /* @group Header */
-
-h1.title {
-    margin-top: 10px;
-    text-align: center;
-}
 
 h1.title {
     font-size: 2.2em;
@@ -220,10 +203,6 @@ h6 span {
 .outline-5,
 .outline-6 {
     margin-left: 1em;
-}
-
-#postamble p {
-    margin: 0px;
 }
 
 .footpara {
@@ -301,6 +280,8 @@ h6 span {
     height: min-content;
 }
 
+/* end garden css */
+
 /* style home page alone *.div-center */
 home {
     text-align: center;
@@ -310,4 +291,55 @@ home {
 copyright {
     font-size: 7px;
     text-align: center;
+}
+
+/* style the logo svg */
+
+.site-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo-link {
+    text-decoration: none;
+    margin-right: 2rem;
+}
+
+/* nuke link underlining for the logo specifically. */
+.logo-link:link,
+.logo-link:visited,
+.logo-link:hover,
+.logo-link:active {
+    border-bottom: none;
+    background-color: transparent;
+}
+
+.site-logo {
+    display: block;
+    transition: transform 0.2s ease;
+    max-width: initial;
+    max-height: initial;
+    width: 150px; /* Adjust to your desired size */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* this lets me zoom it on hover? fun. */
+.site-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .site-logo {
+        width: 100px;
+        height: 50px;
+    }
+
+    .logo-link {
+        margin-right: 1rem;
+    }
 }

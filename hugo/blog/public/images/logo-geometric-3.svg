@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+  <!-- Interlocking circles -->
+  <circle cx="80" cy="50" r="25" fill="black"/>
+  <circle cx="120" cy="50" r="25" fill="black"/>
+  
+  <!-- Purple overlays -->
+  <circle cx="80" cy="50" r="15" fill="#8A2BE2"/>
+  <circle cx="120" cy="50" r="15" fill="#8A2BE2"/>
+  
+  <!-- Connecting arc -->
+  <path d="M80 25 A 40 40 0 0 1 120 25" 
+        stroke="black" stroke-width="8" fill="none"/>
+</svg>
