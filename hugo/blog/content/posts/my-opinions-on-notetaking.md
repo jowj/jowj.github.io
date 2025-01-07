@@ -1,11 +1,11 @@
-+++
-title = "my opinions on task management and notes"
-date = 2022-07-04
-author = ["josiah"]
-draft = false
-tags = ["pim", "emacs", "orgmode"]
-+++
-
+---
+title: "my opinions on task management and notes"
+date: 2022-07-04
+author: ["josiah"]
+draft: false
+tags: ["pim", "emacs", "orgmode"]
+aliases: ["/posts/my-opinions-on-notetaking.html"]
+---
 ## Introduction {#introduction}
 
 Note taking systems have come up at work a lot; flavor of the month applications (Roam Research! Obisidian!); whether you should write up notes in a private wiki; particular ideologies like [Zettelkasten](https://en.wikipedia.org/wiki/Zettelkasten) (ZTK) or [Getting Things Done](https://en.wikipedia.org/wiki/Getting_Things_Done) (GTD); etc. I have A Lot of Opinions about note taking and productivity, and wrote up a quick and dirty summary of options on apps / ideology for coworkers. This post is a longer form write up on task management, productivity systems, and notes generally from that original summary.

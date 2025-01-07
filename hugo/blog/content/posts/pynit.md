@@ -1,11 +1,11 @@
-+++
-title = "pynit"
-date = 2020-03-29
-author = ["josiah"]
-draft = false
-tags = ["project notes"]
-+++
-
+---
+title: "pynit"
+date: 2020-03-29
+author: ["josiah"]
+draft: false
+tags: ["project notes"]
+aliases: ["/posts/pynit.html"]
+---
 ## what is this {#what-is-this}
 
 pynit is a personal archival script that relies on [pinboard](https://pinboard.in). it pulls in posts through the reddit api (by way of \`praw\`) and adds them to the linked \`pinboard\` account. you can get it [here](https://github.com/jowj/pynit).

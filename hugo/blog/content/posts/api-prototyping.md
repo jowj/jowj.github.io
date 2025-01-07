@@ -1,10 +1,11 @@
-+++
-title = "rest api prototyping"
-date = 2020-03-29
-author = ["josiah"]
-draft = false
-tags = ["emacs", "orgmode"]
-+++
+---
+title: "rest api prototyping"
+date: 2020-03-29
+author: ["josiah"]
+draft: false
+tags: ["emacs", "orgmode"]
+aliases: ["/posts/api-prototyping.html"]
+---
 
 ## the problem {#the-problem}
 

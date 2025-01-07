@@ -1,10 +1,11 @@
-+++
-title = "blogging on github pages with orgmode"
-date = 2020-04-11
-author = ["josiah"]
-draft = false
-tags = ["project notes", "emacs", "orgmode"]
-+++
+---
+title: "blogging on github pages with orgmode"
+date: 2020-04-11
+author: ["josiah"]
+draft: false
+tags: ["project notes", "emacs", "orgmode"]
+aliases: ["/posts/blogging-on-ghpages-with-orgmode.html"]
+---
 
 ## what i did {#what-i-did}
 

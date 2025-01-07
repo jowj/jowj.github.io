@@ -1,10 +1,11 @@
-+++
-title = "emacs on catalina"
-date = 2020-03-29
-author = ["josiah"]
-draft = false
-tags = ["emacs"]
-+++
+---
+title: "emacs on catalina"
+date: 2020-03-29
+author: ["josiah"]
+draft: false
+tags: ["emacs"]
+aliases: ["/posts/emacs-on-catalina.html"]
+---
 
 ## early days {#early-days}
 

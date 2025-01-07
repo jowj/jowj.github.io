@@ -1,10 +1,11 @@
-+++
-title = "Moving from 1pass to bitwarden"
-date = 2020-03-29
-author = ["josiah"]
-draft = false
-tags = ["security"]
-+++
+---
+title: "Moving from 1pass to bitwarden"
+date: 2020-03-29
+author: ["josiah"]
+draft: false
+tags: ["security"]
+aliases: ["/posts/moving-from-1pass-to-bitwarden.html"]
+---
 
 ## background {#background}
 

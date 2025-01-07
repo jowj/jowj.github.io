@@ -1,10 +1,11 @@
-+++
-title = "tvm at a new company"
-date = 2020-03-29
-author = ["josiah"]
-draft = false
-tags = ["security"]
-+++
+---
+title: "tvm at a new company"
+date: 2020-03-29
+author: ["josiah"]
+draft: false
+tags: ["security"]
+aliases: ["/posts/tvm-at-a-new-company.html"]
+---
 
 ## no new problems {#no-new-problems}
 

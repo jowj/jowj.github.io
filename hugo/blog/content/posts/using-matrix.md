@@ -1,10 +1,11 @@
-+++
-title = "using matrix"
-date = 2021-01-23
-author = ["josiah"]
-draft = false
-tags = ["matrix"]
-+++
+---
+title: "using matrix"
+date: 2021-01-23
+author: ["josiah"]
+draft: false
+tags: ["matrix"]
+aliases: ["/posts/using-matrix.html"]
+---
 
 ## introduction {#introduction}
 

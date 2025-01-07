@@ -1,10 +1,9 @@
-+++
-title = "vcards"
-date = 2020-03-29
-author = ["josiah"]
-draft = false
-
-+++
+---
+title: "vcards"
+date: 2020-03-29
+author: ["josiah"]
+aliases: ["/posts/vcards.html"]
+---
 
 ## computer recovery after a death in the family {#computer-recovery-after-a-death-in-the-family}
 
