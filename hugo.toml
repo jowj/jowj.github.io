@@ -21,3 +21,11 @@ hardWraps = false
 [module.hugoVersion]
 extended = false
 min = "0.116.0"
+
+[outputFormats]
+[outputFormats.RSS] # this says .RSS is an error in Zed, but its wrong. stupid...lsps? probably.
+mediatype = "application/rss+xml"
+baseName = "rss"
+
+[params]
+mainSections = ["posts", "personal"]
