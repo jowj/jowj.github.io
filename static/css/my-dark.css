@@ -325,13 +325,34 @@ copyright {
     max-height: initial;
     width: 150px; /* Adjust to your desired size */
     height: auto; /* Maintain aspect ratio */
+    position: relative;
 }
 
 /* this lets me zoom it on hover? fun. */
-.site-logo:hover {
+/* .site-logo:hover {
     transform: scale(1.05);
+} */
+
+/* the diamond eye path */
+.site-logo path:nth-of-type(2) {
+    transition: fill 0.3s ease;
 }
 
+.site-logo:hover path:nth-of-type(2) {
+    fill: url(#blink-gradient);
+}
+
+@keyframes blink {
+    0% {
+        fill: #cc99ff;
+    }
+    50% {
+        fill: url(#blink-gradient);
+    }
+    100% {
+        fill: #8a2be2;
+    }
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .site-logo {

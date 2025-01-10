@@ -3,6 +3,19 @@
     <!-- Replace the text title with SVG logo -->
     <a href="{{ .Site.BaseURL }}/" class="logo-link">
         <svg class="site-logo" width="150" height="75" viewBox="0 0 200 100">
+            <defs>
+                <radialGradient
+                    id="blink-gradient"
+                    cx="100"
+                    cy="50"
+                    r="20"
+                    gradientUnits="userSpaceOnUse"
+                >
+                    <stop offset="0%" stop-color="#8A2BE2" />
+                    <stop offset="100%" stop-color="#8A2BE2" />
+                </radialGradient>
+            </defs>
+
             <!-- Flowing circuit path -->
             <path
                 d="M20 50 C40 20, 80 30, 100 50 C120 70, 160 80, 180 50"
