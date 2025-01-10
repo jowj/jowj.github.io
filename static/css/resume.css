@@ -1,0 +1,15 @@
+.contact_info {
+    text-align: left;
+    margin-bottom: 5px;
+    line-height: 0.5;
+}
+
+.job_history p {
+    line-height: 0.5;
+}
+
+.skills ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
