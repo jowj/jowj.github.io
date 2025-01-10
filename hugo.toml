@@ -1,5 +1,5 @@
 baseURL = "https://me.jowj.net/"
-title = "josiah's blog"
+title = "jowj.net"
 languageCode = "en-us"
 
 [markup]
@@ -9,13 +9,13 @@ enableEmoji = true
 codeFences = true
 guessSyntax = false
 tabWidth = 4
-style = "monokai"   # or another style you prefer
+style = "monokai"
 lineNos = false
 
 [markup.goldmark]
 [markup.goldmark.renderer]
 unsafe = true
-hardWraps = false # Changed from the previous suggestion
+hardWraps = false
 
 [module]
 [module.hugoVersion]
