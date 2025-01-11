@@ -1,0 +1,9 @@
+<!doctype html>
+<html
+    lang="{{ site.Language.LanguageCode }}"
+    dir="{{ or site.Language.LanguageDirection `ltr` }}"
+>
+    <body>
+        <main>{{ block "main" . }}{{ end }}</main>
+    </body>
+</html>

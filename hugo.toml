@@ -1,0 +1,31 @@
+baseURL = "https://me.jowj.net/"
+title = "jowj.net"
+languageCode = "en-us"
+
+[markup]
+enableEmoji = true
+
+[markup.highlight]
+codeFences = true
+guessSyntax = false
+tabWidth = 4
+style = "monokai"
+lineNos = false
+
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+hardWraps = false
+
+[module]
+[module.hugoVersion]
+extended = false
+min = "0.116.0"
+
+[outputFormats]
+[outputFormats.RSS] # this says .RSS is an error in Zed, but its wrong. stupid...lsps? probably.
+mediatype = "application/rss+xml"
+baseName = "rss"
+
+[params]
+mainSections = ["posts", "personal"]

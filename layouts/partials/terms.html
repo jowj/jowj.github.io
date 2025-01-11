@@ -1,0 +1,23 @@
+{{- /* For a given taxonomy, renders a list of terms assigned to the page.
+@context {page} page The current page. @context {string} taxonomy The taxonomy.
+*/}} {{- $page := .page }} {{- $taxonomy := .taxonomy }} {{- if eq $page.Kind
+"taxonomy" }} {{- /* Handle taxonomy pages differently */ -}}
+<div>
+    <div>{{ $page.Title }}:</div>
+    <ul>
+        {{- range $page.Pages }}
+        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+        {{- end }}
+    </ul>
+</div>
+{{- else }} {{- /* Handle regular pages */ -}} {{- with $page.GetTerms $taxonomy
+}} {{- $label := (index . 0).Parent.LinkTitle }}
+<div>
+    <div>{{ $label }}:</div>
+    <ul>
+        {{- range . }}
+        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+        {{- end }}
+    </ul>
+</div>
+{{- end }} {{- end }}

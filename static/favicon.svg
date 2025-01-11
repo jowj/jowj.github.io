@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Base arc -->
+  <path d="M16 45 A 38 38 0 0 1 48 45"
+        stroke="black"
+        stroke-width="8"
+        fill="none"
+        stroke-linecap="round"/>
+
+  <!-- Eye circle -->
+  <circle cx="32" cy="28" r="16" fill="black"/>
+  <circle cx="32" cy="28" r="10" fill="#cc99ff"/>
+
+  <!-- Top accent -->
+  <path d="M24 16 A 19 19 0 0 1 40 16"
+        stroke="black"
+        stroke-width="6"
+        fill="none"
+        stroke-linecap="round"/>
+</svg>

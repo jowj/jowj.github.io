@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+  <!-- Base arc -->
+  <path d="M40 70 A 60 60 0 0 1 160 70" stroke="black" stroke-width="12" fill="none"/>
+  
+  <!-- Eye circle -->
+  <circle cx="100" cy="45" r="25" fill="black"/>
+  <circle cx="100" cy="45" r="15" fill="#FF69B4"/>
+  
+  <!-- Top accent -->
+  <path d="M85 25 A 30 30 0 0 1 115 25" stroke="black" stroke-width="8" fill="none"/>
+</svg>
