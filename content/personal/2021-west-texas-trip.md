@@ -23,7 +23,7 @@ We talked off and on for most of the year about going on a trip together and whe
 We decided relatively early on that we'd like to camp.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
   we camped a lot as kids, though I'm not sure either of us actually enjoyed most of those camping trips! we figured we'd try again as adults who could self direct a bit more.
 
@@ -37,7 +37,7 @@ We looked at availability for several national parks, including the grand canyon
 Since this was actually two trips in one it was really hard to figure out what to bring! we both brought _so much bullshit_ lmao. The absolute best things we brought were our two bikes and 3 different water storage things. As a reaction to [the shit show that was the February winter storm in Texas](https://en.wikipedia.org/wiki/2021_Texas_power_crisis), Micah had started preparing some basics like potable water storage to prepare for further grid failure. He bought 2 10 liter jugs, and this trip was their trial run. I purchased a collapsible 2.5 gallon water jug.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  We ended up using the 2.5 gallon jug as our primary water source, filling it from the 10 liter ones when it ran out.
 
@@ -58,7 +58,7 @@ That first day of traveling was really nice - I said goodbye to L, drove to Mica
 Despite my poor judgment, we eventually me made it to Alpine, where we had an AirBNB for a night so we could head into BBR with a bit more daylight. We got to the place, unloaded our shit, and walked to find food. We ate a decent dinner at a bad restaurant; no beer, bad service, right on the main road. Pretty good food. The menu was standard Mexican fare, with some sea food additions that we avoided.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
   Alpine is very far from water!
 
@@ -79,7 +79,7 @@ From alpine we headed to Presidio, the nearest town to BBR state park. Its not v
 Eventually we made it to the ranger station, a place with power / wifi in air quotes, and a little store where you could buy a few things if you forgot them (or didn't realize you needed them): some blankets, headlamps, coffee cups, trail food, etc. We checked in, got some guidance on what trails to check out, then headed out to our drive up campsite. We stayed in [South Leyva Campground](https://www.hipcamp.com/en-US/texas/big-bend-ranch/south-leyva-campsite), a collection of campgrounds that were all empty. We were so surprised! we had the whole place to ourselves for the duration of our stay.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  We asked why the park seemed so empty on our way out on Wednesday, and the lady at the ranger station blinked and said "this is the busiest we've been in months."
 
@@ -100,7 +100,7 @@ We sat at the fire as the sun set and the moon rose. that first night was a few 
 We started the day at a fairly normal time, between 7 and 8, but it took a long while for us to really get going. We made coffee in a French press by boiling potable water in the one cooking dish I brought, a dutch oven. We made a breakfast of eggs and bacon in the same dish, then cleaned up and ~~ran from~~ heroically fought large mean wasps who were interested in our bacon grease. Finally, around 10 or 10:30 we got on bikes and rode to the ranger station to get some advice.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  Readers who have been to the desert before might notice that this is a bit late in the day to get started. This sets the tone for how the rest of our day went!
 
@@ -112,7 +112,7 @@ The route to the ranger station was ~1 mile from our camp ground but by the time
 ![](/ox-hugo/site1.jpg)
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  Before this account goes any further its worth pointing out: we are big idiots! We made a lot of mistakes that could have been Very Bad and thankfully we only got medium dehydrated lol
 
@@ -121,7 +121,7 @@ The route to the ranger station was ~1 mile from our camp ground but by the time
 Because we are bad planners and didn't think too much about what we were doing, we had to go back the direction we came and then some just to get to the road that gets to the trailhead. We rode (bumped, really) through a vague path for 3 miles before finally hitting the trailhead. Just as we made it to the trail head I ran out of water, though my brother still had half his Nalgene left. The maps the ranger gave us showed that the trail was only 2 miles long or so; we figured 40 minutes, maybe an hour, make it to the end, then we head back sharing the remaining water.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  Do not do this lol
 
@@ -146,7 +146,7 @@ We did nothing else the whole day, really. We cooked dinner but I couldn't tell 
 We started the day I think even slower than the day before. We felt surprisingly able and refreshed, but I think maybe we were hesitant to get the day started, savoring the rest in memory of the exhausting afternoon before. We made coffee. we made breakfast, eggs and bacon again. We talked about what we were gonna do that day - ultimately, we decided to avenge ourselves on the trailhead. I was bummed that meant seeing some of the same sights we saw the day before, but agreed it would feel gratifying to conquer the route that nearly killed us.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  it's especially fun/painful to note that: this was the shortest, tamest route in the park! We are not good at this.
 
@@ -155,7 +155,7 @@ We started the day I think even slower than the day before. We felt surprisingly
 This time, however, we were gonna do things right. We filled our water bottles from the main water jugs, then we filled my 2.5gal container of water and tucked _that_ in my saddlebag. Our plan was to lug it all right to the trailhead, leave the bikes and the large 2.5gal of water there, fill up, and go through the trail on foot. We rode off sometime between 10:30 and 11 and made good time. Both of us had become _much_ more proficient at riding through the terrain.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  The biggest thing I learned is that, when approaching a stretch of loose sand, you can build up some speed and keep you front wheel perfectly straight and you're much less likely to get derailed or have to walk. The peddling motion rocks your wheel from side to side and hurts your ability to stay on the bike.
 
@@ -187,7 +187,7 @@ Once we finished packing we started the trek out of the park. Leaving was someho
 Once we made it out of the park and back on paved roads the car started to noticeably pull at higher speeds. We drive the ~15 or 20 minutes to presidio and looked all over for an alignment shop. We checked three stores, but they all said no one would do alignments on the US side of the border. God what a pain. Micah and I talked it over and decide to just continue the drive to Marfa.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  Infuriatingly, I was unable to get the car seen in Marfa or the surrounding towns at all. I talked to 10 different car shops, who all out sourced their alignment shop to a particular place that was booked ~5 days out! I am not used to small town turnaround times, I guess.
 
@@ -242,7 +242,7 @@ It may sound weird, but especially playing video games together on the couch was
 We packed up most things the day before, leaving them just inside the airbnb so that we could just have coffee and load the car with no muss. The trip ended up being uneventful for reasons I still don't understand - the car didn't pull very hard (though still a bit); we just drove and drove the 6 hours or so home.
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3></h3>
 
  Because I absolutely loathe taking things to mechanics, I: still have not had my car looked at. Drives just fine still! Just a little pull to the right!
 

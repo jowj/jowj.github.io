@@ -25,7 +25,7 @@ You can buy a book on GTD by the idea's creator, [David Allen](https://en.wikipe
 For example, here's a workflow sample of GTD:
 
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3>A GTD workflow sample</h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3>A GTD workflow sample</h3>
 
 1.  The most annoying, distracting, or interesting task is chosen, and defined as an "incomplete".
 2.  A description of the successful outcome of the "incomplete" is written down in one sentence, along with the criteria by which the task will be considered completed.
@@ -51,7 +51,7 @@ Core tools:
 -   A filing system for reference material
 -   A calendar
 
-<div style="padding: 1em;background-color: #CCFFCC;border-radius: 15px;font-size: 0.9em;"> <h3>Core tools explainer</h3>
+<div style="padding: 1em;background-color: #2e174a;border-radius: 15px;font-size: 0.9em;"> <h3>Core tools explainer</h3>
 
 -   An inbox is where un-filed ideas/tasks go. If a new idea or task comes to you, you should put it here.
 -   A trash can is self-explanatory, and often doesn't have to be in the system itself; you can just delete an entry or file it away if it might be useful later.
