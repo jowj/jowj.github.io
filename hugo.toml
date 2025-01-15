@@ -28,4 +28,4 @@ mediatype = "application/rss+xml"
 baseName = "rss"
 
 [params]
-mainSections = ["posts", "personal"]
+mainSections = ["posts"]
