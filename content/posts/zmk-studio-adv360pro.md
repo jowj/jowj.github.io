@@ -1,11 +1,11 @@
 +++
-title = "josiah's homepage"
+title = "Getting started with ZMK studio"
 author = ["josiah"]
-draft = true
+draft = false
 +++
 
 # get zmk studio working with the ergodox advantage 360 pro
-I am frustrated at how long it took me to set up ZMK studio with my adv360. `studio` is a fabulous tool, but I was confused by several different pages within the ZMK project + the intermittent issues I had that ended up being caused by USB cables ( :( ). To save anyone else time, here is my config that works with your adv360pro.
+ZMK studio is a fabulous GUI tool for modifying your ZMK config. I am frustrated at how long it took me to set up ZMK studio with my adv360 - I was confused by several different pages within the ZMK project + the intermittent issues I had that ended up being caused by USB cables (😞). I also couldn't find an example of a working config for the adv360 to reference when troubleshooting - to save anyone else time, here is my config that works with your adv360pro.
 
 - https://github.com/jowj/zmk-config/tree/1976d3edecaafc8d05ccb64455c14c1188857299
 
