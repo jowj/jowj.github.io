@@ -6,11 +6,11 @@ draft = false
 
 I've worked on a few things that i'm proud of. Here's the highlights.
 
-## [Halfhazard]()
+## [Halfhazard](https://github.com/jowj/halfhazard)
 - Created: 2024
 - Status: Maintained
 
-I wrote [Halfhazard](https://github.com/jowj/halfhazard), a small app for keeping track of budgeting and billing for me and my partner. Its rough around the edges, has a handful of UI bugs, and will never be officially published on the app store (I pay for an Apple developer account and just use testflight builds for us), but I am now doing billing on it full time instead of through [Splitwise](https://www.splitwise.com/), our previous tracker.
+I wrote Halfhazard, a small app for keeping track of budgeting and billing for me and my partner. Its rough around the edges, has a handful of UI bugs, and will never be officially published on the app store (I pay for an Apple developer account and just use testflight builds for us), but I am now doing billing on it full time instead of through [Splitwise](https://www.splitwise.com/), our previous tracker.
 
 ## [Pynit](https://git.awful.club/projects/pynit)
 - Created: 2019
