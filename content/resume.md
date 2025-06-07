@@ -3,7 +3,6 @@ date: 2024-09-15
 author: ["josiah"]
 draft: false
 tags: ["misc"]
-aliases: ["/posts/security-chat-channels.html"]
 layout: resume
 type: resume
 ---
@@ -56,7 +55,7 @@ and vulnerability management.
             </ul>
     <div class="unity">
         <h4>Unity3d, February 2021 - April 2024</h4>
-        <p><i>Sr. Information Security Engineer, June 2022 - Current</i>
+        <p><i>Sr. Information Security Engineer, June 2022 - May 2024</i>
         <p><i>Information Security Engineer, February 2021 - June 2022</i>
         <ul>
         <li>Brought structure to existing ad-hoc processes for vulnerability response.
