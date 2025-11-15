@@ -312,7 +312,7 @@ I loved this trip. I knew in advance that it would be hard, and more type II fun
 
 At first this was mostly things I was unhappy with. Stress at work about an upcoming audit. Fights with L-. Dissatisfaction with certain aspects of my life. The upcoming stress of moving. Eventually this got boring! It was a relief when, through no real intervention of my own, the unhappiness was replaced with experimentation, interesting hypotheticals, day dreams. I enjoyed the psychological difference. 
 
-Relatedly, this trip was the most time spent away from L- since COVID, and was lovely in two ways; I think I often don't get enough time on my own WITHOUT something bigger requiring focus (work, family holidays). The time to be alone and in my own head made time spent with L- *better* after returning.
+Relatedly, this trip was the most time spent away from L- since COVID, and the distance was *useful*. I think I often don't get enough time on my own WITHOUT something bigger requiring focus (work, family holidays). The time to be alone and in my own head made time spent with L- *better* after returning.
 
 I learned to whistle through my teeth on this trip. I can't convey in text alone how silly I must have looked practicing this whistle. I'm pleased with my new skill.
 
