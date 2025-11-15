@@ -20,4 +20,4 @@ I wrote more than that but a lot of the writing ended up in the public strategy 
 ## Motorcycling
 I ride motorcycles, sometimes alone, and sometimes with my best friend J-. 
 - Once in West Texas (fort davis!) we rode through two tornadoes and nickel-sized hail up the mountain to get to the state park. We intended to camp. Our camp site was buried in hail. We rode back down and slept in a hotel.
-- In 2025 we went on a grand trip through Montana, to Bozeman. I wrote about it [here](../personal/2025-montana-trip/)
+- In 2025 we went on a grand trip through Montana, to Bozeman. I wrote about it [here](../personal/2025-montana-trip/).
