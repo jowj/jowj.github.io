@@ -90,6 +90,33 @@ img {
     max-height: 100%;
 }
 
+/* Thumbnail images - keep them small */
+figure.timg {
+    max-width: 100px;
+    margin: 1em 0;
+}
+
+figure.timg img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #333;
+}
+
+/* Container for side-by-side images */
+.timg-row {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    margin: 1em 0;
+}
+
+.timg-row figure.timg {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+}
+
 ::selection {
     background: rgba(57, 60, 63, 0.99);
 }
@@ -363,4 +390,37 @@ copyright {
     .logo-link {
         margin-right: 1rem;
     }
+}
+
+.fold {
+    margin: 0.75rem 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.fold > summary {
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+    color: white;
+    border-bottom: 2px solid #cc99ff;
+    display: inline-block;
+    padding-bottom: 2px;
+}
+
+.fold > summary::-webkit-details-marker {
+    display: none;
+}
+
+/* custom arrow */
+.fold > summary::before {
+    content: "▸";
+    display: inline-block;
+    margin-right: 0.4rem;
+    transition: transform 0.15s ease;
+}
+
+.fold[open] > summary::before {
+    transform: rotate(90deg);
 }
