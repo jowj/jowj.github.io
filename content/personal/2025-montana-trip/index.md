@@ -2,7 +2,7 @@
 title: "2025 Montana Trip"
 date: 2025-11-15
 author: ["josiah"]
-draft: true
+draft: false
 tags: ["motorcycles"]
 ---
 
