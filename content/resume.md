@@ -32,15 +32,10 @@ and vulnerability management.
         <li>Powershell</li>
         <li>Ansible</li>
         <li>Docker</li>
-        <li>GCP, AWS</li>
-        <li>Vulnerability scanning</li>
-        <li>SIEM administration</li>
-        <li>Antivirus administration</li>
-        <li>Rapid7 Nexpose</li>
-        <li>Rapid7 InsightIDR</li>
-        <li>Splunk</li>
-        <li>xSOAR</li>
-        <li>Orca Security</li>
+        <li>GCP, AWS, cloud usage at large</li>
+        <li>insightVM/Tenable/Qualys, vulnerability scanning at large</li>
+        <li>Wiz, Orca, CSPM at large</li>
+        <li>Linux, Windows administration</li>
     </ul>
 </div>
 <h3>Professional Experience <hr></h3>
@@ -49,9 +44,21 @@ and vulnerability management.
         <h4>Five9, Inc, May 2024 - Current</h4>
         <p><i>Staff Infrastructure Security Engineer</i>
             <ul>
-                <li>Wrote ansible plays to automate patching and deployment of security infrastructure.
-                <li>Spearheaded moving CSPM config to Terraform.
-                <li>Supported burgeoning FedRAMP initiative.
+                <li>Led Infosec's internal DevOps function:
+                    <ul>
+                        <li>Surfaced and retired abandoned resources, migrating necessary components to Ansible/TF for proper management.
+                        <li>Identified missing capabilities and deployed new containerized services to address gaps (logging, secrets detection, internal tooling).
+                        <li>Migrated Wiz configs from clickops to Terraform (ignore rules, automations, tagging, others).
+                    </ul>
+                <li>Service owner for Infrastructure Vulnerability Management function:
+                    <ul>
+                        <li>Responsible for technical direction, prioritization, and delivery.
+                        <li>Wrote a ruleset for automatic detection of EOL operating systems across scanner sources.
+                        <li>Wrote exec level reports for risk posture, directly influenced infrastructure policy and project planning.
+                        <li>Mentored a junior through implementation of ticket-automation pipeline.
+                    </ul>
+                <li>Designed and shipped a cross-platform resource labelling tool in Python for AWS/GCP, targeting workloads not managed by TF. Modular framework allowed for rapid onboarding of new asset types. Used by multiple departments during company-wide labelling initiative.
+                <li>Supported PCI, FedRAMP compliance requirements. 
             </ul>
     <div class="unity">
         <h4>Unity3d, February 2021 - April 2024</h4>
@@ -67,7 +74,6 @@ and vulnerability management.
         </li>
         <li>Automated data collection through account-wide IAM + granular JIT access provisioning integrations.</li>
         <li>Reduced ticket assignment toil from over 30 hours / week to ~1.</li>
-        <li>Engaged with the broader security community to keep informed of vulnerability news as it happens.</li>
         <li>Researched newly announced vulnerabilities to determine company exposure and proportional response.
         <ul>
             <li>On multiple occasions reduced false positive noise from scan engines from thousands of alerts to zero based on faulty CPEs.</li>
@@ -84,8 +90,6 @@ and vulnerability management.
             <ul><li> This was later used as a system of record for SOCII compliance.</ul>
             <li> Created a scanning and remediation process for all products under the Planview
             umbrella.
-            <li> Rolled out Powershell, Macroscript whitelist initiative to all employees through
-            Cylance.
         </ul>
     </div>
     <div class="volusion">
@@ -96,8 +100,6 @@ and vulnerability management.
         <p><i>Tech Support, 2011 - 2012 </i>
         <li> Built out Rapid7 Nexpose infra to decrease scan times from > 24 hours to < 8.
         <li> Spearheaded compliance efforts with PCI and internal security policy.
-        <li> Migrated 40,000+ IIS sites from Windows Server 2003 to 2012 R2.
-        <li> Created SQL cluster build automation in Powershell to decrease department turn around time during physical cluster builds from ~1 week to ~1 day.
     </div>
 </div>
 
@@ -110,7 +112,7 @@ and vulnerability management.
     </ul>
     <i>Other</i>
     <ul>
-        <li>Experience with PCI, SOCII compliance frameworks
+        <li>Experience with PCI, SOCII, FedRAMP compliance frameworks
         <li>Intermediate trapeze skills
         <li>Avid bicyclist
         <li>CompTIA Sec+ (expired)
