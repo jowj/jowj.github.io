@@ -3,7 +3,7 @@ title: "Halfhazard(ous)"
 date: 2025-06-01
 author: ["josiah"]
 draft: false
-tags: ["projects, ios"]
+tags: ["project notes", "ios"]
 ---
 
 I wrote [Halfhazard](https://github.com/jowj/halfhazard), a small app for keeping track of budgeting and billing for me and my partner. Its rough around the edges, has a handful of UI bugs, and will likely never be officially published on the app store (I pay for an Apple developer account and just use testflight builds for us), but I am now doing billing on it full time instead of through [Splitwise](https://www.splitwise.com/), our previous tracker.

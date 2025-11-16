@@ -3,7 +3,7 @@ title: "Importing existing cloud resources to TF through gcloud"
 date: 2025-06-10
 author: ["josiah"]
 draft: false
-tags: ["til, terraform"]
+tags: ["til", "terraform"]
 ---
 
 Lets say you inherit some Very Terrible Infrastructure. There's 10s of cloud accounts (sorry I mean subscriptions (sorry I mean projects)) with infrastructure and applications manually deployed Fucking Everywhere. You, after recovering from an initial bout of "i've made a huge mistake" vomitting, start trying to bring all this shit under version control. Manually importing existing resources in Terraform still sucks, so you look into some better options. You eventually find [Terraformer](https://github.com/GoogleCloudPlatform/terraformer). This is a Good Tool, and i've used it in the past. As of the time of writing there's a breaking compat change somewhere between what Terrformer expects and the `gcp compute instance` provider used; you can't import existing GCP compute instances. You get funny errors like:

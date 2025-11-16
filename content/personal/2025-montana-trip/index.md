@@ -3,7 +3,7 @@ title: "2025 Montana Trip"
 date: 2025-11-15
 author: ["josiah"]
 draft: false
-tags: ["motorcycles"]
+tags: ["motorcycles", "travel"]
 ---
 
 In September of 2025 I went on a 2 week long motorcycle trip, most of it with my best friend. We rode a huge loop up through Wyoming, Montana, and coming back down to Texas through Utah and Arizona. We crisscrossed the Rockies, covered ~5k miles in 9 days on sport bikes.
@@ -133,7 +133,7 @@ The rain turned into a storm, and the temperature dropped like a stone. We were 
 
 We saw elk and deer on the side of the road. J- knew hand signals but I didn't. I thought he was telling me to look up :(. Glad I didn't hit the dumb things.
 
-We arrived at the riverwalk inn, which has a hot tub. I had a sense of relief, of unclenching, that is hard to describe. I had been tested, and I wasn't prepared, and I came out the other end. I swore up and down I was going to spend 2 hours warming up in there. We ate dinner. I was so tired I struggled to finish my second beer, and both of us frigidly walked back to the inn and collapsed, skipping the hot tub. This was a theme; hot tubs were available at like 6 stops, but I was too tired to ever use one!!
+We arrived at the riverwalk inn, where I had a sense of relief, of unclenching, that is hard to describe. I had done something dangerous, I wasn't prepared, and I came out the other end. I swore up and down I was going to spend 2 hours warming up in the inn's hot tub. We ate dinner. I was so tired I struggled to finish my second beer, and both of us frigidly walked back to the inn and collapsed, skipping the hot tub. This was a theme; hot tubs were available at like 6 stops, but I was too tired to ever use one!!
 
 {{< timg src="day3/roadsidebreaktime.jpeg" alt="two bikes!" >}}
 
