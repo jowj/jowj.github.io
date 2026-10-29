@@ -48,6 +48,13 @@ label {
     width: 95%;
 }
 
+/* lists and code blocks have padding; without this, 95% plus that padding
+   runs off the side of a phone screen */
+ul,
+pre {
+    box-sizing: border-box;
+}
+
 h1,
 h2,
 h3,
@@ -57,7 +64,7 @@ h6,
 h7 {
     /* All headers should not be split */
     display: inline-block;
-    width: 101%;
+    width: 100%;
 }
 
 /*  Simple colors here */
@@ -177,6 +184,8 @@ main {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    /* long URLs and inline code break rather than widen the page */
+    overflow-wrap: break-word;
 }
 
 div.outline-2 pre {
