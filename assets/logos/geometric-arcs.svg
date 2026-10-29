@@ -1,0 +1,7 @@
+<svg class="site-logo" width="150" height="75" viewBox="0 0 200 100" style="--blink: #cc99ff">
+    <path d="M40 70 A 30 30 0 0 1 40 30" stroke="white" stroke-width="12" fill="none" />
+    <path d="M160 30 A 30 30 0 0 1 160 70" stroke="white" stroke-width="12" fill="none" />
+    <circle class="eye" cx="100" cy="50" r="20" fill="#8A2BE2" />
+    <circle cx="160" cy="30" r="10" fill="#8A2BE2" />
+    <circle cx="160" cy="70" r="10" fill="#8A2BE2" />
+</svg>

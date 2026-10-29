@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- favicon.svg with the eye shut, for when the tab is in the background -->
+  <path d="M16 45 A 38 38 0 0 1 48 45"
+        stroke="black"
+        stroke-width="8"
+        fill="none"
+        stroke-linecap="round"/>
+
+  <!-- Closed lid and lashes -->
+  <path d="M18 26 Q 32 38 46 26"
+        stroke="#cc99ff"
+        stroke-width="5"
+        fill="none"
+        stroke-linecap="round"/>
+  <path d="M24 31 L 21 36 M32 33 L 32 39 M40 31 L 43 36"
+        stroke="#cc99ff"
+        stroke-width="3"
+        stroke-linecap="round"/>
+
+  <path d="M24 16 A 19 19 0 0 1 40 16"
+        stroke="black"
+        stroke-width="6"
+        fill="none"
+        stroke-linecap="round"/>
+</svg>
