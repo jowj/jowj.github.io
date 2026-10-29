@@ -1,5 +1,14 @@
 {{- /* Generate RSS v2.0 with full page content, claude'd */ -}}
-{{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
+{{- /* Each feed lists its own pages: the home feed is mainSections, a section's
+       feed is that section, a tag's feed is that tag. Using mainSections
+       everywhere put posts in /personal/rss.xml and every tag feed. */ -}}
+{{- $pages := .Pages -}}
+{{- if .IsHome -}}
+{{- $pages = where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
+{{- else if .IsSection -}}
+{{- $pages = .RegularPagesRecursive -}}
+{{- end -}}
+{{- $pages = $pages.ByDate.Reverse -}}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
