@@ -1,0 +1,21 @@
+{{/* "On this page" for long posts. Without JS it's a plain nested list. On wide
+     screens toc.js draws one SVG line down the left that jogs with the
+     indentation, fills it in up to the section being read, and slides a dot
+     along it. On narrow screens the list folds above the post, where the line
+     would scroll away unseen, so a reading-progress bar stands in for it. */}}
+<div class="read-progress" aria-hidden="true"></div>
+<aside class="toc" aria-label="on this page">
+    <details class="toc-fold" open>
+        <summary class="toc-label">/on this page</summary>
+        <div class="toc-body">
+            <svg class="toc-track" aria-hidden="true">
+                <path class="toc-line" />
+                <path class="toc-progress" />
+                <circle class="toc-end" r="2.5" />
+                <circle class="toc-dot" r="3.5" />
+            </svg>
+            {{ .TableOfContents }}
+        </div>
+    </details>
+</aside>
+<script src="{{ "js/toc.js" | relURL }}" defer></script>

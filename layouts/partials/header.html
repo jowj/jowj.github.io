@@ -12,6 +12,9 @@
             const logos = document.querySelectorAll(".logo-variant");
             const pick = logos[Math.floor(Math.random() * logos.length)];
             logos.forEach((logo) => (logo.hidden = logo !== pick));
+            // Share the picked logo's eye color so other bits can match it.
+            const eye = pick.querySelector(".eye");
+            if (eye) document.documentElement.style.setProperty("--logo-accent", eye.getAttribute("fill"));
         })();
     </script>
     {{/* The homepage's own content is the nav; repeating it above is noise. */}}
