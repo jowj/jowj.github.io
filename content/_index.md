@@ -14,6 +14,7 @@ hi you've reached the landing page of me, the person whose name is above this te
 - 🏷️ [categorize your curses](/tags)
 - 💽 [dirty deeds](/projects)
 - 📒 [please! not my diary](/personal)
-- 📜 [deep lore, allegedly](/lore)
+- 📜 [a tragic backstory](/lore)
+- 🖨️ [look for me at the end](/colophon)
 ## assume
 - you must be here for my [resume](/resume)
